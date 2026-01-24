@@ -841,10 +841,7 @@
             isDeleting = false;
         }
 
-        // Initialize language on page load
-        setLanguage(currentLang);
-
-        // Typewriter Effect
+        // Typewriter Effect - Variables declared first
         const typewriter = document.getElementById('typewriter');
         let texts = translations[currentLang].typewriter;
         let textIndex = 0;
@@ -877,6 +874,8 @@
             setTimeout(type, typeSpeed);
         }
 
+        // Initialize language and start typewriter
+        setLanguage(currentLang);
         type();
 
         // Scroll Animation
