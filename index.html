@@ -74,6 +74,81 @@
             color: var(--accent);
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .language-switcher {
+            position: relative;
+        }
+
+        .language-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--primary);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .language-btn:hover {
+            background: var(--primary);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            min-width: 150px;
+            z-index: 1001;
+        }
+
+        .language-switcher:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-dropdown button {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.3s ease;
+        }
+
+        .language-dropdown button:hover {
+            background: var(--primary);
+        }
+
+        .flag {
+            font-size: 1.2rem;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -437,31 +512,46 @@
     <!-- Navigation -->
     <nav>
         <div class="logo">&lt;Dev /&gt;</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projekte</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Kontakt</a></li>
-        </ul>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#home" data-translate="nav_home">Home</a></li>
+                <li><a href="#skills" data-translate="nav_skills">Skills</a></li>
+                <li><a href="#projects" data-translate="nav_projects">Projekte</a></li>
+                <li><a href="#about" data-translate="nav_about">About</a></li>
+                <li><a href="#contact" data-translate="nav_contact">Kontakt</a></li>
+            </ul>
+            <div class="language-switcher">
+                <button class="language-btn">
+                    <span class="flag" id="current-flag">🇩🇪</span>
+                    <span id="current-lang">DE</span>
+                    <span>▼</span>
+                </button>
+                <div class="language-dropdown">
+                    <button onclick="setLanguage('de')"><span class="flag">🇩🇪</span> Deutsch</button>
+                    <button onclick="setLanguage('en')"><span class="flag">🇬🇧</span> English</button>
+                    <button onclick="setLanguage('it')"><span class="flag">🇮🇹</span> Italiano</button>
+                    <button onclick="setLanguage('bs')"><span class="flag">🇧🇦</span> Bosanski</button>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Hallo, ich bin <span class="typewriter" id="typewriter"></span><span class="cursor">|</span></h1>
-            <p>Ich entwickle moderne, responsive und benutzerfreundliche Webanwendungen mit den neuesten Technologien.</p>
+            <h1><span data-translate="hero_hello">Hallo, ich bin</span> <span class="typewriter" id="typewriter"></span><span class="cursor">|</span></h1>
+            <p data-translate="hero_description">Ich entwickle moderne, responsive und benutzerfreundliche Webanwendungen mit den neuesten Technologien.</p>
             <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">Meine Projekte</a>
-                <a href="#contact" class="btn btn-secondary">Kontakt</a>
+                <a href="#projects" class="btn btn-primary" data-translate="hero_btn_projects">Meine Projekte</a>
+                <a href="#contact" class="btn btn-secondary" data-translate="hero_btn_contact">Kontakt</a>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
     <section id="skills">
-        <h2 class="section-title">Meine Skills</h2>
-        <p class="section-subtitle">Technologien und Programmiersprachen, mit denen ich arbeite</p>
+        <h2 class="section-title" data-translate="skills_title">Meine Skills</h2>
+        <p class="section-subtitle" data-translate="skills_subtitle">Technologien und Programmiersprachen, mit denen ich arbeite</p>
         <div class="skills-grid">
             <div class="skill-card fade-in">
                 <div class="skill-icon">
@@ -504,16 +594,16 @@
 
     <!-- Projects Section -->
     <section id="projects">
-        <h2 class="section-title">Meine Projekte</h2>
-        <p class="section-subtitle">Hier werden bald meine Projekte erscheinen</p>
+        <h2 class="section-title" data-translate="projects_title">Meine Projekte</h2>
+        <p class="section-subtitle" data-translate="projects_subtitle">Hier werden bald meine Projekte erscheinen</p>
         <div class="projects-grid">
             <div class="project-card fade-in">
                 <div class="project-image">
-                    <span>Coming Soon</span>
+                    <span data-translate="coming_soon">Coming Soon</span>
                 </div>
                 <div class="project-content">
-                    <h3>Projekt #1</h3>
-                    <p>Hier werde ich mein erstes Projekt vorstellen. Details folgen bald...</p>
+                    <h3 data-translate="project1_title">Projekt #1</h3>
+                    <p data-translate="project1_desc">Hier werde ich mein erstes Projekt vorstellen. Details folgen bald...</p>
                     <div class="project-tags">
                         <span class="tag">React</span>
                         <span class="tag">Node.js</span>
@@ -523,11 +613,11 @@
             </div>
             <div class="project-card fade-in">
                 <div class="project-image">
-                    <span>Coming Soon</span>
+                    <span data-translate="coming_soon">Coming Soon</span>
                 </div>
                 <div class="project-content">
-                    <h3>Projekt #2</h3>
-                    <p>Hier werde ich mein zweites Projekt vorstellen. Details folgen bald...</p>
+                    <h3 data-translate="project2_title">Projekt #2</h3>
+                    <p data-translate="project2_desc">Hier werde ich mein zweites Projekt vorstellen. Details folgen bald...</p>
                     <div class="project-tags">
                         <span class="tag">JavaScript</span>
                         <span class="tag">CSS</span>
@@ -537,11 +627,11 @@
             </div>
             <div class="project-card fade-in">
                 <div class="project-image">
-                    <span>Coming Soon</span>
+                    <span data-translate="coming_soon">Coming Soon</span>
                 </div>
                 <div class="project-content">
-                    <h3>Projekt #3</h3>
-                    <p>Hier werde ich mein drittes Projekt vorstellen. Details folgen bald...</p>
+                    <h3 data-translate="project3_title">Projekt #3</h3>
+                    <p data-translate="project3_desc">Hier werde ich mein drittes Projekt vorstellen. Details folgen bald...</p>
                     <div class="project-tags">
                         <span class="tag">React</span>
                         <span class="tag">Node.js</span>
@@ -553,13 +643,13 @@
 
     <!-- About Section -->
     <section id="about">
-        <h2 class="section-title">About Me</h2>
+        <h2 class="section-title" data-translate="about_title">About Me</h2>
         <div class="about-content fade-in">
             <div class="about-text">
-                <h3>Web Developer mit Leidenschaft</h3>
-                <p>Ich bin ein motivierter Web Developer mit Kenntnissen in Frontend- und Backend-Entwicklung. Meine Expertise umfasst HTML, CSS, JavaScript, React, Node.js und MySQL.</p>
-                <p>Ich arbeite kontinuierlich daran, meine Kenntnisse zu erweitern und moderne, benutzerfreundliche Webanwendungen zu entwickeln. Mein Ziel ist es, innovative Lösungen zu schaffen, die sowohl funktional als auch ästhetisch ansprechend sind.</p>
-                <a href="#contact" class="btn btn-primary">Kontaktiere mich</a>
+                <h3 data-translate="about_subtitle">Web Developer mit Leidenschaft</h3>
+                <p data-translate="about_text1">Ich bin ein motivierter Web Developer mit Kenntnissen in Frontend- und Backend-Entwicklung. Meine Expertise umfasst HTML, CSS, JavaScript, React, Node.js und MySQL.</p>
+                <p data-translate="about_text2">Ich arbeite kontinuierlich daran, meine Kenntnisse zu erweitern und moderne, benutzerfreundliche Webanwendungen zu entwickeln. Mein Ziel ist es, innovative Lösungen zu schaffen, die sowohl funktional als auch ästhetisch ansprechend sind.</p>
+                <a href="#contact" class="btn btn-primary" data-translate="about_btn">Kontaktiere mich</a>
             </div>
             <div class="about-image">
                 <img src="FotoPortfolio.jpeg" alt="Präsentation bei CodersBay">
@@ -570,9 +660,9 @@
     <!-- Contact Section -->
     <section id="contact">
         <div class="contact-container">
-            <h2 class="section-title">Kontakt</h2>
-            <p class="section-subtitle">Interessiert an einer Zusammenarbeit? Kontaktiere mich!</p>
-            <a href="mailto:deine@email.de" class="btn btn-primary">E-Mail senden</a>
+            <h2 class="section-title" data-translate="contact_title">Kontakt</h2>
+            <p class="section-subtitle" data-translate="contact_subtitle">Interessiert an einer Zusammenarbeit? Kontaktiere mich!</p>
+            <a href="mailto:deine@email.de" class="btn btn-primary" data-translate="contact_btn">E-Mail senden</a>
             <div class="contact-links">
                 <a href="#" class="contact-link" title="GitHub">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
@@ -589,14 +679,174 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Mein Portfolio. Alle Rechte vorbehalten.</p>
+        <p data-translate="footer">&copy; 2026 Mein Portfolio. Alle Rechte vorbehalten.</p>
     </footer>
 
     <!-- JavaScript -->
     <script>
+        // Translations
+        const translations = {
+            de: {
+                nav_home: 'Home',
+                nav_skills: 'Skills',
+                nav_projects: 'Projekte',
+                nav_about: 'About',
+                nav_contact: 'Kontakt',
+                hero_hello: 'Hallo, ich bin',
+                hero_description: 'Ich entwickle moderne, responsive und benutzerfreundliche Webanwendungen mit den neuesten Technologien.',
+                hero_btn_projects: 'Meine Projekte',
+                hero_btn_contact: 'Kontakt',
+                skills_title: 'Meine Skills',
+                skills_subtitle: 'Technologien und Programmiersprachen, mit denen ich arbeite',
+                projects_title: 'Meine Projekte',
+                projects_subtitle: 'Hier werden bald meine Projekte erscheinen',
+                coming_soon: 'Coming Soon',
+                project1_title: 'Projekt #1',
+                project1_desc: 'Hier werde ich mein erstes Projekt vorstellen. Details folgen bald...',
+                project2_title: 'Projekt #2',
+                project2_desc: 'Hier werde ich mein zweites Projekt vorstellen. Details folgen bald...',
+                project3_title: 'Projekt #3',
+                project3_desc: 'Hier werde ich mein drittes Projekt vorstellen. Details folgen bald...',
+                about_title: 'Über mich',
+                about_subtitle: 'Web Developer mit Leidenschaft',
+                about_text1: 'Ich bin ein motivierter Web Developer mit Kenntnissen in Frontend- und Backend-Entwicklung. Meine Expertise umfasst HTML, CSS, JavaScript, React, Node.js und MySQL.',
+                about_text2: 'Ich arbeite kontinuierlich daran, meine Kenntnisse zu erweitern und moderne, benutzerfreundliche Webanwendungen zu entwickeln. Mein Ziel ist es, innovative Lösungen zu schaffen, die sowohl funktional als auch ästhetisch ansprechend sind.',
+                about_btn: 'Kontaktiere mich',
+                contact_title: 'Kontakt',
+                contact_subtitle: 'Interessiert an einer Zusammenarbeit? Kontaktiere mich!',
+                contact_btn: 'E-Mail senden',
+                footer: '© 2026 Mein Portfolio. Alle Rechte vorbehalten.',
+                typewriter: ['Menes Nasufoski', 'Web Developer', 'Frontend Enthusiast']
+            },
+            en: {
+                nav_home: 'Home',
+                nav_skills: 'Skills',
+                nav_projects: 'Projects',
+                nav_about: 'About',
+                nav_contact: 'Contact',
+                hero_hello: "Hi, I'm",
+                hero_description: 'I develop modern, responsive and user-friendly web applications with the latest technologies.',
+                hero_btn_projects: 'My Projects',
+                hero_btn_contact: 'Contact',
+                skills_title: 'My Skills',
+                skills_subtitle: 'Technologies and programming languages I work with',
+                projects_title: 'My Projects',
+                projects_subtitle: 'My projects will appear here soon',
+                coming_soon: 'Coming Soon',
+                project1_title: 'Project #1',
+                project1_desc: 'Here I will present my first project. Details coming soon...',
+                project2_title: 'Project #2',
+                project2_desc: 'Here I will present my second project. Details coming soon...',
+                project3_title: 'Project #3',
+                project3_desc: 'Here I will present my third project. Details coming soon...',
+                about_title: 'About Me',
+                about_subtitle: 'Passionate Web Developer',
+                about_text1: 'I am a motivated web developer with skills in frontend and backend development. My expertise includes HTML, CSS, JavaScript, React, Node.js and MySQL.',
+                about_text2: 'I continuously work on expanding my knowledge and developing modern, user-friendly web applications. My goal is to create innovative solutions that are both functional and aesthetically appealing.',
+                about_btn: 'Contact me',
+                contact_title: 'Contact',
+                contact_subtitle: 'Interested in working together? Contact me!',
+                contact_btn: 'Send Email',
+                footer: '© 2026 My Portfolio. All rights reserved.',
+                typewriter: ['Menes Nasufoski', 'Web Developer', 'Frontend Enthusiast']
+            },
+            it: {
+                nav_home: 'Home',
+                nav_skills: 'Competenze',
+                nav_projects: 'Progetti',
+                nav_about: 'Chi sono',
+                nav_contact: 'Contatto',
+                hero_hello: 'Ciao, sono',
+                hero_description: 'Sviluppo applicazioni web moderne, responsive e user-friendly con le tecnologie più recenti.',
+                hero_btn_projects: 'I miei progetti',
+                hero_btn_contact: 'Contatto',
+                skills_title: 'Le mie competenze',
+                skills_subtitle: 'Tecnologie e linguaggi di programmazione con cui lavoro',
+                projects_title: 'I miei progetti',
+                projects_subtitle: 'I miei progetti appariranno presto qui',
+                coming_soon: 'Prossimamente',
+                project1_title: 'Progetto #1',
+                project1_desc: 'Qui presenterò il mio primo progetto. Dettagli in arrivo...',
+                project2_title: 'Progetto #2',
+                project2_desc: 'Qui presenterò il mio secondo progetto. Dettagli in arrivo...',
+                project3_title: 'Progetto #3',
+                project3_desc: 'Qui presenterò il mio terzo progetto. Dettagli in arrivo...',
+                about_title: 'Chi sono',
+                about_subtitle: 'Web Developer appassionato',
+                about_text1: 'Sono uno sviluppatore web motivato con competenze nello sviluppo frontend e backend. La mia esperienza include HTML, CSS, JavaScript, React, Node.js e MySQL.',
+                about_text2: 'Lavoro continuamente per ampliare le mie conoscenze e sviluppare applicazioni web moderne e user-friendly. Il mio obiettivo è creare soluzioni innovative che siano sia funzionali che esteticamente attraenti.',
+                about_btn: 'Contattami',
+                contact_title: 'Contatto',
+                contact_subtitle: 'Interessato a collaborare? Contattami!',
+                contact_btn: 'Invia Email',
+                footer: '© 2026 Il mio Portfolio. Tutti i diritti riservati.',
+                typewriter: ['Menes Nasufoski', 'Web Developer', 'Frontend Enthusiast']
+            },
+            bs: {
+                nav_home: 'Početna',
+                nav_skills: 'Vještine',
+                nav_projects: 'Projekti',
+                nav_about: 'O meni',
+                nav_contact: 'Kontakt',
+                hero_hello: 'Zdravo, ja sam',
+                hero_description: 'Razvijam moderne, responzivne i korisnički prijateljske web aplikacije koristeći najnovije tehnologije.',
+                hero_btn_projects: 'Moji projekti',
+                hero_btn_contact: 'Kontakt',
+                skills_title: 'Moje vještine',
+                skills_subtitle: 'Tehnologije i programski jezici s kojima radim',
+                projects_title: 'Moji projekti',
+                projects_subtitle: 'Moji projekti će se uskoro pojaviti ovdje',
+                coming_soon: 'Uskoro',
+                project1_title: 'Projekt #1',
+                project1_desc: 'Ovdje ću predstaviti svoj prvi projekt. Detalji uskoro...',
+                project2_title: 'Projekt #2',
+                project2_desc: 'Ovdje ću predstaviti svoj drugi projekt. Detalji uskoro...',
+                project3_title: 'Projekt #3',
+                project3_desc: 'Ovdje ću predstaviti svoj treći projekt. Detalji uskoro...',
+                about_title: 'O meni',
+                about_subtitle: 'Web Developer sa strašću',
+                about_text1: 'Ja sam motivirani web developer sa znanjem u frontend i backend razvoju. Moja ekspertiza uključuje HTML, CSS, JavaScript, React, Node.js i MySQL.',
+                about_text2: 'Kontinuirano radim na proširenju svog znanja i razvoju modernih, korisnički prijateljskih web aplikacija. Moj cilj je stvaranje inovativnih rješenja koja su i funkcionalna i estetski privlačna.',
+                about_btn: 'Kontaktiraj me',
+                contact_title: 'Kontakt',
+                contact_subtitle: 'Zainteresirani za saradnju? Kontaktirajte me!',
+                contact_btn: 'Pošalji Email',
+                footer: '© 2026 Moj Portfolio. Sva prava zadržana.',
+                typewriter: ['Menes Nasufoski', 'Web Developer', 'Frontend Enthusiast']
+            }
+        };
+
+        const flags = { de: '🇩🇪', en: '🇬🇧', it: '🇮🇹', bs: '🇧🇦' };
+        const langNames = { de: 'DE', en: 'EN', it: 'IT', bs: 'BS' };
+        let currentLang = localStorage.getItem('language') || 'de';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            document.getElementById('current-flag').textContent = flags[lang];
+            document.getElementById('current-lang').textContent = langNames[lang];
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            // Update typewriter texts
+            texts = translations[lang].typewriter;
+            textIndex = 0;
+            charIndex = 0;
+            isDeleting = false;
+        }
+
+        // Initialize language on page load
+        setLanguage(currentLang);
+
         // Typewriter Effect
         const typewriter = document.getElementById('typewriter');
-        const texts = ['Menes Nasufoski', 'Web Developer', 'Frontend Enthusiast'];
+        let texts = translations[currentLang].typewriter;
         let textIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -617,11 +867,11 @@
 
             if (!isDeleting && charIndex === currentText.length) {
                 isDeleting = true;
-                typeSpeed = 2000; // Pause am Ende
+                typeSpeed = 2000;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 textIndex = (textIndex + 1) % texts.length;
-                typeSpeed = 500; // Pause vor neuem Text
+                typeSpeed = 500;
             }
 
             setTimeout(type, typeSpeed);
