@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkoutTracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0f;
+            --card: #13131a;
+            --card2: #1a1a24;
+            --border: #2a2a3a;
+            --green: #22c55e;
+            --green-dark: #16a34a;
+            --green-glow: rgba(34, 197, 94, 0.15);
+            --text: #f1f5f9;
+            --muted: #64748b;
+            --red: #ef4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--green), #86efac);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .logo span { color: var(--green); }
+
+        .header-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Main layout */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 2rem;
+        }
+
+        /* Add Workout Panel */
+        .panel {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .panel-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-title::before {
+            content: '';
+            width: 3px;
+            height: 18px;
+            background: var(--green);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        input, select {
+            width: 100%;
+            background: var(--card2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.7rem 1rem;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px var(--green-glow);
+        }
+
+        select option { background: var(--card2); }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, var(--green), var(--green-dark));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-add:active { transform: translateY(0); }
+
+        /* Workout Log */
+        .log-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .date-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .date-nav button {
+            background: var(--card2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .date-nav button:hover { border-color: var(--green); color: var(--green); }
+
+        .date-display {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .btn-clear {
+            background: transparent;
+            border: 1px solid var(--red);
+            color: var(--red);
+            padding: 0.4rem 0.9rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-clear:hover { background: rgba(239, 68, 68, 0.1); }
+
+        /* Exercise Cards */
+        .exercise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .exercise-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: slideIn 0.3s ease;
+            transition: border-color 0.2s;
+        }
+
+        .exercise-card:hover { border-color: var(--green); }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .exercise-category {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: var(--green-glow);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .exercise-info { flex: 1; }
+
+        .exercise-name {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .exercise-category-label {
+            font-size: 0.75rem;
+            color: var(--green);
+            font-weight: 500;
+        }
+
+        .exercise-stats {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .ex-stat {
+            text-align: center;
+        }
+
+        .ex-stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .ex-stat-label {
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+
+        .btn-delete {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            padding: 0.4rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-delete:hover { color: var(--red); background: rgba(239, 68, 68, 0.1); }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--muted);
+        }
+
+        .empty-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            font-size: 0.95rem;
+            max-width: 250px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Progress Bar */
+        .progress-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-label { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .progress-count { color: var(--green); font-weight: 700; }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green), #86efac);
+            border-radius: 999px;
+            transition: width 0.4s ease;
+        }
+
+        /* Category filter */
+        .category-pills {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+        }
+
+        .pill {
+            padding: 0.3rem 0.85rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--card2);
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .pill.active, .pill:hover {
+            border-color: var(--green);
+            color: var(--green);
+            background: var(--green-glow);
+        }
+
+        @media (max-width: 768px) {
+            main { grid-template-columns: 1fr; padding: 1rem; }
+            .header-stats { gap: 1rem; }
+            .form-row { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">&#128170;</div>
+        Workout<span>Tracker</span>
+    </div>
+    <div class="header-stats">
+        <div class="stat">
+            <div class="stat-value" id="total-workouts">0</div>
+            <div class="stat-label">Einheiten</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="total-sets">0</div>
+            <div class="stat-label">Sets heute</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="total-reps">0</div>
+            <div class="stat-label">Reps heute</div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Add Exercise Panel -->
+    <div>
+        <div class="panel">
+            <div class="panel-title">Ubung hinzufugen</div>
+
+            <div class="form-group">
+                <label>Ubungsname</label>
+                <input type="text" id="ex-name" placeholder="z.B. Bankdrucken" />
+            </div>
+
+            <div class="form-group">
+                <label>Kategorie</label>
+                <select id="ex-category">
+                    <option value="chest">&#128170; Brust</option>
+                    <option value="back">&#9999;&#65039; Rucken</option>
+                    <option value="legs">&#127939; Beine</option>
+                    <option value="shoulders">&#127947; Schultern</option>
+                    <option value="arms">&#128293; Arme</option>
+                    <option value="core">&#127919; Core</option>
+                    <option value="cardio">&#128170; Cardio</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Sets</label>
+                    <input type="number" id="ex-sets" min="1" max="99" value="3" />
+                </div>
+                <div class="form-group">
+                    <label>Reps</label>
+                    <input type="number" id="ex-reps" min="1" max="999" value="10" />
+                </div>
+                <div class="form-group">
+                    <label>Kg</label>
+                    <input type="number" id="ex-weight" min="0" step="0.5" value="0" />
+                </div>
+            </div>
+
+            <button class="btn-add" onclick="addExercise()">+ Ubung hinzufugen</button>
+        </div>
+
+        <!-- Progress -->
+        <div class="panel" style="margin-top: 1rem;">
+            <div class="panel-title">Tages-Ziel</div>
+            <div class="progress-section">
+                <div class="progress-header">
+                    <span class="progress-label">Ubungen</span>
+                    <span class="progress-count" id="progress-text">0 / 6</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Workout Log -->
+    <div class="panel">
+        <div class="log-header">
+            <div class="panel-title" style="margin-bottom: 0;">Trainingslog</div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div class="date-nav">
+                    <button onclick="changeDay(-1)">&#8249;</button>
+                    <span class="date-display" id="date-display"></span>
+                    <button onclick="changeDay(1)">&#8250;</button>
+                </div>
+                <button class="btn-clear" onclick="clearDay()">Leeren</button>
+            </div>
+        </div>
+
+        <div style="margin: 1.25rem 0 0.5rem;">
+            <div class="category-pills" id="filter-pills">
+                <span class="pill active" onclick="filterCategory('all', this)">Alle</span>
+                <span class="pill" onclick="filterCategory('chest', this)">Brust</span>
+                <span class="pill" onclick="filterCategory('back', this)">Rucken</span>
+                <span class="pill" onclick="filterCategory('legs', this)">Beine</span>
+                <span class="pill" onclick="filterCategory('shoulders', this)">Schultern</span>
+                <span class="pill" onclick="filterCategory('arms', this)">Arme</span>
+                <span class="pill" onclick="filterCategory('core', this)">Core</span>
+                <span class="pill" onclick="filterCategory('cardio', this)">Cardio</span>
+            </div>
+        </div>
+
+        <div class="exercise-list" id="exercise-list"></div>
+    </div>
+</main>
+
+<script>
+    const categoryEmojis = {
+        chest: '&#128170;',
+        back: '&#9999;&#65039;',
+        legs: '&#127939;',
+        shoulders: '&#127947;',
+        arms: '&#128293;',
+        core: '&#127919;',
+        cardio: '&#128170;'
+    };
+    const categoryLabels = {
+        chest: 'Brust', back: 'Rucken', legs: 'Beine',
+        shoulders: 'Schultern', arms: 'Arme', core: 'Core', cardio: 'Cardio'
+    };
+
+    let currentDate = new Date();
+    let activeFilter = 'all';
+
+    function getDateKey(d) {
+        return d.toISOString().split('T')[0];
+    }
+
+    function getWorkouts(dateKey) {
+        return JSON.parse(localStorage.getItem('wt_' + dateKey) || '[]');
+    }
+
+    function saveWorkouts(dateKey, data) {
+        localStorage.setItem('wt_' + dateKey, JSON.stringify(data));
+    }
+
+    function formatDate(d) {
+        const today = new Date();
+        const yesterday = new Date(today); yesterday.setDate(today.getDate() - 1);
+        if (getDateKey(d) === getDateKey(today)) return 'Heute';
+        if (getDateKey(d) === getDateKey(yesterday)) return 'Gestern';
+        return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    function changeDay(dir) {
+        currentDate.setDate(currentDate.getDate() + dir);
+        render();
+    }
+
+    function addExercise() {
+        const name = document.getElementById('ex-name').value.trim();
+        const category = document.getElementById('ex-category').value;
+        const sets = parseInt(document.getElementById('ex-sets').value) || 1;
+        const reps = parseInt(document.getElementById('ex-reps').value) || 1;
+        const weight = parseFloat(document.getElementById('ex-weight').value) || 0;
+
+        if (!name) {
+            document.getElementById('ex-name').focus();
+            document.getElementById('ex-name').style.borderColor = '#ef4444';
+            setTimeout(() => document.getElementById('ex-name').style.borderColor = '', 1500);
+            return;
+        }
+
+        const key = getDateKey(currentDate);
+        const workouts = getWorkouts(key);
+        workouts.push({ id: Date.now(), name, category, sets, reps, weight });
+        saveWorkouts(key, workouts);
+        document.getElementById('ex-name').value = '';
+        render();
+    }
+
+    function deleteExercise(id) {
+        const key = getDateKey(currentDate);
+        const workouts = getWorkouts(key).filter(w => w.id !== id);
+        saveWorkouts(key, workouts);
+        render();
+    }
+
+    function clearDay() {
+        if (!confirm('Alle Ubungen fur diesen Tag loschen?')) return;
+        localStorage.removeItem('wt_' + getDateKey(currentDate));
+        render();
+    }
+
+    function filterCategory(cat, el) {
+        activeFilter = cat;
+        document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        el.classList.add('active');
+        render();
+    }
+
+    function render() {
+        const key = getDateKey(currentDate);
+        const workouts = getWorkouts(key);
+
+        document.getElementById('date-display').textContent = formatDate(currentDate);
+
+        // Stats
+        const todayKey = getDateKey(new Date());
+        const todayWorkouts = getWorkouts(todayKey);
+        const allKeys = Object.keys(localStorage).filter(k => k.startsWith('wt_'));
+        document.getElementById('total-workouts').textContent = allKeys.length;
+        document.getElementById('total-sets').textContent = todayWorkouts.reduce((a, w) => a + w.sets, 0);
+        document.getElementById('total-reps').textContent = todayWorkouts.reduce((a, w) => a + (w.sets * w.reps), 0);
+
+        // Progress
+        const goal = 6;
+        const count = todayWorkouts.length;
+        document.getElementById('progress-text').textContent = count + ' / ' + goal;
+        document.getElementById('progress-fill').style.width = Math.min(100, (count / goal) * 100) + '%';
+
+        // List
+        const filtered = activeFilter === 'all' ? workouts : workouts.filter(w => w.category === activeFilter);
+        const list = document.getElementById('exercise-list');
+
+        if (filtered.length === 0) {
+            list.innerHTML = '<div class="empty-state"><div class="empty-icon">&#128170;</div><p>Noch keine Ubungen fur diesen Tag. Los geht\'s!</p></div>';
+            return;
+        }
+
+        list.innerHTML = filtered.map(w => `
+            <div class="exercise-card">
+                <div class="exercise-category">${categoryEmojis[w.category] || '&#127947;'}</div>
+                <div class="exercise-info">
+                    <div class="exercise-name">${w.name}</div>
+                    <div class="exercise-category-label">${categoryLabels[w.category]}</div>
+                </div>
+                <div class="exercise-stats">
+                    <div class="ex-stat">
+                        <div class="ex-stat-value">${w.sets}</div>
+                        <div class="ex-stat-label">Sets</div>
+                    </div>
+                    <div class="ex-stat">
+                        <div class="ex-stat-value">${w.reps}</div>
+                        <div class="ex-stat-label">Reps</div>
+                    </div>
+                    ${w.weight > 0 ? `<div class="ex-stat"><div class="ex-stat-value">${w.weight}</div><div class="ex-stat-label">kg</div></div>` : ''}
+                </div>
+                <button class="btn-delete" onclick="deleteExercise(${w.id})">&#10005;</button>
+            </div>
+        `).join('');
+    }
+
+    // Enter key support
+    document.getElementById('ex-name').addEventListener('keydown', e => {
+        if (e.key === 'Enter') addExercise();
+    });
+
+    render();
+</script>
+</body>
+</html>
