@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salat Guide</title>
+    <link rel="manifest" href="salat-manifest.json">
+    <meta name="theme-color" content="#10b981">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Salat">
+    <link rel="apple-touch-icon" href="favicon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #060d0d;
+            --card: #0d1a1a;
+            --card2: #132020;
+            --border: #1e3333;
+            --green: #10b981;
+            --green2: #059669;
+            --glow: rgba(16,185,129,0.15);
+            --gold: #f59e0b;
+            --text: #e2e8f0;
+            --muted: #64748b;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+        header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(6,13,13,0.95); backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+        .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--green), #34d399); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+        .logo span { color: var(--green); }
+
+        .lang-switcher { display: flex; align-items: center; gap: 0.5rem; }
+        .lang-btn {
+            padding: 0.35rem 0.8rem; border-radius: 8px;
+            border: 1px solid var(--border); background: var(--card2);
+            color: var(--muted); cursor: pointer; font-size: 0.8rem; font-weight: 600;
+            transition: all 0.2s; font-family: 'Inter', sans-serif;
+        }
+        .lang-btn.active { border-color: var(--green); color: var(--green); background: var(--glow); }
+        .script-toggle {
+            display: none; align-items: center; gap: 0.3rem;
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 8px; padding: 0.2rem;
+        }
+        .script-toggle.visible { display: flex; }
+        .script-btn {
+            padding: 0.25rem 0.6rem; border-radius: 6px;
+            border: none; background: transparent;
+            color: var(--muted); cursor: pointer; font-size: 0.75rem; font-weight: 600;
+            transition: all 0.2s; font-family: 'Inter', sans-serif;
+        }
+        .script-btn.active { background: var(--green); color: white; }
+
+        main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem; gap: 1.25rem; max-width: 500px; margin: 0 auto; width: 100%; }
+
+        /* Step progress */
+        .step-progress { display: flex; gap: 0.4rem; align-items: center; }
+        .step-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--border); transition: all 0.3s;
+        }
+        .step-dot.active { background: var(--green); box-shadow: 0 0 8px var(--green); transform: scale(1.3); }
+        .step-dot.done { background: var(--green2); }
+        .step-counter { font-size: 0.8rem; color: var(--muted); margin-left: 0.5rem; font-weight: 600; }
+
+        /* SVG Animation Area */
+        .animation-card {
+            background: linear-gradient(135deg, var(--card) 0%, #0a1f1f 100%);
+            border: 1px solid var(--border); border-radius: 20px;
+            padding: 1.5rem; width: 100%;
+            display: flex; flex-direction: column; align-items: center;
+            position: relative; overflow: hidden;
+        }
+        .animation-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(16,185,129,0.08) 0%, transparent 60%);
+        }
+        #prayer-figure { width: 200px; height: 210px; z-index: 1; }
+        .pose-name-arabic {
+            font-family: 'Amiri', serif; font-size: 1.8rem;
+            color: var(--gold); text-align: center; margin-top: 0.5rem;
+            letter-spacing: 0.05em; line-height: 1.4; z-index: 1;
+        }
+        .pose-name-local { font-size: 1rem; font-weight: 700; color: var(--green); text-align: center; margin-top: 0.25rem; z-index: 1; }
+
+        /* Step info card */
+        .step-card {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 1.25rem; width: 100%;
+        }
+        .dhikr-arabic {
+            font-family: 'Amiri', serif; font-size: 1.5rem;
+            color: var(--gold); text-align: center; margin-bottom: 0.5rem;
+            line-height: 1.8; direction: rtl;
+        }
+        .dhikr-transliteration {
+            font-size: 0.85rem; color: var(--green); text-align: center;
+            font-style: italic; margin-bottom: 0.5rem; font-weight: 500;
+        }
+        .dhikr-translation {
+            font-size: 0.85rem; color: var(--muted); text-align: center; line-height: 1.6;
+        }
+        .step-description {
+            font-size: 0.85rem; color: var(--text); line-height: 1.7;
+            margin-top: 0.75rem; padding-top: 0.75rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Controls */
+        .controls { display: flex; align-items: center; gap: 1rem; width: 100%; justify-content: center; }
+        .btn-nav {
+            width: 52px; height: 52px; border-radius: 50%;
+            border: 1px solid var(--border); background: var(--card2);
+            color: var(--text); cursor: pointer; font-size: 1.2rem;
+            transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+        }
+        .btn-nav:hover { border-color: var(--green); color: var(--green); }
+        .btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+        .btn-play {
+            flex: 1; max-width: 200px; padding: 0.875rem;
+            background: linear-gradient(135deg, var(--green), var(--green2));
+            border: none; border-radius: 12px; color: white;
+            font-weight: 700; font-size: 0.95rem; cursor: pointer;
+            transition: all 0.2s; box-shadow: 0 6px 20px var(--glow);
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-play:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--glow); }
+        .btn-play.playing { background: linear-gradient(135deg, #ef4444, #dc2626); }
+
+        /* Autoplay speed */
+        .speed-row { display: flex; align-items: center; gap: 0.75rem; }
+        .speed-label { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
+        .speed-btns { display: flex; gap: 0.3rem; }
+        .speed-btn {
+            padding: 0.25rem 0.6rem; border-radius: 6px;
+            border: 1px solid var(--border); background: var(--card2);
+            color: var(--muted); cursor: pointer; font-size: 0.75rem; font-weight: 600;
+            transition: all 0.2s; font-family: 'Inter', sans-serif;
+        }
+        .speed-btn.active { border-color: var(--green); color: var(--green); background: var(--glow); }
+
+        @media (max-width: 400px) { main { padding: 1rem 0.75rem; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">&#9733;</div>
+        Salat<span>Guide</span>
+    </div>
+    <div class="lang-switcher">
+        <button class="lang-btn" onclick="setLang('de', this)">&#127465;&#127466; DE</button>
+        <button class="lang-btn active" onclick="setLang('mk', this)">&#127474;&#127472; МК</button>
+        <div class="script-toggle visible" id="script-toggle">
+            <button class="script-btn active" id="cyr-btn" onclick="setScript('cyr')">Кир</button>
+            <button class="script-btn" id="lat-btn" onclick="setScript('lat')">Lat</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div style="display:flex; align-items:center; justify-content:space-between; width:100%;">
+        <div class="step-progress" id="step-dots"></div>
+        <span class="step-counter" id="step-counter">1 / 10</span>
+    </div>
+
+    <div class="animation-card">
+        <svg id="prayer-figure" viewBox="0 0 200 210" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+            <!-- Prayer mat -->
+            <rect x="15" y="192" width="170" height="14" rx="5" fill="#0d2020" stroke="#10b981" stroke-width="1" opacity="0.6"/>
+            <line x1="30" y1="198" x2="170" y2="198" stroke="#10b981" stroke-width="0.5" opacity="0.4"/>
+            <!-- Figure -->
+            <g filter="url(#glow)" opacity="0.9">
+                <line id="lLeg" stroke="#34d399" stroke-width="5.5" stroke-linecap="round"/>
+                <line id="rLeg" stroke="#34d399" stroke-width="5.5" stroke-linecap="round"/>
+                <line id="torso" stroke="#6ee7b7" stroke-width="5.5" stroke-linecap="round"/>
+                <line id="lArm" stroke="#6ee7b7" stroke-width="4.5" stroke-linecap="round"/>
+                <line id="rArm" stroke="#6ee7b7" stroke-width="4.5" stroke-linecap="round"/>
+                <circle id="head" r="15" fill="none" stroke="#a7f3d0" stroke-width="5" stroke-linecap="round"/>
+            </g>
+        </svg>
+        <div class="pose-name-arabic" id="pose-arabic"></div>
+        <div class="pose-name-local" id="pose-local"></div>
+    </div>
+
+    <div class="step-card">
+        <div class="dhikr-arabic" id="dhikr-arabic"></div>
+        <div class="dhikr-transliteration" id="dhikr-trans"></div>
+        <div class="dhikr-translation" id="dhikr-translation"></div>
+        <div class="step-description" id="step-desc"></div>
+    </div>
+
+    <div style="width:100%; display:flex; flex-direction:column; gap:0.75rem;">
+        <div class="controls">
+            <button class="btn-nav" id="btn-prev" onclick="prevStep()">&#8249;</button>
+            <button class="btn-play" id="btn-play" onclick="toggleAutoPlay()">&#9654; Auto</button>
+            <button class="btn-nav" id="btn-next" onclick="nextStep()">&#8250;</button>
+        </div>
+        <div class="speed-row" style="justify-content:center;">
+            <span class="speed-label" id="speed-label">Geschwindigkeit:</span>
+            <div class="speed-btns">
+                <button class="speed-btn" onclick="setSpeed(3000, this)">1x</button>
+                <button class="speed-btn active" onclick="setSpeed(2000, this)">1.5x</button>
+                <button class="speed-btn" onclick="setSpeed(1200, this)">2x</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+// ─── TRANSLATIONS ────────────────────────────────────────────────
+const T = {
+    de: {
+        speed: 'Geschwindigkeit:',
+        auto: 'Auto',
+        pause: 'Pause',
+    },
+    mk_cyr: {
+        speed: 'Брзина:',
+        auto: 'Авто',
+        pause: 'Пауза',
+    },
+    mk_lat: {
+        speed: 'Brzina:',
+        auto: 'Avto',
+        pause: 'Pauza',
+    }
+};
+
+// ─── STEPS ───────────────────────────────────────────────────────
+const steps = [
+    {
+        pose: 'stand',
+        arabic: 'النِّيَّة',
+        trans: "Niyyah",
+        dhikr_arabic: '',
+        dhikr_trans: '',
+        de: { name: 'Niyyah (Absicht)', dhikr: '', desc: 'Stehe aufrecht in Richtung Qibla. Forme die Absicht im Herzen, das Gebet zu verrichten. Die Absicht muss nicht laut ausgesprochen werden.' },
+        mk_cyr: { name: 'Нија (Намера)', dhikr: '', desc: 'Застани исправено кон Кибла. Формирај намера во срцето за извршување на намазот. Намерата не мора да се изговори гласно.' },
+        mk_lat: { name: 'Nija (Namera)', dhikr: '', desc: 'Zastani ispravljeno kon Kibla. Formiraj namera vo srceto za izvrshuvanje na namazot. Namerata ne mora da se izgovori glasno.' }
+    },
+    {
+        pose: 'takbir',
+        arabic: 'تَكْبِيرَة الإِحْرَام',
+        trans: "Takbiratul Ihram",
+        dhikr_arabic: 'اللَّهُ أَكْبَر',
+        dhikr_trans: 'Allahu Akbar',
+        de: { name: 'Takbir', dhikr: '"Allah ist der Größte"', desc: 'Hebe beide Hände bis auf Höhe der Ohren. Daumen zeigen zu den Ohren. Sprich "Allahu Akbar" und trete damit offiziell in das Gebet ein.' },
+        mk_cyr: { name: 'Текбир', dhikr: '"Аллах е Највелик"', desc: 'Подигни ги двете раце до нивото на ушите. Палците покажуваат кон ушите. Изговори "Алаху Акбер" и со тоа официјално влези во намазот.' },
+        mk_lat: { name: 'Tekbir', dhikr: '"Allah e Najvelik"', desc: 'Podигni gi dvete race do nivoto na ushite. Palcite pokazhuvaat kon ushite. Izgovori "Allahu Akber" i so toa oficijalno vlezi vo namazot.' }
+    },
+    {
+        pose: 'qiyam',
+        arabic: 'القِيَام',
+        trans: "Qiyam",
+        dhikr_arabic: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',
+        dhikr_trans: 'Bismillahir Rahmanir Rahim... Al-Fatiha',
+        de: { name: 'Qiyam (Stehen)', dhikr: 'Rezitiere Al-Fatiha + eine Surah', desc: 'Lege die rechte Hand über die linke auf der Brust. Rezitiere Subhanaka, dann Al-Fatiha. Danach eine beliebige Surah (z.B. Al-Ikhlas).' },
+        mk_cyr: { name: 'Кијам (Стоење)', dhikr: 'Рецитирај Ел-Фатиха + Сура', desc: 'Стави ја десната рака врз левата на градите. Рецитирај Субханеке, потоа Ел-Фатиха. Потоа произволна Сура (пр. Ел-Ихлас).' },
+        mk_lat: { name: 'Kijam (Stoenje)', dhikr: 'Recitiraj El-Fatiha + Sura', desc: 'Stavi ja desnata raka vrs levata na gradite. Recitiraj Subhaneke, potoa El-Fatiha. Potoa proizvolna Sura (pr. El-Ihlas).' }
+    },
+    {
+        pose: 'ruku',
+        arabic: 'الرُّكُوع',
+        trans: "Ruku'",
+        dhikr_arabic: 'سُبْحَانَ رَبِّيَ الْعَظِيمِ',
+        dhikr_trans: "Subhana Rabbiyal Adheem (3x)",
+        de: { name: "Ruku' (Verbeugung)", dhikr: '"Gepriesen sei mein Herr, der Erhabene"', desc: 'Beuge dich vor, bis Rücken und Boden parallel sind. Lege die Hände auf die Knie. Halte den Rücken gerade. Sprich den Dhikr 3 Mal.' },
+        mk_cyr: { name: 'Руку (Поклон)', dhikr: '"Слава на мојот Господ, Возвишениот"', desc: 'Наведни се напред додека грбот и подот не се паралелни. Стави ги рацете на колената. Дршти го грбот рамен. Изговори го Зикрот 3 пати.' },
+        mk_lat: { name: 'Ruku (Poklon)', dhikr: '"Slava na mojot Gospod, Vozvisheniоt"', desc: 'Navedni se napred dodeka grbot i podot ne se paralelni. Stavi gi racete na kolenata. Drzhti go grbot ramen. Izgovori go Zikrot 3 pati.' }
+    },
+    {
+        pose: 'itidal',
+        arabic: 'الاعْتِدَال',
+        trans: "I'tidal",
+        dhikr_arabic: 'سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ ۝ رَبَّنَا لَكَ الْحَمْد',
+        dhikr_trans: "Sami'allahu liman hamidah — Rabbana lakal hamd",
+        de: { name: "I'tidal (Aufrichten)", dhikr: '"Allah hört, wer ihn lobt — Unser Herr, dir gebührt Lob"', desc: 'Richte dich wieder vollständig auf. Hebe die Hände beim Aufrichten und senke sie wieder. Stehe kurz aufrecht inne.' },
+        mk_cyr: { name: 'Итидал (Исправање)', dhikr: '"Аллах слуша кој Го фали — Господи наш, Тебе Ти припаѓа фалба"', desc: 'Исправи се повторно целосно. Подигни ги рацете при исправањето и спушти ги повторно. Застани кратко исправено.' },
+        mk_lat: { name: 'Itidal (Ispravanje)', dhikr: '"Allah slusha koj Go fali — Gospodi nash, Tebe Ti pripagja falba"', desc: 'Ispravi se povtorno celosno. Podигni gi racete pri ispravanjeto i spushti gi povtorno. Zastani kratko ispravljeno.' }
+    },
+    {
+        pose: 'sujud',
+        arabic: 'السُّجُود',
+        trans: "Sujud",
+        dhikr_arabic: 'سُبْحَانَ رَبِّيَ الأَعْلَى',
+        dhikr_trans: "Subhana Rabbiyal A'la (3x)",
+        de: { name: 'Sujud (1. Niederwerfung)', dhikr: '"Gepriesen sei mein Herr, der Höchste"', desc: '7 Körperstellen berühren den Boden: Stirn+Nase, beide Hände, beide Knie, beide Fußspitzen. Ellbogen vom Boden abheben. Dhikr 3x sprechen.' },
+        mk_cyr: { name: 'Сеџда (1. Земен Падеж)', dhikr: '"Слава на мојот Господ, Највисокиот"', desc: '7 делови на телото го допираат подот: чело+нос, двете раце, двете колена, двете прсти на нозете. Лактите ги кревај од подот. Изговори Зикр 3 пати.' },
+        mk_lat: { name: 'Sedzhda (1. Zemen Padezh)', dhikr: '"Slava na mojot Gospod, Najvisokiot"', desc: '7 delovi na teloto go dopirat podot: chelo+nos, dvete race, dvete kolena, dvete prsti na nozete. Laktite gi kreвaj od podot. Izgovori Zikr 3 pati.' }
+    },
+    {
+        pose: 'juloos',
+        arabic: 'الجُلُوس',
+        trans: "Juloos",
+        dhikr_arabic: 'رَبِّ اغْفِرْ لِي',
+        dhikr_trans: "Rabbighfirli",
+        de: { name: 'Juloos (Sitzen)', dhikr: '"Herr, vergib mir"', desc: 'Setze dich zwischen den zwei Niederwerfungen. Rechter Fuß aufgestellt, linker Fuß unter dem Körper. Hände auf den Oberschenkeln. Sprich den Dhikr.' },
+        mk_cyr: { name: 'Џулус (Седење)', dhikr: '"Господи, прости ми"', desc: 'Седни помеѓу двете земни падежи. Десното стапало исправено, левото под телото. Рацете на бутовите. Изговори го Зикрот.' },
+        mk_lat: { name: 'Dzhulus (Sedenje)', dhikr: '"Gospodi, prosti mi"', desc: 'Sedni pomegju dvete zemni padezhi. Desnoto stapalo ispravljeno, levoto pod teloto. Racete na butovite. Izgovori go Zikrot.' }
+    },
+    {
+        pose: 'sujud',
+        arabic: 'السُّجُود الثَّانِي',
+        trans: "Sujud II",
+        dhikr_arabic: 'سُبْحَانَ رَبِّيَ الأَعْلَى',
+        dhikr_trans: "Subhana Rabbiyal A'la (3x)",
+        de: { name: '2. Sujud', dhikr: '"Gepriesen sei mein Herr, der Höchste"', desc: 'Zweite Niederwerfung — identisch mit der ersten. Alle 7 Körperstellen berühren den Boden. Dhikr 3x sprechen. Danach aufstehen für die 2. Rakaat.' },
+        mk_cyr: { name: '2. Сеџда', dhikr: '"Слава на мојот Господ, Највисокиот"', desc: 'Втора Земна Падеж — идентична со првата. Сите 7 делови го допираат подот. Изговори Зикр 3 пати. Потоа стани за 2. Ракат.' },
+        mk_lat: { name: '2. Sedzhda', dhikr: '"Slava na mojot Gospod, Najvisokiot"', desc: 'Vtora Zemna Padezh — identicna so prvata. Site 7 delovi go dopirat podot. Izgovori Zikr 3 pati. Potoa stani za 2. Rakat.' }
+    },
+    {
+        pose: 'tashahhud',
+        arabic: 'التَّشَهُّد',
+        trans: "Tashahhud",
+        dhikr_arabic: 'التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَات',
+        dhikr_trans: "At-Tahiyyatu lillahi was-salawatu wat-tayyibat...",
+        de: { name: 'Tashahhud', dhikr: 'At-Tahiyyat rezitieren', desc: 'Sitze im letzten Tashahhud. Hebe den rechten Zeigefinger beim Zeugenbekenntnis (Ashhadu...). Rezitiere At-Tahiyyat und As-Salat Ibrahimiyya.' },
+        mk_cyr: { name: 'Ташехуд', dhikr: 'Рецитирај Ет-Техијат', desc: 'Седни во последниот Ташехуд. Подигни го десниот показалец при сведочењето (Ешхеду...). Рецитирај Ет-Техијат и Ес-Салат Ибрахимијје.' },
+        mk_lat: { name: 'Tashehud', dhikr: 'Recitiraj Et-Tehijat', desc: 'Sedni vo posledniot Tashehud. Podигni go desniot pokazalec pri svedochenjeto (Eshhedu...). Recitiraj Et-Tehijat i Es-Salat Ibrahimijje.' }
+    },
+    {
+        pose: 'salam',
+        arabic: 'التَّسْلِيم',
+        trans: "Taslim",
+        dhikr_arabic: 'السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّه',
+        dhikr_trans: "Assalamu alaykum wa rahmatullah",
+        de: { name: 'Salam (Abschluss)', dhikr: '"Friede sei mit euch und Gottes Barmherzigkeit"', desc: 'Drehe den Kopf nach rechts und sprich den Salam, dann nach links. Das Gebet ist damit abgeschlossen. Du kannst nun Dua sprechen.' },
+        mk_cyr: { name: 'Селам (Крај)', dhikr: '"Мир нека биде со вас и Божјата милост"', desc: 'Сврти ја главата надесно и изговори Селам, потоа налево. Со тоа намазот е завршен. Сега можеш да правиш Дова.' },
+        mk_lat: { name: 'Selam (Kraj)', dhikr: '"Mir neka bide so vas i Bozhkata milost"', desc: 'Svrti ja glavata nadesno i izgovori Selam, potoa nalevo. So toa namazot e zavrshеn. Sega mozhesh da pravis Dova.' }
+    }
+];
+
+// ─── POSES (SVG coords: viewBox 0 0 200 210) ─────────────────────
+const poses = {
+    stand: {
+        head:  [100, 28],
+        torso: [[100,43],[100,107]],
+        lArm:  [[100,72],[72,98]],
+        rArm:  [[100,72],[128,98]],
+        lLeg:  [[100,107],[80,168]],
+        rLeg:  [[100,107],[120,168]]
+    },
+    takbir: {
+        head:  [100, 28],
+        torso: [[100,43],[100,107]],
+        lArm:  [[100,72],[62,35]],
+        rArm:  [[100,72],[138,35]],
+        lLeg:  [[100,107],[80,168]],
+        rLeg:  [[100,107],[120,168]]
+    },
+    qiyam: {
+        head:  [100, 28],
+        torso: [[100,43],[100,107]],
+        lArm:  [[100,72],[82,90]],
+        rArm:  [[100,72],[118,90]],
+        lLeg:  [[100,107],[80,168]],
+        rLeg:  [[100,107],[120,168]]
+    },
+    ruku: {
+        head:  [47, 88],
+        torso: [[63,88],[143,88]],
+        lArm:  [[100,88],[88,122]],
+        rArm:  [[122,88],[110,122]],
+        lLeg:  [[143,88],[122,168]],
+        rLeg:  [[143,88],[158,168]]
+    },
+    itidal: {
+        head:  [100, 28],
+        torso: [[100,43],[100,107]],
+        lArm:  [[100,72],[70,100]],
+        rArm:  [[100,72],[130,100]],
+        lLeg:  [[100,107],[80,168]],
+        rLeg:  [[100,107],[120,168]]
+    },
+    sujud: {
+        head:  [47, 178],
+        torso: [[60,172],[112,138]],
+        lArm:  [[60,172],[33,178]],
+        rArm:  [[60,172],[82,178]],
+        lLeg:  [[112,138],[93,185]],
+        rLeg:  [[112,138],[122,185]]
+    },
+    juloos: {
+        head:  [100, 88],
+        torso: [[100,103],[100,148]],
+        lArm:  [[100,118],[75,145]],
+        rArm:  [[100,118],[125,145]],
+        lLeg:  [[100,148],[65,182]],
+        rLeg:  [[100,148],[140,182]]
+    },
+    tashahhud: {
+        head:  [100, 88],
+        torso: [[100,103],[100,148]],
+        lArm:  [[100,118],[75,145]],
+        rArm:  [[100,118],[128,100]],
+        lLeg:  [[100,148],[65,182]],
+        rLeg:  [[100,148],[140,182]]
+    },
+    salam: {
+        head:  [85, 28],
+        torso: [[95,43],[95,107]],
+        lArm:  [[95,72],[68,98]],
+        rArm:  [[95,72],[122,98]],
+        lLeg:  [[95,107],[75,168]],
+        rLeg:  [[95,107],[115,168]]
+    }
+};
+
+const poseMap = ['stand','takbir','qiyam','ruku','itidal','sujud','juloos','sujud','tashahhud','salam'];
+
+// ─── STATE ───────────────────────────────────────────────────────
+let currentStep = 0;
+let currentLang = 'mk_cyr';
+let autoPlayInterval = null;
+let autoSpeed = 2000;
+let animating = false;
+
+// ─── SVG UTILS ───────────────────────────────────────────────────
+function lerp(a, b, t) { return a + (b - a) * t; }
+function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+function getPoseState() {
+    return {
+        head:  [parseFloat(document.getElementById('head').getAttribute('cx')), parseFloat(document.getElementById('head').getAttribute('cy'))],
+        torso: [[parseFloat(document.getElementById('torso').getAttribute('x1')), parseFloat(document.getElementById('torso').getAttribute('y1'))], [parseFloat(document.getElementById('torso').getAttribute('x2')), parseFloat(document.getElementById('torso').getAttribute('y2'))]],
+        lArm:  [[parseFloat(document.getElementById('lArm').getAttribute('x1')), parseFloat(document.getElementById('lArm').getAttribute('y1'))], [parseFloat(document.getElementById('lArm').getAttribute('x2')), parseFloat(document.getElementById('lArm').getAttribute('y2'))]],
+        rArm:  [[parseFloat(document.getElementById('rArm').getAttribute('x1')), parseFloat(document.getElementById('rArm').getAttribute('y1'))], [parseFloat(document.getElementById('rArm').getAttribute('x2')), parseFloat(document.getElementById('rArm').getAttribute('y2'))]],
+        lLeg:  [[parseFloat(document.getElementById('lLeg').getAttribute('x1')), parseFloat(document.getElementById('lLeg').getAttribute('y1'))], [parseFloat(document.getElementById('lLeg').getAttribute('x2')), parseFloat(document.getElementById('lLeg').getAttribute('y2'))]],
+        rLeg:  [[parseFloat(document.getElementById('rLeg').getAttribute('x1')), parseFloat(document.getElementById('rLeg').getAttribute('y1'))], [parseFloat(document.getElementById('rLeg').getAttribute('x2')), parseFloat(document.getElementById('rLeg').getAttribute('y2'))]]
+    };
+}
+
+function applyPoseState(state) {
+    document.getElementById('head').setAttribute('cx', state.head[0]);
+    document.getElementById('head').setAttribute('cy', state.head[1]);
+    ['torso','lArm','rArm','lLeg','rLeg'].forEach(id => {
+        const el = document.getElementById(id);
+        el.setAttribute('x1', state[id][0][0]); el.setAttribute('y1', state[id][0][1]);
+        el.setAttribute('x2', state[id][1][0]); el.setAttribute('y2', state[id][1][1]);
+    });
+}
+
+function animateToPose(targetPoseName, duration = 550) {
+    if (animating) return;
+    animating = true;
+    const from = getPoseState();
+    const to = poses[targetPoseName];
+    const start = performance.now();
+
+    function frame(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const e = easeInOut(t);
+        applyPoseState({
+            head:  [lerp(from.head[0], to.head[0], e), lerp(from.head[1], to.head[1], e)],
+            torso: [[lerp(from.torso[0][0], to.torso[0][0], e), lerp(from.torso[0][1], to.torso[0][1], e)], [lerp(from.torso[1][0], to.torso[1][0], e), lerp(from.torso[1][1], to.torso[1][1], e)]],
+            lArm:  [[lerp(from.lArm[0][0], to.lArm[0][0], e), lerp(from.lArm[0][1], to.lArm[0][1], e)], [lerp(from.lArm[1][0], to.lArm[1][0], e), lerp(from.lArm[1][1], to.lArm[1][1], e)]],
+            rArm:  [[lerp(from.rArm[0][0], to.rArm[0][0], e), lerp(from.rArm[0][1], to.rArm[0][1], e)], [lerp(from.rArm[1][0], to.rArm[1][0], e), lerp(from.rArm[1][1], to.rArm[1][1], e)]],
+            lLeg:  [[lerp(from.lLeg[0][0], to.lLeg[0][0], e), lerp(from.lLeg[0][1], to.lLeg[0][1], e)], [lerp(from.lLeg[1][0], to.lLeg[1][0], e), lerp(from.lLeg[1][1], to.lLeg[1][1], e)]],
+            rLeg:  [[lerp(from.rLeg[0][0], to.rLeg[0][0], e), lerp(from.rLeg[0][1], to.rLeg[0][1], e)], [lerp(from.rLeg[1][0], to.rLeg[1][0], e), lerp(from.rLeg[1][1], to.rLeg[1][1], e)]]
+        });
+        if (t < 1) requestAnimationFrame(frame);
+        else animating = false;
+    }
+    requestAnimationFrame(frame);
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────
+function render() {
+    const step = steps[currentStep];
+    const l = currentLang;
+
+    // Dots
+    const dotsEl = document.getElementById('step-dots');
+    dotsEl.innerHTML = steps.map((_, i) => `<div class="step-dot ${i === currentStep ? 'active' : i < currentStep ? 'done' : ''}"></div>`).join('');
+    document.getElementById('step-counter').textContent = (currentStep+1) + ' / ' + steps.length;
+
+    // Animate figure
+    animateToPose(poseMap[currentStep]);
+
+    // Arabic + local name
+    document.getElementById('pose-arabic').textContent = step.arabic;
+    document.getElementById('pose-local').textContent = step[l].name;
+
+    // Dhikr
+    document.getElementById('dhikr-arabic').textContent = step.dhikr_arabic;
+    document.getElementById('dhikr-trans').textContent = step.dhikr_trans;
+    document.getElementById('dhikr-translation').textContent = step[l].dhikr;
+    document.getElementById('step-desc').textContent = step[l].desc;
+
+    // Buttons
+    document.getElementById('btn-prev').disabled = currentStep === 0;
+    document.getElementById('btn-next').disabled = currentStep === steps.length - 1;
+
+    // Speed label
+    document.getElementById('speed-label').textContent = T[l].speed;
+}
+
+// ─── NAVIGATION ──────────────────────────────────────────────────
+function prevStep() { if (currentStep > 0) { currentStep--; render(); } }
+function nextStep() {
+    if (currentStep < steps.length - 1) { currentStep++; render(); }
+    else stopAutoPlay();
+}
+
+function toggleAutoPlay() {
+    if (autoPlayInterval) stopAutoPlay();
+    else startAutoPlay();
+}
+
+function startAutoPlay() {
+    const btn = document.getElementById('btn-play');
+    btn.textContent = '⏸ ' + T[currentLang].pause;
+    btn.classList.add('playing');
+    autoPlayInterval = setInterval(() => {
+        if (currentStep < steps.length - 1) nextStep();
+        else stopAutoPlay();
+    }, autoSpeed);
+}
+
+function stopAutoPlay() {
+    clearInterval(autoPlayInterval);
+    autoPlayInterval = null;
+    const btn = document.getElementById('btn-play');
+    btn.textContent = '▶ ' + T[currentLang].auto;
+    btn.classList.remove('playing');
+}
+
+function setSpeed(ms, el) {
+    autoSpeed = ms;
+    document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    if (autoPlayInterval) { stopAutoPlay(); startAutoPlay(); }
+}
+
+// ─── LANGUAGE ────────────────────────────────────────────────────
+function setLang(lang, el) {
+    if (lang === 'de') {
+        currentLang = 'de';
+        document.getElementById('script-toggle').classList.remove('visible');
+    } else {
+        document.getElementById('script-toggle').classList.add('visible');
+    }
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    if (autoPlayInterval) stopAutoPlay();
+    render();
+}
+
+function setScript(script) {
+    currentLang = 'mk_' + script;
+    document.getElementById('cyr-btn').classList.toggle('active', script === 'cyr');
+    document.getElementById('lat-btn').classList.toggle('active', script === 'lat');
+    if (autoPlayInterval) stopAutoPlay();
+    render();
+}
+
+// ─── INIT ────────────────────────────────────────────────────────
+// Set initial pose instantly
+applyPoseState({ head: poses.stand.head, torso: poses.stand.torso, lArm: poses.stand.lArm, rArm: poses.stand.rArm, lLeg: poses.stand.lLeg, rLeg: poses.stand.rLeg });
+render();
+animating = false; // reset after initial set
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw-salat.js');
+</script>
+</body>
+</html>

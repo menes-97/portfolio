@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasbeeh - Zähler</title>
+    <link rel="manifest" href="tasbeeh-manifest.json">
+    <meta name="theme-color" content="#8b5cf6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Tasbeeh">
+    <link rel="apple-touch-icon" href="favicon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0812;
+            --card: #120f1a;
+            --card2: #1a1626;
+            --border: #2a2240;
+            --purple: #8b5cf6;
+            --purple2: #7c3aed;
+            --glow: rgba(139,92,246,0.2);
+            --gold: #f59e0b;
+            --text: #e2e8f0;
+            --muted: #64748b;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+        body::before {
+            content: ''; position: fixed; inset: 0; z-index: 0;
+            background: radial-gradient(ellipse at 50% 40%, rgba(139,92,246,0.07) 0%, transparent 65%);
+            pointer-events: none;
+        }
+
+        header {
+            padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(10,8,18,0.95); backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+        .logo-icon { font-family: 'Amiri', serif; font-size: 1.4rem; color: var(--gold); }
+        .logo span { color: var(--purple); }
+
+        .lang-switcher { display: flex; align-items: center; gap: 0.5rem; }
+        .lang-btn { padding: 0.35rem 0.8rem; border-radius: 8px; border: 1px solid var(--border); background: var(--card2); color: var(--muted); cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+        .lang-btn.active { border-color: var(--purple); color: var(--purple); background: var(--glow); }
+        .script-toggle { display: none; align-items: center; gap: 0.3rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.2rem; }
+        .script-toggle.visible { display: flex; }
+        .script-btn { padding: 0.25rem 0.6rem; border-radius: 6px; border: none; background: transparent; color: var(--muted); cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+        .script-btn.active { background: var(--purple); color: white; }
+
+        main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem 2rem; gap: 1.5rem; max-width: 420px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+
+        /* Dhikr selector */
+        .dhikr-tabs { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; }
+        .dhikr-tab {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 0.9rem 1.1rem;
+            cursor: pointer; transition: all 0.2s; text-align: left;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .dhikr-tab.active { border-color: var(--purple); background: rgba(139,92,246,0.08); }
+        .dhikr-tab-arabic { font-family: 'Amiri', serif; font-size: 1.3rem; color: var(--gold); direction: rtl; }
+        .dhikr-tab-info { display: flex; flex-direction: column; align-items: flex-end; gap: 0.15rem; }
+        .dhikr-tab-name { font-size: 0.8rem; font-weight: 700; color: var(--text); }
+        .dhikr-tab-count { font-size: 0.7rem; color: var(--muted); }
+        .dhikr-check { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); flex-shrink: 0; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .dhikr-tab.active .dhikr-check { background: var(--purple); border-color: var(--purple); }
+
+        /* Big counter */
+        .counter-area { display: flex; flex-direction: column; align-items: center; gap: 1rem; width: 100%; }
+        .counter-ring-wrap { position: relative; width: 220px; height: 220px; }
+        .counter-svg { width: 220px; height: 220px; }
+        .ring-track { fill: none; stroke: var(--border); stroke-width: 8; }
+        .ring-fill { fill: none; stroke: var(--purple); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 628; stroke-dashoffset: 628; transition: stroke-dashoffset 0.3s ease, stroke 0.3s; filter: drop-shadow(0 0 6px var(--purple)); }
+        .counter-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .counter-number { font-size: 4.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: var(--text); }
+        .counter-goal { font-size: 0.85rem; color: var(--muted); font-weight: 600; margin-top: 0.2rem; }
+        .counter-rounds { font-size: 0.75rem; color: var(--purple); font-weight: 700; margin-top: 0.1rem; }
+
+        /* Tap button */
+        .btn-tap {
+            width: 100%; padding: 1.5rem;
+            background: linear-gradient(135deg, var(--purple), var(--purple2));
+            border: none; border-radius: 20px; color: white;
+            font-size: 1.1rem; font-weight: 800; cursor: pointer;
+            transition: all 0.1s; box-shadow: 0 8px 30px var(--glow);
+            font-family: 'Inter', sans-serif; letter-spacing: 0.02em;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .btn-tap:active { transform: scale(0.97); box-shadow: 0 4px 15px var(--glow); }
+        .btn-tap.pulse { animation: tapPulse 0.15s ease; }
+        @keyframes tapPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        /* Controls row */
+        .controls-row { display: flex; gap: 0.75rem; width: 100%; }
+        .btn-reset {
+            flex: 1; padding: 0.75rem;
+            background: var(--card2); border: 1px solid var(--border);
+            border-radius: 12px; color: var(--muted);
+            font-weight: 600; font-size: 0.9rem; cursor: pointer;
+            transition: all 0.2s; font-family: 'Inter', sans-serif;
+        }
+        .btn-reset:hover { border-color: var(--purple); color: var(--text); }
+        .btn-vibrate {
+            padding: 0.75rem 1rem; background: var(--card2);
+            border: 1px solid var(--border); border-radius: 12px;
+            color: var(--muted); cursor: pointer; font-size: 1rem;
+            transition: all 0.2s; font-family: 'Inter', sans-serif;
+        }
+        .btn-vibrate.on { border-color: var(--purple); color: var(--purple); background: var(--glow); }
+
+        /* Total stats */
+        .stats-bar {
+            display: flex; gap: 0.75rem; width: 100%;
+        }
+        .stat-box { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem; text-align: center; }
+        .stat-val { font-size: 1.4rem; font-weight: 800; color: var(--purple); }
+        .stat-lbl { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.15rem; }
+
+        /* Completion celebration */
+        .celebration {
+            position: fixed; inset: 0; z-index: 200;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: rgba(10,8,18,0.92); backdrop-filter: blur(8px);
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .celebration.show { opacity: 1; pointer-events: all; }
+        .celebration-text { font-family: 'Amiri', serif; font-size: 2.5rem; color: var(--gold); text-align: center; margin-bottom: 0.5rem; }
+        .celebration-sub { font-size: 0.95rem; color: var(--muted); margin-bottom: 1.5rem; text-align: center; }
+        .btn-continue { padding: 0.875rem 2rem; background: linear-gradient(135deg, var(--purple), var(--purple2)); border: none; border-radius: 12px; color: white; font-weight: 700; font-size: 1rem; cursor: pointer; font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <span class="logo-icon">&#x6DB;&#xFE0F;</span>
+        Tasbeeh<span> Zähler</span>
+    </div>
+    <div class="lang-switcher">
+        <button class="lang-btn" onclick="setLang('de', this)">&#127465;&#127466; DE</button>
+        <button class="lang-btn active" onclick="setLang('mk', this)">&#127474;&#127472; МК</button>
+        <div class="script-toggle visible" id="script-toggle">
+            <button class="script-btn active" id="cyr-btn" onclick="setScript('cyr')">Кир</button>
+            <button class="script-btn" id="lat-btn" onclick="setScript('lat')">Lat</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Dhikr selector -->
+    <div class="dhikr-tabs" id="dhikr-tabs"></div>
+
+    <!-- Counter ring -->
+    <div class="counter-area">
+        <div class="counter-ring-wrap">
+            <svg class="counter-svg" viewBox="0 0 200 200">
+                <circle class="ring-track" cx="100" cy="100" r="85" transform="rotate(-90 100 100)"/>
+                <circle class="ring-fill" id="ring-fill" cx="100" cy="100" r="85" transform="rotate(-90 100 100)"/>
+            </svg>
+            <div class="counter-inner">
+                <div class="counter-number" id="counter-num">0</div>
+                <div class="counter-goal" id="counter-goal">/ 33</div>
+                <div class="counter-rounds" id="counter-rounds"></div>
+            </div>
+        </div>
+
+        <button class="btn-tap" id="btn-tap" onclick="tap()">
+            <span id="tap-label">Tippe zum Zählen</span>
+        </button>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-row">
+        <button class="btn-reset" id="btn-reset" onclick="reset()">&#8635; Reset</button>
+        <button class="btn-vibrate on" id="btn-vibrate" onclick="toggleVibrate()" title="Vibration">&#128263;</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+        <div class="stat-box">
+            <div class="stat-val" id="stat-total">0</div>
+            <div class="stat-lbl" id="stat-total-lbl">Gesamt</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-val" id="stat-rounds">0</div>
+            <div class="stat-lbl" id="stat-rounds-lbl">Runden</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-val" id="stat-today">0</div>
+            <div class="stat-lbl" id="stat-today-lbl">Heute</div>
+        </div>
+    </div>
+</main>
+
+<!-- Celebration overlay -->
+<div class="celebration" id="celebration">
+    <div class="celebration-text" id="cel-arabic"></div>
+    <div style="font-size:3rem; margin: 0.5rem 0;">&#127775;</div>
+    <div class="celebration-sub" id="cel-sub"></div>
+    <button class="btn-continue" onclick="nextDhikr()" id="cel-btn"></button>
+</div>
+
+<script>
+const DHIKR = [
+    {
+        arabic: 'سُبْحَانَ اللَّه',
+        trans: 'Subhanallah',
+        goal: 33,
+        de: 'Gelobt sei Allah',
+        mk_cyr: 'Слава нека е на Аллах',
+        mk_lat: 'Slava neka e na Allah',
+        color: '#6366f1'
+    },
+    {
+        arabic: 'الْحَمْدُ لِلَّه',
+        trans: 'Alhamdulillah',
+        goal: 33,
+        de: 'Lob sei Allah',
+        mk_cyr: 'Фала нека е на Аллах',
+        mk_lat: 'Fala neka e na Allah',
+        color: '#10b981'
+    },
+    {
+        arabic: 'اللَّهُ أَكْبَر',
+        trans: 'Allahu Akbar',
+        goal: 34,
+        de: 'Allah ist der Größte',
+        mk_cyr: 'Аллах е Највелик',
+        mk_lat: 'Allah e Najvelik',
+        color: '#f59e0b'
+    }
+];
+
+const T = {
+    de:     { tap: 'Tippe zum Zählen', reset: '↺ Reset', total: 'Gesamt', rounds: 'Runden', today: 'Heute', celSub: 'Weiter mit dem nächsten Dhikr', celBtn: 'Weiter ▶', vibOn: '🔔', vibOff: '🔕' },
+    mk_cyr: { tap: 'Тапни за броење', reset: '↺ Ресет', total: 'Вкупно', rounds: 'Рунди', today: 'Денес', celSub: 'Продолжи со следниот Зикр', celBtn: 'Продолжи ▶', vibOn: '🔔', vibOff: '🔕' },
+    mk_lat: { tap: 'Tapni za broenje', reset: '↺ Reset', total: 'Vkupno', rounds: 'Rundi', today: 'Denes', celSub: 'Prodolzhi so sledniot Zikr', celBtn: 'Prodolzhi ▶', vibOn: '🔔', vibOff: '🔕' }
+};
+
+let currentLang = 'mk_cyr';
+let currentDhikr = 0;
+let count = 0;
+let totalAllTime = parseInt(localStorage.getItem('tb_total') || '0');
+let totalRounds = parseInt(localStorage.getItem('tb_rounds') || '0');
+let todayCount = 0;
+let vibrateOn = true;
+
+const CIRCUMFERENCE = 2 * Math.PI * 85;
+
+function tap() {
+    count++;
+    const goal = DHIKR[currentDhikr].goal;
+
+    if (vibrateOn && navigator.vibrate) navigator.vibrate(30);
+
+    // Animate button
+    const btn = document.getElementById('btn-tap');
+    btn.classList.remove('pulse');
+    void btn.offsetWidth;
+    btn.classList.add('pulse');
+
+    // Update ring
+    const progress = Math.min(count / goal, 1);
+    const offset = CIRCUMFERENCE * (1 - progress);
+    document.getElementById('ring-fill').style.strokeDashoffset = offset;
+    document.getElementById('ring-fill').style.stroke = DHIKR[currentDhikr].color;
+
+    // Update counter
+    document.getElementById('counter-num').textContent = count;
+
+    // Stats
+    totalAllTime++;
+    todayCount++;
+    localStorage.setItem('tb_total', totalAllTime);
+    document.getElementById('stat-total').textContent = totalAllTime;
+    document.getElementById('stat-today').textContent = todayCount;
+
+    if (count >= goal) {
+        totalRounds++;
+        localStorage.setItem('tb_rounds', totalRounds);
+        document.getElementById('stat-rounds').textContent = totalRounds;
+        if (vibrateOn && navigator.vibrate) navigator.vibrate([50, 50, 50, 50, 100]);
+        showCelebration();
+    }
+}
+
+function showCelebration() {
+    const d = DHIKR[currentDhikr];
+    const t = T[currentLang];
+    document.getElementById('cel-arabic').textContent = d.arabic;
+    document.getElementById('cel-sub').textContent = t.celSub;
+    document.getElementById('cel-btn').textContent = t.celBtn;
+    document.getElementById('celebration').classList.add('show');
+}
+
+function nextDhikr() {
+    document.getElementById('celebration').classList.remove('show');
+    if (currentDhikr < DHIKR.length - 1) {
+        currentDhikr++;
+    } else {
+        currentDhikr = 0;
+    }
+    count = 0;
+    renderDhikrTabs();
+    updateRing();
+    document.getElementById('counter-num').textContent = 0;
+    updateRounds();
+}
+
+function reset() {
+    count = 0;
+    currentDhikr = 0;
+    renderDhikrTabs();
+    updateRing();
+    document.getElementById('counter-num').textContent = 0;
+    updateRounds();
+}
+
+function updateRing() {
+    document.getElementById('ring-fill').style.strokeDashoffset = CIRCUMFERENCE;
+    document.getElementById('ring-fill').style.stroke = DHIKR[currentDhikr].color;
+    document.getElementById('counter-goal').textContent = '/ ' + DHIKR[currentDhikr].goal;
+}
+
+function updateRounds() {
+    const t = T[currentLang];
+    document.getElementById('counter-rounds').textContent = totalRounds > 0 ? totalRounds + 'x' : '';
+}
+
+function toggleVibrate() {
+    vibrateOn = !vibrateOn;
+    const btn = document.getElementById('btn-vibrate');
+    btn.classList.toggle('on', vibrateOn);
+    btn.textContent = vibrateOn ? '🔔' : '🔕';
+}
+
+function renderDhikrTabs() {
+    const t = T[currentLang];
+    document.getElementById('dhikr-tabs').innerHTML = DHIKR.map((d, i) => `
+        <div class="dhikr-tab ${i === currentDhikr ? 'active' : ''}" onclick="selectDhikr(${i})">
+            <div class="dhikr-check">
+                ${i === currentDhikr ? '<svg width="10" height="10" viewBox="0 0 10 10"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>' : ''}
+            </div>
+            <div style="flex:1; padding: 0 0.75rem;">
+                <div class="dhikr-tab-arabic">${d.arabic}</div>
+                <div style="font-size:0.75rem; color:var(--muted); margin-top:0.1rem; font-style:italic;">${d.trans}</div>
+            </div>
+            <div class="dhikr-tab-info">
+                <span class="dhikr-tab-name">${d[currentLang]}</span>
+                <span class="dhikr-tab-count">${d.goal}x</span>
+            </div>
+        </div>
+    `).join('');
+
+    // Update labels
+    document.getElementById('tap-label').textContent = t.tap;
+    document.getElementById('btn-reset').textContent = t.reset;
+    document.getElementById('stat-total-lbl').textContent = t.total;
+    document.getElementById('stat-rounds-lbl').textContent = t.rounds;
+    document.getElementById('stat-today-lbl').textContent = t.today;
+    document.getElementById('counter-goal').textContent = '/ ' + DHIKR[currentDhikr].goal;
+    updateRounds();
+}
+
+function selectDhikr(i) {
+    currentDhikr = i;
+    count = 0;
+    document.getElementById('counter-num').textContent = 0;
+    renderDhikrTabs();
+    updateRing();
+}
+
+function setLang(lang, el) {
+    if (lang === 'de') {
+        currentLang = 'de';
+        document.getElementById('script-toggle').classList.remove('visible');
+    } else {
+        document.getElementById('script-toggle').classList.add('visible');
+    }
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    renderDhikrTabs();
+}
+
+function setScript(s) {
+    currentLang = 'mk_' + s;
+    document.getElementById('cyr-btn').classList.toggle('active', s==='cyr');
+    document.getElementById('lat-btn').classList.toggle('active', s==='lat');
+    renderDhikrTabs();
+}
+
+// Keyboard support (spacebar)
+document.addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); tap(); } });
+
+// Init
+document.getElementById('ring-fill').style.strokeDasharray = CIRCUMFERENCE;
+document.getElementById('ring-fill').style.strokeDashoffset = CIRCUMFERENCE;
+document.getElementById('stat-total').textContent = totalAllTime;
+document.getElementById('stat-rounds').textContent = totalRounds;
+renderDhikrTabs();
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw-tasbeeh.js');
+</script>
+</body>
+</html>

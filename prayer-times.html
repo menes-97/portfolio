@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vakti - Gebetszeiten</title>
+    <link rel="manifest" href="prayer-times-manifest.json">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Vakti">
+    <link rel="apple-touch-icon" href="favicon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #080812;
+            --card: #10101e;
+            --card2: #16162a;
+            --border: #22223a;
+            --purple: #6366f1;
+            --purple2: #4f46e5;
+            --glow: rgba(99,102,241,0.15);
+            --gold: #f59e0b;
+            --cyan: #22d3ee;
+            --text: #e2e8f0;
+            --muted: #64748b;
+            --green: #10b981;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+        body::before {
+            content: ''; position: fixed; inset: 0; z-index: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        header {
+            padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(8,8,18,0.95); backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { font-weight: 800; font-size: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+        .logo-moon { font-size: 1.3rem; }
+        .logo span { color: var(--purple); }
+
+        .lang-switcher { display: flex; align-items: center; gap: 0.5rem; }
+        .lang-btn { padding: 0.35rem 0.8rem; border-radius: 8px; border: 1px solid var(--border); background: var(--card2); color: var(--muted); cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+        .lang-btn.active { border-color: var(--purple); color: var(--purple); background: var(--glow); }
+        .script-toggle { display: none; align-items: center; gap: 0.3rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 0.2rem; }
+        .script-toggle.visible { display: flex; }
+        .script-btn { padding: 0.25rem 0.6rem; border-radius: 6px; border: none; background: transparent; color: var(--muted); cursor: pointer; font-size: 0.75rem; font-weight: 600; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+        .script-btn.active { background: var(--purple); color: white; }
+
+        main { flex: 1; padding: 1.5rem; max-width: 520px; margin: 0 auto; width: 100%; position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1.25rem; }
+
+        /* Hijri date + location */
+        .top-bar { display: flex; justify-content: space-between; align-items: center; }
+        .hijri-date { font-size: 0.85rem; color: var(--gold); font-weight: 600; font-family: 'Amiri', serif; font-size: 1rem; }
+        .location-btn { display: flex; align-items: center; gap: 0.4rem; background: var(--card2); border: 1px solid var(--border); border-radius: 8px; padding: 0.45rem 0.9rem; cursor: pointer; font-size: 0.8rem; font-weight: 600; color: var(--text); transition: all 0.2s; font-family: 'Inter', sans-serif; }
+        .location-btn:hover { border-color: var(--purple); color: var(--purple); }
+
+        /* City selector */
+        .city-select { width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem 1rem; color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: border-color 0.2s; }
+        .city-select:focus { outline: none; border-color: var(--purple); }
+        .city-select option { background: var(--card); }
+
+        /* Next prayer countdown */
+        .next-card {
+            background: linear-gradient(135deg, #10102a 0%, #1a1a40 100%);
+            border: 1px solid rgba(99,102,241,0.3); border-radius: 20px;
+            padding: 1.75rem; text-align: center;
+            box-shadow: 0 0 40px rgba(99,102,241,0.08);
+        }
+        .next-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.5rem; }
+        .next-name { font-size: 1.5rem; font-weight: 800; color: var(--purple); margin-bottom: 0.25rem; }
+        .next-name-arabic { font-family: 'Amiri', serif; font-size: 1.6rem; color: var(--gold); margin-bottom: 0.75rem; }
+        .countdown { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin-bottom: 0.5rem; background: linear-gradient(135deg, var(--text), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .countdown-sub { font-size: 0.8rem; color: var(--muted); }
+
+        /* Prayer times grid */
+        .prayers-grid { display: flex; flex-direction: column; gap: 0.6rem; }
+        .prayer-row {
+            background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+            padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem;
+            transition: all 0.2s;
+        }
+        .prayer-row.active { border-color: var(--purple); background: rgba(99,102,241,0.08); box-shadow: 0 0 20px rgba(99,102,241,0.1); }
+        .prayer-row.passed { opacity: 0.5; }
+        .prayer-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+        .prayer-info { flex: 1; }
+        .prayer-name-row { display: flex; align-items: center; gap: 0.5rem; }
+        .prayer-name { font-weight: 700; font-size: 0.95rem; }
+        .prayer-name-arabic { font-family: 'Amiri', serif; font-size: 1.1rem; color: var(--gold); }
+        .prayer-name-local { font-size: 0.75rem; color: var(--muted); }
+        .prayer-time { font-size: 1.25rem; font-weight: 800; color: var(--text); }
+        .prayer-time.active-time { color: var(--purple); }
+        .next-badge { font-size: 0.65rem; background: var(--glow); border: 1px solid rgba(99,102,241,0.3); color: var(--purple); padding: 0.15rem 0.5rem; border-radius: 999px; font-weight: 700; }
+
+        /* Sunrise row */
+        .sunrise-row { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 0.75rem 1.25rem; display: flex; justify-content: space-between; align-items: center; opacity: 0.7; }
+        .sunrise-label { font-size: 0.8rem; color: var(--muted); font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+        .sunrise-time { font-size: 1rem; font-weight: 700; color: var(--gold); }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <span class="logo-moon">&#9790;</span>
+        Vakti<span> - Gebetszeiten</span>
+    </div>
+    <div class="lang-switcher">
+        <button class="lang-btn" onclick="setLang('de', this)">&#127465;&#127466; DE</button>
+        <button class="lang-btn active" onclick="setLang('mk', this)">&#127474;&#127472; МК</button>
+        <div class="script-toggle visible" id="script-toggle">
+            <button class="script-btn active" id="cyr-btn" onclick="setScript('cyr')">Кир</button>
+            <button class="script-btn" id="lat-btn" onclick="setScript('lat')">Lat</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="top-bar">
+        <div class="hijri-date" id="hijri-date"></div>
+        <div style="font-size:0.75rem; color:var(--muted);" id="gregorian-date"></div>
+    </div>
+
+    <select class="city-select" id="city-select" onchange="onCityChange()"></select>
+
+    <div class="next-card">
+        <div class="next-label" id="next-label">Nächstes Gebet</div>
+        <div class="next-name-arabic" id="next-arabic"></div>
+        <div class="next-name" id="next-name"></div>
+        <div class="countdown" id="countdown">--:--:--</div>
+        <div class="countdown-sub" id="countdown-sub"></div>
+    </div>
+
+    <div class="prayers-grid" id="prayers-grid"></div>
+
+    <div class="sunrise-row">
+        <span class="sunrise-label">&#9728;&#65039; <span id="sunrise-label">Sonnenaufgang</span></span>
+        <span class="sunrise-time" id="sunrise-time">--:--</span>
+    </div>
+</main>
+
+<script>
+// ─── TRANSLATIONS ─────────────────────────────────────────────────
+const T = {
+    de: {
+        nextPrayer: 'Nächstes Gebet',
+        untilPrayer: 'bis zum Gebet',
+        sunrise: 'Sonnenaufgang',
+        prayers: [
+            { name: 'Fajr', arabic: 'الفَجْر', local: 'Morgengebet', icon: '🌙', bg: 'rgba(99,102,241,0.12)' },
+            { name: 'Dhuhr', arabic: 'الظُّهْر', local: 'Mittagsgebet', icon: '☀️', bg: 'rgba(245,158,11,0.12)' },
+            { name: 'Asr', arabic: 'العَصْر', local: 'Nachmittagsgebet', icon: '🌤️', bg: 'rgba(16,185,129,0.12)' },
+            { name: 'Maghrib', arabic: 'المَغْرِب', local: 'Abendgebet', icon: '🌅', bg: 'rgba(239,68,68,0.12)' },
+            { name: 'Isha', arabic: 'العِشَاء', local: 'Nachtgebet', icon: '🌌', bg: 'rgba(139,92,246,0.12)' }
+        ]
+    },
+    mk_cyr: {
+        nextPrayer: 'Следен намаз',
+        untilPrayer: 'до намазот',
+        sunrise: 'Изгрев на сонцето',
+        prayers: [
+            { name: 'Сабах', arabic: 'الفَجْر', local: 'Утрински намаз', icon: '🌙', bg: 'rgba(99,102,241,0.12)' },
+            { name: 'Пладне', arabic: 'الظُّهْر', local: 'Пладневен намаз', icon: '☀️', bg: 'rgba(245,158,11,0.12)' },
+            { name: 'Икиндија', arabic: 'العَصْر', local: 'Попладневен намаз', icon: '🌤️', bg: 'rgba(16,185,129,0.12)' },
+            { name: 'Акшам', arabic: 'المَغْرِب', local: 'Вечерен намаз', icon: '🌅', bg: 'rgba(239,68,68,0.12)' },
+            { name: 'Јација', arabic: 'العِشَاء', local: 'Ноќен намаз', icon: '🌌', bg: 'rgba(139,92,246,0.12)' }
+        ]
+    },
+    mk_lat: {
+        nextPrayer: 'Slleden namaz',
+        untilPrayer: 'do namazot',
+        sunrise: 'Izgrev na sonceto',
+        prayers: [
+            { name: 'Sabah', arabic: 'الفَجْر', local: 'Utrinski namaz', icon: '🌙', bg: 'rgba(99,102,241,0.12)' },
+            { name: 'Pladne', arabic: 'الظُّهْر', local: 'Pladneven namaz', icon: '☀️', bg: 'rgba(245,158,11,0.12)' },
+            { name: 'Ikindija', arabic: 'العَصْر', local: 'Popladneven namaz', icon: '🌤️', bg: 'rgba(16,185,129,0.12)' },
+            { name: 'Aksham', arabic: 'المَغْرِب', local: 'Veceren namaz', icon: '🌅', bg: 'rgba(239,68,68,0.12)' },
+            { name: 'Jacija', arabic: 'العِشَاء', local: 'Nokjen namaz', icon: '🌌', bg: 'rgba(139,92,246,0.12)' }
+        ]
+    }
+};
+
+const CITIES = [
+    { name: 'Skopje', lat: 41.997, lng: 21.428, tz: 2 },
+    { name: 'Tetovo', lat: 42.010, lng: 20.972, tz: 2 },
+    { name: 'Ohrid', lat: 41.116, lng: 20.802, tz: 2 },
+    { name: 'Bitola', lat: 41.031, lng: 21.329, tz: 2 },
+    { name: 'Gostivar', lat: 41.796, lng: 20.907, tz: 2 },
+    { name: 'Struga', lat: 41.178, lng: 20.678, tz: 2 },
+    { name: 'Wien', lat: 48.210, lng: 16.363, tz: 2 },
+    { name: 'München', lat: 48.137, lng: 11.576, tz: 2 },
+    { name: 'Berlin', lat: 52.520, lng: 13.405, tz: 2 },
+    { name: 'Stuttgart', lat: 48.775, lng: 9.182, tz: 2 },
+    { name: 'Zürich', lat: 47.377, lng: 8.541, tz: 2 },
+    { name: 'Sarajevo', lat: 43.848, lng: 18.356, tz: 2 },
+    { name: 'Istanbul', lat: 41.015, lng: 28.979, tz: 3 },
+    { name: 'London', lat: 51.507, lng: -0.128, tz: 1 },
+    { name: 'Paris', lat: 48.857, lng: 2.352, tz: 2 }
+];
+
+// ─── PRAYER TIME CALCULATION ─────────────────────────────────────
+function julianDay(d) {
+    const Y = d.getFullYear(), M = d.getMonth()+1, D = d.getDate();
+    return 367*Y - Math.floor(7*(Y+Math.floor((M+9)/12))/4) + Math.floor(275*M/9) + D + 1721013.5 - 0.5*Math.sign(100*Y+M-190002.5)+0.5;
+}
+
+function sunPos(jd) {
+    const D2R = Math.PI/180;
+    const D = jd - 2451545;
+    const g = (357.529 + 0.98560028*D) * D2R;
+    const q = 280.459 + 0.98564736*D;
+    const L = (q + 1.915*Math.sin(g) + 0.02*Math.sin(2*g)) * D2R;
+    const e = (23.439 - 0.00000036*D) * D2R;
+    const RA = (180/Math.PI) * Math.atan2(Math.cos(e)*Math.sin(L), Math.cos(L)) / 15;
+    const decl = (180/Math.PI) * Math.asin(Math.sin(e)*Math.sin(L));
+    const eqt = q/15 - (RA < 0 ? RA+24 : RA > 24 ? RA-24 : RA);
+    return { decl, eqt };
+}
+
+function calcTimes(date, lat, lng, tz) {
+    const D2R = Math.PI/180, R2D = 180/Math.PI;
+    const { decl, eqt } = sunPos(julianDay(date));
+    const dhuhr = 12 - eqt + tz - lng/15;
+
+    function angle(a) {
+        const v = (-Math.sin(a*D2R) - Math.sin(decl*D2R)*Math.sin(lat*D2R)) / (Math.cos(decl*D2R)*Math.cos(lat*D2R));
+        return Math.abs(v) > 1 ? null : R2D*Math.acos(v)/15;
+    }
+    function asr() {
+        const v = (Math.sin(Math.atan(1/(1+Math.tan(Math.abs(lat-decl)*D2R)))) - Math.sin(lat*D2R)*Math.sin(decl*D2R)) / (Math.cos(lat*D2R)*Math.cos(decl*D2R));
+        return Math.abs(v) > 1 ? null : R2D*Math.acos(v)/15;
+    }
+    function fmt(h) {
+        if (h === null) return '--:--';
+        let hh = Math.floor(h) % 24;
+        let mm = Math.floor((h % 1) * 60);
+        if (hh < 0) hh += 24;
+        return String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0');
+    }
+    function toMin(h) {
+        if (h === null) return null;
+        let hh = Math.floor(h) % 24;
+        let mm = Math.floor((h % 1) * 60);
+        if (hh < 0) hh += 24;
+        return hh * 60 + mm;
+    }
+    const fT = angle(18), sT = angle(0.833), aT = asr(), iT = angle(17);
+    return {
+        fajr:    { str: fmt(dhuhr - (fT||0)), min: toMin(dhuhr-(fT||0)) },
+        sunrise: { str: fmt(dhuhr - (sT||0)), min: toMin(dhuhr-(sT||0)) },
+        dhuhr:   { str: fmt(dhuhr),            min: toMin(dhuhr) },
+        asr:     { str: fmt(dhuhr + (aT||0)), min: toMin(dhuhr+(aT||0)) },
+        maghrib: { str: fmt(dhuhr + (sT||0)), min: toMin(dhuhr+(sT||0)) },
+        isha:    { str: fmt(dhuhr + (iT||0)), min: toMin(dhuhr+(iT||0)) }
+    };
+}
+
+// ─── HIJRI DATE ───────────────────────────────────────────────────
+function toHijri(gDate) {
+    const months_ar = ['محرم','صفر','ربيع الأول','ربيع الثاني','جمادى الأولى','جمادى الثانية','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
+    let y=gDate.getFullYear(), m=gDate.getMonth()+1, d=gDate.getDate();
+    if (m < 3) { y--; m += 12; }
+    const A = Math.floor(y/100), B = 2-A+Math.floor(A/4);
+    const jd = Math.floor(365.25*(y+4716)) + Math.floor(30.6001*(m+1)) + d + B - 1524.5;
+    let l = Math.floor(jd) - 1948440 + 10632;
+    const n = Math.floor((l-1)/10631);
+    l = l - 10631*n + 354;
+    const j = Math.floor((10985-l)/5965);
+    l = l - Math.floor(j*5965/11) + Math.floor((224-l)/29.5);
+    const day = l - 29*Math.floor(l/29.5);
+    const month = Math.floor((l-day)/29.5);
+    const year = 30*n + j + Math.floor(month/12);
+    return { day, month: ((month-1)%12), year: year + (month>12?1:0) };
+}
+
+// ─── STATE & RENDER ───────────────────────────────────────────────
+let currentLang = 'mk_cyr';
+let selectedCity = 0;
+let prayerTimes = null;
+let countdownInterval = null;
+
+function onCityChange() {
+    selectedCity = document.getElementById('city-select').value;
+    update();
+}
+
+function update() {
+    const city = CITIES[selectedCity];
+    const now = new Date();
+    prayerTimes = calcTimes(now, city.lat, city.lng, city.tz);
+    renderAll();
+}
+
+function renderAll() {
+    const t = T[currentLang];
+    const now = new Date();
+    const nowMin = now.getHours()*60 + now.getMinutes();
+
+    // Dates
+    const h = toHijri(now);
+    const hMonths = ['Muharrem','Safer','Rebi\'ul-Evvel','Rebi\'ul-Ahir','Džumadel-Ula','Džumadel-Uhra','Redžeb','Šaban','Ramazan','Ševval','Zul-Ka\'de','Zul-Hidže'];
+    document.getElementById('hijri-date').textContent = h.day + '. ' + hMonths[h.month] + ' ' + h.year + ' h.';
+    document.getElementById('gregorian-date').textContent = now.toLocaleDateString('de-DE', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+
+    // Prayer keys
+    const keys = ['fajr','dhuhr','asr','maghrib','isha'];
+    const mins = keys.map(k => prayerTimes[k].min);
+    const nextIdx = mins.findIndex(m => m > nowMin);
+    const activeIdx = nextIdx === -1 ? 4 : (nextIdx === 0 ? 0 : nextIdx - 1);
+
+    // Next prayer card
+    const ni = nextIdx === -1 ? 0 : nextIdx;
+    document.getElementById('next-label').textContent = t.nextPrayer;
+    document.getElementById('next-arabic').textContent = t.prayers[ni].arabic;
+    document.getElementById('next-name').textContent = t.prayers[ni].name;
+    document.getElementById('countdown-sub').textContent = t.untilPrayer;
+
+    // Countdown
+    clearInterval(countdownInterval);
+    function updateCountdown() {
+        const n = new Date();
+        const nm = n.getHours()*60+n.getMinutes();
+        const nextMin = nextIdx === -1 ? mins[0] + 1440 : mins[ni];
+        const diff = nextMin > nm ? (nextMin - nm) * 60 - n.getSeconds() : (nextMin + 1440 - nm) * 60 - n.getSeconds();
+        const h = Math.floor(diff/3600), m = Math.floor((diff%3600)/60), s = diff%60;
+        document.getElementById('countdown').textContent = String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    }
+    updateCountdown();
+    countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Prayer rows
+    const grid = document.getElementById('prayers-grid');
+    grid.innerHTML = keys.map((k, i) => {
+        const p = t.prayers[i];
+        const isNext = i === ni && nextIdx !== -1;
+        const isPassed = mins[i] < nowMin && !isNext;
+        return `<div class="prayer-row ${isNext?'active':''} ${isPassed?'passed':''}">
+            <div class="prayer-icon" style="background:${p.bg}">${p.icon}</div>
+            <div class="prayer-info">
+                <div class="prayer-name-row">
+                    <span class="prayer-name">${p.name}</span>
+                    <span class="prayer-name-arabic">${p.arabic}</span>
+                    ${isNext ? `<span class="next-badge">&#9654;</span>` : ''}
+                </div>
+                <div class="prayer-name-local">${p.local}</div>
+            </div>
+            <div class="prayer-time ${isNext?'active-time':''}">${prayerTimes[k].str}</div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('sunrise-label').textContent = t.sunrise;
+    document.getElementById('sunrise-time').textContent = prayerTimes.sunrise.str;
+}
+
+function setLang(lang, el) {
+    if (lang === 'de') {
+        currentLang = 'de';
+        document.getElementById('script-toggle').classList.remove('visible');
+    } else {
+        document.getElementById('script-toggle').classList.add('visible');
+    }
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    renderAll();
+}
+
+function setScript(s) {
+    currentLang = 'mk_' + s;
+    document.getElementById('cyr-btn').classList.toggle('active', s==='cyr');
+    document.getElementById('lat-btn').classList.toggle('active', s==='lat');
+    renderAll();
+}
+
+// Init city select
+const sel = document.getElementById('city-select');
+CITIES.forEach((c, i) => {
+    const opt = document.createElement('option');
+    opt.value = i; opt.textContent = c.name + ' (' + (c.tz>0?'+':'') + c.tz + ':00)';
+    sel.appendChild(opt);
+});
+
+update();
+setInterval(update, 60000);
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw-prayer-times.js');
+</script>
+</body>
+</html>
