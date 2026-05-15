@@ -709,126 +709,23 @@
                 </div>
             </div>
 
-            <!-- Pomodoro Timer -->
-            <div class="project-card fade-in">
-                <div class="project-image" style="background: linear-gradient(135deg, #1a0510 0%, #4c0519 50%, #1a0510 100%); font-size: 0; position: relative; overflow: hidden;">
-                    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;">
-                        <div style="font-size: 2.8rem; line-height: 1;">&#9201;</div>
-                        <span style="font-size: 1rem; font-weight: 800; letter-spacing: 0.1em; color: #f43f5e; text-transform: uppercase;">PomodoroTimer</span>
-                        <div style="display: flex; gap: 0.5rem; margin-top: 0.25rem; align-items: center;">
-                            <span style="background: rgba(244,63,94,0.15); border: 1px solid rgba(244,63,94,0.3); color: #f43f5e; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600;">25:00</span>
-                            <span style="color: #f43f5e; font-size: 0.8rem;">&#8594;</span>
-                            <span style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: #10b981; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600;">5:00</span>
-                        </div>
+            <!-- Coming Soon -->
+            <div class="project-card fade-in" style="position: relative; overflow: hidden;">
+                <div style="height: 200px; background: linear-gradient(135deg, #0f0f1a 0%, #1a1a3e 50%, #0f0f1a 100%); display: flex; align-items: center; justify-content: center; position: relative;">
+                    <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(99,102,241,0.15) 0%, transparent 70%);"></div>
+                    <div style="text-align: center; z-index: 1;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">&#128640;</div>
+                        <span style="font-size: 1.1rem; font-weight: 700; letter-spacing: 0.15em; color: #a5b4fc; text-transform: uppercase;">Coming Soon</span>
                     </div>
+                    <div style="position: absolute; top: 20px; right: 20px; width: 8px; height: 8px; border-radius: 50%; background: #6366f1; box-shadow: 0 0 12px #6366f1; animation: pulse 2s infinite;"></div>
+                    <div style="position: absolute; bottom: 30px; left: 25px; width: 5px; height: 5px; border-radius: 50%; background: #a5b4fc; box-shadow: 0 0 8px #a5b4fc; animation: pulse 2.5s infinite;"></div>
                 </div>
                 <div class="project-content">
-                    <h3>Pomodoro Timer</h3>
-                    <p data-translate="pomodoro_desc">Produktivitats-Timer mit 25/5-Min-Zyklus, Aufgabenliste, Session-Tracking und Browser-Benachrichtigungen.</p>
+                    <h3 style="color: #a5b4fc;">Neues Projekt</h3>
+                    <p style="color: var(--text-secondary); font-style: italic;">Ein neues Projekt ist in Arbeit. Bleib gespannt!</p>
                     <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Web API</span>
+                        <span class="tag" style="background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3);">In Entwicklung</span>
                     </div>
-                    <a href="pomodoro-timer.html" target="_blank" class="btn btn-primary" style="margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm1 16.057v-3.057h2.994c-.059 1.143-.212 2.24-.456 3.279-.823-.12-1.674-.188-2.538-.222zm1.957 2.162c-.499 1.33-1.159 2.497-1.957 3.456v-3.62c.666.028 1.319.081 1.957.164zm-1.957-7.219v-3.015c.868-.034 1.721-.103 2.548-.224.238 1.027.389 2.111.446 3.239h-2.994zm0-5.014v-3.661c.806.969 1.471 2.15 1.971 3.496-.642.084-1.3.137-1.971.165zm2.703-3.267c1.237.496 2.354 1.228 3.29 2.146-.642.234-1.311.442-2.019.607-.344-.992-.775-1.91-1.271-2.753zm-7.241 13.56c-.244-1.039-.398-2.136-.456-3.279h2.994v3.057c-.865.034-1.714.102-2.538.222zm2.538 1.776v3.62c-.798-.959-1.458-2.126-1.957-3.456.638-.083 1.291-.136 1.957-.164zm-2.994-7.055c.057-1.128.207-2.212.446-3.239.827.121 1.68.19 2.548.224v3.015h-2.994zm1.024-5.179c.5-1.346 1.165-2.527 1.97-3.496v3.661c-.671-.028-1.329-.081-1.97-.165zm-2.005-.35c-.708-.165-1.377-.373-2.018-.607.937-.918 2.053-1.65 3.29-2.146-.496.844-.927 1.762-1.272 2.753zm-.549 1.918c-.264 1.151-.434 2.36-.492 3.611h-3.933c.165-1.658.739-3.197 1.617-4.518.88.361 1.816.67 2.808.907zm-.009 9.262c-.988.236-1.92.542-2.797.9-.89-1.324-1.471-2.87-1.637-4.536h3.934c.058 1.265.231 2.488.5 3.636zm.553 1.917c.342.976.768 1.881 1.257 2.712-1.223-.49-2.326-1.211-3.256-2.115.636-.229 1.299-.435 1.999-.597zm9.924 0c.7.163 1.362.368 1.999.597-.931.903-2.034 1.625-3.257 2.116.489-.832.915-1.737 1.258-2.713zm.553-1.917c.27-1.148.442-2.371.5-3.636h3.934c-.167 1.666-.748 3.212-1.638 4.536-.877-.358-1.81-.664-2.796-.9zm.501-5.636c-.058-1.251-.229-2.46-.492-3.611.992-.237 1.929-.546 2.809-.907.877 1.321 1.451 2.86 1.616 4.518h-3.933z"/></svg>
-                        Live Demo
-                    </a>
-                </div>
-            </div>
-
-            <!-- Study Together -->
-            <div class="project-card fade-in">
-                <div class="project-image" style="background: linear-gradient(135deg, #0d0520 0%, #1e0a4a 50%, #0d0520 100%); font-size: 0; position: relative; overflow: hidden;">
-                    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;">
-                        <div style="font-size: 2.8rem; line-height: 1;">&#128218;</div>
-                        <span style="font-size: 1rem; font-weight: 800; letter-spacing: 0.1em; color: #8b5cf6; text-transform: uppercase;">StudyTogether</span>
-                        <div style="display: flex; gap: 0.5rem; margin-top: 0.25rem;">
-                            <span style="background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); color: #8b5cf6; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600;">Focus</span>
-                            <span style="background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); color: #8b5cf6; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600;">Notes</span>
-                            <span style="background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); color: #8b5cf6; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600;">To-Do</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <h3>Study Together</h3>
-                    <p data-translate="study_desc">Virtueller Lernraum mit Focus-Timer, Notizen pro Fach, To-Do-Liste, Streak-Tracking und Motivations-Zitaten.</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">localStorage</span>
-                    </div>
-                    <a href="study-together.html" target="_blank" class="btn btn-primary" style="margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm1 16.057v-3.057h2.994c-.059 1.143-.212 2.24-.456 3.279-.823-.12-1.674-.188-2.538-.222zm1.957 2.162c-.499 1.33-1.159 2.497-1.957 3.456v-3.62c.666.028 1.319.081 1.957.164zm-1.957-7.219v-3.015c.868-.034 1.721-.103 2.548-.224.238 1.027.389 2.111.446 3.239h-2.994zm0-5.014v-3.661c.806.969 1.471 2.15 1.971 3.496-.642.084-1.3.137-1.971.165zm2.703-3.267c1.237.496 2.354 1.228 3.29 2.146-.642.234-1.311.442-2.019.607-.344-.992-.775-1.91-1.271-2.753zm-7.241 13.56c-.244-1.039-.398-2.136-.456-3.279h2.994v3.057c-.865.034-1.714.102-2.538.222zm2.538 1.776v3.62c-.798-.959-1.458-2.126-1.957-3.456.638-.083 1.291-.136 1.957-.164zm-2.994-7.055c.057-1.128.207-2.212.446-3.239.827.121 1.68.19 2.548.224v3.015h-2.994zm1.024-5.179c.5-1.346 1.165-2.527 1.97-3.496v3.661c-.671-.028-1.329-.081-1.97-.165zm-2.005-.35c-.708-.165-1.377-.373-2.018-.607.937-.918 2.053-1.65 3.29-2.146-.496.844-.927 1.762-1.272 2.753zm-.549 1.918c-.264 1.151-.434 2.36-.492 3.611h-3.933c.165-1.658.739-3.197 1.617-4.518.88.361 1.816.67 2.808.907zm-.009 9.262c-.988.236-1.92.542-2.797.9-.89-1.324-1.471-2.87-1.637-4.536h3.934c.058 1.265.231 2.488.5 3.636zm.553 1.917c.342.976.768 1.881 1.257 2.712-1.223-.49-2.326-1.211-3.256-2.115.636-.229 1.299-.435 1.999-.597zm9.924 0c.7.163 1.362.368 1.999.597-.931.903-2.034 1.625-3.257 2.116.489-.832.915-1.737 1.258-2.713zm.553-1.917c.27-1.148.442-2.371.5-3.636h3.934c-.167 1.666-.748 3.212-1.638 4.536-.877-.358-1.81-.664-2.796-.9zm.501-5.636c-.058-1.251-.229-2.46-.492-3.611.992-.237 1.929-.546 2.809-.907.877 1.321 1.451 2.86 1.616 4.518h-3.933z"/></svg>
-                        Live Demo
-                    </a>
-                </div>
-            </div>
-            <!-- Salat Guide -->
-            <div class="project-card fade-in">
-                <div class="project-image" style="background: linear-gradient(135deg, #021a10 0%, #064e30 50%, #021a10 100%); position: relative; overflow: hidden;">
-                    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;">
-                        <div style="font-size: 2.5rem; line-height: 1;">&#9733;</div>
-                        <span style="font-size: 1rem; font-weight: 800; letter-spacing: 0.1em; color: #10b981; text-transform: uppercase;">Salat Guide</span>
-                        <div style="font-size: 0.75rem; color: #6ee7b7; font-style: italic;">DE / МК / MK</div>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <h3>Salat Guide</h3>
-                    <p data-translate="salat_desc">Gebet-Anleitung mit animierten SVG-Figuren für jede Gebetshaltung. Sprachen: Deutsch & Mazedonisch (Kyrillisch/Lateinisch).</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">SVG Animation</span>
-                        <span class="tag">PWA</span>
-                        <span class="tag">DE / МК</span>
-                    </div>
-                    <a href="salat-guide.html" target="_blank" class="btn btn-primary" style="margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;">Live Demo</a>
-                </div>
-            </div>
-
-            <!-- Vakti Gebetszeiten -->
-            <div class="project-card fade-in">
-                <div class="project-image" style="background: linear-gradient(135deg, #080818 0%, #1a1a50 50%, #080818 100%); position: relative; overflow: hidden;">
-                    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;">
-                        <div style="font-size: 2.5rem; line-height: 1;">&#9790;</div>
-                        <span style="font-size: 1rem; font-weight: 800; letter-spacing: 0.1em; color: #6366f1; text-transform: uppercase;">Vakti</span>
-                        <div style="font-size: 0.75rem; color: #a5b4fc; font-style: italic;">Сабах · Пладне · Акшам · Јација</div>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <h3>Vakti - Gebetszeiten</h3>
-                    <p data-translate="vakti_desc">Gebetszeiten mit Echtzeit-Countdown, Städteauswahl (Skopje, Wien...), Hijri-Datum und astronomischer Berechnung.</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">PWA</span>
-                        <span class="tag">DE / МК</span>
-                    </div>
-                    <a href="prayer-times.html" target="_blank" class="btn btn-primary" style="margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;">Live Demo</a>
-                </div>
-            </div>
-
-            <!-- Tasbeeh -->
-            <div class="project-card fade-in">
-                <div class="project-image" style="background: linear-gradient(135deg, #0d0818 0%, #2d1a50 50%, #0d0818 100%); position: relative; overflow: hidden;">
-                    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem;">
-                        <div style="font-size: 2.5rem; line-height: 1;">&#128260;</div>
-                        <span style="font-size: 1rem; font-weight: 800; letter-spacing: 0.1em; color: #8b5cf6; text-transform: uppercase;">Tasbeeh</span>
-                        <div style="font-size: 0.85rem; color: #f59e0b; font-family: Georgia, serif;">سُبْحَانَ اللَّه · الْحَمْدُ لِلَّه</div>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <h3>Tasbeeh Zähler</h3>
-                    <p data-translate="tasbeeh_desc">Digitaler Gebetsperlen-Zähler mit 33/33/34-Zyklus, Vibration, Fortschrittsring und Statistiken.</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">PWA</span>
-                        <span class="tag">DE / МК</span>
-                    </div>
-                    <a href="tasbeeh.html" target="_blank" class="btn btn-primary" style="margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;">Live Demo</a>
                 </div>
             </div>
 
