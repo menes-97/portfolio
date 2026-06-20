@@ -561,8 +561,55 @@
             transform: translateY(0);
         }
 
+        /* Floating CTA Button */
+        .floating-cta {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1100;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 1.5rem;
+            border-radius: 999px;
+            background: var(--gradient);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.45);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: ctaPulse 2.5s infinite;
+        }
+
+        .floating-cta:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 14px 40px rgba(99, 102, 241, 0.6);
+            animation: none;
+        }
+
+        .floating-cta svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        @keyframes ctaPulse {
+            0% { box-shadow: 0 10px 30px rgba(99, 102, 241, 0.45), 0 0 0 0 rgba(99, 102, 241, 0.45); }
+            70% { box-shadow: 0 10px 30px rgba(99, 102, 241, 0.45), 0 0 0 14px rgba(99, 102, 241, 0); }
+            100% { box-shadow: 0 10px 30px rgba(99, 102, 241, 0.45), 0 0 0 0 rgba(99, 102, 241, 0); }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
+            .floating-cta {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
             .nav-links {
                 display: none;
             }
@@ -709,6 +756,27 @@
                 </div>
             </div>
 
+            <!-- HeartLink -->
+            <div class="project-card fade-in">
+                <div class="project-image" style="padding: 0; overflow: hidden;">
+                    <img src="Screenshot-Heartlink.png" alt="HeartLink Screenshot" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="project-content">
+                    <h3>HeartLink</h3>
+                    <p data-translate="heartlink_desc">Fullstack Charity-Plattform mit React & Node.js. Features: User-Auth, Warenkorb, Checkout, Spendenprojekte.</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Bootstrap</span>
+                        <span class="tag">MySQL</span>
+                    </div>
+                    <a href="https://github.com/menes-97/hearth_link" target="_blank" class="btn btn-primary" style="margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+
             <!-- Coming Soon -->
             <div class="project-card fade-in" style="position: relative; overflow: hidden;">
                 <div style="height: 200px; background: linear-gradient(135deg, #0f0f1a 0%, #1a1a3e 50%, #0f0f1a 100%); display: flex; align-items: center; justify-content: center; position: relative;">
@@ -800,6 +868,12 @@
         </div>
     </section>
 
+    <!-- Floating CTA Button -->
+    <a href="#contact" class="floating-cta">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <span data-translate="floating_cta">Hole dir ein Angebot</span>
+    </a>
+
     <!-- Footer -->
     <footer>
         <p data-translate="footer">&copy; 2026 Mein Portfolio. Alle Rechte vorbehalten.</p>
@@ -823,6 +897,7 @@
                 skills_subtitle: 'Technologien und Programmiersprachen, mit denen ich arbeite',
                 projects_title: 'Meine Projekte',
                 projects_subtitle: 'Hier werden bald meine Projekte erscheinen',
+                heartlink_desc: 'Fullstack Charity-Plattform mit React & Node.js. Features: User-Auth, Warenkorb, Checkout, Spendenprojekte.',
                 salat_desc: 'Gebet-Anleitung mit animierten SVG-Figuren für jede Gebetshaltung. Sprachen: Deutsch & Mazedonisch (Kyrillisch/Lateinisch).',
                 vakti_desc: 'Gebetszeiten mit Echtzeit-Countdown, Städteauswahl (Skopje, Wien...), Hijri-Datum und astronomischer Berechnung.',
                 tasbeeh_desc: 'Digitaler Gebetsperlen-Zähler mit 33/33/34-Zyklus, Vibration, Fortschrittsring und Statistiken.',
@@ -840,6 +915,7 @@
                 contact_email: 'E-Mail',
                 contact_phone: 'Telefon',
                 footer: '© 2026 Mein Portfolio. Alle Rechte vorbehalten.',
+                floating_cta: 'Hole dir ein Angebot',
                 typewriter: ['Menes Nasufoski', 'Web Developer', 'Frontend Enthusiast']
             },
             en: {
@@ -856,6 +932,7 @@
                 skills_subtitle: 'Technologies and programming languages I work with',
                 projects_title: 'My Projects',
                 projects_subtitle: 'My projects will appear here soon',
+                heartlink_desc: 'Fullstack charity platform with React & Node.js. Features: User-Auth, shopping cart, checkout, donation projects.',
                 salat_desc: 'Prayer guide with animated SVG figures for each prayer position. Languages: German & Macedonian (Cyrillic/Latin).',
                 vakti_desc: 'Prayer times with live countdown, city selection (Skopje, Vienna...), Hijri date and astronomical calculation.',
                 tasbeeh_desc: 'Digital prayer bead counter with 33/33/34 cycle, vibration, progress ring and statistics.',
@@ -873,6 +950,7 @@
                 contact_email: 'Email',
                 contact_phone: 'Phone',
                 footer: '© 2026 My Portfolio. All rights reserved.',
+                floating_cta: 'Get a quote',
                 typewriter: ['Menes Nasufoski', 'Web Developer', 'Frontend Enthusiast']
             },
             it: {
@@ -889,6 +967,7 @@
                 skills_subtitle: 'Tecnologie e linguaggi di programmazione con cui lavoro',
                 projects_title: 'I miei progetti',
                 projects_subtitle: 'I miei progetti appariranno presto qui',
+                heartlink_desc: 'Piattaforma charity fullstack con React & Node.js. Funzionalità: autenticazione, carrello, checkout, progetti di donazione.',
                 salat_desc: 'Guida alla preghiera con figure SVG animate per ogni posizione. Lingue: Tedesco e Macedone (Cirillico/Latino).',
                 vakti_desc: 'Orari di preghiera con conto alla rovescia, selezione città (Skopje, Vienna...), data Hijri e calcolo astronomico.',
                 tasbeeh_desc: 'Contatore digitale del rosario con ciclo 33/33/34, vibrazione, anello di avanzamento e statistiche.',
@@ -906,6 +985,7 @@
                 contact_email: 'Email',
                 contact_phone: 'Telefono',
                 footer: '© 2026 Il mio Portfolio. Tutti i diritti riservati.',
+                floating_cta: 'Richiedi un preventivo',
                 typewriter: ['Menes Nasufoski', 'Web Developer', 'Frontend Enthusiast']
             },
             bs: {
@@ -922,6 +1002,7 @@
                 skills_subtitle: 'Tehnologije i programski jezici s kojima radim',
                 projects_title: 'Moji projekti',
                 projects_subtitle: 'Moji projekti će se uskoro pojaviti ovdje',
+                heartlink_desc: 'Fullstack charity platforma s React & Node.js. Funkcije: autentikacija, korpa, checkout, donatorski projekti.',
                 salat_desc: 'Vodič za namaz s animiranim SVG figurama za svaki položaj. Jezici: Njemački i Makedonski (Ćirilica/Latinica).',
                 vakti_desc: 'Vakti namaza s odbrojavanjem, izborom grada (Skoplje, Beč...), Hidžri datumom i astronomskim izračunom.',
                 tasbeeh_desc: 'Digitalni brojač tespiha s ciklusom 33/33/34, vibracijom, prstenom napretka i statistikama.',
@@ -939,6 +1020,7 @@
                 contact_email: 'Email',
                 contact_phone: 'Telefon',
                 footer: '© 2026 Moj Portfolio. Sva prava zadržana.',
+                floating_cta: 'Zatraži ponudu',
                 typewriter: ['Menes Nasufoski', 'Web Developer', 'Frontend Enthusiast']
             }
         };
