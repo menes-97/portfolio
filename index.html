@@ -180,7 +180,8 @@
             z-index: 1001;
         }
 
-        .language-switcher:hover .language-dropdown {
+        .language-switcher:hover .language-dropdown,
+        .language-switcher.open .language-dropdown {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
@@ -207,6 +208,39 @@
 
         .flag {
             font-size: 1.2rem;
+        }
+
+        /* Hamburger Menu (mobile) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
         /* Hero Section */
@@ -620,8 +654,33 @@
                 font-size: 0.9rem;
             }
 
+            .hamburger {
+                display: flex;
+            }
+
             .nav-links {
-                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                gap: 1.25rem;
+                background: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(10px);
+                border-top: 1px solid var(--bg-card);
+                padding: 0 2rem;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .nav-links.open {
+                max-height: 320px;
+                opacity: 1;
+                visibility: visible;
+                padding: 1.5rem 2rem;
             }
 
             .hero-content h1 {
@@ -673,6 +732,11 @@
                     <button onclick="setLanguage('bs')"><span class="flag">🇧🇦</span> Bosanski</button>
                 </div>
             </div>
+            <button class="hamburger" id="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
@@ -752,7 +816,7 @@
                 </div>
                 <div class="project-content">
                     <h3>Workout Tracker</h3>
-                    <p data-translate="workout_desc">Trainingsplan-App zum Tracken von Ubungen, Sets, Reps und Gewicht. Mit Tagesfilter, Kategorien und localStorage.</p>
+                    <p data-translate="workout_desc">Trainingsplan-App zum Tracken von Übungen, Sets, Reps und Gewicht. Mit Tagesfilter, Kategorien und localStorage.</p>
                     <div class="project-tags">
                         <span class="tag">HTML</span>
                         <span class="tag">CSS</span>
@@ -938,12 +1002,7 @@
                 projects_title: 'Meine Projekte',
                 projects_subtitle: 'Eine Auswahl meiner Projekte',
                 heartlink_desc: 'Fullstack Charity-Plattform mit React & Node.js. Features: User-Auth, Warenkorb, Checkout, Spendenprojekte.',
-                salat_desc: 'Gebet-Anleitung mit animierten SVG-Figuren für jede Gebetshaltung. Sprachen: Deutsch & Mazedonisch (Kyrillisch/Lateinisch).',
-                vakti_desc: 'Gebetszeiten mit Echtzeit-Countdown, Städteauswahl (Skopje, Wien...), Hijri-Datum und astronomischer Berechnung.',
-                tasbeeh_desc: 'Digitaler Gebetsperlen-Zähler mit 33/33/34-Zyklus, Vibration, Fortschrittsring und Statistiken.',
-                workout_desc: 'Trainingsplan-App zum Tracken von Ubungen, Sets, Reps und Gewicht. Mit Tagesfilter, Kategorien und localStorage.',
-                pomodoro_desc: 'Produktivitats-Timer mit 25/5-Min-Zyklus, Aufgabenliste, Session-Tracking und Browser-Benachrichtigungen.',
-                study_desc: 'Virtueller Lernraum mit Focus-Timer, Notizen pro Fach, To-Do-Liste, Streak-Tracking und Motivations-Zitaten.',
+                workout_desc: 'Trainingsplan-App zum Tracken von Übungen, Sets, Reps und Gewicht. Mit Tagesfilter, Kategorien und localStorage.',
                 impresaedile_desc: 'Professionelle Website für ein Bauunternehmen in Treviso. Modernes Design mit Animationen, Kontaktformular und SEO-Optimierung.',
                 bellanapoli_desc: 'Moderne, responsive Landingpage für eine Pizzeria. Mehrsprachig (DE/IT/EN) mit Vanilla JavaScript, Hero, Menü, Galerie und Reservierungsformular.',
                 werkstatt_desc: 'Moderne Landingpage für eine KFZ-Meisterwerkstatt. Dark/Light-Mode, Hero, Leistungen, Preise und Terminbuchung – klares, vertrauenswürdiges Design.',
@@ -975,12 +1034,7 @@
                 projects_title: 'My Projects',
                 projects_subtitle: 'A selection of my projects',
                 heartlink_desc: 'Fullstack charity platform with React & Node.js. Features: User-Auth, shopping cart, checkout, donation projects.',
-                salat_desc: 'Prayer guide with animated SVG figures for each prayer position. Languages: German & Macedonian (Cyrillic/Latin).',
-                vakti_desc: 'Prayer times with live countdown, city selection (Skopje, Vienna...), Hijri date and astronomical calculation.',
-                tasbeeh_desc: 'Digital prayer bead counter with 33/33/34 cycle, vibration, progress ring and statistics.',
                 workout_desc: 'Workout tracking app to log exercises, sets, reps and weight. With day filter, categories and localStorage.',
-                pomodoro_desc: 'Productivity timer with 25/5-min cycle, task list, session tracking and browser notifications.',
-                study_desc: 'Virtual study room with focus timer, notes per subject, to-do list, streak tracking and motivational quotes.',
                 impresaedile_desc: 'Professional website for a construction company in Treviso. Modern design with animations, contact form and SEO optimization.',
                 bellanapoli_desc: 'Modern, responsive landing page for a pizzeria. Multilingual (DE/IT/EN) with vanilla JavaScript, hero, menu, gallery and reservation form.',
                 werkstatt_desc: 'Modern landing page for a certified car repair shop. Dark/light mode, hero, services, pricing and appointment booking – clean, trustworthy design.',
@@ -1012,12 +1066,7 @@
                 projects_title: 'I miei progetti',
                 projects_subtitle: 'Una selezione dei miei progetti',
                 heartlink_desc: 'Piattaforma charity fullstack con React & Node.js. Funzionalità: autenticazione, carrello, checkout, progetti di donazione.',
-                salat_desc: 'Guida alla preghiera con figure SVG animate per ogni posizione. Lingue: Tedesco e Macedone (Cirillico/Latino).',
-                vakti_desc: 'Orari di preghiera con conto alla rovescia, selezione città (Skopje, Vienna...), data Hijri e calcolo astronomico.',
-                tasbeeh_desc: 'Contatore digitale del rosario con ciclo 33/33/34, vibrazione, anello di avanzamento e statistiche.',
                 workout_desc: 'App per tracciare esercizi, serie, ripetizioni e peso. Con filtro giornaliero, categorie e localStorage.',
-                pomodoro_desc: 'Timer di produttivita con ciclo 25/5 min, lista attivita, tracking sessioni e notifiche browser.',
-                study_desc: 'Stanza studio virtuale con timer focus, note per materia, to-do list, streak e citazioni motivazionali.',
                 impresaedile_desc: 'Sito web professionale per un\'impresa edile a Treviso. Design moderno con animazioni, modulo di contatto e ottimizzazione SEO.',
                 bellanapoli_desc: 'Landing page moderna e responsive per una pizzeria. Multilingue (DE/IT/EN) con JavaScript vanilla, hero, menù, galleria e modulo di prenotazione.',
                 werkstatt_desc: 'Landing page moderna per un\'officina meccanica certificata. Modalità scura/chiara, hero, servizi, prezzi e prenotazione appuntamenti – design pulito e affidabile.',
@@ -1049,12 +1098,7 @@
                 projects_title: 'Moji projekti',
                 projects_subtitle: 'Izbor mojih projekata',
                 heartlink_desc: 'Fullstack charity platforma s React & Node.js. Funkcije: autentikacija, korpa, checkout, donatorski projekti.',
-                salat_desc: 'Vodič za namaz s animiranim SVG figurama za svaki položaj. Jezici: Njemački i Makedonski (Ćirilica/Latinica).',
-                vakti_desc: 'Vakti namaza s odbrojavanjem, izborom grada (Skoplje, Beč...), Hidžri datumom i astronomskim izračunom.',
-                tasbeeh_desc: 'Digitalni brojač tespiha s ciklusom 33/33/34, vibracijom, prstenom napretka i statistikama.',
-                workout_desc: 'Aplikacija za pracenje vjezbi, setova, ponavljanja i tezine. S dnevnim filtrom, kategorijama i localStorage.',
-                pomodoro_desc: 'Timer produktivnosti s ciklusom 25/5 min, listom zadataka, pracenjem sesija i obavijestima preglednika.',
-                study_desc: 'Virtualna soba za ucenje s focus timerom, biljeskama po predmetu, to-do listom, streak pracenjem i motivacijskim citatima.',
+                workout_desc: 'Aplikacija za praćenje vježbi, setova, ponavljanja i težine. S dnevnim filtrom, kategorijama i localStorage.',
                 impresaedile_desc: 'Profesionalna web stranica za građevinsku firmu u Trevisu. Moderan dizajn sa animacijama, kontakt formom i SEO optimizacijom.',
                 bellanapoli_desc: 'Moderna, responzivna landing stranica za piceriju. Višejezična (DE/IT/EN) s vanilla JavaScriptom, hero sekcijom, menijem, galerijom i formom za rezervaciju.',
                 werkstatt_desc: 'Moderna landing stranica za ovlašteni auto servis. Tamni/svijetli način, hero, usluge, cijene i rezervacija termina – čist i pouzdan dizajn.',
@@ -1182,6 +1226,39 @@
             } else {
                 nav.style.background = 'rgba(15, 23, 42, 0.9)';
             }
+        });
+
+        // Hamburger menu (mobile)
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            hamburger.classList.toggle('active', isOpen);
+            hamburger.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Close mobile menu when a nav link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Language switcher: open on tap (works on touch devices)
+        const languageSwitcher = document.querySelector('.language-switcher');
+        const languageBtn = document.querySelector('.language-btn');
+
+        languageBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageSwitcher.classList.toggle('open');
+        });
+
+        // Close the language dropdown when clicking outside
+        document.addEventListener('click', () => {
+            languageSwitcher.classList.remove('open');
         });
     </script>
 </body>
