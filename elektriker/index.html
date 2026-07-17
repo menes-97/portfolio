@@ -1,0 +1,2316 @@
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voltwerk Elektrotechnik — Elektriker, Wallbox &amp; Photovoltaik</title>
+    <style>
+      :root {
+        --bg: #0a0c10;
+        --bg-2: #11151c;
+        --bg-3: #171c26;
+        --line: #242c39;
+        --txt: #eef2f7;
+        --muted: #8b98ab;
+        --volt: #ffd60a;
+        --volt-dim: #f5c400;
+        --volt-glow: rgba(255, 214, 10, 0.16);
+        --green: #22c55e;
+        --radius: 14px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family:
+          "Segoe UI",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: var(--bg);
+        color: var(--txt);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.1;
+        letter-spacing: -0.025em;
+      }
+      h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+      }
+      .lead {
+        color: var(--muted);
+        font-size: 1.06rem;
+        max-width: 58ch;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--volt);
+        border: 1px solid rgba(255, 214, 10, 0.3);
+        background: var(--volt-glow);
+        padding: 7px 14px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        padding: 14px 26px;
+        border-radius: 9px;
+        font-weight: 800;
+        font-size: 0.95rem;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        transition:
+          transform 0.18s,
+          box-shadow 0.18s,
+          background 0.18s,
+          border-color 0.18s;
+      }
+      .btn-volt {
+        background: var(--volt);
+        color: #0a0c10;
+        box-shadow:
+          0 0 0 0 var(--volt-glow),
+          0 10px 30px rgba(255, 214, 10, 0.2);
+      }
+      .btn-volt:hover {
+        background: #fff05a;
+        transform: translateY(-2px);
+        box-shadow: 0 14px 40px rgba(255, 214, 10, 0.35);
+      }
+      .btn-out {
+        background: transparent;
+        color: var(--txt);
+        border: 1.5px solid var(--line);
+      }
+      .btn-out:hover {
+        border-color: var(--volt);
+        color: var(--volt);
+      }
+      .btn-lg {
+        padding: 17px 32px;
+        font-size: 1rem;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(10, 12, 16, 0.78);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 78px;
+        gap: 24px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-weight: 900;
+        font-size: 1.2rem;
+        letter-spacing: -0.03em;
+      }
+      .bolt {
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        flex-shrink: 0;
+        background: var(--volt);
+        display: grid;
+        place-items: center;
+        box-shadow: 0 0 22px rgba(255, 214, 10, 0.45);
+      }
+      .bolt svg {
+        width: 19px;
+        height: 19px;
+        fill: #0a0c10;
+      }
+      .logo small {
+        display: block;
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: var(--muted);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        line-height: 1;
+        margin-top: 2px;
+      }
+      .menu {
+        display: flex;
+        gap: 32px;
+        font-weight: 600;
+        font-size: 0.94rem;
+      }
+      .menu a {
+        color: var(--muted);
+        position: relative;
+        transition: color 0.2s;
+      }
+      .menu a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 0;
+        height: 2px;
+        background: var(--volt);
+        transition: width 0.25s;
+      }
+      .menu a:hover {
+        color: var(--txt);
+      }
+      .menu a:hover::after {
+        width: 100%;
+      }
+      .burger {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+      }
+      .burger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--txt);
+        margin: 5px 0;
+        border-radius: 2px;
+        transition: 0.25s;
+      }
+
+      .hero {
+        position: relative;
+        padding: 110px 0 120px;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background:
+          radial-gradient(
+            700px 420px at 78% 18%,
+            rgba(255, 214, 10, 0.11),
+            transparent 65%
+          ),
+          radial-gradient(
+            600px 400px at 10% 90%,
+            rgba(34, 197, 94, 0.06),
+            transparent 60%
+          );
+      }
+      .grid-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.35;
+        background-image:
+          linear-gradient(rgba(36, 44, 57, 0.5) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(36, 44, 57, 0.5) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: radial-gradient(
+          ellipse 80% 60% at 50% 40%,
+          #000,
+          transparent 75%
+        );
+      }
+      .hero .wrap {
+        position: relative;
+        z-index: 1;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .hero h1 {
+        font-size: clamp(2.5rem, 5.4vw, 4.1rem);
+        font-weight: 900;
+        margin-bottom: 22px;
+      }
+      .hero h1 em {
+        font-style: normal;
+        color: var(--volt);
+        text-shadow: 0 0 40px rgba(255, 214, 10, 0.35);
+      }
+      .hero p.lead {
+        margin-bottom: 34px;
+        font-size: 1.15rem;
+      }
+      .hero-cta {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 44px;
+      }
+      .stats {
+        display: flex;
+        gap: 0;
+        border-top: 1px solid var(--line);
+        padding-top: 26px;
+        flex-wrap: wrap;
+      }
+      .stats div {
+        padding-right: 36px;
+        margin-right: 36px;
+        border-right: 1px solid var(--line);
+      }
+      .stats div:last-child {
+        border: none;
+        padding-right: 0;
+        margin-right: 0;
+      }
+      .stats strong {
+        display: block;
+        font-size: 1.75rem;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        color: var(--volt);
+      }
+      .stats span {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .hero-card {
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 8px;
+        position: relative;
+        box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55);
+      }
+      .hero-card .pic {
+        border-radius: 14px;
+        overflow: hidden;
+        aspect-ratio: 1/1;
+        background: #1b2230 url("img/hero-elektriker.jpg") center/cover;
+      }
+      .badge {
+        position: absolute;
+        right: -18px;
+        top: 34px;
+        background: var(--volt);
+        color: #0a0c10;
+        font-weight: 900;
+        font-size: 0.82rem;
+        padding: 11px 18px;
+        border-radius: 9px;
+        letter-spacing: 0.02em;
+        box-shadow: 0 12px 32px rgba(255, 214, 10, 0.35);
+        transform: rotate(3deg);
+      }
+      .live-strip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 16px;
+        font-size: 0.87rem;
+        color: var(--muted);
+      }
+      .pulse {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
+        animation: p 2s infinite;
+      }
+      @keyframes p {
+        70% {
+          box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+        }
+      }
+      .live-strip b {
+        color: var(--txt);
+      }
+
+      .ticker {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: var(--bg-2);
+        overflow: hidden;
+        padding: 18px 0;
+      }
+      .ticker-in {
+        display: flex;
+        gap: 56px;
+        white-space: nowrap;
+        animation: slide 26s linear infinite;
+        width: max-content;
+      }
+      @keyframes slide {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      .ticker-in span {
+        font-weight: 800;
+        font-size: 0.95rem;
+        color: #4a5768;
+        letter-spacing: 0.04em;
+        display: flex;
+        align-items: center;
+        gap: 56px;
+      }
+      .ticker-in span::after {
+        content: "⚡";
+        color: var(--volt);
+        font-size: 0.8rem;
+      }
+
+      section {
+        padding: 110px 0;
+        position: relative;
+      }
+      .sec-head {
+        max-width: 660px;
+        margin-bottom: 56px;
+      }
+      .sec-head h2 {
+        margin-bottom: 16px;
+      }
+
+      .bento {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .bx {
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 32px;
+        position: relative;
+        overflow: hidden;
+        transition:
+          border-color 0.3s,
+          transform 0.3s,
+          background 0.3s;
+      }
+      .bx::after {
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: var(--volt-glow);
+        filter: blur(60px);
+        top: -90px;
+        right: -90px;
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      .bx:hover {
+        border-color: rgba(255, 214, 10, 0.4);
+        transform: translateY(-4px);
+        background: var(--bg-3);
+      }
+      .bx:hover::after {
+        opacity: 1;
+      }
+      .bx.big {
+        grid-column: span 2;
+      }
+      .bx .ic {
+        width: 48px;
+        height: 48px;
+        border-radius: 11px;
+        background: var(--bg-3);
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        font-size: 1.35rem;
+        margin-bottom: 22px;
+        position: relative;
+        z-index: 1;
+      }
+      .bx h3 {
+        font-size: 1.3rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+      .bx p {
+        color: var(--muted);
+        font-size: 0.96rem;
+        position: relative;
+        z-index: 1;
+      }
+      .bx .pills {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+        position: relative;
+        z-index: 1;
+      }
+      .pill {
+        font-size: 0.78rem;
+        font-weight: 700;
+        padding: 5px 11px;
+        border-radius: 999px;
+        background: var(--bg-3);
+        border: 1px solid var(--line);
+        color: var(--muted);
+      }
+      .bx.big .pill {
+        border-color: rgba(255, 214, 10, 0.25);
+        color: var(--volt);
+      }
+
+      .calc-sec {
+        background: var(--bg-2);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .calc-grid {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .panel {
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 34px;
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+      }
+      .field {
+        margin-bottom: 26px;
+      }
+      .field > label {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+      }
+      .field > label b {
+        color: var(--volt);
+        font-size: 1rem;
+      }
+      .opts {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 9px;
+      }
+      .opts.two {
+        grid-template-columns: 1fr 1fr;
+      }
+      .opt input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .opt span {
+        display: block;
+        text-align: center;
+        padding: 13px 8px;
+        border-radius: 9px;
+        border: 1.5px solid var(--line);
+        background: var(--bg-2);
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--muted);
+        cursor: pointer;
+        transition: 0.18s;
+      }
+      .opt span:hover {
+        border-color: #3a4557;
+        color: var(--txt);
+      }
+      .opt input:checked + span {
+        border-color: var(--volt);
+        background: var(--volt-glow);
+        color: var(--volt);
+        box-shadow: 0 0 20px rgba(255, 214, 10, 0.14);
+      }
+      input[type="range"] {
+        width: 100%;
+        -webkit-appearance: none;
+        height: 5px;
+        border-radius: 4px;
+        background: var(--line);
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--volt);
+        cursor: pointer;
+        border: 3px solid var(--bg);
+        box-shadow: 0 0 14px rgba(255, 214, 10, 0.6);
+      }
+      .range-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin-top: 8px;
+      }
+
+      .out {
+        margin-top: 30px;
+        border-top: 1px dashed var(--line);
+        padding-top: 26px;
+      }
+      .line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.94rem;
+        margin-bottom: 12px;
+        color: var(--muted);
+      }
+      .line b {
+        color: var(--txt);
+        font-weight: 700;
+      }
+      .line.sub b {
+        color: var(--green);
+      }
+      .total {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+      }
+      .total .lbl {
+        font-size: 0.85rem;
+        color: var(--muted);
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .total .val {
+        font-size: 2.5rem;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        color: var(--volt);
+        text-shadow: 0 0 34px rgba(255, 214, 10, 0.3);
+        line-height: 1;
+      }
+      .panel .btn {
+        width: 100%;
+        margin-top: 22px;
+      }
+      .fineprint {
+        font-size: 0.75rem;
+        color: #5c6878;
+        margin-top: 14px;
+        line-height: 1.5;
+        text-align: center;
+      }
+
+      .calc-side ul {
+        list-style: none;
+        margin-top: 28px;
+      }
+      .calc-side li {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 20px;
+        align-items: flex-start;
+        font-size: 0.97rem;
+        color: var(--muted);
+      }
+      .calc-side li b {
+        display: block;
+        color: var(--txt);
+        font-size: 1rem;
+      }
+      .chk {
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+        flex-shrink: 0;
+        margin-top: 2px;
+        background: var(--volt-glow);
+        border: 1px solid rgba(255, 214, 10, 0.3);
+        color: var(--volt);
+        display: grid;
+        place-items: center;
+        font-size: 0.8rem;
+        font-weight: 900;
+      }
+
+      .projs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .proj {
+        border-radius: var(--radius);
+        overflow: hidden;
+        position: relative;
+        aspect-ratio: 3/4;
+        background: #1b2230;
+        border: 1px solid var(--line);
+      }
+      .proj img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.62;
+        transition: 0.5s;
+      }
+      .proj:hover img {
+        opacity: 0.85;
+        transform: scale(1.05);
+      }
+      .proj .info {
+        position: absolute;
+        inset: auto 0 0 0;
+        padding: 26px;
+        background: linear-gradient(transparent, rgba(10, 12, 16, 0.95) 65%);
+      }
+      .proj .kind {
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--volt);
+        margin-bottom: 6px;
+      }
+      .proj strong {
+        display: block;
+        font-size: 1.12rem;
+        font-weight: 800;
+        margin-bottom: 4px;
+      }
+      .proj span {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+
+      .certs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      .cert {
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 26px;
+        text-align: center;
+        transition: border-color 0.3s;
+      }
+      .cert:hover {
+        border-color: rgba(255, 214, 10, 0.35);
+      }
+      .cert .big {
+        font-size: 1.9rem;
+        margin-bottom: 10px;
+      }
+      .cert strong {
+        display: block;
+        font-size: 0.98rem;
+        margin-bottom: 4px;
+      }
+      .cert span {
+        font-size: 0.83rem;
+        color: var(--muted);
+      }
+
+      .cta {
+        background: linear-gradient(120deg, var(--volt), #ffb703);
+        color: #0a0c10;
+        border-radius: 22px;
+        padding: 64px 52px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        flex-wrap: wrap;
+        position: relative;
+        overflow: hidden;
+      }
+      .cta::after {
+        content: "⚡";
+        position: absolute;
+        right: -10px;
+        bottom: -70px;
+        font-size: 16rem;
+        opacity: 0.1;
+        line-height: 1;
+      }
+      .cta h2 {
+        font-size: 2.3rem;
+        margin-bottom: 10px;
+      }
+      .cta p {
+        max-width: 44ch;
+        font-weight: 600;
+        opacity: 0.78;
+      }
+      .cta .btn {
+        background: #0a0c10;
+        color: var(--volt);
+        white-space: nowrap;
+        position: relative;
+        z-index: 1;
+      }
+      .cta .btn:hover {
+        background: #1b2230;
+        transform: translateY(-2px);
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.05fr;
+        gap: 60px;
+      }
+      .infos {
+        list-style: none;
+        margin-top: 32px;
+      }
+      .infos li {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 24px;
+        align-items: flex-start;
+      }
+      .infos .ic {
+        width: 44px;
+        height: 44px;
+        border-radius: 11px;
+        flex-shrink: 0;
+        background: var(--bg-3);
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        font-size: 1.1rem;
+      }
+      .infos strong {
+        display: block;
+        font-size: 0.98rem;
+      }
+      .infos span,
+      .infos a {
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+      .infos a:hover {
+        color: var(--volt);
+      }
+      form {
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 36px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .inp {
+        margin-bottom: 18px;
+      }
+      .inp label {
+        display: block;
+        font-size: 0.83rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .inp input,
+      .inp select,
+      .inp textarea {
+        width: 100%;
+        padding: 13px 15px;
+        border-radius: 9px;
+        font-family: inherit;
+        font-size: 0.95rem;
+        background: var(--bg);
+        border: 1.5px solid var(--line);
+        color: var(--txt);
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .inp input::placeholder,
+      .inp textarea::placeholder {
+        color: #4f5c6e;
+      }
+      .inp input:focus,
+      .inp select:focus,
+      .inp textarea:focus {
+        outline: none;
+        border-color: var(--volt);
+        box-shadow: 0 0 0 3px var(--volt-glow);
+      }
+      .inp textarea {
+        resize: vertical;
+        min-height: 110px;
+      }
+      form .btn {
+        width: 100%;
+      }
+      .fnote {
+        font-size: 0.79rem;
+        color: #5c6878;
+        text-align: center;
+        margin-top: 14px;
+      }
+      .sent {
+        display: none;
+        text-align: center;
+        padding: 44px 20px;
+      }
+      .sent .big {
+        width: 66px;
+        height: 66px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        background: var(--volt-glow);
+        border: 1px solid rgba(255, 214, 10, 0.35);
+        color: var(--volt);
+        display: grid;
+        place-items: center;
+        font-size: 1.8rem;
+      }
+      .sent h3 {
+        font-size: 1.35rem;
+        margin-bottom: 8px;
+      }
+      .sent p {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      footer {
+        background: var(--bg-2);
+        border-top: 1px solid var(--line);
+        padding: 70px 0 28px;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+      .fgrid {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1fr 1fr;
+        gap: 44px;
+        margin-bottom: 52px;
+      }
+      footer h4 {
+        color: var(--txt);
+        font-size: 0.76rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+      footer ul {
+        list-style: none;
+      }
+      footer li {
+        margin-bottom: 10px;
+      }
+      footer a:hover {
+        color: var(--volt);
+      }
+      footer .logo {
+        margin-bottom: 18px;
+      }
+      .fbot {
+        border-top: 1px solid var(--line);
+        padding-top: 26px;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        font-size: 0.84rem;
+        color: #5c6878;
+      }
+
+      @media (max-width: 980px) {
+        .hero-grid,
+        .calc-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .hero-card {
+          max-width: 440px;
+        }
+        .bento {
+          grid-template-columns: 1fr 1fr;
+        }
+        .bx.big {
+          grid-column: span 2;
+        }
+        .projs {
+          grid-template-columns: 1fr 1fr;
+        }
+        .certs {
+          grid-template-columns: 1fr 1fr;
+        }
+        .fgrid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 640px) {
+        section {
+          padding: 72px 0;
+        }
+        .nav .btn {
+          display: none;
+        }
+        .burger {
+          display: block;
+          flex-shrink: 0;
+          margin-left: 2px;
+        }
+        header .wrap {
+          padding: 0 16px;
+        }
+        .nav {
+          gap: 10px;
+        }
+        .logo {
+          font-size: 1.05rem;
+          gap: 9px;
+        }
+        .bolt {
+          width: 32px;
+          height: 32px;
+        }
+        .bento,
+        .projs,
+        .certs,
+        .row,
+        .opts {
+          grid-template-columns: 1fr;
+        }
+        .bx.big {
+          grid-column: span 1;
+        }
+        .opts.two {
+          grid-template-columns: 1fr 1fr;
+        }
+        .fgrid {
+          grid-template-columns: 1fr;
+        }
+        .cta {
+          padding: 44px 28px;
+          text-align: center;
+          justify-content: center;
+        }
+        .cta p {
+          margin: 0 auto;
+        }
+        .badge {
+          right: 10px;
+          top: -14px;
+        }
+        html,
+        body {
+          overflow-x: hidden;
+        }
+        .hero {
+          padding: 64px 0 80px;
+        }
+        .hero h1 {
+          font-size: 2.05rem;
+        }
+        .hero p.lead {
+          font-size: 1rem;
+        }
+        .stats {
+          flex-wrap: wrap;
+          gap: 14px 0;
+        }
+        .stats div {
+          padding-right: 18px;
+          margin-right: 18px;
+        }
+        .lang-switch {
+          flex-shrink: 0;
+        }
+        .lang-switch .lng {
+          padding: 5px 6px;
+          font-size: 0.7rem;
+        }
+        .menu {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: var(--bg-2);
+          border-bottom: 1px solid var(--line);
+          box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6);
+          padding: 6px 16px 14px;
+          transform: translateY(-10px);
+          opacity: 0;
+          pointer-events: none;
+          transition:
+            opacity 0.2s,
+            transform 0.2s;
+        }
+        header.open .menu {
+          transform: none;
+          opacity: 1;
+          pointer-events: auto;
+        }
+        .menu a {
+          padding: 13px 2px;
+          border-bottom: 1px solid var(--line);
+          font-size: 1rem;
+          color: var(--txt);
+        }
+        .menu a::after {
+          display: none;
+        }
+        .menu a:last-child {
+          border-bottom: none;
+        }
+        header.open .burger span:nth-child(1) {
+          transform: translateY(7px) rotate(45deg);
+        }
+        header.open .burger span:nth-child(2) {
+          opacity: 0;
+        }
+        header.open .burger span:nth-child(3) {
+          transform: translateY(-7px) rotate(-45deg);
+        }
+      }
+      .lang-switch {
+        display: flex;
+        gap: 2px;
+        background: var(--bg-3);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 3px;
+      }
+      .lang-switch .lng {
+        border: none;
+        background: none;
+        font-family: inherit;
+        font-weight: 800;
+        font-size: 0.78rem;
+        letter-spacing: 0.03em;
+        color: var(--muted);
+        padding: 6px 9px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition:
+          color 0.15s,
+          background 0.15s;
+      }
+      .lang-switch .lng:hover {
+        color: var(--txt);
+      }
+      .lang-switch .lng.active {
+        background: var(--volt);
+        color: #0a0c10;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a href="#" class="logo">
+          <span class="bolt"
+            ><svg viewBox="0 0 24 24">
+              <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" /></svg
+          ></span>
+          <span>Voltwerk<small>Elektrotechnik</small></span>
+        </a>
+        <nav class="menu">
+          <a href="#leistungen">Leistungen</a>
+          <a href="#foerderung">Förderrechner</a>
+          <a href="#projekte">Projekte</a>
+          <a href="#zertifikate">Zertifikate</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+        <div class="lang-switch" id="langSwitch">
+          <button class="lng" data-lang="de">DE</button>
+          <button class="lng" data-lang="it">IT</button>
+          <button class="lng" data-lang="en">EN</button>
+          <button class="lng" data-lang="bs">BS</button>
+        </div>
+        <a href="#kontakt" class="btn btn-volt">Termin buchen</a>
+        <button class="burger" aria-label="Menü">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div class="grid-bg"></div>
+      <div class="wrap hero-grid">
+        <div>
+          <span class="tag"
+            >⚡ Konzessionierter Elektrotechnik-Meisterbetrieb</span
+          >
+          <h1>
+            Strom ist unser Handwerk.<br /><em>Zukunft</em> unser Auftrag.
+          </h1>
+          <p class="lead">
+            Wallbox, Photovoltaik, Smart Home und klassische Elektroinstallation
+            — von einem Team, das die Förderanträge gleich mitmacht.
+          </p>
+          <div class="hero-cta">
+            <a href="#foerderung" class="btn btn-volt btn-lg"
+              >Förderung berechnen</a
+            >
+            <a href="#projekte" class="btn btn-out btn-lg">Projekte ansehen</a>
+          </div>
+          <div class="stats">
+            <div><strong>1.200+</strong><span>Anlagen installiert</span></div>
+            <div><strong>18 J.</strong><span>Erfahrung</span></div>
+            <div><strong>5 J.</strong><span>Garantie</span></div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <span class="badge">E-Check zertifiziert</span>
+          <div class="pic"></div>
+          <div class="live-strip">
+            <span class="pulse"></span>
+            <span><b>3 Termine</b> diese Woche noch frei</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker">
+      <div class="ticker-in">
+        <span>WALLBOX</span><span>PHOTOVOLTAIK</span><span>SMART HOME</span
+        ><span>E-CHECK</span><span>NOTSTROM</span><span>KNX</span>
+        <span>WALLBOX</span><span>PHOTOVOLTAIK</span><span>SMART HOME</span
+        ><span>E-CHECK</span><span>NOTSTROM</span><span>KNX</span>
+      </div>
+    </div>
+
+    <section id="leistungen">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="tag">Leistungen</span>
+          <h2>Alles, was Spannung führt.</h2>
+          <p class="lead">
+            Von der Steckdose bis zur 20-kWp-Anlage am Dach — inklusive Planung,
+            Anmeldung beim Netzbetreiber und Förderantrag.
+          </p>
+        </div>
+
+        <div class="bento">
+          <article class="bx big">
+            <span class="ic">🔌</span>
+            <h3>Wallbox &amp; E-Mobilität</h3>
+            <p>
+              Installation, Lastmanagement und Anmeldung beim Netzbetreiber. Wir
+              kümmern uns um den kompletten Papierkram und holen die
+              Bundesförderung für Sie heraus — im Schnitt 600 € pro Wallbox.
+            </p>
+            <div class="pills">
+              <span class="pill">11 &amp; 22 kW</span
+              ><span class="pill">Lastmanagement</span
+              ><span class="pill">Förderantrag inkl.</span
+              ><span class="pill">Eichrechtskonform</span>
+            </div>
+          </article>
+
+          <article class="bx">
+            <span class="ic">☀️</span>
+            <h3>Photovoltaik</h3>
+            <p>
+              Planung, Montage, Speicher und Netzanmeldung — schlüsselfertig aus
+              einer Hand.
+            </p>
+            <div class="pills">
+              <span class="pill">Mit Speicher</span
+              ><span class="pill">Notstrom</span>
+            </div>
+          </article>
+
+          <article class="bx">
+            <span class="ic">🏠</span>
+            <h3>Smart Home &amp; KNX</h3>
+            <p>
+              Licht, Beschattung, Heizung und Sicherheit — in einer App, ohne
+              Cloud-Zwang.
+            </p>
+            <div class="pills">
+              <span class="pill">KNX</span><span class="pill">Loxone</span>
+            </div>
+          </article>
+
+          <article class="bx">
+            <span class="ic">🛡️</span>
+            <h3>E-Check &amp; Prüfung</h3>
+            <p>
+              Anlagenprüfung nach ÖVE/ÖNORM E 8001 — Pflicht für Vermieter und
+              Betriebe.
+            </p>
+            <div class="pills"><span class="pill">Mit Protokoll</span></div>
+          </article>
+
+          <article class="bx">
+            <span class="ic">⚙️</span>
+            <h3>Elektroinstallation</h3>
+            <p>
+              Neubau, Sanierung, Verteilerbau. Sauber verlegt, sauber
+              dokumentiert.
+            </p>
+            <div class="pills">
+              <span class="pill">Neubau</span
+              ><span class="pill">Sanierung</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="calc-sec" id="foerderung">
+      <div class="wrap calc-grid">
+        <div class="calc-side">
+          <span class="tag">Förderrechner</span>
+          <h2>Was zahlt der Staat?<br />Rechnen wir nach.</h2>
+          <p class="lead">
+            Photovoltaik und Wallbox werden gefördert — nur weiß kaum jemand,
+            wie viel. Stellen Sie Ihre Anlage zusammen und sehen Sie sofort, was
+            übrig bleibt.
+          </p>
+          <ul>
+            <li>
+              <span class="chk">⚡</span>
+              <div>
+                <b>Förderung inklusive</b>Wir stellen den Antrag für Sie. Kein
+                Formular, kein Behördenweg.
+              </div>
+            </li>
+            <li>
+              <span class="chk">⚡</span>
+              <div>
+                <b>Realistische Zahlen</b>Basierend auf den Fördersätzen 2026
+                und echten Projektkosten.
+              </div>
+            </li>
+            <li>
+              <span class="chk">⚡</span>
+              <div>
+                <b>Amortisation sichtbar</b>Sie sehen sofort, nach wie vielen
+                Jahren sich die Anlage rechnet.
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="field">
+            <label>Photovoltaik-Anlage <b id="kwpVal">8 kWp</b></label>
+            <input type="range" id="kwp" min="0" max="20" step="1" value="8" />
+            <div class="range-row">
+              <span>keine PV</span><span>20 kWp</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Batteriespeicher</label>
+            <div class="opts">
+              <label class="opt"
+                ><input type="radio" name="akku" value="0" checked /><span
+                  >Ohne</span
+                ></label
+              >
+              <label class="opt"
+                ><input type="radio" name="akku" value="5" /><span
+                  >5 kWh</span
+                ></label
+              >
+              <label class="opt"
+                ><input type="radio" name="akku" value="10" /><span
+                  >10 kWh</span
+                ></label
+              >
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Wallbox</label>
+            <div class="opts">
+              <label class="opt"
+                ><input type="radio" name="wb" value="0" /><span
+                  >Keine</span
+                ></label
+              >
+              <label class="opt"
+                ><input type="radio" name="wb" value="11" checked /><span
+                  >11 kW</span
+                ></label
+              >
+              <label class="opt"
+                ><input type="radio" name="wb" value="22" /><span
+                  >22 kW</span
+                ></label
+              >
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom: 0">
+            <label>Objekt</label>
+            <div class="opts two">
+              <label class="opt"
+                ><input type="radio" name="obj" value="1" checked /><span
+                  >Einfamilienhaus</span
+                ></label
+              >
+              <label class="opt"
+                ><input type="radio" name="obj" value="1.18" /><span
+                  >Gewerbe</span
+                ></label
+              >
+            </div>
+          </div>
+
+          <div class="out">
+            <div class="line">
+              <span>Anlagenkosten (brutto)</span><b id="brutto">— €</b>
+            </div>
+            <div class="line sub">
+              <span>abzüglich Förderung</span><b id="foerder">— €</b>
+            </div>
+            <div class="line">
+              <span>Stromersparnis pro Jahr</span><b id="spar">— €</b>
+            </div>
+
+            <div class="total">
+              <div>
+                <div class="lbl">Ihr Eigenanteil</div>
+                <div
+                  style="font-size: 0.82rem; color: #5c6878; margin-top: 6px"
+                >
+                  amortisiert in
+                  <b id="amort" style="color: var(--green)">— Jahren</b>
+                </div>
+              </div>
+              <div class="val" id="netto">— €</div>
+            </div>
+
+            <a href="#kontakt" class="btn btn-volt btn-lg"
+              >Kostenloses Angebot anfordern →</a
+            >
+            <p class="fineprint">
+              Richtwerte nach Fördersätzen 2026, inkl. 20 % USt. Verbindliches
+              Angebot nach Vor-Ort-Termin.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projekte">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="tag">Projekte</span>
+          <h2>Zuletzt unter Strom gesetzt</h2>
+        </div>
+        <div class="projs">
+          <figure class="proj">
+            <img
+              src="img/projekt-pv.jpg"
+              alt="Photovoltaik auf Einfamilienhaus"
+            />
+            <figcaption class="info">
+              <div class="kind">Photovoltaik</div>
+              <strong>14 kWp + 10 kWh Speicher</strong>
+              <span>Einfamilienhaus · Graz · 2026</span>
+            </figcaption>
+          </figure>
+          <figure class="proj">
+            <img src="img/projekt-wallbox.jpg" alt="Wallbox Ladestation" />
+            <figcaption class="info">
+              <div class="kind">E-Mobilität</div>
+              <strong>12 Wallboxen, Tiefgarage</strong>
+              <span>Wohnanlage · Wien 1220 · 2025</span>
+            </figcaption>
+          </figure>
+          <figure class="proj">
+            <img src="img/projekt-smarthome.jpg" alt="Smart Home Steuerung" />
+            <figcaption class="info">
+              <div class="kind">Smart Home</div>
+              <strong>KNX-Vollausbau</strong>
+              <span>Neubau-Villa · Klagenfurt · 2025</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="zertifikate" style="padding-top: 0">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="tag">Qualifikation</span>
+          <h2>Geprüft, konzessioniert, versichert</h2>
+        </div>
+        <div class="certs">
+          <div class="cert">
+            <div class="big">🎓</div>
+            <strong>Meisterbetrieb</strong
+            ><span>Elektrotechnik, seit 2008</span>
+          </div>
+          <div class="cert">
+            <div class="big">🔋</div>
+            <strong>PV-Fachpartner</strong
+            ><span>Fronius &amp; SMA zertifiziert</span>
+          </div>
+          <div class="cert">
+            <div class="big">📋</div>
+            <strong>ÖVE/ÖNORM</strong><span>Prüfberechtigt E 8001</span>
+          </div>
+          <div class="cert">
+            <div class="big">🛡️</div>
+            <strong>10 Mio. €</strong><span>Betriebshaftpflicht</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top: 0">
+      <div class="wrap">
+        <div class="cta">
+          <div>
+            <h2>Erstberatung kostet nichts.</h2>
+            <p>
+              Vor-Ort-Termin, Bestandsaufnahme, Angebot mit Förderberechnung —
+              unverbindlich und gratis.
+            </p>
+          </div>
+          <a href="#kontakt" class="btn btn-lg">Termin sichern ⚡</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <div class="wrap contact-grid">
+        <div>
+          <span class="tag">Kontakt</span>
+          <h2>Reden wir über<br />Ihr Projekt.</h2>
+          <p class="lead">
+            Anfragen beantworten wir werktags innerhalb von 24 Stunden — meist
+            deutlich schneller.
+          </p>
+          <ul class="infos">
+            <li>
+              <span class="ic">☎</span>
+              <div>
+                <strong>Telefon</strong
+                ><a href="tel:+43316445566">0316 / 44 55 66</a>
+              </div>
+            </li>
+            <li>
+              <span class="ic">✉</span>
+              <div>
+                <strong>E-Mail</strong
+                ><a href="mailto:office@voltwerk-demo.at">office@voltwerk-demo.at</a>
+              </div>
+            </li>
+            <li>
+              <span class="ic">📍</span>
+              <div>
+                <strong>Standort</strong
+                ><span>Industriestraße 8, 8020 Graz</span>
+              </div>
+            </li>
+            <li>
+              <span class="ic">🕐</span>
+              <div>
+                <strong>Öffnungszeiten</strong
+                ><span>Mo–Fr 7:00–17:00 · Störungsdienst 24/7</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <form id="form">
+          <div id="formBody">
+            <div class="row">
+              <div class="inp">
+                <label for="n">Name</label
+                ><input
+                  id="n"
+                  type="text"
+                  placeholder="Max Mustermann"
+                  required
+                />
+              </div>
+              <div class="inp">
+                <label for="t">Telefon</label
+                ><input
+                  id="t"
+                  type="tel"
+                  placeholder="0664 123 45 67"
+                  required
+                />
+              </div>
+            </div>
+            <div class="inp">
+              <label for="e">E-Mail</label
+              ><input
+                id="e"
+                type="email"
+                placeholder="max@beispiel.at"
+                required
+              />
+            </div>
+            <div class="inp">
+              <label for="a">Ich interessiere mich für</label>
+              <select id="a">
+                <option>Photovoltaik</option>
+                <option>Wallbox / E-Mobilität</option>
+                <option>Smart Home / KNX</option>
+                <option>E-Check / Anlagenprüfung</option>
+                <option>Elektroinstallation</option>
+              </select>
+            </div>
+            <div class="inp">
+              <label for="m">Ihr Projekt</label
+              ><textarea
+                id="m"
+                placeholder="Kurz beschreiben, was geplant ist…"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-volt btn-lg">
+              Kostenlose Beratung anfragen
+            </button>
+            <p class="fnote">
+              Unverbindlich · Antwort innerhalb von 24 Stunden
+            </p>
+          </div>
+
+          <div class="sent" id="sent">
+            <div class="big">⚡</div>
+            <h3>Anfrage angekommen!</h3>
+            <p>
+              Wir melden uns innerhalb von 24 Stunden mit einem Terminvorschlag
+              bei Ihnen.
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="fgrid">
+          <div>
+            <a href="#" class="logo">
+              <span class="bolt"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" /></svg
+              ></span>
+              <span style="color: var(--txt)"
+                >Voltwerk<small>Elektrotechnik</small></span
+              >
+            </a>
+            <p style="max-width: 36ch">
+              Konzessionierter Elektrotechnik-Meisterbetrieb für Photovoltaik,
+              E-Mobilität und Smart Home. Graz und Umgebung.
+            </p>
+          </div>
+          <div>
+            <h4>Leistungen</h4>
+            <ul>
+              <li><a href="#leistungen">Photovoltaik</a></li>
+              <li><a href="#leistungen">Wallbox</a></li>
+              <li><a href="#leistungen">Smart Home</a></li>
+              <li><a href="#leistungen">E-Check</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Unternehmen</h4>
+            <ul>
+              <li><a href="#projekte">Projekte</a></li>
+              <li><a href="#zertifikate">Zertifikate</a></li>
+              <li><a href="#kontakt">Kontakt</a></li>
+              <li><a href="#">Karriere</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Kontakt</h4>
+            <ul>
+              <li><a href="tel:+43316445566">0316 / 44 55 66</a></li>
+              <li>
+                <a href="mailto:office@voltwerk-demo.at">office@voltwerk-demo.at</a>
+              </li>
+              <li>Industriestraße 8<br />8020 Graz</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fbot">
+          <span
+            >© 2026 Voltwerk Elektrotechnik GmbH — Demo-Projekt, kein echtes
+            Unternehmen.</span
+          >
+          <span>Impressum · Datenschutz · AGB</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var header = document.querySelector("header"),
+          burger = document.querySelector(".burger");
+        if (!header || !burger) return;
+        burger.addEventListener("click", function () {
+          header.classList.toggle("open");
+        });
+        document.querySelectorAll("header .menu a").forEach(function (a) {
+          a.addEventListener("click", function () {
+            header.classList.remove("open");
+          });
+        });
+      })();
+    </script>
+
+    <script>
+      const PV_PRO_KWP = 1650;
+      const AKKU_PRO_KWH = 900;
+      const WB_PREIS = { 0: 0, 11: 1900, 22: 2600 };
+      const FOERD_PV_KWP = 250;
+      const FOERD_AKKU = 200;
+      const FOERD_WB = { 0: 0, 11: 600, 22: 600 };
+      const ERSPARNIS_KWP = 210;
+      const ERSPARNIS_WB = 340;
+
+      const eur = (n) =>
+        new Intl.NumberFormat("de-AT", { maximumFractionDigits: 0 }).format(
+          Math.round(n / 10) * 10,
+        ) + " €";
+
+      function rechne() {
+        const kwp = parseInt(document.getElementById("kwp").value, 10);
+        const akku = parseInt(
+          document.querySelector("input[name=akku]:checked").value,
+          10,
+        );
+        const wb = parseInt(
+          document.querySelector("input[name=wb]:checked").value,
+          10,
+        );
+        const obj = parseFloat(
+          document.querySelector("input[name=obj]:checked").value,
+        );
+
+        const NOPV = {
+          de: "keine PV",
+          it: "senza FV",
+          en: "no PV",
+          bs: "bez FN",
+        };
+        document.getElementById("kwpVal").textContent =
+          kwp === 0 ? NOPV[window.__i18nLang] || "keine PV" : kwp + " kWp";
+
+        const brutto =
+          (kwp * PV_PRO_KWP + akku * AKKU_PRO_KWH + WB_PREIS[wb]) * obj;
+        const foerder = kwp * FOERD_PV_KWP + akku * FOERD_AKKU + FOERD_WB[wb];
+        const netto = Math.max(brutto - foerder, 0);
+        const spar = kwp * ERSPARNIS_KWP + (wb ? ERSPARNIS_WB : 0);
+
+        document.getElementById("brutto").textContent = eur(brutto);
+        document.getElementById("foerder").textContent = foerder
+          ? "− " + eur(foerder)
+          : "0 €";
+        document.getElementById("spar").textContent = spar ? eur(spar) : "0 €";
+        document.getElementById("netto").textContent = eur(netto);
+
+        const amortEl = document.getElementById("amort");
+        const YR = { de: "Jahren", it: "anni", en: "years", bs: "godina" };
+        if (spar > 0 && netto > 0) {
+          const lang = window.__i18nLang || "de";
+          const num = (netto / spar)
+            .toFixed(1)
+            .replace(".", lang === "en" ? "." : ",");
+          amortEl.textContent = num + " " + (YR[lang] || "Jahren");
+        } else {
+          amortEl.textContent = "—";
+        }
+      }
+
+      document
+        .querySelectorAll(
+          "#kwp,input[name=akku],input[name=wb],input[name=obj]",
+        )
+        .forEach((el) => el.addEventListener("input", rechne));
+      rechne();
+
+      document.getElementById("form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        document.getElementById("formBody").style.display = "none";
+        document.getElementById("sent").style.display = "block";
+      });
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) {
+              en.target.style.opacity = 1;
+              en.target.style.transform = "none";
+              io.unobserve(en.target);
+            }
+          });
+        },
+        { threshold: 0.12 },
+      );
+
+      document
+        .querySelectorAll(".bx,.proj,.cert,.panel,.cta")
+        .forEach((el, i) => {
+          el.style.opacity = 0;
+          el.style.transform = "translateY(26px)";
+          el.style.transition = `opacity .65s ${(i % 4) * 0.07}s ease, transform .65s ${(i % 4) * 0.07}s ease`;
+          io.observe(el);
+        });
+    </script>
+
+    <script>
+      (function () {
+        const DICT = {
+          it: {
+            Elektrotechnik: "Elettrotecnica",
+            Leistungen: "Servizi",
+            Förderrechner: "Calcolo incentivi",
+            Projekte: "Progetti",
+            Zertifikate: "Certificati",
+            Kontakt: "Contatti",
+            "Termin buchen": "Prenota appuntamento",
+            "⚡ Konzessionierter Elektrotechnik-Meisterbetrieb":
+              "⚡ Impresa elettrotecnica autorizzata",
+            "Strom ist unser Handwerk.": "La corrente è il nostro mestiere.",
+            Zukunft: "Il futuro",
+            "unser Auftrag.": "la nostra missione.",
+            "Wallbox, Photovoltaik, Smart Home und klassische Elektroinstallation — von einem Team, das die Förderanträge gleich mitmacht.":
+              "Wallbox, fotovoltaico, smart home e impianti elettrici classici — da un team che si occupa anche delle domande di incentivo.",
+            "Förderung berechnen": "Calcola incentivi",
+            "Projekte ansehen": "Vedi progetti",
+            "Anlagen installiert": "impianti installati",
+            Erfahrung: "esperienza",
+            Garantie: "garanzia",
+            "E-Check zertifiziert": "certificato E-Check",
+            "3 Termine": "3 appuntamenti",
+            "diese Woche noch frei": "liberi questa settimana",
+            PHOTOVOLTAIK: "FOTOVOLTAICO",
+            NOTSTROM: "CORRENTE D'EMERGENZA",
+            "Alles, was Spannung führt.": "Tutto ciò che porta tensione.",
+            "Von der Steckdose bis zur 20-kWp-Anlage am Dach — inklusive Planung, Anmeldung beim Netzbetreiber und Förderantrag.":
+              "Dalla presa all'impianto da 20 kWp sul tetto — inclusi progettazione, registrazione presso il gestore di rete e domanda di incentivo.",
+            "Wallbox & E-Mobilität": "Wallbox & mobilità elettrica",
+            "Installation, Lastmanagement und Anmeldung beim Netzbetreiber. Wir kümmern uns um den kompletten Papierkram und holen die Bundesförderung für Sie heraus — im Schnitt 600 € pro Wallbox.":
+              "Installazione, gestione dei carichi e registrazione presso il gestore di rete. Ci occupiamo di tutta la burocrazia e otteniamo per lei l'incentivo statale — in media 600 € per wallbox.",
+            Lastmanagement: "Gestione carichi",
+            "Förderantrag inkl.": "Domanda incentivo incl.",
+            Eichrechtskonform: "Conforme alla metrologia legale",
+            Photovoltaik: "Fotovoltaico",
+            "Planung, Montage, Speicher und Netzanmeldung — schlüsselfertig aus einer Hand.":
+              "Progettazione, montaggio, accumulo e allacciamento alla rete — chiavi in mano da un unico fornitore.",
+            "Mit Speicher": "Con accumulo",
+            Notstrom: "Corrente d'emergenza",
+            "Smart Home & KNX": "Smart Home & KNX",
+            "Licht, Beschattung, Heizung und Sicherheit — in einer App, ohne Cloud-Zwang.":
+              "Luci, ombreggiatura, riscaldamento e sicurezza — in un'unica app, senza obbligo di cloud.",
+            "E-Check & Prüfung": "E-Check & verifica",
+            "Anlagenprüfung nach ÖVE/ÖNORM E 8001 — Pflicht für Vermieter und Betriebe.":
+              "Verifica degli impianti secondo ÖVE/ÖNORM E 8001 — obbligatoria per locatori e aziende.",
+            "Mit Protokoll": "Con verbale",
+            Elektroinstallation: "Impianti elettrici",
+            "Neubau, Sanierung, Verteilerbau. Sauber verlegt, sauber dokumentiert.":
+              "Nuova costruzione, ristrutturazione, quadri elettrici. Posato con cura, documentato con cura.",
+            Neubau: "Nuova costruzione",
+            Sanierung: "Ristrutturazione",
+            "Was zahlt der Staat?": "Quanto paga lo Stato?",
+            "Rechnen wir nach.": "Facciamo i conti.",
+            "Photovoltaik und Wallbox werden gefördert — nur weiß kaum jemand, wie viel. Stellen Sie Ihre Anlage zusammen und sehen Sie sofort, was übrig bleibt.":
+              "Fotovoltaico e wallbox sono incentivati — solo che quasi nessuno sa quanto. Componga il suo impianto e veda subito quanto resta.",
+            "Förderung inklusive": "Incentivo incluso",
+            "Wir stellen den Antrag für Sie. Kein Formular, kein Behördenweg.":
+              "Presentiamo la domanda per lei. Nessun modulo, nessuna trafila burocratica.",
+            "Realistische Zahlen": "Numeri realistici",
+            "Basierend auf den Fördersätzen 2026 und echten Projektkosten.":
+              "Basato sulle aliquote di incentivo 2026 e su costi di progetto reali.",
+            "Amortisation sichtbar": "Ammortamento visibile",
+            "Sie sehen sofort, nach wie vielen Jahren sich die Anlage rechnet.":
+              "Vede subito dopo quanti anni l'impianto si ripaga.",
+            "Photovoltaik-Anlage": "Impianto fotovoltaico",
+            "keine PV": "senza FV",
+            Batteriespeicher: "Accumulo a batteria",
+            Ohne: "Senza",
+            Keine: "Nessuna",
+            Objekt: "Immobile",
+            Einfamilienhaus: "Casa unifamiliare",
+            Gewerbe: "Commerciale",
+            "Anlagenkosten (brutto)": "Costo impianto (lordo)",
+            "abzüglich Förderung": "meno incentivo",
+            "Stromersparnis pro Jahr": "Risparmio energetico annuo",
+            "Ihr Eigenanteil": "La sua quota",
+            "amortisiert in": "ammortizzato in",
+            "Kostenloses Angebot anfordern →":
+              "Richiedi un preventivo gratuito →",
+            "Richtwerte nach Fördersätzen 2026, inkl. 20 % USt. Verbindliches Angebot nach Vor-Ort-Termin.":
+              "Valori indicativi secondo le aliquote 2026, IVA 20% incl. Preventivo vincolante dopo sopralluogo.",
+            "Zuletzt unter Strom gesetzt": "Ultimi impianti messi in tensione",
+            "14 kWp + 10 kWh Speicher": "14 kWp + 10 kWh accumulo",
+            "Einfamilienhaus · Graz · 2026": "Casa unifamiliare · Graz · 2026",
+            "E-Mobilität": "Mobilità elettrica",
+            "12 Wallboxen, Tiefgarage": "12 wallbox, garage sotterraneo",
+            "Wohnanlage · Wien 1220 · 2025":
+              "Complesso residenziale · Vienna 1220 · 2025",
+            "KNX-Vollausbau": "Espansione KNX completa",
+            "Neubau-Villa · Klagenfurt · 2025":
+              "Villa nuova · Klagenfurt · 2025",
+            Qualifikation: "Qualifica",
+            "Geprüft, konzessioniert, versichert":
+              "Verificati, autorizzati, assicurati",
+            Meisterbetrieb: "Impresa artigiana",
+            "Elektrotechnik, seit 2008": "Elettrotecnica, dal 2008",
+            "PV-Fachpartner": "Partner FV specializzato",
+            "Fronius & SMA zertifiziert": "Certificato Fronius & SMA",
+            "Prüfberechtigt E 8001": "Abilitato alla verifica E 8001",
+            "10 Mio. €": "10 mln €",
+            Betriebshaftpflicht: "RC aziendale",
+            "Erstberatung kostet nichts.": "La prima consulenza è gratuita.",
+            "Vor-Ort-Termin, Bestandsaufnahme, Angebot mit Förderberechnung — unverbindlich und gratis.":
+              "Sopralluogo, rilievo, preventivo con calcolo incentivi — senza impegno e gratuito.",
+            "Termin sichern ⚡": "Fissa un appuntamento ⚡",
+            "Reden wir über": "Parliamo del",
+            "Ihr Projekt.": "suo progetto.",
+            "Anfragen beantworten wir werktags innerhalb von 24 Stunden — meist deutlich schneller.":
+              "Rispondiamo alle richieste nei giorni feriali entro 24 ore — di solito molto prima.",
+            Telefon: "Telefono",
+            "E-Mail": "E-mail",
+            Standort: "Sede",
+            Öffnungszeiten: "Orari di apertura",
+            "Mo–Fr 7:00–17:00 · Störungsdienst 24/7":
+              "Lun–Ven 7:00–17:00 · Servizio guasti 24/7",
+            Name: "Nome",
+            "Ich interessiere mich für": "Sono interessato a",
+            "Wallbox / E-Mobilität": "Wallbox / mobilità elettrica",
+            "Smart Home / KNX": "Smart Home / KNX",
+            "E-Check / Anlagenprüfung": "E-Check / verifica impianto",
+            "Ihr Projekt": "Il suo progetto",
+            "Kurz beschreiben, was geplant ist…":
+              "Descriva brevemente cosa è previsto…",
+            "Kostenlose Beratung anfragen": "Richiedi consulenza gratuita",
+            "Unverbindlich · Antwort innerhalb von 24 Stunden":
+              "Senza impegno · Risposta entro 24 ore",
+            "Anfrage angekommen!": "Richiesta ricevuta!",
+            "Wir melden uns innerhalb von 24 Stunden mit einem Terminvorschlag bei Ihnen.":
+              "La ricontattiamo entro 24 ore con una proposta di appuntamento.",
+            "Konzessionierter Elektrotechnik-Meisterbetrieb für Photovoltaik, E-Mobilität und Smart Home. Graz und Umgebung.":
+              "Impresa elettrotecnica autorizzata per fotovoltaico, mobilità elettrica e smart home. Graz e dintorni.",
+            Unternehmen: "Azienda",
+            Karriere: "Carriere",
+            "© 2026 Voltwerk Elektrotechnik GmbH — Demo-Projekt, kein echtes Unternehmen.":
+              "© 2026 Voltwerk Elektrotechnik GmbH — progetto demo, non un'azienda reale.",
+            "Impressum · Datenschutz · AGB":
+              "Note legali · Privacy · Condizioni",
+          },
+          en: {
+            Elektrotechnik: "Electrical",
+            Leistungen: "Services",
+            Förderrechner: "Subsidy calculator",
+            Projekte: "Projects",
+            Zertifikate: "Certificates",
+            Kontakt: "Contact",
+            "Termin buchen": "Book appointment",
+            "⚡ Konzessionierter Elektrotechnik-Meisterbetrieb":
+              "⚡ Licensed master electrical company",
+            "Strom ist unser Handwerk.": "Power is our craft.",
+            Zukunft: "The future",
+            "unser Auftrag.": "our mission.",
+            "Wallbox, Photovoltaik, Smart Home und klassische Elektroinstallation — von einem Team, das die Förderanträge gleich mitmacht.":
+              "Wallbox, photovoltaics, smart home, and classic electrical installation — from a team that handles the subsidy applications too.",
+            "Förderung berechnen": "Calculate subsidy",
+            "Projekte ansehen": "View projects",
+            "Anlagen installiert": "systems installed",
+            Erfahrung: "experience",
+            Garantie: "warranty",
+            "E-Check zertifiziert": "E-Check certified",
+            "3 Termine": "3 slots",
+            "diese Woche noch frei": "still free this week",
+            PHOTOVOLTAIK: "PHOTOVOLTAICS",
+            NOTSTROM: "BACKUP POWER",
+            "Alles, was Spannung führt.": "Everything that carries current.",
+            "Von der Steckdose bis zur 20-kWp-Anlage am Dach — inklusive Planung, Anmeldung beim Netzbetreiber und Förderantrag.":
+              "From the power socket to a 20-kWp rooftop system — including planning, grid operator registration, and subsidy application.",
+            "Wallbox & E-Mobilität": "Wallbox & e-mobility",
+            "Installation, Lastmanagement und Anmeldung beim Netzbetreiber. Wir kümmern uns um den kompletten Papierkram und holen die Bundesförderung für Sie heraus — im Schnitt 600 € pro Wallbox.":
+              "Installation, load management, and grid operator registration. We handle all the paperwork and secure the federal subsidy for you — on average €600 per wallbox.",
+            Lastmanagement: "Load management",
+            "Förderantrag inkl.": "Subsidy application incl.",
+            Eichrechtskonform: "Calibration-law compliant",
+            Photovoltaik: "Photovoltaics",
+            "Planung, Montage, Speicher und Netzanmeldung — schlüsselfertig aus einer Hand.":
+              "Planning, installation, storage, and grid connection — turnkey from a single source.",
+            "Mit Speicher": "With storage",
+            Notstrom: "Backup power",
+            "Smart Home & KNX": "Smart Home & KNX",
+            "Licht, Beschattung, Heizung und Sicherheit — in einer App, ohne Cloud-Zwang.":
+              "Lighting, shading, heating, and security — in one app, without forced cloud.",
+            "E-Check & Prüfung": "E-Check & inspection",
+            "Anlagenprüfung nach ÖVE/ÖNORM E 8001 — Pflicht für Vermieter und Betriebe.":
+              "System inspection per ÖVE/ÖNORM E 8001 — mandatory for landlords and businesses.",
+            "Mit Protokoll": "With report",
+            Elektroinstallation: "Electrical installation",
+            "Neubau, Sanierung, Verteilerbau. Sauber verlegt, sauber dokumentiert.":
+              "New builds, renovations, distribution boards. Cleanly laid, cleanly documented.",
+            Neubau: "New build",
+            Sanierung: "Renovation",
+            "Was zahlt der Staat?": "What does the state pay?",
+            "Rechnen wir nach.": "Let's do the math.",
+            "Photovoltaik und Wallbox werden gefördert — nur weiß kaum jemand, wie viel. Stellen Sie Ihre Anlage zusammen und sehen Sie sofort, was übrig bleibt.":
+              "Photovoltaics and wallboxes are subsidised — but hardly anyone knows how much. Configure your system and see immediately what's left.",
+            "Förderung inklusive": "Subsidy included",
+            "Wir stellen den Antrag für Sie. Kein Formular, kein Behördenweg.":
+              "We file the application for you. No forms, no bureaucracy.",
+            "Realistische Zahlen": "Realistic numbers",
+            "Basierend auf den Fördersätzen 2026 und echten Projektkosten.":
+              "Based on 2026 subsidy rates and real project costs.",
+            "Amortisation sichtbar": "Payback made visible",
+            "Sie sehen sofort, nach wie vielen Jahren sich die Anlage rechnet.":
+              "You see instantly after how many years the system pays off.",
+            "Photovoltaik-Anlage": "Photovoltaic system",
+            "keine PV": "no PV",
+            Batteriespeicher: "Battery storage",
+            Ohne: "None",
+            Keine: "None",
+            Objekt: "Property",
+            Einfamilienhaus: "Detached house",
+            Gewerbe: "Commercial",
+            "Anlagenkosten (brutto)": "System cost (gross)",
+            "abzüglich Förderung": "less subsidy",
+            "Stromersparnis pro Jahr": "Electricity savings per year",
+            "Ihr Eigenanteil": "Your share",
+            "amortisiert in": "paid off in",
+            "Kostenloses Angebot anfordern →": "Request a free quote →",
+            "Richtwerte nach Fördersätzen 2026, inkl. 20 % USt. Verbindliches Angebot nach Vor-Ort-Termin.":
+              "Guide values based on 2026 subsidy rates, incl. 20% VAT. Binding quote after an on-site visit.",
+            "Zuletzt unter Strom gesetzt": "Recently powered up",
+            "14 kWp + 10 kWh Speicher": "14 kWp + 10 kWh storage",
+            "Einfamilienhaus · Graz · 2026": "Detached house · Graz · 2026",
+            "E-Mobilität": "E-mobility",
+            "12 Wallboxen, Tiefgarage": "12 wallboxes, underground garage",
+            "Wohnanlage · Wien 1220 · 2025":
+              "Residential complex · Vienna 1220 · 2025",
+            "KNX-Vollausbau": "Full KNX build-out",
+            "Neubau-Villa · Klagenfurt · 2025":
+              "New-build villa · Klagenfurt · 2025",
+            Qualifikation: "Qualification",
+            "Geprüft, konzessioniert, versichert":
+              "Certified, licensed, insured",
+            Meisterbetrieb: "Master company",
+            "Elektrotechnik, seit 2008": "Electrical engineering, since 2008",
+            "PV-Fachpartner": "PV specialist partner",
+            "Fronius & SMA zertifiziert": "Fronius & SMA certified",
+            "Prüfberechtigt E 8001": "Authorised to inspect E 8001",
+            "10 Mio. €": "€10 million",
+            Betriebshaftpflicht: "Business liability",
+            "Erstberatung kostet nichts.": "The first consultation is free.",
+            "Vor-Ort-Termin, Bestandsaufnahme, Angebot mit Förderberechnung — unverbindlich und gratis.":
+              "On-site visit, assessment, quote with subsidy calculation — no obligation and free.",
+            "Termin sichern ⚡": "Secure a slot ⚡",
+            "Reden wir über": "Let's talk about",
+            "Ihr Projekt.": "your project.",
+            "Anfragen beantworten wir werktags innerhalb von 24 Stunden — meist deutlich schneller.":
+              "We answer inquiries on working days within 24 hours — usually much faster.",
+            Telefon: "Phone",
+            "E-Mail": "Email",
+            Standort: "Location",
+            Öffnungszeiten: "Opening hours",
+            "Mo–Fr 7:00–17:00 · Störungsdienst 24/7":
+              "Mon–Fri 7:00–17:00 · Fault service 24/7",
+            Name: "Name",
+            "Ich interessiere mich für": "I'm interested in",
+            "Wallbox / E-Mobilität": "Wallbox / e-mobility",
+            "Smart Home / KNX": "Smart Home / KNX",
+            "E-Check / Anlagenprüfung": "E-Check / system inspection",
+            "Ihr Projekt": "Your project",
+            "Kurz beschreiben, was geplant ist…":
+              "Briefly describe what's planned…",
+            "Kostenlose Beratung anfragen": "Request free consultation",
+            "Unverbindlich · Antwort innerhalb von 24 Stunden":
+              "No obligation · Reply within 24 hours",
+            "Anfrage angekommen!": "Request received!",
+            "Wir melden uns innerhalb von 24 Stunden mit einem Terminvorschlag bei Ihnen.":
+              "We'll get back to you within 24 hours with a proposed appointment.",
+            "Konzessionierter Elektrotechnik-Meisterbetrieb für Photovoltaik, E-Mobilität und Smart Home. Graz und Umgebung.":
+              "Licensed master electrical company for photovoltaics, e-mobility, and smart home. Graz and surroundings.",
+            Unternehmen: "Company",
+            Karriere: "Careers",
+            "© 2026 Voltwerk Elektrotechnik GmbH — Demo-Projekt, kein echtes Unternehmen.":
+              "© 2026 Voltwerk Elektrotechnik GmbH — demo project, not a real company.",
+            "Impressum · Datenschutz · AGB": "Imprint · Privacy · Terms",
+          },
+          bs: {
+            Elektrotechnik: "Elektrotehnika",
+            Leistungen: "Usluge",
+            Förderrechner: "Kalkulator subvencija",
+            Projekte: "Projekti",
+            Zertifikate: "Certifikati",
+            Kontakt: "Kontakt",
+            "Termin buchen": "Rezerviši termin",
+            "⚡ Konzessionierter Elektrotechnik-Meisterbetrieb":
+              "⚡ Ovlašteni majstorski elektro obrt",
+            "Strom ist unser Handwerk.": "Struja je naš zanat.",
+            Zukunft: "Budućnost",
+            "unser Auftrag.": "naša misija.",
+            "Wallbox, Photovoltaik, Smart Home und klassische Elektroinstallation — von einem Team, das die Förderanträge gleich mitmacht.":
+              "Wallbox, fotovoltaika, pametna kuća i klasične elektroinstalacije — od tima koji odmah riješi i zahtjeve za subvencije.",
+            "Förderung berechnen": "Izračunaj subvenciju",
+            "Projekte ansehen": "Pogledaj projekte",
+            "Anlagen installiert": "instaliranih sistema",
+            Erfahrung: "iskustva",
+            Garantie: "garancije",
+            "E-Check zertifiziert": "E-Check certificiran",
+            "3 Termine": "3 termina",
+            "diese Woche noch frei": "slobodna ove sedmice",
+            PHOTOVOLTAIK: "FOTOVOLTAIKA",
+            NOTSTROM: "REZERVNO NAPAJANJE",
+            "Alles, was Spannung führt.": "Sve što je pod naponom.",
+            "Von der Steckdose bis zur 20-kWp-Anlage am Dach — inklusive Planung, Anmeldung beim Netzbetreiber und Förderantrag.":
+              "Od utičnice do sistema od 20 kWp na krovu — uključujući planiranje, prijavu operateru mreže i zahtjev za subvenciju.",
+            "Wallbox & E-Mobilität": "Wallbox & e-mobilnost",
+            "Installation, Lastmanagement und Anmeldung beim Netzbetreiber. Wir kümmern uns um den kompletten Papierkram und holen die Bundesförderung für Sie heraus — im Schnitt 600 € pro Wallbox.":
+              "Instalacija, upravljanje opterećenjem i prijava operateru mreže. Preuzimamo svu papirologiju i osiguravamo vam državnu subvenciju — u prosjeku 600 € po wallboxu.",
+            Lastmanagement: "Upravljanje opterećenjem",
+            "Förderantrag inkl.": "Zahtjev za subvenciju uklj.",
+            Eichrechtskonform: "U skladu s propisima o mjerenju",
+            Photovoltaik: "Fotovoltaika",
+            "Planung, Montage, Speicher und Netzanmeldung — schlüsselfertig aus einer Hand.":
+              "Planiranje, montaža, baterija i priključak na mrežu — ključ u ruke iz jedne ruke.",
+            "Mit Speicher": "S baterijom",
+            Notstrom: "Rezervno napajanje",
+            "Smart Home & KNX": "Pametna kuća & KNX",
+            "Licht, Beschattung, Heizung und Sicherheit — in einer App, ohne Cloud-Zwang.":
+              "Svjetlo, zasjenjenje, grijanje i sigurnost — u jednoj aplikaciji, bez prisile na cloud.",
+            "E-Check & Prüfung": "E-Check & provjera",
+            "Anlagenprüfung nach ÖVE/ÖNORM E 8001 — Pflicht für Vermieter und Betriebe.":
+              "Provjera instalacija prema ÖVE/ÖNORM E 8001 — obavezna za najmodavce i firme.",
+            "Mit Protokoll": "S protokolom",
+            Elektroinstallation: "Elektroinstalacije",
+            "Neubau, Sanierung, Verteilerbau. Sauber verlegt, sauber dokumentiert.":
+              "Novogradnja, sanacija, razvodni ormari. Uredno položeno, uredno dokumentovano.",
+            Neubau: "Novogradnja",
+            Sanierung: "Sanacija",
+            "Was zahlt der Staat?": "Koliko plaća država?",
+            "Rechnen wir nach.": "Izračunajmo.",
+            "Photovoltaik und Wallbox werden gefördert — nur weiß kaum jemand, wie viel. Stellen Sie Ihre Anlage zusammen und sehen Sie sofort, was übrig bleibt.":
+              "Fotovoltaika i wallbox se subvencioniraju — samo što jedva ko zna koliko. Složite svoj sistem i odmah vidite koliko ostaje.",
+            "Förderung inklusive": "Subvencija uključena",
+            "Wir stellen den Antrag für Sie. Kein Formular, kein Behördenweg.":
+              "Podnosimo zahtjev umjesto vas. Bez formulara, bez šaltera.",
+            "Realistische Zahlen": "Realni brojevi",
+            "Basierend auf den Fördersätzen 2026 und echten Projektkosten.":
+              "Na osnovu stopa subvencija za 2026. i stvarnih troškova projekta.",
+            "Amortisation sichtbar": "Vidljiva amortizacija",
+            "Sie sehen sofort, nach wie vielen Jahren sich die Anlage rechnet.":
+              "Odmah vidite nakon koliko godina se sistem isplati.",
+            "Photovoltaik-Anlage": "Fotovoltaični sistem",
+            "keine PV": "bez FN",
+            Batteriespeicher: "Baterijska pohrana",
+            Ohne: "Bez",
+            Keine: "Nema",
+            Objekt: "Objekat",
+            Einfamilienhaus: "Porodična kuća",
+            Gewerbe: "Poslovni prostor",
+            "Anlagenkosten (brutto)": "Trošak sistema (bruto)",
+            "abzüglich Förderung": "minus subvencija",
+            "Stromersparnis pro Jahr": "Ušteda struje godišnje",
+            "Ihr Eigenanteil": "Vaš udio",
+            "amortisiert in": "isplati se za",
+            "Kostenloses Angebot anfordern →": "Zatraži besplatnu ponudu →",
+            "Richtwerte nach Fördersätzen 2026, inkl. 20 % USt. Verbindliches Angebot nach Vor-Ort-Termin.":
+              "Okvirne vrijednosti prema stopama za 2026., uklj. 20% PDV. Obavezujuća ponuda nakon izlaska na teren.",
+            "Zuletzt unter Strom gesetzt": "Nedavno pušteno pod napon",
+            "14 kWp + 10 kWh Speicher": "14 kWp + 10 kWh baterija",
+            "Einfamilienhaus · Graz · 2026": "Porodična kuća · Graz · 2026",
+            "E-Mobilität": "E-mobilnost",
+            "12 Wallboxen, Tiefgarage": "12 wallboxova, podzemna garaža",
+            "Wohnanlage · Wien 1220 · 2025":
+              "Stambeni kompleks · Beč 1220 · 2025",
+            "KNX-Vollausbau": "Potpuna KNX izvedba",
+            "Neubau-Villa · Klagenfurt · 2025":
+              "Novoizgrađena vila · Klagenfurt · 2025",
+            Qualifikation: "Kvalifikacija",
+            "Geprüft, konzessioniert, versichert":
+              "Provjereni, ovlašteni, osigurani",
+            Meisterbetrieb: "Majstorski obrt",
+            "Elektrotechnik, seit 2008": "Elektrotehnika, od 2008.",
+            "PV-Fachpartner": "PV specijalizirani partner",
+            "Fronius & SMA zertifiziert": "Fronius & SMA certificiran",
+            "Prüfberechtigt E 8001": "Ovlašten za provjeru E 8001",
+            "10 Mio. €": "10 mil. €",
+            Betriebshaftpflicht: "Osiguranje od odgovornosti",
+            "Erstberatung kostet nichts.": "Prva konsultacija je besplatna.",
+            "Vor-Ort-Termin, Bestandsaufnahme, Angebot mit Förderberechnung — unverbindlich und gratis.":
+              "Izlazak na teren, snimanje stanja, ponuda s izračunom subvencije — bez obaveze i besplatno.",
+            "Termin sichern ⚡": "Osiguraj termin ⚡",
+            "Reden wir über": "Razgovarajmo o",
+            "Ihr Projekt.": "vašem projektu.",
+            "Anfragen beantworten wir werktags innerhalb von 24 Stunden — meist deutlich schneller.":
+              "Na upite odgovaramo radnim danima u roku od 24 sata — obično znatno brže.",
+            Telefon: "Telefon",
+            "E-Mail": "E-mail",
+            Standort: "Lokacija",
+            Öffnungszeiten: "Radno vrijeme",
+            "Mo–Fr 7:00–17:00 · Störungsdienst 24/7":
+              "Pon–Pet 7:00–17:00 · Servis kvarova 24/7",
+            Name: "Ime",
+            "Ich interessiere mich für": "Zanima me",
+            "Wallbox / E-Mobilität": "Wallbox / e-mobilnost",
+            "Smart Home / KNX": "Pametna kuća / KNX",
+            "E-Check / Anlagenprüfung": "E-Check / provjera instalacije",
+            "Ihr Projekt": "Vaš projekat",
+            "Kurz beschreiben, was geplant ist…":
+              "Ukratko opišite šta je planirano…",
+            "Kostenlose Beratung anfragen": "Zatraži besplatnu konsultaciju",
+            "Unverbindlich · Antwort innerhalb von 24 Stunden":
+              "Bez obaveze · Odgovor u roku od 24 sata",
+            "Anfrage angekommen!": "Upit je stigao!",
+            "Wir melden uns innerhalb von 24 Stunden mit einem Terminvorschlag bei Ihnen.":
+              "Javljamo se u roku od 24 sata s prijedlogom termina.",
+            "Konzessionierter Elektrotechnik-Meisterbetrieb für Photovoltaik, E-Mobilität und Smart Home. Graz und Umgebung.":
+              "Ovlašteni majstorski elektro obrt za fotovoltaiku, e-mobilnost i pametne kuće. Graz i okolina.",
+            Unternehmen: "Kompanija",
+            Karriere: "Karijera",
+            "© 2026 Voltwerk Elektrotechnik GmbH — Demo-Projekt, kein echtes Unternehmen.":
+              "© 2026 Voltwerk Elektrotechnik GmbH — demo projekat, nije stvarna firma.",
+            "Impressum · Datenschutz · AGB": "Impresum · Privatnost · Uslovi",
+          },
+        };
+        const TITLES = {
+          de: "Voltwerk Elektrotechnik — Elektriker, Wallbox & Photovoltaik",
+          it: "Voltwerk Elettrotecnica — Elettricista, Wallbox & Fotovoltaico",
+          en: "Voltwerk Electrical — Electrician, Wallbox & Photovoltaics",
+          bs: "Voltwerk Elektrotehnika — Električar, Wallbox & Fotovoltaika",
+        };
+
+        const skip = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1 };
+        const nodes = [];
+        (function walk(el) {
+          for (let n = el.firstChild; n; n = n.nextSibling) {
+            if (n.nodeType === 3) {
+              const raw = n.nodeValue,
+                t = raw.trim();
+              if (t && /[A-Za-zÀ-ž]/.test(t)) {
+                const i = raw.indexOf(t);
+                nodes.push({
+                  node: n,
+                  de: t,
+                  pre: raw.slice(0, i),
+                  post: raw.slice(i + t.length),
+                });
+              }
+            } else if (
+              n.nodeType === 1 &&
+              !skip[n.tagName] &&
+              n.id !== "langSwitch"
+            ) {
+              walk(n);
+            }
+          }
+        })(document.body);
+
+        const phs = [].map.call(
+          document.querySelectorAll("[placeholder]"),
+          (el) => ({ el, de: el.getAttribute("placeholder") }),
+        );
+
+        function apply(lang) {
+          const d = DICT[lang] || {};
+          window.__i18nLang = lang;
+          nodes.forEach((o) => {
+            const tr = lang === "de" ? o.de : o.de in d ? d[o.de] : o.de;
+            o.node.nodeValue = o.pre + tr + o.post;
+          });
+          phs.forEach((o) => {
+            const tr = lang === "de" ? o.de : o.de in d ? d[o.de] : o.de;
+            o.el.setAttribute("placeholder", tr);
+          });
+          document.title = TITLES[lang] || TITLES.de;
+          document.documentElement.lang = lang;
+          document
+            .querySelectorAll("#langSwitch .lng")
+            .forEach((b) =>
+              b.classList.toggle("active", b.dataset.lang === lang),
+            );
+          try {
+            localStorage.setItem("siteLang", lang);
+          } catch (e) {}
+          if (typeof calc === "function") calc();
+          if (typeof rechne === "function") rechne();
+        }
+
+        document
+          .querySelectorAll("#langSwitch .lng")
+          .forEach((b) =>
+            b.addEventListener("click", () => apply(b.dataset.lang)),
+          );
+        let start = "de";
+        try {
+          start = localStorage.getItem("siteLang") || "de";
+        } catch (e) {}
+        if (!DICT[start] && start !== "de") start = "de";
+        apply(start);
+      })();
+    </script>
+  </body>
+</html>
