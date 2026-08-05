@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRADNJA BAU — Bau & Konstruktion</title>
+<meta name="description" content="Gradnja Bau — Bauunternehmen für Rohbau, Hochbau, Sanierung und schlüsselfertiges Bauen. Mehrsprachige Demo-Website (DE/EN/IT/BS).">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23E0930A'/%3E%3Ctext x='50' y='72' font-family='Arial' font-weight='900' font-size='68' text-anchor='middle' fill='%231a1204'%3EG%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#EAEBE9; --surface:#F6F7F6; --surface-2:#FFFFFF;
+    --ink:#16181B; --ink-soft:#454A50; --muted:#7C8189;
+    --line:#D6D8D4; --line-strong:#C3C6C1;
+    --accent:#E0930A; --accent-strong:#B97400; --accent-ink:#1a1204;
+    --steel:#37424E; --steel-soft:#5C6772;
+    --hero-bg:#14161A; --hero-bg2:#1B2027; --hero-ink:#F3F2EE; --hero-line:#2E3641;
+    --radius:14px; --maxw:1200px;
+    --shadow:0 1px 2px rgba(20,22,26,.05),0 10px 34px rgba(20,22,26,.09);
+    --shadow-lg:0 30px 70px rgba(20,22,26,.16);
+    --f-display:"Arial Narrow",'Helvetica Neue',Segoe UI,system-ui,sans-serif;
+    --f-body:ui-sans-serif,system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --f-mono:ui-monospace,'Cascadia Code','Cascadia Mono',Consolas,'SFMono-Regular',Menlo,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#121316; --surface:#17191D; --surface-2:#1E2127;
+      --ink:#ECEDEA; --ink-soft:#B4B9BF; --muted:#7E848C;
+      --line:#282C32; --line-strong:#343941;
+      --accent:#F0A81E; --accent-strong:#FFC24D; --accent-ink:#1a1204;
+      --steel:#9FB0C0; --steel-soft:#7C8B99;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 34px rgba(0,0,0,.5);
+      --shadow-lg:0 30px 70px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#EAEBE9; --surface:#F6F7F6; --surface-2:#FFFFFF;
+    --ink:#16181B; --ink-soft:#454A50; --muted:#7C8189;
+    --line:#D6D8D4; --line-strong:#C3C6C1;
+    --accent:#E0930A; --accent-strong:#B97400;
+    --steel:#37424E; --steel-soft:#5C6772;
+    --shadow:0 1px 2px rgba(20,22,26,.05),0 10px 34px rgba(20,22,26,.09);
+    --shadow-lg:0 30px 70px rgba(20,22,26,.16);
+  }
+  :root[data-theme="dark"]{
+    --bg:#121316; --surface:#17191D; --surface-2:#1E2127;
+    --ink:#ECEDEA; --ink-soft:#B4B9BF; --muted:#7E848C;
+    --line:#282C32; --line-strong:#343941;
+    --accent:#F0A81E; --accent-strong:#FFC24D;
+    --steel:#9FB0C0; --steel-soft:#7C8B99;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 34px rgba(0,0,0,.5);
+    --shadow-lg:0 30px 70px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--f-body);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;letter-spacing:.005em;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section{position:relative}
+
+  .eyebrow{
+    font-family:var(--f-mono);font-size:12.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--accent-strong);display:inline-flex;
+    align-items:center;gap:10px;font-weight:600;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--accent);display:inline-block}
+  .display{
+    font-family:var(--f-display);font-weight:700;line-height:.98;
+    letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance;
+    font-stretch:condensed;
+  }
+  h2.display{font-size:clamp(2.1rem,5.2vw,3.5rem);margin:.35em 0 .3em}
+  .lead{color:var(--ink-soft);font-size:clamp(1.02rem,1.6vw,1.18rem);max-width:60ch}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:60;
+    background:color-mix(in srgb,var(--bg) 82%,transparent);
+    backdrop-filter:blur(14px) saturate(1.3);
+    border-bottom:1px solid transparent;transition:border-color .3s,background .3s;
+  }
+  header.nav.scrolled{border-bottom-color:var(--line);background:color-mix(in srgb,var(--bg) 92%,transparent)}
+  .nav-in{display:flex;align-items:center;gap:24px;height:70px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.02em}
+  .brand .mark{
+    width:34px;height:34px;flex:none;display:grid;place-items:center;
+    background:var(--accent);color:#1a1204;border-radius:8px;
+    font-family:var(--f-display);font-weight:700;font-size:22px;font-stretch:condensed;
+    box-shadow:0 4px 14px color-mix(in srgb,var(--accent) 45%,transparent);
+  }
+  .brand b{font-family:var(--f-display);font-stretch:condensed;font-size:22px;letter-spacing:.03em;text-transform:uppercase}
+  .brand small{display:block;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.24em;color:var(--muted);margin-top:-3px;text-transform:uppercase;font-weight:600}
+  nav.links{display:flex;gap:6px;margin-left:auto}
+  nav.links a{
+    font-size:14.5px;padding:9px 13px;border-radius:8px;color:var(--ink-soft);
+    font-weight:500;transition:color .2s,background .2s;
+  }
+  nav.links a:hover{color:var(--ink);background:color-mix(in srgb,var(--ink) 6%,transparent)}
+  .nav-tools{display:flex;align-items:center;gap:10px}
+
+  .lang{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:3px;gap:2px}
+  .lang button{
+    font-family:var(--f-mono);font-size:12px;font-weight:700;letter-spacing:.05em;
+    border:0;background:transparent;color:var(--muted);cursor:pointer;
+    padding:6px 9px;border-radius:6px;transition:.18s;text-transform:uppercase;
+  }
+  .lang button:hover{color:var(--ink)}
+  .lang button.active{background:var(--accent);color:#1a1204;box-shadow:0 2px 8px color-mix(in srgb,var(--accent) 40%,transparent)}
+  .icon-btn{
+    width:38px;height:38px;flex:none;border:1px solid var(--line);background:var(--surface);
+    border-radius:9px;cursor:pointer;color:var(--ink-soft);display:grid;place-items:center;transition:.2s;
+  }
+  .icon-btn:hover{color:var(--ink);border-color:var(--line-strong)}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;
+    padding:12px 20px;border-radius:10px;cursor:pointer;border:1px solid transparent;
+    transition:transform .15s,box-shadow .2s,background .2s;white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--accent);color:#1a1204;box-shadow:0 6px 20px color-mix(in srgb,var(--accent) 38%,transparent)}
+  .btn-primary:hover{background:var(--accent-strong);color:#fff}
+  .btn-ghost{background:transparent;border-color:var(--line-strong);color:var(--ink)}
+  .btn-ghost:hover{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+  .btn-lg{padding:15px 26px;font-size:16px}
+  .nav-cta{display:inline-flex}
+  .burger{display:none}
+
+  /* ---------- HERO ---------- */
+  .hero{background:linear-gradient(160deg,var(--hero-bg),var(--hero-bg2));color:var(--hero-ink);position:relative;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(var(--hero-line) 1px,transparent 1px),linear-gradient(90deg,var(--hero-line) 1px,transparent 1px);
+    background-size:44px 44px;mask-image:radial-gradient(120% 100% at 80% 20%,#000 30%,transparent 78%);
+    opacity:.5;
+  }
+  .hero-in{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:70px 0 84px;position:relative;z-index:2}
+  .hero .eyebrow{color:var(--accent)}
+  .hero .eyebrow::before{background:var(--accent)}
+  .hero h1{
+    font-family:var(--f-display);font-stretch:condensed;font-weight:700;text-transform:uppercase;
+    font-size:clamp(2.9rem,7vw,5.4rem);line-height:.94;letter-spacing:-.015em;margin:.28em 0 .34em;text-wrap:balance;
+  }
+  .hero h1 .amber{color:var(--accent)}
+  .hero p.sub{color:#C4C9CE;font-size:clamp(1.05rem,1.8vw,1.24rem);max-width:46ch;line-height:1.6}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+  .hero .btn-ghost{border-color:#3a434e;color:#F3F2EE}
+  .hero .btn-ghost:hover{background:rgba(255,255,255,.06)}
+  .hero-stats{display:flex;gap:34px;margin-top:44px;flex-wrap:wrap}
+  .hero-stats .s b{font-family:var(--f-display);font-stretch:condensed;font-size:2.3rem;color:#fff;display:block;line-height:1;font-variant-numeric:tabular-nums}
+  .hero-stats .s span{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#8A929B}
+  .hero-art{position:relative;min-height:420px}
+  .blueprint{width:100%;height:auto;display:block;filter:drop-shadow(0 20px 40px rgba(0,0,0,.4))}
+  .blueprint .draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.6s ease forwards}
+  .blueprint .draw.d2{animation-delay:.5s}.blueprint .draw.d3{animation-delay:.9s}
+  .blueprint .draw.d4{animation-delay:1.25s}.blueprint .draw.d5{animation-delay:1.55s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .blueprint .fade{opacity:0;animation:fadein .8s ease forwards;animation-delay:2s}
+  @keyframes fadein{to{opacity:1}}
+  #dust{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.7}
+  .hero-scroll{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:3;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.24em;color:#7d858e;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .hero-scroll::after{content:"";width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:scr 2s ease-in-out infinite}
+  @keyframes scr{0%,100%{opacity:.3;height:20px}50%{opacity:1;height:38px}}
+
+  /* marquee */
+  .ticker{background:var(--accent);color:#1a1204;overflow:hidden;border-block:1px solid rgba(0,0,0,.12)}
+  .ticker .track{display:flex;gap:0;white-space:nowrap;animation:marq 34s linear infinite;will-change:transform}
+  .ticker span{font-family:var(--f-display);font-stretch:condensed;text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.08em;padding:11px 0;display:inline-flex;align-items:center}
+  .ticker span::after{content:"◆";margin:0 26px;font-size:9px;opacity:.55}
+  @keyframes marq{to{transform:translateX(-50%)}}
+
+  /* ---------- SECTION SHELL ---------- */
+  .sec{padding:96px 0}
+  .sec-head{max-width:720px}
+  .grid{display:grid;gap:22px}
+
+  /* services */
+  .services{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 26px;transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s,box-shadow .3s;position:relative;overflow:hidden;
+  }
+  .card::after{content:"";position:absolute;left:0;top:0;height:3px;width:0;background:var(--accent);transition:width .4s}
+  .card:hover{transform:translateY(-6px);border-color:var(--line-strong);box-shadow:var(--shadow)}
+  .card:hover::after{width:100%}
+  .card .ic{width:52px;height:52px;border-radius:11px;background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent-strong);display:grid;place-items:center;margin-bottom:20px}
+  .card h3{font-family:var(--f-display);font-stretch:condensed;text-transform:uppercase;font-size:1.5rem;letter-spacing:.01em;margin:0 0 8px}
+  .card p{color:var(--ink-soft);font-size:15px;margin:0;line-height:1.6}
+  .card .no{position:absolute;top:22px;right:24px;font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+
+  /* projects */
+  .projects{grid-template-columns:repeat(2,1fr)}
+  .proj{
+    border-radius:var(--radius);overflow:hidden;position:relative;border:1px solid var(--line);
+    background:var(--surface);min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;
+    isolation:isolate;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s;
+  }
+  .proj:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+  .proj .thumb{position:absolute;inset:0;z-index:-1}
+  .proj .thumb svg{width:100%;height:100%;display:block}
+  .proj .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,12,15,.92) 4%,rgba(10,12,15,.35) 46%,rgba(10,12,15,.05) 100%)}
+  .proj .body{position:relative;padding:26px;color:#fff}
+  .proj .cat{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .proj h3{font-family:var(--f-display);font-stretch:condensed;text-transform:uppercase;font-size:1.85rem;margin:8px 0 6px;line-height:1}
+  .proj .loc{font-size:13.5px;color:#C7CCD1;display:flex;gap:16px;font-family:var(--f-mono);letter-spacing:.03em}
+  .proj .loc b{color:#fff;font-weight:600}
+
+  /* stats band */
+  .band{background:linear-gradient(150deg,#323e4c,#232c37);color:#fff;border-radius:20px;padding:56px 40px;margin:0 auto;position:relative;overflow:hidden}
+  .band::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:38px 38px;mask-image:radial-gradient(100% 120% at 100% 0,#000,transparent 70%)}
+  .band-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;position:relative}
+  .stat b{font-family:var(--f-display);font-stretch:condensed;font-size:clamp(2.6rem,5vw,3.6rem);display:block;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .stat .u{color:var(--accent);margin-left:2px}
+  .stat .u{color:var(--accent)}
+  .stat span{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#B9C2CB;margin-top:6px;display:block}
+
+  /* process */
+  .steps{grid-template-columns:repeat(4,1fr)}
+  .step{position:relative;padding-top:30px}
+  .step .n{font-family:var(--f-mono);font-size:13px;color:var(--accent-strong);font-weight:700;letter-spacing:.1em}
+  .step .bar{height:3px;background:var(--line);margin:14px 0 20px;border-radius:2px;position:relative;overflow:hidden}
+  .step .bar::after{content:"";position:absolute;inset:0;width:34%;background:var(--accent);border-radius:2px}
+  .step:nth-child(2) .bar::after{width:58%}.step:nth-child(3) .bar::after{width:82%}.step:nth-child(4) .bar::after{width:100%}
+  .step h3{font-family:var(--f-display);font-stretch:condensed;text-transform:uppercase;font-size:1.35rem;margin:0 0 8px}
+  .step p{color:var(--ink-soft);font-size:14.5px;margin:0}
+
+  /* about */
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .about-art{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:linear-gradient(160deg,var(--steel),#232b33);aspect-ratio:4/3;position:relative}
+  .about-art svg{width:100%;height:100%}
+  .values{display:flex;flex-direction:column;gap:16px;margin-top:26px}
+  .value{display:flex;gap:14px;align-items:flex-start}
+  .value .dot{width:26px;height:26px;flex:none;border-radius:7px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent-strong);display:grid;place-items:center;margin-top:2px}
+  .value b{display:block;font-weight:700;font-size:15.5px}
+  .value p{margin:2px 0 0;color:var(--ink-soft);font-size:14.5px}
+
+  /* contact */
+  .contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:start}
+  .contact-info{display:flex;flex-direction:column;gap:22px}
+  .ci{display:flex;gap:16px;align-items:flex-start}
+  .ci .ic{width:44px;height:44px;flex:none;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;color:var(--accent-strong)}
+  .ci .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .ci .v{font-weight:600;font-size:16px}
+  form{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px;display:grid;gap:16px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field label{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .field input,.field textarea,.field select{
+    width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:9px;
+    padding:12px 14px;font:inherit;font-size:15px;color:var(--ink);transition:border-color .2s,box-shadow .2s;
+  }
+  .field textarea{resize:vertical;min-height:120px}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+  .form-note{font-size:12.5px;color:var(--muted)}
+  .form-ok{display:none;background:color-mix(in srgb,var(--accent) 14%,transparent);border:1px solid var(--accent);color:var(--ink);border-radius:9px;padding:13px 16px;font-size:14.5px;font-weight:600}
+  .form-ok.show{display:block}
+  .form-ok::before{content:"✓ ";color:var(--accent-strong);font-weight:800}
+
+  /* footer */
+  footer{background:var(--hero-bg);color:#C6CBD1;padding:64px 0 30px;margin-top:20px}
+  .foot{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px;padding-bottom:40px;border-bottom:1px solid #262d36}
+  footer .brand b,footer .brand{color:#fff}
+  footer h4{font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7d858e;margin:0 0 16px}
+  footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  footer ul a{font-size:14.5px;color:#C6CBD1;transition:color .2s}
+  footer ul a:hover{color:var(--accent)}
+  footer .fp{font-size:14px;color:#9aa1a9;max-width:34ch;margin:16px 0 0}
+  .foot-bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:22px;font-size:13px;color:#7d858e;font-family:var(--f-mono);letter-spacing:.04em}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:960px){
+    .hero-in{grid-template-columns:1fr;padding:48px 0 60px}
+    .hero-art{min-height:300px;order:-1}
+    .hero-scroll{display:none}
+    .services{grid-template-columns:1fr 1fr}
+    .about,.contact{grid-template-columns:1fr;gap:34px}
+    .band-grid{grid-template-columns:1fr 1fr;gap:34px 20px}
+    .steps{grid-template-columns:1fr 1fr}
+    .foot{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:640px){
+    body{font-size:16px}
+    nav.links{display:none}
+    .nav-cta{display:none}
+    .brand small{display:none}
+    .projects,.services,.band-grid,.steps,.frow,.foot{grid-template-columns:1fr}
+    .sec{padding:66px 0}
+    .band{padding:40px 26px;border-radius:16px}
+    .hero-stats{gap:22px;justify-content:center;width:100%}
+    .hero-stats .s b{font-size:1.85rem}
+    .hero-stats .s span{font-size:9px;letter-spacing:.08em}
+    .nav-in{height:60px;gap:10px}
+    .nav-tools{margin-left:auto;gap:6px}
+    .brand{gap:9px}
+    .brand .mark{width:30px;height:30px;font-size:18px;border-radius:7px}
+    .brand b{font-size:17px}
+    .lang{padding:2px;gap:1px}
+    .lang button{padding:6px 7px;font-size:10.5px;letter-spacing:.02em}
+    #theme{width:34px;height:34px}
+  }
+  @media (max-width:360px){
+    .brand b{display:none}
+    .lang button{padding:6px 6px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================= NAV ======================= -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="brand" aria-label="GRADNJA BAU">
+      <span class="mark">G</span>
+      <span><b>Gradnja Bau</b><small>Est. 1998 · Konstruktion</small></span>
+    </a>
+    <nav class="links">
+      <a href="#services" data-i18n="nav.services">Leistungen</a>
+      <a href="#projects" data-i18n="nav.projects">Projekte</a>
+      <a href="#about" data-i18n="nav.about">Über uns</a>
+      <a href="#process" data-i18n="nav.process">Ablauf</a>
+      <a href="#contact" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="nav-tools">
+      <div class="lang" id="lang" role="group" aria-label="Sprache / Language">
+        <button data-lang="de" class="active">DE</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="it">IT</button>
+        <button data-lang="bs">BS</button>
+      </div>
+      <button class="icon-btn" id="theme" aria-label="Theme" title="Light / Dark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>
+      </button>
+      <a href="#contact" class="btn btn-primary nav-cta" data-i18n="nav.cta">Angebot anfragen</a>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= HERO ======================= -->
+<section class="hero" id="top">
+  <canvas id="dust"></canvas>
+  <div class="wrap hero-in">
+    <div>
+      <span class="eyebrow" data-i18n="hero.eyebrow">Bau & Konstruktion seit 1998</span>
+      <h1 data-i18n="hero.title">Wir bauen, was <span class="amber">Bestand</span> hat.</h1>
+      <p class="sub" data-i18n="hero.sub">Vom Rohbau bis zur schlüsselfertigen Übergabe — Ihr Partner für Hochbau, Sanierung und Ausbau in ganz Europa. Präzise geplant, sauber ausgeführt, termintreu übergeben.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary btn-lg" data-i18n="hero.cta1">Projekt starten</a>
+        <a href="#projects" class="btn btn-ghost btn-lg" data-i18n="hero.cta2">Referenzen ansehen</a>
+      </div>
+      <div class="hero-stats">
+        <div class="s"><b>25+</b><span data-i18n="hero.s1">Jahre Erfahrung</span></div>
+        <div class="s"><b>340+</b><span data-i18n="hero.s2">Projekte</span></div>
+        <div class="s"><b>60</b><span data-i18n="hero.s3">Fachkräfte</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg class="blueprint" viewBox="0 0 460 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="#4a90d9" stroke-opacity=".55" stroke-width="1.4">
+          <!-- ground -->
+          <path class="draw" pathLength="1" d="M30 372 H440" stroke="#E0930A" stroke-opacity=".9" stroke-width="2"/>
+          <!-- building outline -->
+          <path class="draw d2" pathLength="1" d="M90 372 V150 H300 V372"/>
+          <path class="draw d2" pathLength="1" d="M90 150 L195 92 L300 150"/>
+          <!-- floors -->
+          <path class="draw d3" pathLength="1" d="M90 205 H300 M90 260 H300 M90 315 H300"/>
+          <!-- columns -->
+          <path class="draw d3" pathLength="1" d="M160 150 V372 M230 150 V372"/>
+          <!-- windows -->
+          <g class="draw d4" pathLength="1" stroke="#7fb2e6">
+            <rect x="108" y="170" width="34" height="24"/><rect x="178" y="170" width="34" height="24"/><rect x="248" y="170" width="34" height="24"/>
+            <rect x="108" y="225" width="34" height="24"/><rect x="178" y="225" width="34" height="24"/><rect x="248" y="225" width="34" height="24"/>
+            <rect x="108" y="280" width="34" height="24"/><rect x="248" y="280" width="34" height="24"/>
+          </g>
+          <!-- door -->
+          <path class="draw d4" pathLength="1" d="M178 372 V300 H212 V372"/>
+          <!-- crane -->
+          <path class="draw d5" pathLength="1" stroke="#E0930A" stroke-opacity=".85" d="M360 372 V70 M330 96 H430 M360 70 L410 96 M360 96 L400 118 M410 96 V132 M410 132 L402 148 M410 132 L418 148"/>
+          <path class="draw d5" pathLength="1" stroke="#E0930A" stroke-opacity=".85" d="M348 70 h24"/>
+        </g>
+        <!-- dimension + labels -->
+        <g class="fade" fill="#8fb6e0" font-family="ui-monospace,monospace" font-size="11" letter-spacing="1">
+          <path d="M90 392 H300" stroke="#8fb6e0" stroke-opacity=".5" stroke-width="1"/>
+          <path d="M90 388 V396 M300 388 V396" stroke="#8fb6e0" stroke-opacity=".5"/>
+          <text x="176" y="408">21.00 m</text>
+          <path d="M64 150 V372" stroke="#8fb6e0" stroke-opacity=".5"/>
+          <path d="M60 150 H68 M60 372 H68" stroke="#8fb6e0" stroke-opacity=".5"/>
+          <text x="20" y="266" transform="rotate(-90 30 266)">12.40 m</text>
+          <text x="330" y="60" fill="#E0930A">A-01</text>
+          <circle cx="195" cy="92" r="3" fill="#E0930A"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true"><span data-i18n="hero.scroll">Scrollen</span></div>
+</section>
+
+<!-- ticker -->
+<div class="ticker" aria-hidden="true">
+  <div class="track" id="ticker"></div>
+</div>
+
+<!-- ======================= SERVICES ======================= -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="services.eyebrow">Unsere Leistungen</span>
+      <h2 class="display" data-i18n="services.title">Alles aus einer Hand</h2>
+      <p class="lead" data-i18n="services.sub">Von der ersten Skizze bis zum letzten Handschlag — wir übernehmen jedes Gewerk und koordinieren Ihr Bauvorhaben von Anfang bis Ende.</p>
+    </div>
+    <div class="grid services" style="margin-top:44px">
+      <article class="card reveal"><span class="no">01</span><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div><h3 data-i18n="srv.1.t">Rohbau</h3><p data-i18n="srv.1.d">Fundament, Mauerwerk, Decken und Tragwerk — das solide Skelett Ihres Gebäudes, statisch geprüft und normgerecht.</p></article>
+      <article class="card reveal"><span class="no">02</span><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 21V9l8-6 8 6v12M4 21h16M9 21v-6h6v6M8 12h.01M16 12h.01"/></svg></div><h3 data-i18n="srv.2.t">Hochbau</h3><p data-i18n="srv.2.d">Wohn-, Gewerbe- und Industriebauten in Massiv- oder Fertigbauweise — schlüsselfertig und aus einer Hand.</p></article>
+      <article class="card reveal"><span class="no">03</span><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 20h20M4 20l3-8h10l3 8M9 12V8h6v4M11 4h2"/></svg></div><h3 data-i18n="srv.3.t">Tiefbau</h3><p data-i18n="srv.3.d">Erdarbeiten, Kanal- und Straßenbau, Entwässerung und Gründungen — der Untergrund, der alles trägt.</p></article>
+      <article class="card reveal"><span class="no">04</span><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3l7 7-4 4-7-7zM11 6L3 14v7h7l8-8M9 15l-2 2"/></svg></div><h3 data-i18n="srv.4.t">Sanierung</h3><p data-i18n="srv.4.d">Denkmalgerechte Restaurierung und energetische Modernisierung — wir bringen Bestand auf den neuesten Stand.</p></article>
+      <article class="card reveal"><span class="no">05</span><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3h18v18H3zM3 9h18M9 21V9M15 3v6"/></svg></div><h3 data-i18n="srv.5.t">Innenausbau</h3><p data-i18n="srv.5.d">Trockenbau, Estrich, Fliesen, Böden und Türen — präzise Details, die aus Räumen ein Zuhause machen.</p></article>
+      <article class="card reveal"><span class="no">06</span><div class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 11V7a5 5 0 0110 0v4M5 11h14v10H5zM12 15v3"/></svg></div><h3 data-i18n="srv.6.t">Schlüsselfertig</h3><p data-i18n="srv.6.d">Ein Ansprechpartner, ein Festpreis, ein Termin — Sie erhalten Ihr fertiges Objekt und den Schlüssel in die Hand.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PROJECTS ======================= -->
+<section class="sec" id="projects" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="projects.eyebrow">Referenzen</span>
+      <h2 class="display" data-i18n="projects.title">Ausgewählte Projekte</h2>
+      <p class="lead" data-i18n="projects.sub">Ein Auszug aus über 340 realisierten Bauvorhaben in Deutschland, Italien und auf dem Balkan.</p>
+    </div>
+    <div class="grid projects" style="margin-top:44px">
+      <article class="proj reveal">
+        <div class="thumb"><svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="p1sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24314c"/><stop offset=".55" stop-color="#5d5170"/><stop offset="1" stop-color="#e39a63"/></linearGradient><linearGradient id="p1b" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3c4966"/><stop offset="1" stop-color="#2b3348"/></linearGradient><pattern id="p1win" width="30" height="34" patternUnits="userSpaceOnUse"><rect x="6" y="6" width="18" height="20" fill="#5a6c91" opacity=".5"/></pattern></defs><rect width="600" height="400" fill="url(#p1sky)"/><circle cx="470" cy="120" r="46" fill="#f6c489" opacity=".45"/><circle cx="470" cy="120" r="20" fill="#f9dcae" opacity=".75"/><g opacity=".5" fill="#31405c"><rect x="0" y="210" width="90" height="190"/><rect x="540" y="235" width="60" height="165"/></g><rect x="70" y="150" width="150" height="250" fill="url(#p1b)"/><rect x="70" y="150" width="150" height="250" fill="url(#p1win)"/><rect x="240" y="105" width="135" height="295" fill="#374361"/><rect x="240" y="105" width="135" height="295" fill="url(#p1win)"/><polygon points="240,105 258,113 258,400 240,400" fill="#2a3247"/><rect x="395" y="185" width="150" height="215" fill="url(#p1b)"/><rect x="395" y="185" width="150" height="215" fill="url(#p1win)"/><g fill="#ffb84d"><rect x="96" y="176" width="18" height="20"/><rect x="156" y="210" width="18" height="20"/><rect x="126" y="244" width="18" height="20"/><rect x="186" y="312" width="18" height="20"/><rect x="96" y="346" width="18" height="20"/><rect x="246" y="142" width="18" height="20"/><rect x="336" y="176" width="18" height="20"/><rect x="276" y="278" width="18" height="20"/><rect x="306" y="346" width="18" height="20"/><rect x="396" y="210" width="18" height="20"/><rect x="456" y="278" width="18" height="20"/><rect x="516" y="346" width="18" height="20"/></g><g fill="#1d3320"><ellipse cx="40" cy="394" rx="46" ry="26"/><ellipse cx="300" cy="399" rx="80" ry="20"/><ellipse cx="560" cy="396" rx="46" ry="22"/></g><rect x="0" y="393" width="600" height="12" fill="#152112"/></svg></div>
+        <div class="body"><span class="cat" data-i18n="prj.1.c">Neubau · Wohnen</span><h3 data-i18n="prj.1.t">Wohnquartier „Am Park"</h3><div class="loc"><span data-i18n="prj.1.l">München, DE</span><span><b>2024</b></span></div></div>
+      </article>
+      <article class="proj reveal">
+        <div class="thumb"><svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="p2sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e1a2e"/><stop offset="1" stop-color="#38577b"/></linearGradient><linearGradient id="p2g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a6f96"/><stop offset=".48" stop-color="#2c4661"/><stop offset=".52" stop-color="#3a5a7d"/><stop offset="1" stop-color="#20364c"/></linearGradient><pattern id="p2m" width="20" height="24" patternUnits="userSpaceOnUse"><path d="M20 0V24M0 24H20" stroke="#12212f" stroke-width="1.3" opacity=".55"/></pattern></defs><rect width="600" height="400" fill="url(#p2sky)"/><g fill="#1b2c40" opacity=".8"><rect x="0" y="220" width="120" height="180"/><rect x="470" y="170" width="130" height="230"/></g><g fill="#233a53"><rect x="90" y="250" width="140" height="150"/><rect x="360" y="200" width="130" height="200"/></g><rect x="90" y="250" width="140" height="150" fill="url(#p2m)"/><rect x="360" y="200" width="130" height="200" fill="url(#p2m)"/><rect x="225" y="55" width="150" height="345" fill="url(#p2g)"/><rect x="225" y="55" width="150" height="345" fill="url(#p2m)"/><polygon points="225,55 375,55 300,120 225,140" fill="#ffffff" opacity=".07"/><polygon points="225,180 300,150 300,400 225,400" fill="#ffffff" opacity=".04"/><g fill="#ffc65a"><rect x="231" y="120" width="14" height="14"/><rect x="291" y="120" width="14" height="14"/><rect x="351" y="120" width="14" height="14"/><rect x="261" y="216" width="14" height="14"/><rect x="321" y="216" width="14" height="14"/><rect x="231" y="288" width="14" height="14"/><rect x="291" y="288" width="14" height="14"/><rect x="351" y="288" width="14" height="14"/><rect x="381" y="240" width="12" height="12"/><rect x="411" y="288" width="12" height="12"/><rect x="120" y="290" width="12" height="12"/><rect x="180" y="330" width="12" height="12"/></g><rect x="0" y="392" width="600" height="8" fill="#0c1826"/><rect x="255" y="360" width="90" height="40" fill="#1a2a3c"/></svg></div>
+        <div class="body"><span class="cat" data-i18n="prj.2.c">Gewerbe · Büro</span><h3 data-i18n="prj.2.t">Bürocampus „Steelworks"</h3><div class="loc"><span data-i18n="prj.2.l">Frankfurt, DE</span><span><b>2023</b></span></div></div>
+      </article>
+      <article class="proj reveal">
+        <div class="thumb"><svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="p3sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b4a72"/><stop offset=".5" stop-color="#d98a5a"/><stop offset="1" stop-color="#f4cf8f"/></linearGradient><linearGradient id="p3wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0dcae"/><stop offset="1" stop-color="#d8bd86"/></linearGradient></defs><rect width="600" height="400" fill="url(#p3sky)"/><circle cx="300" cy="150" r="40" fill="#fff0cf" opacity=".85"/><path d="M0 210 L90 150 L170 200 L250 140 L340 205 L430 150 L520 200 L600 160 V400 H0 Z" fill="#7c6a86" opacity=".55"/><path d="M0 250 L110 195 L210 245 L320 190 L430 250 L540 200 L600 235 V400 H0 Z" fill="#5f5473" opacity=".6"/><rect x="0" y="300" width="600" height="100" fill="#6f7a4a"/><polygon points="150,110 300,110 300,190 150,190" fill="#4a3f4a" opacity=".9"/><rect x="150" y="185" width="300" height="140" fill="url(#p3wall)"/><polygon points="140,185 300,110 460,185" fill="#7a4436"/><polygon points="300,110 460,185 300,185" fill="#63382c"/><rect x="285" y="70" width="30" height="45" fill="#c9ad78"/><polygon points="280,70 300,48 320,70" fill="#7a4436"/><g fill="#4a3b2e"><rect x="180" y="215" width="26" height="40"/><rect x="240" y="215" width="26" height="40"/><rect x="336" y="215" width="26" height="40"/><rect x="396" y="215" width="26" height="40"/></g><g fill="#8a5a2a"><rect x="176" y="211" width="34" height="6"/><rect x="236" y="211" width="34" height="6"/><rect x="332" y="211" width="34" height="6"/><rect x="392" y="211" width="34" height="6"/></g><rect x="222" y="219" width="12" height="40" fill="#ffd98a" opacity=".85"/><rect x="378" y="219" width="12" height="40" fill="#ffd98a" opacity=".85"/><path d="M285 325 V275 a15 15 0 0 1 30 0 V325 Z" fill="#3a2c22"/><g fill="#2f4a2a"><ellipse cx="115" cy="280" rx="17" ry="55"/><ellipse cx="485" cy="280" rx="17" ry="55"/></g><rect x="150" y="320" width="300" height="8" fill="#c2a877"/></svg></div>
+        <div class="body"><span class="cat" data-i18n="prj.3.c">Sanierung · Denkmal</span><h3 data-i18n="prj.3.t">Villa Salegg</h3><div class="loc"><span data-i18n="prj.3.l">Bozen · Bolzano, IT</span><span><b>2023</b></span></div></div>
+      </article>
+      <article class="proj reveal">
+        <div class="thumb"><svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="p4sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fb4d4"/><stop offset="1" stop-color="#e6eef0"/></linearGradient><linearGradient id="p4wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8d2d8"/><stop offset="1" stop-color="#9fadb6"/></linearGradient><pattern id="p4rib" width="16" height="10" patternUnits="userSpaceOnUse"><path d="M0 0V10" stroke="#8593a0" stroke-width="1.2" opacity=".5"/></pattern></defs><rect width="600" height="400" fill="url(#p4sky)"/><ellipse cx="150" cy="90" rx="70" ry="26" fill="#ffffff" opacity=".7"/><ellipse cx="470" cy="70" rx="90" ry="30" fill="#ffffff" opacity=".6"/><path d="M0 300 Q150 275 320 295 T600 285 V400 H0 Z" fill="#b7c6a8"/><rect x="60" y="150" width="470" height="222" fill="url(#p4wall)"/><rect x="60" y="150" width="470" height="222" fill="url(#p4rib)"/><polygon points="60,150 530,120 530,150 60,150" fill="#dfe6ea"/><rect x="60" y="120" width="470" height="34" fill="#7f8d99" opacity=".3"/><rect x="80" y="165" width="430" height="30" fill="#3f5a70" opacity=".8"/><g stroke="#c8d6e0" stroke-width="1.5"><path d="M160 165V195M240 165V195M320 165V195M400 165V195"/></g><g fill="#2b3742"><rect x="90" y="300" width="70" height="72"/><rect x="185" y="300" width="70" height="72"/><rect x="280" y="300" width="70" height="72"/><rect x="375" y="300" width="70" height="72"/></g><g fill="#E0930A"><rect x="90" y="296" width="70" height="6"/><rect x="185" y="296" width="70" height="6"/><rect x="280" y="296" width="70" height="6"/><rect x="375" y="296" width="70" height="6"/></g><g><rect x="455" y="322" width="80" height="50" fill="#c23a2f"/><rect x="500" y="300" width="60" height="72" fill="#e6e6e6"/><circle cx="480" cy="378" r="14" fill="#222"/><circle cx="545" cy="378" r="14" fill="#222"/></g><path d="M420 372 V60 M400 82 H500 M420 60 L470 82" stroke="#5a6773" stroke-width="2.5" fill="none" opacity=".55"/><rect x="0" y="372" width="600" height="28" fill="#3a4048"/><rect x="0" y="384" width="600" height="4" fill="#d8c04a" opacity=".6"/></svg></div>
+        <div class="body"><span class="cat" data-i18n="prj.4.c">Industrie · Halle</span><h3 data-i18n="prj.4.t">Logistikzentrum Nord</h3><div class="loc"><span data-i18n="prj.4.l">Sarajevo, BA</span><span><b>2022</b></span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= STATS BAND ======================= -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="band reveal">
+      <div class="band-grid">
+        <div class="stat"><b><span data-count="1998">1998</span></b><span data-i18n="band.1">Gegründet</span></div>
+        <div class="stat"><b><span data-count="340">0</span><span class="u">+</span></b><span data-i18n="band.2">Fertige Projekte</span></div>
+        <div class="stat"><b><span data-count="60">0</span></b><span data-i18n="band.3">Mitarbeiter</span></div>
+        <div class="stat"><b><span data-count="4">0</span> <span class="u" data-i18n="band.4u">Länder</span></b><span data-i18n="band.4">Aktiv in Europa</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ABOUT ======================= -->
+<section class="sec" id="about" style="padding-top:0">
+  <div class="wrap about">
+    <div class="reveal">
+      <span class="eyebrow" data-i18n="about.eyebrow">Über uns</span>
+      <h2 class="display" data-i18n="about.title">Ein Familienbetrieb mit Handschlag-Qualität</h2>
+      <p class="lead" data-i18n="about.body">Seit 1998 steht der Name Gradnja für ehrliches Handwerk und verlässliche Bauleitung. Was mit einem kleinen Maurerteam begann, ist heute ein Bauunternehmen mit 60 Fachkräften — geblieben ist der Anspruch: Qualität, die man anfassen kann, und Termine, auf die man sich verlassen kann.</p>
+      <div class="values">
+        <div class="value"><span class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span><div><b data-i18n="about.v1t">Termintreue</b><p data-i18n="about.v1d">Fester Zeitplan, klare Meilensteine — 96 % unserer Projekte übergeben wir pünktlich oder früher.</p></div></div>
+        <div class="value"><span class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span><div><b data-i18n="about.v2t">Festpreis-Garantie</b><p data-i18n="about.v2d">Transparente Kalkulation ohne versteckte Kosten. Was wir anbieten, gilt.</p></div></div>
+        <div class="value"><span class="dot"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span><div><b data-i18n="about.v3t">Meisterbetrieb</b><p data-i18n="about.v3d">Zertifizierte Fachkräfte, eigene Bauleitung und geprüfte Statik bei jedem Gewerk.</p></div></div>
+      </div>
+    </div>
+    <div class="about-art reveal" aria-hidden="true">
+      <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="abs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3340"/><stop offset="1" stop-color="#c98a4e"/></linearGradient><linearGradient id="abg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e9c48f"/><stop offset="1" stop-color="#c99a5f"/></linearGradient></defs><rect width="400" height="300" fill="url(#abs)"/><circle cx="320" cy="90" r="34" fill="#ffe6b8" opacity=".55"/><g fill="#1f2732" opacity=".5"><rect x="0" y="150" width="70" height="150"/><rect x="350" y="170" width="50" height="130"/></g><rect x="70" y="120" width="160" height="140" fill="url(#abg)"/><rect x="230" y="80" width="110" height="180" fill="#d9ad74"/><polygon points="230,80 250,88 250,260 230,260" fill="#b98c54"/><g fill="#33404e"><rect x="90" y="140" width="40" height="50"/><rect x="150" y="140" width="40" height="50"/><rect x="250" y="100" width="70" height="50"/><rect x="250" y="180" width="70" height="60"/></g><g fill="#ffcf82"><rect x="90" y="140" width="40" height="50"/><rect x="250" y="180" width="70" height="60"/></g><rect x="70" y="255" width="270" height="8" fill="#a87f4a"/><ellipse cx="42" cy="272" rx="30" ry="34" fill="#24361f"/><rect x="0" y="262" width="400" height="38" fill="#6b6f4a"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PROCESS ======================= -->
+<section class="sec" id="process" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="process.eyebrow">So arbeiten wir</span>
+      <h2 class="display" data-i18n="process.title">Von der Idee zum Schlüssel</h2>
+    </div>
+    <div class="grid steps" style="margin-top:40px">
+      <div class="step reveal"><span class="n">STEP 01</span><div class="bar"></div><h3 data-i18n="proc.1t">Beratung & Angebot</h3><p data-i18n="proc.1d">Wir hören zu, besichtigen vor Ort und erstellen ein transparentes Festpreis-Angebot.</p></div>
+      <div class="step reveal"><span class="n">STEP 02</span><div class="bar"></div><h3 data-i18n="proc.2t">Planung & Statik</h3><p data-i18n="proc.2d">Architektur, Statik und Genehmigungen — wir koordinieren alle Fachplaner für Sie.</p></div>
+      <div class="step reveal"><span class="n">STEP 03</span><div class="bar"></div><h3 data-i18n="proc.3t">Ausführung</h3><p data-i18n="proc.3d">Eigene Kolonnen, feste Bauleitung und wöchentliche Updates auf der Baustelle.</p></div>
+      <div class="step reveal"><span class="n">STEP 04</span><div class="bar"></div><h3 data-i18n="proc.4t">Übergabe</h3><p data-i18n="proc.4d">Abnahme, Dokumentation und Schlüsselübergabe — inklusive Gewährleistung.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CONTACT ======================= -->
+<section class="sec" id="contact" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="contact.eyebrow">Kontakt</span>
+      <h2 class="display" data-i18n="contact.title">Lassen Sie uns bauen</h2>
+      <p class="lead" data-i18n="contact.sub">Erzählen Sie uns von Ihrem Vorhaben — wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung.</p>
+    </div>
+    <div class="contact" style="margin-top:44px">
+      <div class="contact-info reveal">
+        <div class="ci"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8 9.6a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg></span><div><div class="k" data-i18n="contact.k1">Telefon</div><div class="v">+49 89 4521 8890</div></div></div>
+        <div class="ci"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4zM4 6l8 6 8-6"/></svg></span><div><div class="k" data-i18n="contact.k2">E-Mail</div><div class="v">bau@gradnja.eu</div></div></div>
+        <div class="ci"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><div class="k" data-i18n="contact.k3">Büro</div><div class="v">Industriestraße 14, 80939 München</div></div></div>
+        <div class="ci"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><div class="k" data-i18n="contact.k4">Öffnungszeiten</div><div class="v" data-i18n="contact.k4v">Mo–Fr · 07:00–17:00</div></div></div>
+      </div>
+      <form class="reveal" id="form" novalidate>
+        <div class="frow">
+          <div class="field"><label data-i18n="form.name">Name</label><input type="text" name="name" required></div>
+          <div class="field"><label data-i18n="form.phone">Telefon</label><input type="tel" name="phone"></div>
+        </div>
+        <div class="frow">
+          <div class="field"><label data-i18n="form.email">E-Mail</label><input type="email" name="email" required></div>
+          <div class="field"><label data-i18n="form.type">Projektart</label>
+            <select name="type">
+              <option data-i18n="form.opt1">Neubau</option>
+              <option data-i18n="form.opt2">Sanierung</option>
+              <option data-i18n="form.opt3">Ausbau / Umbau</option>
+              <option data-i18n="form.opt4">Sonstiges</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label data-i18n="form.msg">Ihre Nachricht</label><textarea name="msg" data-i18n-ph="form.msgph" placeholder="Beschreiben Sie Ihr Vorhaben…"></textarea></div>
+        <button type="submit" class="btn btn-primary btn-lg" style="justify-content:center" data-i18n="form.send">Anfrage senden</button>
+        <p class="form-note" data-i18n="form.note">Mit dem Absenden stimmen Sie der Kontaktaufnahme zu. Es entstehen keine Kosten.</p>
+        <div class="form-ok" id="formok" data-i18n="form.ok">Vielen Dank! Ihre Anfrage ist eingegangen — wir melden uns innerhalb von 24 Stunden.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FOOTER ======================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#top" class="brand"><span class="mark">G</span><span><b>Gradnja Bau</b></span></a>
+        <p class="fp" data-i18n="foot.tag">Bau & Konstruktion seit 1998. Solide gebaut in Deutschland, Italien und auf dem Balkan.</p>
+      </div>
+      <div><h4 data-i18n="foot.h1">Leistungen</h4><ul>
+        <li><a href="#services" data-i18n="srv.1.t">Rohbau</a></li>
+        <li><a href="#services" data-i18n="srv.2.t">Hochbau</a></li>
+        <li><a href="#services" data-i18n="srv.4.t">Sanierung</a></li>
+        <li><a href="#services" data-i18n="srv.6.t">Schlüsselfertig</a></li>
+      </ul></div>
+      <div><h4 data-i18n="foot.h2">Unternehmen</h4><ul>
+        <li><a href="#about" data-i18n="nav.about">Über uns</a></li>
+        <li><a href="#projects" data-i18n="nav.projects">Projekte</a></li>
+        <li><a href="#process" data-i18n="nav.process">Ablauf</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
+      </ul></div>
+      <div><h4 data-i18n="foot.h3">Kontakt</h4><ul>
+        <li><a href="tel:+498945218890">+49 89 4521 8890</a></li>
+        <li><a href="mailto:bau@gradnja.eu">bau@gradnja.eu</a></li>
+        <li><span data-i18n="foot.addr">Industriestraße 14, München</span></li>
+      </ul></div>
+    </div>
+    <div class="foot-bot">
+      <span>© <span id="year"></span> Gradnja Bau GmbH</span>
+      <span data-i18n="foot.legal">Impressum · Datenschutz · AGB</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- i18n ---------------- */
+  var T = {
+    de:{
+      "nav.services":"Leistungen","nav.projects":"Projekte","nav.about":"Über uns","nav.process":"Ablauf","nav.contact":"Kontakt","nav.cta":"Angebot anfragen",
+      "hero.eyebrow":"Bau & Konstruktion seit 1998","hero.title":"Wir bauen, was <span class='amber'>Bestand</span> hat.","hero.sub":"Vom Rohbau bis zur schlüsselfertigen Übergabe — Ihr Partner für Hochbau, Sanierung und Ausbau in ganz Europa. Präzise geplant, sauber ausgeführt, termintreu übergeben.","hero.cta1":"Projekt starten","hero.cta2":"Referenzen ansehen","hero.s1":"Jahre Erfahrung","hero.s2":"Projekte","hero.s3":"Fachkräfte","hero.scroll":"Scrollen",
+      "ticker":"Rohbau · Hochbau · Tiefbau · Sanierung · Innenausbau · Schlüsselfertig · Meisterbetrieb · Festpreis · Termintreu",
+      "services.eyebrow":"Unsere Leistungen","services.title":"Alles aus einer Hand","services.sub":"Von der ersten Skizze bis zum letzten Handschlag — wir übernehmen jedes Gewerk und koordinieren Ihr Bauvorhaben von Anfang bis Ende.",
+      "srv.1.t":"Rohbau","srv.1.d":"Fundament, Mauerwerk, Decken und Tragwerk — das solide Skelett Ihres Gebäudes, statisch geprüft und normgerecht.",
+      "srv.2.t":"Hochbau","srv.2.d":"Wohn-, Gewerbe- und Industriebauten in Massiv- oder Fertigbauweise — schlüsselfertig und aus einer Hand.",
+      "srv.3.t":"Tiefbau","srv.3.d":"Erdarbeiten, Kanal- und Straßenbau, Entwässerung und Gründungen — der Untergrund, der alles trägt.",
+      "srv.4.t":"Sanierung","srv.4.d":"Denkmalgerechte Restaurierung und energetische Modernisierung — wir bringen Bestand auf den neuesten Stand.",
+      "srv.5.t":"Innenausbau","srv.5.d":"Trockenbau, Estrich, Fliesen, Böden und Türen — präzise Details, die aus Räumen ein Zuhause machen.",
+      "srv.6.t":"Schlüsselfertig","srv.6.d":"Ein Ansprechpartner, ein Festpreis, ein Termin — Sie erhalten Ihr fertiges Objekt und den Schlüssel in die Hand.",
+      "projects.eyebrow":"Referenzen","projects.title":"Ausgewählte Projekte","projects.sub":"Ein Auszug aus über 340 realisierten Bauvorhaben in Deutschland, Italien und auf dem Balkan.",
+      "prj.1.c":"Neubau · Wohnen","prj.1.t":"Wohnquartier „Am Park“","prj.1.l":"München, DE",
+      "prj.2.c":"Gewerbe · Büro","prj.2.t":"Bürocampus „Steelworks“","prj.2.l":"Frankfurt, DE",
+      "prj.3.c":"Sanierung · Denkmal","prj.3.t":"Villa Salegg","prj.3.l":"Bozen · Bolzano, IT",
+      "prj.4.c":"Industrie · Halle","prj.4.t":"Logistikzentrum Nord","prj.4.l":"Sarajevo, BA",
+      "band.1":"Gegründet","band.2":"Fertige Projekte","band.3":"Mitarbeiter","band.4":"Aktiv in Europa","band.4u":"Länder",
+      "about.eyebrow":"Über uns","about.title":"Ein Familienbetrieb mit Handschlag-Qualität","about.body":"Seit 1998 steht der Name Gradnja für ehrliches Handwerk und verlässliche Bauleitung. Was mit einem kleinen Maurerteam begann, ist heute ein Bauunternehmen mit 60 Fachkräften — geblieben ist der Anspruch: Qualität, die man anfassen kann, und Termine, auf die man sich verlassen kann.",
+      "about.v1t":"Termintreue","about.v1d":"Fester Zeitplan, klare Meilensteine — 96 % unserer Projekte übergeben wir pünktlich oder früher.",
+      "about.v2t":"Festpreis-Garantie","about.v2d":"Transparente Kalkulation ohne versteckte Kosten. Was wir anbieten, gilt.",
+      "about.v3t":"Meisterbetrieb","about.v3d":"Zertifizierte Fachkräfte, eigene Bauleitung und geprüfte Statik bei jedem Gewerk.",
+      "process.eyebrow":"So arbeiten wir","process.title":"Von der Idee zum Schlüssel",
+      "proc.1t":"Beratung & Angebot","proc.1d":"Wir hören zu, besichtigen vor Ort und erstellen ein transparentes Festpreis-Angebot.",
+      "proc.2t":"Planung & Statik","proc.2d":"Architektur, Statik und Genehmigungen — wir koordinieren alle Fachplaner für Sie.",
+      "proc.3t":"Ausführung","proc.3d":"Eigene Kolonnen, feste Bauleitung und wöchentliche Updates auf der Baustelle.",
+      "proc.4t":"Übergabe","proc.4d":"Abnahme, Dokumentation und Schlüsselübergabe — inklusive Gewährleistung.",
+      "contact.eyebrow":"Kontakt","contact.title":"Lassen Sie uns bauen","contact.sub":"Erzählen Sie uns von Ihrem Vorhaben — wir melden uns innerhalb von 24 Stunden mit einer ersten Einschätzung.",
+      "contact.k1":"Telefon","contact.k2":"E-Mail","contact.k3":"Büro","contact.k4":"Öffnungszeiten","contact.k4v":"Mo–Fr · 07:00–17:00",
+      "form.name":"Name","form.phone":"Telefon","form.email":"E-Mail","form.type":"Projektart","form.opt1":"Neubau","form.opt2":"Sanierung","form.opt3":"Ausbau / Umbau","form.opt4":"Sonstiges","form.msg":"Ihre Nachricht","form.msgph":"Beschreiben Sie Ihr Vorhaben…","form.send":"Anfrage senden","form.note":"Mit dem Absenden stimmen Sie der Kontaktaufnahme zu. Es entstehen keine Kosten.","form.ok":"Vielen Dank! Ihre Anfrage ist eingegangen — wir melden uns innerhalb von 24 Stunden.",
+      "foot.tag":"Bau & Konstruktion seit 1998. Solide gebaut in Deutschland, Italien und auf dem Balkan.","foot.h1":"Leistungen","foot.h2":"Unternehmen","foot.h3":"Kontakt","foot.addr":"Industriestraße 14, München","foot.legal":"Impressum · Datenschutz · AGB"
+    },
+    en:{
+      "nav.services":"Services","nav.projects":"Projects","nav.about":"About","nav.process":"Process","nav.contact":"Contact","nav.cta":"Request a quote",
+      "hero.eyebrow":"Building & construction since 1998","hero.title":"We build things <span class='amber'>made to last</span>.","hero.sub":"From shell construction to turnkey handover — your partner for building, renovation and fit-out across Europe. Precisely planned, cleanly executed, delivered on time.","hero.cta1":"Start a project","hero.cta2":"View our work","hero.s1":"Years of experience","hero.s2":"Projects","hero.s3":"Specialists","hero.scroll":"Scroll",
+      "ticker":"Shell · Building · Civil works · Renovation · Fit-out · Turnkey · Master craftsmen · Fixed price · On schedule",
+      "services.eyebrow":"What we do","services.title":"Everything from one hand","services.sub":"From the first sketch to the final handshake — we deliver every trade and coordinate your project from start to finish.",
+      "srv.1.t":"Shell construction","srv.1.d":"Foundations, masonry, floors and structure — the solid skeleton of your building, statically verified and to standard.",
+      "srv.2.t":"Building","srv.2.d":"Residential, commercial and industrial buildings in solid or prefab construction — turnkey, from a single source.",
+      "srv.3.t":"Civil works","srv.3.d":"Earthworks, sewers, roads, drainage and foundations — the groundwork that carries it all.",
+      "srv.4.t":"Renovation","srv.4.d":"Heritage restoration and energy-efficient modernisation — we bring existing buildings up to today's standard.",
+      "srv.5.t":"Interior fit-out","srv.5.d":"Drywall, screed, tiling, flooring and doors — the precise details that turn rooms into a home.",
+      "srv.6.t":"Turnkey","srv.6.d":"One contact, one fixed price, one deadline — you receive the finished building and the keys in your hand.",
+      "projects.eyebrow":"Selected work","projects.title":"Featured projects","projects.sub":"A selection from over 340 completed builds across Germany, Italy and the Balkans.",
+      "prj.1.c":"New build · Residential","prj.1.t":"“Am Park” Residences","prj.1.l":"Munich, DE",
+      "prj.2.c":"Commercial · Office","prj.2.t":"“Steelworks” Office Campus","prj.2.l":"Frankfurt, DE",
+      "prj.3.c":"Renovation · Heritage","prj.3.t":"Villa Salegg","prj.3.l":"Bolzano, IT",
+      "prj.4.c":"Industrial · Hall","prj.4.t":"North Logistics Centre","prj.4.l":"Sarajevo, BA",
+      "band.1":"Founded","band.2":"Completed projects","band.3":"Employees","band.4":"Active across Europe","band.4u":"countries",
+      "about.eyebrow":"About us","about.title":"A family business with a handshake you can trust","about.body":"Since 1998 the name Gradnja has stood for honest craftsmanship and reliable site management. What began as a small team of bricklayers is today a construction company with 60 specialists — and the standard has never changed: quality you can touch, and deadlines you can count on.",
+      "about.v1t":"On time","about.v1d":"Fixed schedule, clear milestones — 96% of our projects are handed over on time or early.",
+      "about.v2t":"Fixed-price guarantee","about.v2d":"Transparent costing with no hidden extras. What we quote is what you pay.",
+      "about.v3t":"Certified master firm","about.v3d":"Certified specialists, in-house site management and verified structural engineering on every trade.",
+      "process.eyebrow":"How we work","process.title":"From idea to keys",
+      "proc.1t":"Consultation & quote","proc.1d":"We listen, visit the site and prepare a transparent fixed-price offer.",
+      "proc.2t":"Planning & structure","proc.2d":"Architecture, structural engineering and permits — we coordinate every planner for you.",
+      "proc.3t":"Construction","proc.3d":"Our own crews, dedicated site management and weekly updates from the site.",
+      "proc.4t":"Handover","proc.4d":"Inspection, documentation and key handover — warranty included.",
+      "contact.eyebrow":"Contact","contact.title":"Let's build together","contact.sub":"Tell us about your project — we'll get back to you within 24 hours with a first assessment.",
+      "contact.k1":"Phone","contact.k2":"Email","contact.k3":"Office","contact.k4":"Opening hours","contact.k4v":"Mon–Fri · 07:00–17:00",
+      "form.name":"Name","form.phone":"Phone","form.email":"Email","form.type":"Project type","form.opt1":"New build","form.opt2":"Renovation","form.opt3":"Fit-out / conversion","form.opt4":"Other","form.msg":"Your message","form.msgph":"Describe your project…","form.send":"Send request","form.note":"By submitting you agree to be contacted. No costs are incurred.","form.ok":"Thank you! Your request has been received — we'll be in touch within 24 hours.",
+      "foot.tag":"Building & construction since 1998. Solidly built across Germany, Italy and the Balkans.","foot.h1":"Services","foot.h2":"Company","foot.h3":"Contact","foot.addr":"Industriestraße 14, Munich","foot.legal":"Imprint · Privacy · Terms"
+    },
+    it:{
+      "nav.services":"Servizi","nav.projects":"Progetti","nav.about":"Chi siamo","nav.process":"Processo","nav.contact":"Contatti","nav.cta":"Richiedi preventivo",
+      "hero.eyebrow":"Edilizia e costruzioni dal 1998","hero.title":"Costruiamo ciò che <span class='amber'>dura</span> nel tempo.","hero.sub":"Dalla struttura grezza alla consegna chiavi in mano — il vostro partner per edilizia, ristrutturazione e finiture in tutta Europa. Pianificato con precisione, eseguito con cura, consegnato nei tempi.","hero.cta1":"Avvia un progetto","hero.cta2":"Guarda i lavori","hero.s1":"Anni di esperienza","hero.s2":"Progetti","hero.s3":"Specialisti","hero.scroll":"Scorri",
+      "ticker":"Struttura grezza · Edilizia · Genio civile · Ristrutturazione · Finiture · Chiavi in mano · Impresa qualificata · Prezzo fisso · Puntuali",
+      "services.eyebrow":"Cosa facciamo","services.title":"Tutto da un unico partner","services.sub":"Dal primo schizzo all'ultima stretta di mano — realizziamo ogni lavorazione e coordiniamo il vostro cantiere dall'inizio alla fine.",
+      "srv.1.t":"Struttura grezza","srv.1.d":"Fondazioni, murature, solai e struttura portante — lo scheletro solido del vostro edificio, verificato staticamente e a norma.",
+      "srv.2.t":"Edilizia","srv.2.d":"Edifici residenziali, commerciali e industriali in muratura o prefabbricati — chiavi in mano, da un unico interlocutore.",
+      "srv.3.t":"Genio civile","srv.3.d":"Movimento terra, fognature, strade, drenaggi e fondazioni — le basi che sostengono tutto.",
+      "srv.4.t":"Ristrutturazione","srv.4.d":"Restauro conservativo e riqualificazione energetica — riportiamo l'esistente agli standard di oggi.",
+      "srv.5.t":"Finiture interne","srv.5.d":"Cartongesso, massetti, piastrelle, pavimenti e porte — i dettagli precisi che rendono uno spazio una casa.",
+      "srv.6.t":"Chiavi in mano","srv.6.d":"Un referente, un prezzo fisso, una scadenza — ricevete l'immobile finito e le chiavi in mano.",
+      "projects.eyebrow":"Referenze","projects.title":"Progetti selezionati","projects.sub":"Una selezione tra oltre 340 opere realizzate in Germania, Italia e nei Balcani.",
+      "prj.1.c":"Nuova costruzione · Residenziale","prj.1.t":"Residenze „Am Park“","prj.1.l":"Monaco, DE",
+      "prj.2.c":"Commerciale · Uffici","prj.2.t":"Campus uffici „Steelworks“","prj.2.l":"Francoforte, DE",
+      "prj.3.c":"Ristrutturazione · Storico","prj.3.t":"Villa Salegg","prj.3.l":"Bolzano, IT",
+      "prj.4.c":"Industriale · Capannone","prj.4.t":"Centro Logistico Nord","prj.4.l":"Sarajevo, BA",
+      "band.1":"Fondata","band.2":"Progetti completati","band.3":"Collaboratori","band.4":"Attivi in Europa","band.4u":"paesi",
+      "about.eyebrow":"Chi siamo","about.title":"Un'impresa familiare con la qualità della stretta di mano","about.body":"Dal 1998 il nome Gradnja è sinonimo di artigianato onesto e direzione lavori affidabile. Quello che è nato come una piccola squadra di muratori è oggi un'impresa edile con 60 specialisti — ma l'impegno è rimasto lo stesso: una qualità che si può toccare e scadenze su cui si può contare.",
+      "about.v1t":"Puntualità","about.v1d":"Cronoprogramma fisso, traguardi chiari — il 96% dei nostri progetti viene consegnato in tempo o in anticipo.",
+      "about.v2t":"Prezzo fisso garantito","about.v2d":"Preventivi trasparenti senza costi nascosti. Ciò che offriamo, vale.",
+      "about.v3t":"Impresa qualificata","about.v3d":"Personale certificato, direzione lavori interna e calcoli statici verificati per ogni lavorazione.",
+      "process.eyebrow":"Come lavoriamo","process.title":"Dall'idea alle chiavi",
+      "proc.1t":"Consulenza e preventivo","proc.1d":"Ascoltiamo, effettuiamo un sopralluogo e prepariamo un'offerta trasparente a prezzo fisso.",
+      "proc.2t":"Progettazione e statica","proc.2d":"Architettura, calcoli statici e permessi — coordiniamo per voi tutti i progettisti.",
+      "proc.3t":"Esecuzione","proc.3d":"Squadre proprie, direzione lavori dedicata e aggiornamenti settimanali dal cantiere.",
+      "proc.4t":"Consegna","proc.4d":"Collaudo, documentazione e consegna delle chiavi — garanzia inclusa.",
+      "contact.eyebrow":"Contatti","contact.title":"Costruiamo insieme","contact.sub":"Raccontateci il vostro progetto — vi risponderemo entro 24 ore con una prima valutazione.",
+      "contact.k1":"Telefono","contact.k2":"E-mail","contact.k3":"Ufficio","contact.k4":"Orari","contact.k4v":"Lun–Ven · 07:00–17:00",
+      "form.name":"Nome","form.phone":"Telefono","form.email":"E-mail","form.type":"Tipo di progetto","form.opt1":"Nuova costruzione","form.opt2":"Ristrutturazione","form.opt3":"Finiture / ampliamento","form.opt4":"Altro","form.msg":"Il vostro messaggio","form.msgph":"Descrivete il vostro progetto…","form.send":"Invia richiesta","form.note":"Inviando accettate di essere contattati. Nessun costo.","form.ok":"Grazie! La vostra richiesta è stata ricevuta — vi ricontatteremo entro 24 ore.",
+      "foot.tag":"Edilizia e costruzioni dal 1998. Costruito solido in Germania, Italia e nei Balcani.","foot.h1":"Servizi","foot.h2":"Azienda","foot.h3":"Contatti","foot.addr":"Industriestraße 14, Monaco","foot.legal":"Note legali · Privacy · Condizioni"
+    },
+    bs:{
+      "nav.services":"Usluge","nav.projects":"Projekti","nav.about":"O nama","nav.process":"Proces","nav.contact":"Kontakt","nav.cta":"Zatražite ponudu",
+      "hero.eyebrow":"Gradnja i konstrukcija od 1998.","hero.title":"Gradimo ono što <span class='amber'>traje</span>.","hero.sub":"Od grubih radova do primopredaje ključ u ruke — vaš partner za visokogradnju, renoviranje i unutrašnje radove širom Evrope. Precizno planirano, uredno izvedeno, isporučeno na vrijeme.","hero.cta1":"Pokrenite projekat","hero.cta2":"Pogledajte radove","hero.s1":"Godina iskustva","hero.s2":"Projekata","hero.s3":"Stručnjaka","hero.scroll":"Skrolajte",
+      "ticker":"Grubi radovi · Visokogradnja · Niskogradnja · Renoviranje · Unutrašnji radovi · Ključ u ruke · Ovlašteni izvođač · Fiksna cijena · Na vrijeme",
+      "services.eyebrow":"Šta radimo","services.title":"Sve na jednom mjestu","services.sub":"Od prve skice do posljednjeg rukovanja — izvodimo svaki zanat i koordiniramo vaš projekat od početka do kraja.",
+      "srv.1.t":"Grubi radovi","srv.1.d":"Temelji, zidovi, ploče i noseća konstrukcija — čvrsti skelet vaše zgrade, statički provjeren i u skladu s normama.",
+      "srv.2.t":"Visokogradnja","srv.2.d":"Stambeni, poslovni i industrijski objekti u masivnoj ili montažnoj gradnji — ključ u ruke, iz jedne ruke.",
+      "srv.3.t":"Niskogradnja","srv.3.d":"Zemljani radovi, kanalizacija, putevi, odvodnja i temelji — podloga koja sve nosi.",
+      "srv.4.t":"Renoviranje","srv.4.d":"Obnova spomeničkih objekata i energetska modernizacija — postojeće dovodimo na današnji standard.",
+      "srv.5.t":"Unutrašnji radovi","srv.5.d":"Suhomontaža, estrih, pločice, podovi i vrata — precizni detalji koji od prostora prave dom.",
+      "srv.6.t":"Ključ u ruke","srv.6.d":"Jedan kontakt, jedna fiksna cijena, jedan rok — dobijate gotov objekat i ključ u ruke.",
+      "projects.eyebrow":"Reference","projects.title":"Odabrani projekti","projects.sub":"Izbor iz više od 340 realizovanih objekata u Njemačkoj, Italiji i na Balkanu.",
+      "prj.1.c":"Novogradnja · Stanovanje","prj.1.t":"Naselje „Am Park“","prj.1.l":"München, DE",
+      "prj.2.c":"Poslovno · Kancelarije","prj.2.t":"Poslovni kampus „Steelworks“","prj.2.l":"Frankfurt, DE",
+      "prj.3.c":"Renoviranje · Spomenik","prj.3.t":"Villa Salegg","prj.3.l":"Bolzano, IT",
+      "prj.4.c":"Industrija · Hala","prj.4.t":"Logistički centar Sjever","prj.4.l":"Sarajevo, BA",
+      "band.1":"Osnovani","band.2":"Završenih projekata","band.3":"Zaposlenih","band.4":"Aktivni u Evropi","band.4u":"zemlje",
+      "about.eyebrow":"O nama","about.title":"Porodična firma s kvalitetom na riječ","about.body":"Od 1998. ime Gradnja znači pošten zanat i pouzdano vođenje gradilišta. Ono što je počelo kao mala ekipa zidara danas je građevinska firma sa 60 stručnjaka — a mjerilo je ostalo isto: kvalitet koji se može opipati i rokovi na koje se možete osloniti.",
+      "about.v1t":"Poštivanje rokova","about.v1d":"Fiksan raspored, jasni ciljevi — 96% naših projekata predajemo na vrijeme ili ranije.",
+      "about.v2t":"Garancija fiksne cijene","about.v2d":"Transparentan obračun bez skrivenih troškova. Ono što ponudimo, to i vrijedi.",
+      "about.v3t":"Ovlašteni izvođač","about.v3d":"Certificirani stručnjaci, vlastito vođenje gradilišta i provjerena statika za svaki zanat.",
+      "process.eyebrow":"Kako radimo","process.title":"Od ideje do ključa",
+      "proc.1t":"Konsultacije i ponuda","proc.1d":"Slušamo vas, izlazimo na teren i pravimo transparentnu ponudu s fiksnom cijenom.",
+      "proc.2t":"Projektovanje i statika","proc.2d":"Arhitektura, statika i dozvole — koordiniramo sve projektante umjesto vas.",
+      "proc.3t":"Izvođenje","proc.3d":"Vlastite ekipe, stalno vođenje gradilišta i sedmični izvještaji s gradilišta.",
+      "proc.4t":"Primopredaja","proc.4d":"Prijem radova, dokumentacija i predaja ključeva — uz garanciju.",
+      "contact.eyebrow":"Kontakt","contact.title":"Gradimo zajedno","contact.sub":"Recite nam o svom projektu — javljamo se u roku od 24 sata s prvom procjenom.",
+      "contact.k1":"Telefon","contact.k2":"E-mail","contact.k3":"Kancelarija","contact.k4":"Radno vrijeme","contact.k4v":"Pon–Pet · 07:00–17:00",
+      "form.name":"Ime","form.phone":"Telefon","form.email":"E-mail","form.type":"Vrsta projekta","form.opt1":"Novogradnja","form.opt2":"Renoviranje","form.opt3":"Unutrašnji radovi / adaptacija","form.opt4":"Ostalo","form.msg":"Vaša poruka","form.msgph":"Opišite svoj projekat…","form.send":"Pošalji upit","form.note":"Slanjem pristajete na kontakt. Bez ikakvih troškova.","form.ok":"Hvala! Vaš upit je zaprimljen — javljamo se u roku od 24 sata.",
+      "foot.tag":"Gradnja i konstrukcija od 1998. Čvrsto izgrađeno u Njemačkoj, Italiji i na Balkanu.","foot.h1":"Usluge","foot.h2":"Firma","foot.h3":"Kontakt","foot.addr":"Industriestraße 14, München","foot.legal":"Impressum · Privatnost · Uslovi"
+    }
+  };
+
+  var titles = {de:"Gradnja Bau — Bau & Konstruktion",en:"Gradnja Bau — Building & Construction",it:"Gradnja Bau — Edilizia e Costruzioni",bs:"Gradnja Bau — Gradnja i Konstrukcija"};
+  var current = "de";
+
+  function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function load(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+
+  function apply(lang){
+    var dict = T[lang]; if(!dict) return;
+    current = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function(el){
+      var v = dict[el.getAttribute("data-i18n")];
+      if(v!=null) el.innerHTML = v;
+    });
+    document.querySelectorAll("[data-i18n-ph]").forEach(function(el){
+      var v = dict[el.getAttribute("data-i18n-ph")];
+      if(v!=null) el.setAttribute("placeholder",v);
+    });
+    document.documentElement.lang = lang;
+    if(titles[lang]) document.title = titles[lang];
+    document.querySelectorAll("#lang button").forEach(function(b){
+      b.classList.toggle("active", b.getAttribute("data-lang")===lang);
+    });
+    buildTicker(dict["ticker"]);
+    store("gradnja-lang", lang);
+  }
+
+  function buildTicker(text){
+    if(!text) return;
+    var t = document.getElementById("ticker");
+    var seg = text.split(" · ").map(function(s){return "<span>"+s+"</span>";}).join("");
+    t.innerHTML = seg + seg;
+  }
+
+  document.getElementById("lang").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if(!b) return;
+    apply(b.getAttribute("data-lang"));
+  });
+
+  /* ---------------- theme ---------------- */
+  var savedTheme = load("gradnja-theme");
+  if(savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
+  document.getElementById("theme").addEventListener("click", function(){
+    var isDark;
+    var attr = document.documentElement.getAttribute("data-theme");
+    if(attr) isDark = attr==="dark";
+    else isDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
+    var next = isDark ? "light":"dark";
+    document.documentElement.setAttribute("data-theme", next);
+    store("gradnja-theme", next);
+  });
+
+  /* ---------------- nav scroll ---------------- */
+  var nav = document.getElementById("nav");
+  window.addEventListener("scroll", function(){
+    nav.classList.toggle("scrolled", window.scrollY>10);
+  }, {passive:true});
+
+  /* ---------------- reveal on scroll ---------------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+    });
+  }, {threshold:.14, rootMargin:"0px 0px -40px 0px"});
+  document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
+
+  /* ---------------- counters ---------------- */
+  var reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      var el = en.target, target = +el.getAttribute("data-count"), t0=null, dur=1400, start=(target>1900?1900:0);
+      if(reduce){ el.textContent = target; cio.unobserve(el); return; }
+      function tick(ts){
+        if(!t0) t0=ts; var p=Math.min((ts-t0)/dur,1);
+        var e = 1-Math.pow(1-p,3);
+        el.textContent = Math.round(start+(target-start)*e);
+        if(p<1) requestAnimationFrame(tick); else el.textContent = target;
+      }
+      requestAnimationFrame(tick);
+      cio.unobserve(el);
+    });
+  }, {threshold:.5});
+  document.querySelectorAll("[data-count]").forEach(function(el){cio.observe(el);});
+
+  /* ---------------- form ---------------- */
+  document.getElementById("form").addEventListener("submit", function(e){
+    e.preventDefault();
+    var f=e.target;
+    if(!f.name.value.trim() || !f.email.value.trim()){
+      f.querySelector('[name="'+(!f.name.value.trim()?"name":"email")+'"]').focus();
+      return;
+    }
+    document.getElementById("formok").classList.add("show");
+    f.querySelectorAll("input,textarea").forEach(function(i){i.value="";});
+  });
+
+  /* ---------------- dust particles ---------------- */
+  (function(){
+    if(reduce) return;
+    var c=document.getElementById("dust"), ctx=c.getContext("2d"), parts=[], raf;
+    function size(){ var r=c.parentElement.getBoundingClientRect(); c.width=r.width; c.height=r.height; }
+    size();
+    for(var i=0;i<46;i++){parts.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.4,vx:(Math.random()-.5)*.0006,vy:-Math.random()*.0004-.0001,o:Math.random()*.5+.15});}
+    function draw(){
+      ctx.clearRect(0,0,c.width,c.height);
+      for(var i=0;i<parts.length;i++){var p=parts[i];p.x+=p.vx;p.y+=p.vy;if(p.y<-.02){p.y=1.02;p.x=Math.random();}if(p.x<0)p.x=1;if(p.x>1)p.x=0;
+        ctx.beginPath();ctx.arc(p.x*c.width,p.y*c.height,p.r,0,6.28);ctx.fillStyle="rgba(224,147,10,"+p.o+")";ctx.fill();}
+      raf=requestAnimationFrame(draw);
+    }
+    draw();
+    window.addEventListener("resize", size, {passive:true});
+  })();
+
+  /* ---------------- init ---------------- */
+  document.getElementById("year").textContent = new Date().getFullYear();
+  var pref = load("gradnja-lang");
+  if(!pref){ var b=(navigator.language||"de").slice(0,2); pref = T[b]?b:"de"; }
+  apply(pref);
+})();
+</script>
+</body>
+</html>
