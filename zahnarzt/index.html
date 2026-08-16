@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dentavit — Zahnarztpraxis in Wien | Termin online buchen</title>
+
+<meta name="description" content="Dentavit Zahnarztpraxis Wien: Prophylaxe, Implantate, unsichtbare Aligner, Ästhetik und Angstpatienten-Betreuung. Termin in 30 Sekunden online buchen.">
+<meta name="author" content="Menes Nasufoski">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dentavit — Zahnarztpraxis in Wien">
+<meta property="og:description" content="Moderne Zahnmedizin ohne Angst. Termin online buchen — in 30 Sekunden.">
+<meta property="og:locale" content="de_AT">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230E8E8E'/%3E%3Cpath d='M16 7c-2 0-2.6 1-4.6 1C9.6 8 8 9.4 8 12c0 4 1.6 6.5 2.4 9.4.5 1.9.8 3.6 2 3.6 1.4 0 1.4-3.4 3.6-3.4s2.2 3.4 3.6 3.4c1.2 0 1.5-1.7 2-3.6C22.4 18.5 24 16 24 12c0-2.6-1.6-4-3.4-4-2 0-2.6-1-4.6-1z' fill='%23fff'/%3E%3C/svg%3E">
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F5FAFB; --surface:#FFFFFF; --surface-2:#EDF6F7;
+  --ink:#0D2A33; --ink-soft:#3D5D68; --muted:#6B8894;
+  --brand:#0E8E8E; --brand-strong:#0A7070; --brand-soft:#DFF1F1;
+  --accent:#F2A65A; --line:rgba(13,42,51,.10);
+  --shadow:0 1px 2px rgba(13,42,51,.05), 0 12px 32px rgba(13,42,51,.08);
+  --shadow-lg:0 24px 60px rgba(13,42,51,.14);
+  --radius:18px; --wrap:1180px;
+}
+html[data-theme="dark"]{
+  --bg:#091417; --surface:#0F2028; --surface-2:#152D36;
+  --ink:#E9F4F5; --ink-soft:#B7CDD3; --muted:#8AA6AF;
+  --brand:#2FBFBA; --brand-strong:#4FD6D0; --brand-soft:#12333A;
+  --accent:#F2A65A; --line:rgba(233,244,245,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px rgba(0,0,0,.4);
+  --shadow-lg:0 24px 60px rgba(0,0,0,.55);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  transition:background .3s ease,color .3s ease;
+}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.15;letter-spacing:-.02em;font-weight:700}
+h1{font-size:clamp(2.2rem,5.2vw,4rem)}
+h2{font-size:clamp(1.8rem,3.6vw,2.7rem)}
+h3{font-size:1.15rem;font-family:'Inter',sans-serif;font-weight:700;letter-spacing:-.01em}
+p{color:var(--ink-soft)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+section{padding:96px 0;position:relative}
+
+/* ---------- shared bits ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.74rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brand);background:var(--brand-soft);
+  padding:.45rem .9rem;border-radius:999px;margin-bottom:1rem;
+}
+.section-head{max-width:640px;margin-bottom:56px}
+.section-head.center{margin-inline:auto;text-align:center}
+.section-head p{margin-top:.85rem;font-size:1.05rem}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  padding:.92rem 1.6rem;border-radius:999px;font-weight:650;font-size:.96rem;
+  border:1px solid transparent;cursor:pointer;transition:.25s ease;font-family:inherit;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:0 8px 22px rgba(14,142,142,.28)}
+.btn-primary:hover{background:var(--brand-strong);transform:translateY(-2px);box-shadow:0 14px 30px rgba(14,142,142,.36)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{background:var(--surface-2);border-color:var(--brand);color:var(--brand)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:.3s ease;
+}
+header.scrolled{border-bottom-color:var(--line);box-shadow:0 4px 24px rgba(13,42,51,.06)}
+.nav{display:flex;align-items:center;gap:1.5rem;height:78px}
+.logo{display:flex;align-items:center;gap:.65rem;font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
+.logo-mark{
+  width:38px;height:38px;border-radius:11px;background:var(--brand);
+  display:grid;place-items:center;flex-shrink:0;box-shadow:0 6px 16px rgba(14,142,142,.3);
+}
+.logo-mark svg{width:22px;height:22px;fill:#fff}
+.logo span small{display:block;font-size:.62rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);margin-top:-4px}
+.nav-links{display:flex;gap:1.75rem;margin-left:auto;font-size:.94rem;font-weight:550}
+.nav-links a{color:var(--ink-soft);position:relative;padding:.3rem 0;transition:color .2s}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:0;width:0;height:2px;
+  background:var(--brand);border-radius:2px;transition:width .28s ease;
+}
+.nav-links a:hover{color:var(--brand)}
+.nav-links a:hover::after{width:100%}
+.nav-tools{display:flex;align-items:center;gap:.6rem;margin-left:auto}
+.nav-links + .nav-tools{margin-left:0}
+.lang-switch{display:flex;gap:2px;background:var(--surface-2);border:1px solid var(--line);
+  border-radius:999px;padding:3px}
+.lang-switch button{
+  border:0;background:transparent;color:var(--muted);cursor:pointer;
+  font:600 .74rem/1 'Inter',sans-serif;letter-spacing:.05em;
+  padding:.42rem .6rem;border-radius:999px;transition:.2s;
+}
+.lang-switch button:hover{color:var(--brand)}
+.lang-switch button.active{background:var(--brand);color:#fff;box-shadow:0 2px 8px rgba(14,142,142,.35)}
+.icon-btn{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--line);
+  background:var(--surface-2);color:var(--ink-soft);cursor:pointer;
+  display:grid;place-items:center;transition:.22s;flex-shrink:0;
+}
+.icon-btn:hover{color:var(--brand);border-color:var(--brand);transform:rotate(-12deg)}
+.icon-btn svg{width:17px;height:17px;fill:currentColor}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+.burger span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ---------- hero ---------- */
+.hero{padding:150px 0 90px;overflow:hidden}
+.hero::before{
+  content:'';position:absolute;top:-280px;right:-180px;width:720px;height:720px;
+  background:radial-gradient(circle,var(--brand-soft) 0%,transparent 68%);
+  border-radius:50%;pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;position:relative}
+.hero h1{margin-bottom:1.4rem}
+.hero h1 em{font-style:italic;color:var(--brand)}
+.hero-lead{font-size:1.13rem;max-width:520px;margin-bottom:2.2rem}
+.hero-cta{display:flex;gap:.85rem;flex-wrap:wrap;margin-bottom:2.6rem}
+.trust-row{display:flex;gap:2.4rem;flex-wrap:wrap;padding-top:1.8rem;border-top:1px solid var(--line)}
+.trust-row .n{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:700;color:var(--brand);line-height:1}
+.trust-row .l{font-size:.82rem;color:var(--muted);margin-top:.3rem}
+
+.hero-visual{position:relative}
+.hero-photo{
+  border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);
+  aspect-ratio:4/5;background:linear-gradient(150deg,var(--brand) 0%,#0a5f6b 100%);
+  position:relative;
+}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.floating-card{
+  position:absolute;background:var(--surface);border:1px solid var(--line);
+  border-radius:16px;padding:.9rem 1.1rem;box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;gap:.8rem;
+}
+.fc-1{bottom:26px;left:-28px;animation:float 5s ease-in-out infinite}
+.fc-2{top:34px;right:-24px;animation:float 5s ease-in-out infinite .8s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+.fc-icon{width:38px;height:38px;border-radius:11px;background:var(--brand-soft);
+  display:grid;place-items:center;flex-shrink:0}
+.fc-icon svg{width:19px;height:19px;fill:var(--brand)}
+.fc-t{font-size:.9rem;font-weight:700;line-height:1.25}
+.fc-s{font-size:.74rem;color:var(--muted)}
+.stars{color:var(--accent);font-size:.8rem;letter-spacing:1px}
+
+/* ---------- services ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:22px}
+.svc{padding:32px 28px;border-radius:var(--radius);background:var(--surface);
+  border:1px solid var(--line);transition:.32s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
+.svc::before{
+  content:'';position:absolute;left:0;top:0;height:3px;width:0;background:var(--brand);transition:width .4s ease;
+}
+.svc:hover{transform:translateY(-7px);box-shadow:var(--shadow-lg);border-color:transparent}
+.svc:hover::before{width:100%}
+.svc-icon{width:52px;height:52px;border-radius:14px;background:var(--brand-soft);
+  display:grid;place-items:center;margin-bottom:1.2rem;transition:.32s}
+.svc:hover .svc-icon{background:var(--brand);transform:scale(1.06) rotate(-5deg)}
+.svc-icon svg{width:26px;height:26px;fill:var(--brand);transition:.32s}
+.svc:hover .svc-icon svg{fill:#fff}
+.svc h3{margin-bottom:.55rem}
+.svc p{font-size:.93rem}
+
+/* ---------- angst / comfort ---------- */
+.comfort{background:var(--surface-2)}
+.comfort-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.comfort-list{list-style:none;display:grid;gap:1.1rem;margin-top:1.8rem}
+.comfort-list li{display:flex;gap:.9rem;align-items:flex-start}
+.check{width:26px;height:26px;border-radius:50%;background:var(--brand);flex-shrink:0;
+  display:grid;place-items:center;margin-top:2px}
+.check svg{width:13px;height:13px;fill:#fff}
+.comfort-list b{display:block;font-size:.98rem;margin-bottom:.1rem}
+.comfort-list span{font-size:.9rem;color:var(--ink-soft)}
+.comfort-visual{border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:1/1;
+  background:linear-gradient(150deg,#0a5f6b,var(--brand))}
+.comfort-visual img{width:100%;height:100%;object-fit:cover}
+
+/* ---------- booking ---------- */
+.booking-shell{display:grid;grid-template-columns:1fr 400px;gap:28px;align-items:start}
+.booking-box{padding:34px;border-radius:24px;background:var(--surface);
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.step{margin-bottom:2rem}
+.step:last-child{margin-bottom:0}
+.step-label{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;
+  display:grid;place-items:center;font-size:.78rem;font-weight:800;flex-shrink:0}
+.step-label h3{font-size:1rem}
+.chip-row{display:flex;flex-wrap:wrap;gap:.55rem}
+.chip{
+  padding:.62rem 1.05rem;border-radius:999px;border:1px solid var(--line);
+  background:var(--surface-2);color:var(--ink-soft);cursor:pointer;
+  font:600 .87rem/1 'Inter',sans-serif;transition:.2s;
+}
+.chip:hover{border-color:var(--brand);color:var(--brand)}
+.chip.sel{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 4px 12px rgba(14,142,142,.3)}
+.chip small{display:block;font-size:.7rem;font-weight:500;opacity:.72;margin-top:3px}
+.day-row{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:8px;scrollbar-width:thin}
+.day{
+  min-width:70px;flex-shrink:0;text-align:center;padding:.7rem .4rem;border-radius:14px;
+  border:1px solid var(--line);background:var(--surface-2);cursor:pointer;transition:.2s;
+}
+.day:hover:not(.off){border-color:var(--brand)}
+.day.sel{background:var(--brand);border-color:var(--brand);color:#fff}
+.day.off{opacity:.32;cursor:not-allowed}
+.day .dw{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;font-weight:700;color:var(--muted)}
+.day.sel .dw{color:rgba(255,255,255,.8)}
+.day .dd{font-size:1.22rem;font-weight:700;font-family:'Fraunces',serif;line-height:1.25}
+.day .dm{font-size:.66rem;color:var(--muted)}
+.day.sel .dm{color:rgba(255,255,255,.75)}
+.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:.5rem}
+.slot{
+  padding:.6rem .3rem;border-radius:11px;border:1px solid var(--line);background:var(--surface-2);
+  cursor:pointer;font:600 .88rem/1 'Inter',sans-serif;text-align:center;transition:.18s;color:var(--ink-soft);
+}
+.slot:hover:not(.taken){border-color:var(--brand);color:var(--brand)}
+.slot.sel{background:var(--brand);border-color:var(--brand);color:#fff}
+.slot.taken{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.hint{font-size:.86rem;color:var(--muted);padding:.9rem 0}
+.field{margin-bottom:.9rem}
+.field label{display:block;font-size:.8rem;font-weight:650;margin-bottom:.35rem;color:var(--ink-soft)}
+.field input,.field textarea{
+  width:100%;padding:.82rem 1rem;border-radius:12px;border:1px solid var(--line);
+  background:var(--surface-2);color:var(--ink);font:400 .93rem/1.5 'Inter',sans-serif;transition:.2s;
+}
+.field input:focus,.field textarea:focus{outline:0;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.field textarea{resize:vertical;min-height:82px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+
+.summary{padding:28px;border-radius:24px;background:var(--brand);color:#fff;
+  box-shadow:0 20px 46px rgba(14,142,142,.32);position:sticky;top:100px}
+.summary h3{color:#fff;margin-bottom:.3rem}
+.summary > p{color:rgba(255,255,255,.75);font-size:.88rem;margin-bottom:1.5rem}
+.sum-line{display:flex;justify-content:space-between;gap:1rem;padding:.85rem 0;
+  border-bottom:1px solid rgba(255,255,255,.18);font-size:.9rem}
+.sum-line:last-of-type{border-bottom:0}
+.sum-line .k{color:rgba(255,255,255,.72)}
+.sum-line .v{font-weight:700;text-align:right}
+.summary .btn{width:100%;margin-top:1.4rem;background:#fff;color:var(--brand);box-shadow:none}
+.summary .btn:hover{background:#eafafa;transform:translateY(-2px)}
+.summary .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.sum-note{font-size:.76rem;color:rgba(255,255,255,.66);margin-top:1rem;text-align:center;line-height:1.5}
+.ok-box{display:none;text-align:center;padding:1rem 0}
+.ok-box.show{display:block;animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+.ok-ring{width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.2);
+  display:grid;place-items:center;margin:0 auto 1rem}
+.ok-ring svg{width:30px;height:30px;fill:#fff}
+
+/* ---------- team ---------- */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px}
+.member{text-align:center}
+.member-photo{
+  aspect-ratio:1/1;border-radius:22px;overflow:hidden;margin-bottom:1.1rem;
+  background:linear-gradient(150deg,var(--brand-soft),var(--surface-2));
+  box-shadow:var(--shadow);transition:.35s cubic-bezier(.2,.8,.2,1);position:relative;
+}
+.member:hover .member-photo{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.member-photo img{width:100%;height:100%;object-fit:cover}
+.member-photo{display:grid;place-items:center}
+.member-photo .initials{
+  font-family:'Fraunces',Georgia,serif;font-size:clamp(2.6rem,6vw,3.4rem);font-weight:700;
+  color:#fff;letter-spacing:.03em;line-height:1;user-select:none;
+  text-shadow:0 2px 12px rgba(0,0,0,.18);
+}
+.member:nth-child(1) .member-photo{background:linear-gradient(150deg,#0E8E8E,#0a5f6b)}
+.member:nth-child(2) .member-photo{background:linear-gradient(150deg,#12A5A5,#0b6f78)}
+.member:nth-child(3) .member-photo{background:linear-gradient(150deg,#0a7f86,#084f5c)}
+.member:nth-child(4) .member-photo{background:linear-gradient(150deg,#149a94,#0a6068)}
+.member h3{margin-bottom:.15rem}
+.member .role{font-size:.87rem;color:var(--brand);font-weight:600}
+.member .spec{font-size:.82rem;color:var(--muted);margin-top:.3rem}
+
+/* ---------- reviews ---------- */
+.reviews{background:var(--surface-2)}
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px}
+.rev{padding:28px;border-radius:var(--radius);background:var(--surface);border:1px solid var(--line)}
+.rev .stars{font-size:.95rem;margin-bottom:.9rem;display:block}
+.rev p{font-size:.95rem;font-style:italic;margin-bottom:1.2rem}
+.rev-who{display:flex;align-items:center;gap:.7rem}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--brand);color:#fff;
+  display:grid;place-items:center;font-weight:700;font-size:.85rem;flex-shrink:0}
+.rev-who b{font-size:.88rem;display:block}
+.rev-who small{font-size:.76rem;color:var(--muted)}
+
+/* ---------- faq ---------- */
+.faq-list{max-width:820px;margin:0 auto;display:grid;gap:.75rem}
+.faq-item{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;transition:.25s}
+.faq-item.open{border-color:var(--brand);box-shadow:var(--shadow)}
+.faq-q{
+  width:100%;display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:1.15rem 1.4rem;background:none;border:0;cursor:pointer;text-align:left;
+  font:650 1rem/1.4 'Inter',sans-serif;color:var(--ink);
+}
+.faq-q svg{width:18px;height:18px;fill:var(--brand);flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-q svg{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a p{padding:0 1.4rem 1.3rem;font-size:.94rem}
+
+/* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.info-block{display:flex;gap:1rem;margin-bottom:1.7rem}
+.info-icon{width:44px;height:44px;border-radius:13px;background:var(--brand-soft);
+  display:grid;place-items:center;flex-shrink:0}
+.info-icon svg{width:20px;height:20px;fill:var(--brand)}
+.info-block b{display:block;font-size:.95rem;margin-bottom:.2rem}
+.info-block span,.info-block a{font-size:.92rem;color:var(--ink-soft);display:block}
+.info-block a:hover{color:var(--brand)}
+.hours{border-radius:var(--radius);background:var(--surface);border:1px solid var(--line);padding:26px}
+.hours h3{margin-bottom:1rem}
+.hrow{display:flex;justify-content:space-between;padding:.55rem 0;font-size:.92rem;border-bottom:1px solid var(--line)}
+.hrow:last-child{border-bottom:0}
+.hrow .d{color:var(--ink-soft)}
+.hrow .t{font-weight:600}
+.hrow.closed .t{color:var(--muted);font-weight:500}
+.hrow.today{color:var(--brand)}
+.hrow.today .d,.hrow.today .t{color:var(--brand);font-weight:700}
+.emergency{margin-top:1.3rem;padding:1.1rem 1.3rem;border-radius:14px;
+  background:var(--brand-soft);border:1px dashed var(--brand);display:flex;gap:.85rem;align-items:center}
+.emergency svg{width:22px;height:22px;fill:var(--brand);flex-shrink:0}
+.emergency b{display:block;font-size:.9rem}
+.emergency a{font-size:1.05rem;font-weight:800;color:var(--brand)}
+.map{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+  height:250px;margin-top:1.4rem;background:var(--surface-2);position:relative}
+.map iframe{width:100%;height:100%;border:0;filter:grayscale(.25)}
+
+/* ---------- footer ---------- */
+footer{background:var(--surface);border-top:1px solid var(--line);padding:56px 0 28px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:44px;margin-bottom:38px}
+.foot-grid p{font-size:.9rem;margin-top:1rem;max-width:330px}
+.foot-col h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:1rem;font-weight:700}
+.foot-col a{display:block;font-size:.91rem;color:var(--ink-soft);padding:.28rem 0;transition:.2s}
+.foot-col a:hover{color:var(--brand);transform:translateX(3px)}
+.foot-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;
+  justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.84rem;color:var(--muted)}
+.foot-bottom a{color:var(--brand);font-weight:600}
+
+/* ---------- demo ribbon ---------- */
+.demo-note{
+  position:fixed;bottom:18px;left:18px;z-index:99;
+  background:var(--ink);color:var(--bg);font-size:.76rem;font-weight:600;
+  padding:.6rem 1rem;border-radius:999px;box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;gap:.5rem;max-width:calc(100vw - 36px);
+}
+.demo-note a{color:var(--accent);font-weight:700}
+.demo-note .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;
+  animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media(max-width:980px){
+  .hero-grid,.comfort-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
+  .booking-shell{grid-template-columns:1fr}
+  .summary{position:static}
+  .hero-visual{max-width:420px;margin:0 auto}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .comfort-visual{max-width:440px;margin:0 auto}
+}
+@media(max-width:760px){
+  section{padding:70px 0}
+  .hero{padding:120px 0 70px}
+  .nav-links{
+    position:fixed;top:78px;left:0;right:0;flex-direction:column;gap:0;
+    background:var(--surface);border-bottom:1px solid var(--line);padding:0 24px;
+    max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;
+    box-shadow:var(--shadow-lg);
+  }
+  .nav-links.open{max-height:340px;padding:14px 24px 22px}
+  .nav-links a{padding:.8rem 0;border-bottom:1px solid var(--line);font-size:1rem}
+  .nav-links a:last-child{border-bottom:0}
+  .burger{display:flex}
+  .nav-tools{margin-left:auto}
+  .nav .btn-primary{display:none}
+  .fc-1{left:-8px;bottom:14px}
+  .fc-2{right:-8px;top:16px}
+  .floating-card{padding:.7rem .85rem}
+  .booking-box{padding:24px 20px}
+  .field-row{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .trust-row{gap:1.6rem}
+  .demo-note{font-size:.7rem;padding:.5rem .8rem;bottom:12px;left:12px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2c-1.8 0-2.4 1-4.4 1C5.5 3 4 4.4 4 7c0 4 1.6 6.5 2.4 9.4.5 1.9.8 3.6 2 3.6 1.4 0 1.4-3.4 3.6-3.4s2.2 3.4 3.6 3.4c1.2 0 1.5-1.7 2-3.6C18.4 13.5 20 11 20 7c0-2.6-1.5-4-3.6-4-2 0-2.6-1-4.4-1z"/></svg>
+      </span>
+      <span>Dentavit<small data-i18n="logo_sub">Zahnarztpraxis</small></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#leistungen" data-i18n="nav_services">Leistungen</a>
+      <a href="#wohlfuehlen" data-i18n="nav_comfort">Ohne Angst</a>
+      <a href="#termin" data-i18n="nav_booking">Termin</a>
+      <a href="#team" data-i18n="nav_team">Team</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+    </nav>
+
+    <div class="nav-tools">
+      <div class="lang-switch" id="langSwitch">
+        <button data-lang="de">DE</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="it">IT</button>
+        <button data-lang="bs">BS</button>
+      </div>
+      <button class="icon-btn" id="themeBtn" aria-label="Theme">
+        <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4 5.39 5.39 0 0 1 2.26-4.4c-.44-.06-.9-.1-1.36-.1z"/></svg>
+      </button>
+      <a href="#termin" class="btn btn-primary" data-i18n="nav_cta">Termin buchen</a>
+      <button class="burger" id="burger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow" data-i18n="hero_badge">★ 4,9 von 5 — 312 Patientenbewertungen</span>
+      <h1><span data-i18n="hero_h1a">Zahnmedizin, die sich</span> <em data-i18n="hero_h1b">leicht anfühlt</em>.</h1>
+      <p class="hero-lead" data-i18n="hero_lead">Moderne Behandlung ohne Hektik, ohne Druck und ohne Angst — mitten in Wien. Termin online buchen, ganz ohne Warteschleife am Telefon.</p>
+      <div class="hero-cta">
+        <a href="#termin" class="btn btn-primary" data-i18n="hero_cta1">Termin online buchen</a>
+        <a href="#leistungen" class="btn btn-ghost" data-i18n="hero_cta2">Leistungen ansehen</a>
+      </div>
+      <div class="trust-row">
+        <div><div class="n">18</div><div class="l" data-i18n="stat1">Jahre Erfahrung</div></div>
+        <div><div class="n">9.400+</div><div class="l" data-i18n="stat2">Behandelte Patienten</div></div>
+        <div><div class="n">4,9<span style="font-size:1rem">/5</span></div><div class="l" data-i18n="stat3">Google Bewertung</div></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=900&q=80" alt="Zahnarztpraxis Dentavit" loading="eager" onerror="this.style.display='none'">
+      </div>
+      <div class="floating-card fc-1">
+        <span class="fc-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" transform="rotate(180 12 12)"/></svg></span>
+        <div><div class="fc-t" data-i18n="float1_t">Termin in 30 Sek.</div><div class="fc-s" data-i18n="float1_s">Online, rund um die Uhr</div></div>
+      </div>
+      <div class="floating-card fc-2">
+        <span class="fc-icon"><svg viewBox="0 0 24 24"><path d="M12 21s-8-4.9-8-10.6A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8 3.4C20 16.1 12 21 12 21z"/></svg></span>
+        <div><div class="fc-t" data-i18n="float2_t">Angstfrei behandelt</div><div class="stars">★★★★★</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ LEISTUNGEN ============ -->
+<section id="leistungen">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow" data-i18n="svc_eyebrow">Leistungen</span>
+      <h2 data-i18n="svc_title">Alles für Ihre Zähne — unter einem Dach</h2>
+      <p data-i18n="svc_sub">Von der jährlichen Kontrolle bis zum Implantat. Wir erklären jeden Schritt, bevor wir ihn machen.</p>
+    </div>
+
+    <div class="svc-grid">
+      <article class="svc reveal">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2c-1.8 0-2.4 1-4.4 1C5.5 3 4 4.4 4 7c0 4 1.6 6.5 2.4 9.4.5 1.9.8 3.6 2 3.6 1.4 0 1.4-3.4 3.6-3.4s2.2 3.4 3.6 3.4c1.2 0 1.5-1.7 2-3.6C18.4 13.5 20 11 20 7c0-2.6-1.5-4-3.6-4-2 0-2.6-1-4.4-1z"/></svg></div>
+        <h3 data-i18n="svc1_t">Prophylaxe &amp; Zahnreinigung</h3>
+        <p data-i18n="svc1_d">Professionelle Reinigung mit Airflow, Politur und Fluoridierung. Der günstigste Weg, teure Behandlungen zu vermeiden.</p>
+      </article>
+
+      <article class="svc reveal">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M11 2h2v6h-2zM9.5 9h5l-.6 10.5a1.9 1.9 0 0 1-3.8 0zM8 4h8v2H8z"/></svg></div>
+        <h3 data-i18n="svc2_t">Implantologie</h3>
+        <p data-i18n="svc2_d">Fester Zahnersatz auf Titanimplantaten — 3D-geplant, schonend gesetzt und ein Leben lang belastbar.</p>
+      </article>
+
+      <article class="svc reveal">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M4 8h16a1 1 0 0 1 1 1v2a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V9a1 1 0 0 1 1-1zm2 2v1a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-1z"/></svg></div>
+        <h3 data-i18n="svc3_t">Unsichtbare Aligner</h3>
+        <p data-i18n="svc3_d">Zähne begradigen ohne Metallspange. Transparente Schienen, die im Alltag und auf Fotos niemand sieht.</p>
+      </article>
+
+      <article class="svc reveal">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="m12 2 2.2 5.2 5.8.5-4.4 3.8 1.3 5.6L12 14.2l-4.9 2.9 1.3-5.6L4 7.7l5.8-.5z"/></svg></div>
+        <h3 data-i18n="svc4_t">Ästhetik &amp; Bleaching</h3>
+        <p data-i18n="svc4_d">Veneers und schonendes Aufhellen für ein Lächeln, das natürlich bleibt — nicht künstlich wirkt.</p>
+      </article>
+
+      <article class="svc reveal">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 0 0-8 8v5a3 3 0 0 0 3 3h1v-7H6v-1a6 6 0 0 1 12 0v1h-2v7h1a3 3 0 0 0 3-3v-5a8 8 0 0 0-8-8z"/></svg></div>
+        <h3 data-i18n="svc5_t">Kinderzahnheilkunde</h3>
+        <p data-i18n="svc5_d">Spielerisch statt einschüchternd. Wir sorgen dafür, dass Ihr Kind gerne wiederkommt.</p>
+      </article>
+
+      <article class="svc reveal">
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></div>
+        <h3 data-i18n="svc6_t">Schmerz-Notdienst</h3>
+        <p data-i18n="svc6_d">Akute Schmerzen? Wir halten täglich Notfalltermine frei — Anruf genügt, auch am Wochenende.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WOHLFÜHLEN / ANGST ============ -->
+<section class="comfort" id="wohlfuehlen">
+  <div class="wrap comfort-grid">
+    <div class="reveal">
+      <span class="eyebrow" data-i18n="comfort_eyebrow">Angstpatienten</span>
+      <h2 data-i18n="comfort_title">Sie waren jahrelang nicht beim Zahnarzt? Gut, dass Sie da sind.</h2>
+      <p data-i18n="comfort_lead">Etwa jeder fünfte Erwachsene schiebt den Zahnarztbesuch aus Angst auf. Bei uns bekommen Sie keine Vorwürfe — sondern einen Plan, der zu Ihrem Tempo passt.</p>
+      <ul class="comfort-list">
+        <li>
+          <span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+          <div><b data-i18n="cf1_t">Erstgespräch ohne Behandlung</b><span data-i18n="cf1_s">Wir reden erst. Der Behandlungsstuhl bleibt beim ersten Termin leer, wenn Sie das möchten.</span></div>
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+          <div><b data-i18n="cf2_t">Stopp-Signal jederzeit</b><span data-i18n="cf2_s">Hand heben genügt — wir unterbrechen sofort, ohne Diskussion.</span></div>
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+          <div><b data-i18n="cf3_t">Behandlung im Dämmerschlaf</b><span data-i18n="cf3_s">Auf Wunsch mit Lachgas oder Sedierung — Sie bekommen von der Behandlung nichts mit.</span></div>
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+          <div><b data-i18n="cf4_t">Kosten vorher schriftlich</b><span data-i18n="cf4_s">Sie bekommen einen Heil- und Kostenplan, bevor irgendetwas beginnt. Keine Überraschungen.</span></div>
+        </li>
+      </ul>
+    </div>
+    <div class="comfort-visual reveal">
+      <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80" alt="Entspannte Behandlung" loading="lazy" onerror="this.style.display='none'">
+    </div>
+  </div>
+</section>
+
+<!-- ============ TERMIN BUCHEN ============ -->
+<section id="termin">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow" data-i18n="book_eyebrow">Online-Terminbuchung</span>
+      <h2 data-i18n="book_title">In 30 Sekunden zum Termin</h2>
+      <p data-i18n="book_sub">Keine Warteschleife, keine Rückrufbitte. Wählen Sie Behandlung, Tag und Uhrzeit — den Rest übernehmen wir.</p>
+    </div>
+
+    <div class="booking-shell">
+      <div class="booking-box reveal">
+        <!-- Step 1 -->
+        <div class="step">
+          <div class="step-label"><span class="step-num">1</span><h3 data-i18n="step1">Behandlung wählen</h3></div>
+          <div class="chip-row" id="treatRow"></div>
+        </div>
+        <!-- Step 2 -->
+        <div class="step">
+          <div class="step-label"><span class="step-num">2</span><h3 data-i18n="step2">Tag wählen</h3></div>
+          <div class="day-row" id="dayRow"></div>
+        </div>
+        <!-- Step 3 -->
+        <div class="step">
+          <div class="step-label"><span class="step-num">3</span><h3 data-i18n="step3">Uhrzeit wählen</h3></div>
+          <div class="slot-grid" id="slotGrid"></div>
+          <p class="hint" id="slotHint" data-i18n="slot_hint">Bitte zuerst einen Tag auswählen.</p>
+        </div>
+        <!-- Step 4 -->
+        <div class="step">
+          <div class="step-label"><span class="step-num">4</span><h3 data-i18n="step4">Ihre Kontaktdaten</h3></div>
+          <div class="field-row">
+            <div class="field"><label data-i18n="f_name">Vor- und Nachname</label><input type="text" id="fName" placeholder="Anna Berger"></div>
+            <div class="field"><label data-i18n="f_phone">Telefon</label><input type="tel" id="fPhone" placeholder="+43 660 1234567"></div>
+          </div>
+          <div class="field"><label data-i18n="f_mail">E-Mail</label><input type="email" id="fMail" placeholder="anna@beispiel.at"></div>
+          <div class="field"><label data-i18n="f_msg">Nachricht (optional)</label><textarea id="fMsg" data-i18n-ph="f_msg_ph" placeholder="Haben Sie Beschwerden oder Wünsche, die wir vorher wissen sollten?"></textarea></div>
+        </div>
+      </div>
+
+      <aside class="summary reveal">
+        <div id="sumMain">
+          <h3 data-i18n="sum_title">Ihr Termin</h3>
+          <p data-i18n="sum_sub">Die Übersicht aktualisiert sich automatisch.</p>
+          <div class="sum-line"><span class="k" data-i18n="sum_treat">Behandlung</span><span class="v" id="sumTreat">—</span></div>
+          <div class="sum-line"><span class="k" data-i18n="sum_date">Datum</span><span class="v" id="sumDate">—</span></div>
+          <div class="sum-line"><span class="k" data-i18n="sum_time">Uhrzeit</span><span class="v" id="sumTime">—</span></div>
+          <div class="sum-line"><span class="k" data-i18n="sum_dur">Dauer</span><span class="v" id="sumDur">—</span></div>
+          <button class="btn" id="bookBtn" disabled data-i18n="sum_btn">Termin bestätigen</button>
+          <p class="sum-note" data-i18n="sum_note">Sie erhalten sofort eine Bestätigung per E-Mail. Absagen bis 24 Std. vorher sind kostenlos.</p>
+        </div>
+        <div class="ok-box" id="okBox">
+          <div class="ok-ring"><svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></div>
+          <h3 data-i18n="ok_title">Termin angefragt!</h3>
+          <p style="color:rgba(255,255,255,.85);font-size:.92rem;margin-top:.5rem" id="okText"></p>
+          <p class="sum-note" data-i18n="ok_note">Demo-Hinweis: Es wurde nichts wirklich versendet.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section id="team">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow" data-i18n="team_eyebrow">Das Team</span>
+      <h2 data-i18n="team_title">Die Menschen hinter dem Mundschutz</h2>
+      <p data-i18n="team_sub">Fünf Spezialistinnen und Spezialisten, die seit Jahren zusammenarbeiten.</p>
+    </div>
+    <div class="team-grid">
+      <div class="member reveal">
+        <div class="member-photo"><span class="initials" aria-hidden="true">LV</span></div>
+        <h3>Dr. Lena Vogt</h3>
+        <div class="role" data-i18n="role1">Zahnärztin &amp; Praxisleitung</div>
+        <div class="spec" data-i18n="spec1">Implantologie, Ästhetik</div>
+      </div>
+      <div class="member reveal">
+        <div class="member-photo"><span class="initials" aria-hidden="true">SH</span></div>
+        <h3>Dr. Samir Halilović</h3>
+        <div class="role" data-i18n="role2">Zahnarzt</div>
+        <div class="spec" data-i18n="spec2">Kieferorthopädie, Aligner</div>
+      </div>
+      <div class="member reveal">
+        <div class="member-photo"><span class="initials" aria-hidden="true">MK</span></div>
+        <h3>Marta Kern</h3>
+        <div class="role" data-i18n="role3">Dentalhygienikerin</div>
+        <div class="spec" data-i18n="spec3">Prophylaxe, Angstpatienten</div>
+      </div>
+      <div class="member reveal">
+        <div class="member-photo"><span class="initials" aria-hidden="true">JR</span></div>
+        <h3>Julian Reiter</h3>
+        <div class="role" data-i18n="role4">Zahntechniker</div>
+        <div class="spec" data-i18n="spec4">Eigenes Praxislabor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEWERTUNGEN ============ -->
+<section class="reviews">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow" data-i18n="rev_eyebrow">Patientenstimmen</span>
+      <h2 data-i18n="rev_title">4,9 von 5 Sternen bei 312 Bewertungen</h2>
+    </div>
+    <div class="rev-grid">
+      <article class="rev reveal">
+        <span class="stars">★★★★★</span>
+        <p data-i18n="rev1">„Ich hatte 12 Jahre lang Panik vor dem Zahnarzt. Frau Kern hat sich beim ersten Termin 40 Minuten Zeit genommen — ohne dass irgendetwas gemacht wurde. Inzwischen gehe ich freiwillig hin."</p>
+        <div class="rev-who"><span class="avatar">SB</span><div><b>Sandra B.</b><small data-i18n="rev1_s">Patientin seit 2023</small></div></div>
+      </article>
+      <article class="rev reveal">
+        <span class="stars">★★★★★</span>
+        <p data-i18n="rev2">„Implantat gesetzt bekommen, alles digital geplant. Vorher wusste ich auf den Euro genau, was es kostet. So sollte das überall laufen."</p>
+        <div class="rev-who"><span class="avatar">MK</span><div><b>Michael K.</b><small data-i18n="rev2_s">Patient seit 2021</small></div></div>
+      </article>
+      <article class="rev reveal">
+        <span class="stars">★★★★★</span>
+        <p data-i18n="rev3">„Meine Tochter ist sieben und wollte nach dem ersten Besuch sofort wieder hin. Das muss man erstmal schaffen."</p>
+        <div class="rev-who"><span class="avatar">EF</span><div><b>Elena F.</b><small data-i18n="rev3_s">Patientin seit 2024</small></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow" data-i18n="faq_eyebrow">Häufige Fragen</span>
+      <h2 data-i18n="faq_title">Das fragen uns Patienten am häufigsten</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q"><span data-i18n="faq1_q">Bin ich Kassenpatient oder muss ich privat zahlen?</span><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg></button>
+        <div class="faq-a"><p data-i18n="faq1_a">Wir rechnen mit allen Krankenkassen ab. Kontrolle, Zahnstein-Entfernung und viele Füllungen sind vollständig gedeckt. Bei Leistungen mit Selbstbehalt bekommen Sie vorher einen schriftlichen Kostenplan.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span data-i18n="faq2_q">Wie schnell bekomme ich bei Schmerzen einen Termin?</span><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg></button>
+        <div class="faq-a"><p data-i18n="faq2_a">Bei akuten Schmerzen noch am selben Tag. Wir halten täglich Notfallzeiten frei — rufen Sie einfach an, statt online zu buchen.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span data-i18n="faq3_q">Kann ich in Raten zahlen?</span><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg></button>
+        <div class="faq-a"><p data-i18n="faq3_a">Ja. Ab 500 € bieten wir zinsfreie Ratenzahlung über bis zu 12 Monate an. Das besprechen wir offen beim Kostenplan — niemand muss eine Behandlung aus Geldgründen aufschieben.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span data-i18n="faq4_q">Was, wenn ich mitten in der Behandlung Panik bekomme?</span><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg></button>
+        <div class="faq-a"><p data-i18n="faq4_a">Dann heben Sie die Hand und wir hören sofort auf. Kein Zureden, keine Diskussion. Bei starker Angst behandeln wir auf Wunsch mit Lachgas oder im Dämmerschlaf.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span data-i18n="faq5_q">Sprechen Sie auch andere Sprachen?</span><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg></button>
+        <div class="faq-a"><p data-i18n="faq5_a">Ja — im Team sprechen wir Deutsch, Englisch, Italienisch und Bosnisch/Kroatisch/Serbisch. Sagen Sie bei der Buchung Bescheid, dann teilen wir Sie passend ein.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT ============ -->
+<section id="kontakt" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-i18n="con_eyebrow">Kontakt</span>
+      <h2 data-i18n="con_title">So finden Sie uns</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="info-block">
+          <span class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></span>
+          <div><b data-i18n="con_addr">Adresse</b><span data-i18n="con_addr_d" style="white-space:pre-line">Musterstraße 1 (Demo-Adresse)
+1080 Wien, Österreich</span></div>
+        </div>
+        <div class="info-block">
+          <span class="info-icon"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .6 3.6 1 1 0 0 1-.2 1z"/></svg></span>
+          <div><b data-i18n="con_phone">Telefon</b><span>+43 1 000 00 00</span></div>
+        </div>
+        <div class="info-block">
+          <span class="info-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg></span>
+          <div><b data-i18n="con_mail">E-Mail</b><span>hallo@dentavit.example</span></div>
+        </div>
+        <div class="info-block">
+          <span class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
+          <div><b data-i18n="con_transit">Öffentlich erreichbar</b><span data-i18n="con_transit_d">U-Bahn-Station 3 Min. zu Fuß · Straßenbahn vor der Tür · Parkgarage im Haus</span></div>
+        </div>
+        <div class="map">
+          <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=16.335%2C48.208%2C16.355%2C48.218&amp;layer=mapnik" loading="lazy" title="Karte"></iframe>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="hours">
+          <h3 data-i18n="hours_title">Öffnungszeiten</h3>
+          <div class="hrow" data-day="1"><span class="d" data-i18n="d_mon">Montag</span><span class="t">08:00 – 18:00</span></div>
+          <div class="hrow" data-day="2"><span class="d" data-i18n="d_tue">Dienstag</span><span class="t">08:00 – 18:00</span></div>
+          <div class="hrow" data-day="3"><span class="d" data-i18n="d_wed">Mittwoch</span><span class="t">08:00 – 18:00</span></div>
+          <div class="hrow" data-day="4"><span class="d" data-i18n="d_thu">Donnerstag</span><span class="t">08:00 – 20:00</span></div>
+          <div class="hrow" data-day="5"><span class="d" data-i18n="d_fri">Freitag</span><span class="t">08:00 – 14:00</span></div>
+          <div class="hrow" data-day="6"><span class="d" data-i18n="d_sat">Samstag</span><span class="t" data-i18n="d_sat_t">Nur Notdienst</span></div>
+          <div class="hrow closed" data-day="0"><span class="d" data-i18n="d_sun">Sonntag</span><span class="t" data-i18n="d_closed">Geschlossen</span></div>
+        </div>
+        <div class="emergency">
+          <svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+          <div>
+            <b data-i18n="em_t">Zahnschmerzen am Wochenende?</b>
+            <span style="font-size:1.05rem;font-weight:800;color:var(--brand)">+43 1 000 00 99</span>
+          </div>
+        </div>
+        <a href="#termin" class="btn btn-primary" style="width:100%;margin-top:1.3rem" data-i18n="con_cta">Jetzt Termin buchen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo">
+          <span class="logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2c-1.8 0-2.4 1-4.4 1C5.5 3 4 4.4 4 7c0 4 1.6 6.5 2.4 9.4.5 1.9.8 3.6 2 3.6 1.4 0 1.4-3.4 3.6-3.4s2.2 3.4 3.6 3.4c1.2 0 1.5-1.7 2-3.6C18.4 13.5 20 11 20 7c0-2.6-1.5-4-3.6-4-2 0-2.6-1-4.4-1z"/></svg></span>
+          <span>Dentavit<small data-i18n="logo_sub2">Zahnarztpraxis</small></span>
+        </a>
+        <p data-i18n="foot_p">Zahnmedizin für Menschen, die lieber gut behandelt als schnell abgefertigt werden. Mitten im 8. Bezirk in Wien.</p>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="foot_c1">Praxis</h4>
+        <a href="#leistungen" data-i18n="nav_services2">Leistungen</a>
+        <a href="#team" data-i18n="nav_team2">Team</a>
+        <a href="#wohlfuehlen" data-i18n="nav_comfort2">Angstpatienten</a>
+        <a href="#faq" data-i18n="nav_faq2">FAQ</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-i18n="foot_c2">Rechtliches</h4>
+        <a href="#" data-i18n="foot_imp">Impressum</a>
+        <a href="#" data-i18n="foot_ds">Datenschutz</a>
+        <a href="#" data-i18n="foot_agb">Patienteninformation</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="foot_copy">© 2026 Dentavit Zahnarztpraxis — Demo-Projekt, kein echtes Unternehmen.</span>
+      <span><span data-i18n="foot_by">Design &amp; Entwicklung</span> <a href="https://menesnasufoski.dev" target="_blank">Menes Nasufoski</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="demo-note">
+  <span class="dot"></span>
+  <span data-i18n="demo_note">Demo-Website</span>
+  <a href="https://menesnasufoski.dev" target="_blank">menesnasufoski.dev</a>
+</div>
+
+<script>
+/* ============================================================
+   i18n — 4 Sprachen (DE / EN / IT / BS)
+   ============================================================ */
+const I18N = {
+  de:{
+    logo_sub:'Zahnarztpraxis', logo_sub2:'Zahnarztpraxis',
+    nav_services:'Leistungen', nav_comfort:'Ohne Angst', nav_booking:'Termin', nav_team:'Team', nav_faq:'FAQ', nav_contact:'Kontakt', nav_cta:'Termin buchen',
+    hero_badge:'★ 4,9 von 5 — 312 Patientenbewertungen',
+    hero_h1a:'Zahnmedizin, die sich', hero_h1b:'leicht anfühlt',
+    hero_lead:'Moderne Behandlung ohne Hektik, ohne Druck und ohne Angst — mitten in Wien. Termin online buchen, ganz ohne Warteschleife am Telefon.',
+    hero_cta1:'Termin online buchen', hero_cta2:'Leistungen ansehen',
+    stat1:'Jahre Erfahrung', stat2:'Behandelte Patienten', stat3:'Google Bewertung',
+    float1_t:'Termin in 30 Sek.', float1_s:'Online, rund um die Uhr', float2_t:'Angstfrei behandelt',
+    svc_eyebrow:'Leistungen', svc_title:'Alles für Ihre Zähne — unter einem Dach',
+    svc_sub:'Von der jährlichen Kontrolle bis zum Implantat. Wir erklären jeden Schritt, bevor wir ihn machen.',
+    svc1_t:'Prophylaxe & Zahnreinigung', svc1_d:'Professionelle Reinigung mit Airflow, Politur und Fluoridierung. Der günstigste Weg, teure Behandlungen zu vermeiden.',
+    svc2_t:'Implantologie', svc2_d:'Fester Zahnersatz auf Titanimplantaten — 3D-geplant, schonend gesetzt und ein Leben lang belastbar.',
+    svc3_t:'Unsichtbare Aligner', svc3_d:'Zähne begradigen ohne Metallspange. Transparente Schienen, die im Alltag und auf Fotos niemand sieht.',
+    svc4_t:'Ästhetik & Bleaching', svc4_d:'Veneers und schonendes Aufhellen für ein Lächeln, das natürlich bleibt — nicht künstlich wirkt.',
+    svc5_t:'Kinderzahnheilkunde', svc5_d:'Spielerisch statt einschüchternd. Wir sorgen dafür, dass Ihr Kind gerne wiederkommt.',
+    svc6_t:'Schmerz-Notdienst', svc6_d:'Akute Schmerzen? Wir halten täglich Notfalltermine frei — Anruf genügt, auch am Wochenende.',
+    comfort_eyebrow:'Angstpatienten', comfort_title:'Sie waren jahrelang nicht beim Zahnarzt? Gut, dass Sie da sind.',
+    comfort_lead:'Etwa jeder fünfte Erwachsene schiebt den Zahnarztbesuch aus Angst auf. Bei uns bekommen Sie keine Vorwürfe — sondern einen Plan, der zu Ihrem Tempo passt.',
+    cf1_t:'Erstgespräch ohne Behandlung', cf1_s:'Wir reden erst. Der Behandlungsstuhl bleibt beim ersten Termin leer, wenn Sie das möchten.',
+    cf2_t:'Stopp-Signal jederzeit', cf2_s:'Hand heben genügt — wir unterbrechen sofort, ohne Diskussion.',
+    cf3_t:'Behandlung im Dämmerschlaf', cf3_s:'Auf Wunsch mit Lachgas oder Sedierung — Sie bekommen von der Behandlung nichts mit.',
+    cf4_t:'Kosten vorher schriftlich', cf4_s:'Sie bekommen einen Heil- und Kostenplan, bevor irgendetwas beginnt. Keine Überraschungen.',
+    book_eyebrow:'Online-Terminbuchung', book_title:'In 30 Sekunden zum Termin',
+    book_sub:'Keine Warteschleife, keine Rückrufbitte. Wählen Sie Behandlung, Tag und Uhrzeit — den Rest übernehmen wir.',
+    step1:'Behandlung wählen', step2:'Tag wählen', step3:'Uhrzeit wählen', step4:'Ihre Kontaktdaten',
+    slot_hint:'Bitte zuerst einen Tag auswählen.', slot_none:'An diesem Tag ist leider nichts mehr frei.',
+    f_name:'Vor- und Nachname', f_phone:'Telefon', f_mail:'E-Mail', f_msg:'Nachricht (optional)',
+    f_msg_ph:'Haben Sie Beschwerden oder Wünsche, die wir vorher wissen sollten?',
+    sum_title:'Ihr Termin', sum_sub:'Die Übersicht aktualisiert sich automatisch.',
+    sum_treat:'Behandlung', sum_date:'Datum', sum_time:'Uhrzeit', sum_dur:'Dauer', sum_btn:'Termin bestätigen',
+    sum_note:'Sie erhalten sofort eine Bestätigung per E-Mail. Absagen bis 24 Std. vorher sind kostenlos.',
+    ok_title:'Termin angefragt!', ok_note:'Demo-Hinweis: Es wurde nichts wirklich versendet.',
+    ok_text:'Wir haben Ihren Wunschtermin am {d} um {t} Uhr notiert. Eine Bestätigung ist unterwegs.',
+    t1:'Kontrolle', t2:'Zahnreinigung', t3:'Schmerzen / Akut', t4:'Implantat-Beratung', t5:'Aligner-Beratung', t6:'Bleaching',
+    min:'Min.',
+    team_eyebrow:'Das Team', team_title:'Die Menschen hinter dem Mundschutz', team_sub:'Fünf Spezialistinnen und Spezialisten, die seit Jahren zusammenarbeiten.',
+    role1:'Zahnärztin & Praxisleitung', spec1:'Implantologie, Ästhetik',
+    role2:'Zahnarzt', spec2:'Kieferorthopädie, Aligner',
+    role3:'Dentalhygienikerin', spec3:'Prophylaxe, Angstpatienten',
+    role4:'Zahntechniker', spec4:'Eigenes Praxislabor',
+    rev_eyebrow:'Patientenstimmen', rev_title:'4,9 von 5 Sternen bei 312 Bewertungen',
+    rev1:'„Ich hatte 12 Jahre lang Panik vor dem Zahnarzt. Frau Kern hat sich beim ersten Termin 40 Minuten Zeit genommen — ohne dass irgendetwas gemacht wurde. Inzwischen gehe ich freiwillig hin."',
+    rev2:'„Implantat gesetzt bekommen, alles digital geplant. Vorher wusste ich auf den Euro genau, was es kostet. So sollte das überall laufen."',
+    rev3:'„Meine Tochter ist sieben und wollte nach dem ersten Besuch sofort wieder hin. Das muss man erstmal schaffen."',
+    rev1_s:'Patientin seit 2023', rev2_s:'Patient seit 2021', rev3_s:'Patientin seit 2024',
+    faq_eyebrow:'Häufige Fragen', faq_title:'Das fragen uns Patienten am häufigsten',
+    faq1_q:'Bin ich Kassenpatient oder muss ich privat zahlen?',
+    faq1_a:'Wir rechnen mit allen Krankenkassen ab. Kontrolle, Zahnstein-Entfernung und viele Füllungen sind vollständig gedeckt. Bei Leistungen mit Selbstbehalt bekommen Sie vorher einen schriftlichen Kostenplan.',
+    faq2_q:'Wie schnell bekomme ich bei Schmerzen einen Termin?',
+    faq2_a:'Bei akuten Schmerzen noch am selben Tag. Wir halten täglich Notfallzeiten frei — rufen Sie einfach an, statt online zu buchen.',
+    faq3_q:'Kann ich in Raten zahlen?',
+    faq3_a:'Ja. Ab 500 € bieten wir zinsfreie Ratenzahlung über bis zu 12 Monate an. Das besprechen wir offen beim Kostenplan — niemand muss eine Behandlung aus Geldgründen aufschieben.',
+    faq4_q:'Was, wenn ich mitten in der Behandlung Panik bekomme?',
+    faq4_a:'Dann heben Sie die Hand und wir hören sofort auf. Kein Zureden, keine Diskussion. Bei starker Angst behandeln wir auf Wunsch mit Lachgas oder im Dämmerschlaf.',
+    faq5_q:'Sprechen Sie auch andere Sprachen?',
+    faq5_a:'Ja — im Team sprechen wir Deutsch, Englisch, Italienisch und Bosnisch/Kroatisch/Serbisch. Sagen Sie bei der Buchung Bescheid, dann teilen wir Sie passend ein.',
+    con_eyebrow:'Kontakt', con_title:'So finden Sie uns',
+    con_addr:'Adresse', con_phone:'Telefon', con_mail:'E-Mail',
+    con_addr_d:'Musterstraße 1 (Demo-Adresse)\n1080 Wien, Österreich',
+    con_transit:'Öffentlich erreichbar', con_transit_d:'U-Bahn-Station 3 Min. zu Fuß · Straßenbahn vor der Tür · Parkgarage im Haus',
+    hours_title:'Öffnungszeiten',
+    d_mon:'Montag', d_tue:'Dienstag', d_wed:'Mittwoch', d_thu:'Donnerstag', d_fri:'Freitag', d_sat:'Samstag', d_sun:'Sonntag',
+    d_sat_t:'Nur Notdienst', d_closed:'Geschlossen',
+    em_t:'Zahnschmerzen am Wochenende?', con_cta:'Jetzt Termin buchen',
+    foot_p:'Zahnmedizin für Menschen, die lieber gut behandelt als schnell abgefertigt werden. Mitten im 8. Bezirk in Wien.',
+    foot_c1:'Praxis', foot_c2:'Rechtliches', nav_services2:'Leistungen', nav_team2:'Team', nav_comfort2:'Angstpatienten', nav_faq2:'FAQ',
+    foot_imp:'Impressum', foot_ds:'Datenschutz', foot_agb:'Patienteninformation',
+    foot_copy:'© 2026 Dentavit Zahnarztpraxis — Demo-Projekt, kein echtes Unternehmen.',
+    foot_by:'Design & Entwicklung', demo_note:'Demo-Website'
+  },
+  en:{
+    logo_sub:'Dental Practice', logo_sub2:'Dental Practice',
+    nav_services:'Services', nav_comfort:'No Fear', nav_booking:'Booking', nav_team:'Team', nav_faq:'FAQ', nav_contact:'Contact', nav_cta:'Book now',
+    hero_badge:'★ 4.9 out of 5 — 312 patient reviews',
+    hero_h1a:'Dentistry that finally', hero_h1b:'feels easy',
+    hero_lead:'Modern treatment without rush, pressure or fear — right in the heart of Vienna. Book online, no waiting on hold.',
+    hero_cta1:'Book appointment online', hero_cta2:'See our services',
+    stat1:'Years of experience', stat2:'Patients treated', stat3:'Google rating',
+    float1_t:'Booked in 30 sec.', float1_s:'Online, around the clock', float2_t:'Treated without fear',
+    svc_eyebrow:'Services', svc_title:'Everything for your teeth — under one roof',
+    svc_sub:'From the annual check-up to the implant. We explain every step before we take it.',
+    svc1_t:'Prophylaxis & Cleaning', svc1_d:'Professional cleaning with Airflow, polishing and fluoridation. The cheapest way to avoid expensive treatments.',
+    svc2_t:'Implantology', svc2_d:'Fixed restorations on titanium implants — 3D-planned, gently placed and built to last a lifetime.',
+    svc3_t:'Invisible aligners', svc3_d:'Straighten teeth without metal braces. Clear trays nobody notices in daily life or on photos.',
+    svc4_t:'Aesthetics & Whitening', svc4_d:'Veneers and gentle whitening for a smile that stays natural — never artificial.',
+    svc5_t:'Children’s dentistry', svc5_d:'Playful instead of intimidating. We make sure your child is happy to come back.',
+    svc6_t:'Emergency service', svc6_d:'Acute pain? We keep emergency slots free every day — just call, weekends included.',
+    comfort_eyebrow:'Dental anxiety', comfort_title:'Haven’t seen a dentist in years? Good thing you’re here.',
+    comfort_lead:'About one in five adults postpones the dentist out of fear. Here you get no reproach — just a plan that moves at your pace.',
+    cf1_t:'First talk, no treatment', cf1_s:'We talk first. The chair stays empty at your first visit if that is what you need.',
+    cf2_t:'Stop signal anytime', cf2_s:'Just raise your hand — we stop immediately, no questions asked.',
+    cf3_t:'Treatment under sedation', cf3_s:'On request with nitrous oxide or sedation — you won’t notice a thing.',
+    cf4_t:'Costs in writing upfront', cf4_s:'You get a written treatment and cost plan before anything starts. No surprises.',
+    book_eyebrow:'Online booking', book_title:'An appointment in 30 seconds',
+    book_sub:'No hold music, no callback requests. Pick treatment, day and time — we handle the rest.',
+    step1:'Choose treatment', step2:'Choose a day', step3:'Choose a time', step4:'Your contact details',
+    slot_hint:'Please select a day first.', slot_none:'Sorry, nothing available on this day.',
+    f_name:'First and last name', f_phone:'Phone', f_mail:'Email', f_msg:'Message (optional)',
+    f_msg_ph:'Any complaints or wishes we should know about beforehand?',
+    sum_title:'Your appointment', sum_sub:'This summary updates automatically.',
+    sum_treat:'Treatment', sum_date:'Date', sum_time:'Time', sum_dur:'Duration', sum_btn:'Confirm appointment',
+    sum_note:'You will receive an instant email confirmation. Cancellation is free up to 24 hrs in advance.',
+    ok_title:'Appointment requested!', ok_note:'Demo notice: nothing was actually sent.',
+    ok_text:'We noted your preferred slot on {d} at {t}. A confirmation is on its way.',
+    t1:'Check-up', t2:'Teeth cleaning', t3:'Pain / urgent', t4:'Implant consultation', t5:'Aligner consultation', t6:'Whitening',
+    min:'min',
+    team_eyebrow:'The team', team_title:'The people behind the mask', team_sub:'Five specialists who have worked side by side for years.',
+    role1:'Dentist & Practice Owner', spec1:'Implantology, aesthetics',
+    role2:'Dentist', spec2:'Orthodontics, aligners',
+    role3:'Dental hygienist', spec3:'Prophylaxis, anxious patients',
+    role4:'Dental technician', spec4:'In-house laboratory',
+    rev_eyebrow:'Patient voices', rev_title:'4.9 out of 5 stars from 312 reviews',
+    rev1:'"I panicked about dentists for 12 years. Ms Kern spent 40 minutes with me on the first visit — without doing anything at all. Now I go voluntarily."',
+    rev2:'"Got an implant, all digitally planned. I knew the exact cost to the euro beforehand. This is how it should work everywhere."',
+    rev3:'"My daughter is seven and wanted to come back right after the first visit. That takes some doing."',
+    rev1_s:'Patient since 2023', rev2_s:'Patient since 2021', rev3_s:'Patient since 2024',
+    faq_eyebrow:'FAQ', faq_title:'What patients ask us most',
+    faq1_q:'Am I covered by insurance or do I pay privately?',
+    faq1_a:'We settle with all health insurers. Check-ups, scaling and many fillings are fully covered. For services with a co-payment you receive a written cost plan in advance.',
+    faq2_q:'How fast can I get an appointment when in pain?',
+    faq2_a:'Same day for acute pain. We keep emergency slots open daily — just call instead of booking online.',
+    faq3_q:'Can I pay in instalments?',
+    faq3_a:'Yes. From €500 we offer interest-free instalments over up to 12 months. We discuss it openly with the cost plan — nobody should postpone treatment over money.',
+    faq4_q:'What if I panic during treatment?',
+    faq4_a:'Raise your hand and we stop instantly. No persuading, no debate. For severe anxiety we treat with nitrous oxide or sedation on request.',
+    faq5_q:'Do you speak other languages?',
+    faq5_a:'Yes — our team speaks German, English, Italian and Bosnian/Croatian/Serbian. Let us know when booking and we will assign you accordingly.',
+    con_eyebrow:'Contact', con_title:'How to find us',
+    con_addr:'Address', con_phone:'Phone', con_mail:'Email',
+    con_addr_d:'1 Example Street (demo address)\n1080 Vienna, Austria',
+    con_transit:'Public transport', con_transit_d:'Metro station 3 min on foot · Tram right outside · Parking garage in the building',
+    hours_title:'Opening hours',
+    d_mon:'Monday', d_tue:'Tuesday', d_wed:'Wednesday', d_thu:'Thursday', d_fri:'Friday', d_sat:'Saturday', d_sun:'Sunday',
+    d_sat_t:'Emergency only', d_closed:'Closed',
+    em_t:'Toothache on the weekend?', con_cta:'Book an appointment',
+    foot_p:'Dentistry for people who would rather be treated well than processed quickly. In the heart of Vienna’s 8th district.',
+    foot_c1:'Practice', foot_c2:'Legal', nav_services2:'Services', nav_team2:'Team', nav_comfort2:'Anxious patients', nav_faq2:'FAQ',
+    foot_imp:'Imprint', foot_ds:'Privacy', foot_agb:'Patient information',
+    foot_copy:'© 2026 Dentavit Dental Practice — demo project, not a real business.',
+    foot_by:'Design & development', demo_note:'Demo website'
+  },
+  it:{
+    logo_sub:'Studio dentistico', logo_sub2:'Studio dentistico',
+    nav_services:'Servizi', nav_comfort:'Senza paura', nav_booking:'Appuntamento', nav_team:'Team', nav_faq:'FAQ', nav_contact:'Contatti', nav_cta:'Prenota ora',
+    hero_badge:'★ 4,9 su 5 — 312 recensioni dei pazienti',
+    hero_h1a:'Odontoiatria che finalmente', hero_h1b:'sembra leggera',
+    hero_lead:'Cure moderne senza fretta, senza pressione e senza paura — nel cuore di Vienna. Prenota online, senza attese al telefono.',
+    hero_cta1:'Prenota online', hero_cta2:'Scopri i servizi',
+    stat1:'Anni di esperienza', stat2:'Pazienti trattati', stat3:'Valutazione Google',
+    float1_t:'Prenoti in 30 sec.', float1_s:'Online, 24 ore su 24', float2_t:'Curato senza ansia',
+    svc_eyebrow:'Servizi', svc_title:'Tutto per i tuoi denti — sotto lo stesso tetto',
+    svc_sub:'Dal controllo annuale all’impianto. Spieghiamo ogni passo prima di farlo.',
+    svc1_t:'Igiene e prevenzione', svc1_d:'Pulizia professionale con Airflow, lucidatura e fluorizzazione. Il modo più economico per evitare cure costose.',
+    svc2_t:'Implantologia', svc2_d:'Protesi fissa su impianti in titanio — pianificata in 3D, inserita con delicatezza e duratura tutta la vita.',
+    svc3_t:'Allineatori invisibili', svc3_d:'Denti dritti senza apparecchio metallico. Mascherine trasparenti che nessuno nota, nemmeno nelle foto.',
+    svc4_t:'Estetica e sbiancamento', svc4_d:'Faccette e sbiancamento delicato per un sorriso che resta naturale — mai artificiale.',
+    svc5_t:'Odontoiatria pediatrica', svc5_d:'Giocosa invece che intimidatoria. Facciamo in modo che tuo figlio torni volentieri.',
+    svc6_t:'Pronto soccorso dentale', svc6_d:'Dolore acuto? Teniamo liberi slot d’emergenza ogni giorno — basta una telefonata, anche nel weekend.',
+    comfort_eyebrow:'Pazienti ansiosi', comfort_title:'Non vai dal dentista da anni? Meno male che sei qui.',
+    comfort_lead:'Circa un adulto su cinque rimanda il dentista per paura. Da noi non ricevi rimproveri — ma un piano che segue il tuo ritmo.',
+    cf1_t:'Primo colloquio senza cure', cf1_s:'Prima parliamo. Alla prima visita la poltrona resta vuota, se è ciò che preferisci.',
+    cf2_t:'Segnale di stop sempre', cf2_s:'Basta alzare la mano — ci fermiamo subito, senza discutere.',
+    cf3_t:'Trattamento in sedazione', cf3_s:'Su richiesta con protossido d’azoto o sedazione — non ti accorgerai di nulla.',
+    cf4_t:'Costi per iscritto in anticipo', cf4_s:'Ricevi un piano di cura e di spesa prima che inizi qualsiasi cosa. Nessuna sorpresa.',
+    book_eyebrow:'Prenotazione online', book_title:'Un appuntamento in 30 secondi',
+    book_sub:'Niente attese, niente richiami. Scegli trattamento, giorno e orario — al resto pensiamo noi.',
+    step1:'Scegli il trattamento', step2:'Scegli il giorno', step3:'Scegli l’orario', step4:'I tuoi dati',
+    slot_hint:'Seleziona prima un giorno.', slot_none:'Purtroppo in questo giorno non c’è più posto.',
+    f_name:'Nome e cognome', f_phone:'Telefono', f_mail:'E-mail', f_msg:'Messaggio (facoltativo)',
+    f_msg_ph:'Hai disturbi o richieste che dovremmo sapere in anticipo?',
+    sum_title:'Il tuo appuntamento', sum_sub:'Il riepilogo si aggiorna automaticamente.',
+    sum_treat:'Trattamento', sum_date:'Data', sum_time:'Orario', sum_dur:'Durata', sum_btn:'Conferma appuntamento',
+    sum_note:'Riceverai subito una conferma via e-mail. La disdetta è gratuita fino a 24 ore prima.',
+    ok_title:'Appuntamento richiesto!', ok_note:'Nota demo: non è stato inviato nulla realmente.',
+    ok_text:'Abbiamo annotato la tua preferenza per il {d} alle {t}. La conferma è in arrivo.',
+    t1:'Controllo', t2:'Igiene dentale', t3:'Dolore / urgenza', t4:'Consulenza impianti', t5:'Consulenza allineatori', t6:'Sbiancamento',
+    min:'min',
+    team_eyebrow:'Il team', team_title:'Le persone dietro la mascherina', team_sub:'Cinque specialisti che lavorano fianco a fianco da anni.',
+    role1:'Dentista e titolare', spec1:'Implantologia, estetica',
+    role2:'Dentista', spec2:'Ortodonzia, allineatori',
+    role3:'Igienista dentale', spec3:'Prevenzione, pazienti ansiosi',
+    role4:'Odontotecnico', spec4:'Laboratorio interno',
+    rev_eyebrow:'Voci dei pazienti', rev_title:'4,9 stelle su 5 da 312 recensioni',
+    rev1:'«Per 12 anni ho avuto il panico del dentista. Alla prima visita la signora Kern mi ha dedicato 40 minuti — senza fare assolutamente nulla. Ora ci vado volentieri.»',
+    rev2:'«Impianto inserito, tutto pianificato in digitale. Sapevo in anticipo il costo all’euro. Dovrebbe funzionare così ovunque.»',
+    rev3:'«Mia figlia ha sette anni e dopo la prima visita voleva tornarci subito. Non è da tutti.»',
+    rev1_s:'Paziente dal 2023', rev2_s:'Paziente dal 2021', rev3_s:'Paziente dal 2024',
+    faq_eyebrow:'Domande frequenti', faq_title:'Quello che i pazienti ci chiedono di più',
+    faq1_q:'Sono coperto dall’assicurazione o pago privatamente?',
+    faq1_a:'Collaboriamo con tutte le casse malattia. Controlli, detartrasi e molte otturazioni sono interamente coperti. Per le prestazioni con compartecipazione ricevi in anticipo un piano dei costi scritto.',
+    faq2_q:'Quanto in fretta ottengo un appuntamento in caso di dolore?',
+    faq2_a:'In giornata per i dolori acuti. Teniamo liberi slot d’emergenza ogni giorno — telefona invece di prenotare online.',
+    faq3_q:'Posso pagare a rate?',
+    faq3_a:'Sì. Da 500 € offriamo rate senza interessi fino a 12 mesi. Ne parliamo apertamente con il piano dei costi — nessuno deve rimandare una cura per soldi.',
+    faq4_q:'E se mi prende il panico durante la cura?',
+    faq4_a:'Alzi la mano e ci fermiamo subito. Nessuna insistenza, nessuna discussione. In caso di forte ansia trattiamo su richiesta con protossido o sedazione.',
+    faq5_q:'Parlate anche altre lingue?',
+    faq5_a:'Sì — il nostro team parla tedesco, inglese, italiano e bosniaco/croato/serbo. Segnalacelo alla prenotazione e ti assegneremo la persona giusta.',
+    con_eyebrow:'Contatti', con_title:'Come trovarci',
+    con_addr:'Indirizzo', con_phone:'Telefono', con_mail:'E-mail',
+    con_addr_d:'Via Esempio 1 (indirizzo demo)\n1080 Vienna, Austria',
+    con_transit:'Mezzi pubblici', con_transit_d:'Stazione della metro a 3 min a piedi · Tram davanti all’ingresso · Garage nell’edificio',
+    hours_title:'Orari di apertura',
+    d_mon:'Lunedì', d_tue:'Martedì', d_wed:'Mercoledì', d_thu:'Giovedì', d_fri:'Venerdì', d_sat:'Sabato', d_sun:'Domenica',
+    d_sat_t:'Solo emergenze', d_closed:'Chiuso',
+    em_t:'Mal di denti nel weekend?', con_cta:'Prenota adesso',
+    foot_p:'Odontoiatria per chi preferisce essere curato bene piuttosto che sbrigato in fretta. Nel cuore dell’8° distretto di Vienna.',
+    foot_c1:'Studio', foot_c2:'Note legali', nav_services2:'Servizi', nav_team2:'Team', nav_comfort2:'Pazienti ansiosi', nav_faq2:'FAQ',
+    foot_imp:'Note legali', foot_ds:'Privacy', foot_agb:'Informazioni per i pazienti',
+    foot_copy:'© 2026 Dentavit Studio dentistico — progetto demo, non un’azienda reale.',
+    foot_by:'Design e sviluppo', demo_note:'Sito demo'
+  },
+  bs:{
+    logo_sub:'Stomatološka ordinacija', logo_sub2:'Stomatološka ordinacija',
+    nav_services:'Usluge', nav_comfort:'Bez straha', nav_booking:'Termin', nav_team:'Tim', nav_faq:'Pitanja', nav_contact:'Kontakt', nav_cta:'Zakaži termin',
+    hero_badge:'★ 4,9 od 5 — 312 ocjena pacijenata',
+    hero_h1a:'Stomatologija koja se konačno', hero_h1b:'čini lakom',
+    hero_lead:'Moderno liječenje bez žurbe, pritiska i straha — u centru Beča. Zakažite online, bez čekanja na telefonu.',
+    hero_cta1:'Zakaži termin online', hero_cta2:'Pogledaj usluge',
+    stat1:'Godina iskustva', stat2:'Liječenih pacijenata', stat3:'Google ocjena',
+    float1_t:'Termin za 30 sek.', float1_s:'Online, 24 sata dnevno', float2_t:'Liječeni bez straha',
+    svc_eyebrow:'Usluge', svc_title:'Sve za vaše zube — na jednom mjestu',
+    svc_sub:'Od godišnje kontrole do implantata. Svaki korak objasnimo prije nego ga napravimo.',
+    svc1_t:'Profilaksa i čišćenje zubi', svc1_d:'Profesionalno čišćenje Airflow tehnikom, poliranje i fluorizacija. Najjeftiniji način da izbjegnete skupe zahvate.',
+    svc2_t:'Implantologija', svc2_d:'Fiksna nadoknada na titanijumskim implantatima — 3D planirana, nježno postavljena i izdržljiva cijeli život.',
+    svc3_t:'Nevidljivi alajneri', svc3_d:'Ravnanje zuba bez metalne proteze. Prozirne folije koje niko ne primijeti ni u svakodnevici ni na fotografijama.',
+    svc4_t:'Estetika i izbjeljivanje', svc4_d:'Ljuskice i nježno izbjeljivanje za osmijeh koji ostaje prirodan — nikad vještački.',
+    svc5_t:'Dječja stomatologija', svc5_d:'Kroz igru umjesto zastrašivanja. Pobrinemo se da se vaše dijete rado vrati.',
+    svc6_t:'Hitna služba', svc6_d:'Akutni bol? Svaki dan držimo slobodne hitne termine — dovoljan je poziv, i vikendom.',
+    comfort_eyebrow:'Strah od stomatologa', comfort_title:'Godinama niste bili kod stomatologa? Dobro je što ste tu.',
+    comfort_lead:'Otprilike svaki peti odrasli odgađa stomatologa zbog straha. Kod nas nema prijekora — nego plan koji prati vaš tempo.',
+    cf1_t:'Prvi razgovor bez zahvata', cf1_s:'Prvo razgovaramo. Na prvom terminu stolica ostaje prazna, ako tako želite.',
+    cf2_t:'Znak za stop u svakom trenutku', cf2_s:'Dovoljno je podići ruku — odmah prekidamo, bez rasprave.',
+    cf3_t:'Zahvat u sedaciji', cf3_s:'Po želji uz smijući plin ili sedaciju — nećete osjetiti ništa.',
+    cf4_t:'Troškovi pismeno unaprijed', cf4_s:'Dobijate plan terapije i troškova prije nego išta počne. Bez iznenađenja.',
+    book_eyebrow:'Online zakazivanje', book_title:'Do termina za 30 sekundi',
+    book_sub:'Bez čekanja i bez povratnih poziva. Odaberite zahvat, dan i vrijeme — ostalo je na nama.',
+    step1:'Odaberite zahvat', step2:'Odaberite dan', step3:'Odaberite vrijeme', step4:'Vaši podaci',
+    slot_hint:'Molimo prvo odaberite dan.', slot_none:'Nažalost, tog dana nema slobodnih termina.',
+    f_name:'Ime i prezime', f_phone:'Telefon', f_mail:'E-mail', f_msg:'Poruka (opcionalno)',
+    f_msg_ph:'Imate li tegobe ili želje koje bismo trebali znati unaprijed?',
+    sum_title:'Vaš termin', sum_sub:'Pregled se ažurira automatski.',
+    sum_treat:'Zahvat', sum_date:'Datum', sum_time:'Vrijeme', sum_dur:'Trajanje', sum_btn:'Potvrdi termin',
+    sum_note:'Odmah dobijate potvrdu e-mailom. Otkazivanje do 24 sata prije je besplatno.',
+    ok_title:'Termin zatražen!', ok_note:'Demo napomena: ništa nije stvarno poslano.',
+    ok_text:'Zabilježili smo vaš željeni termin {d} u {t}. Potvrda stiže uskoro.',
+    t1:'Kontrola', t2:'Čišćenje zubi', t3:'Bol / hitno', t4:'Konsultacija za implantat', t5:'Konsultacija za alajnere', t6:'Izbjeljivanje',
+    min:'min',
+    team_eyebrow:'Naš tim', team_title:'Ljudi iza maske', team_sub:'Pet specijalista koji godinama rade rame uz rame.',
+    role1:'Stomatolog i vlasnica ordinacije', spec1:'Implantologija, estetika',
+    role2:'Stomatolog', spec2:'Ortodoncija, alajneri',
+    role3:'Dentalni higijeničar', spec3:'Profilaksa, pacijenti sa strahom',
+    role4:'Zubni tehničar', spec4:'Vlastiti laboratorij',
+    rev_eyebrow:'Riječi pacijenata', rev_title:'4,9 od 5 zvjezdica iz 312 ocjena',
+    rev1:'„12 godina sam paničila od stomatologa. Gospođa Kern mi je na prvom terminu posvetila 40 minuta — a da ništa nije radila. Sada idem dobrovoljno."',
+    rev2:'„Ugrađen mi je implantat, sve digitalno planirano. Unaprijed sam znao cijenu do eura. Tako bi trebalo biti svugdje."',
+    rev3:'„Kćerka ima sedam godina i poslije prve posjete je odmah htjela ponovo. To nije lako postići."',
+    rev1_s:'Pacijentica od 2023.', rev2_s:'Pacijent od 2021.', rev3_s:'Pacijentica od 2024.',
+    faq_eyebrow:'Česta pitanja', faq_title:'Ovo nas pacijenti najčešće pitaju',
+    faq1_q:'Da li sam osiguran ili plaćam privatno?',
+    faq1_a:'Sarađujemo sa svim zdravstvenim osiguranjima. Kontrole, uklanjanje kamenca i mnoge plombe su u potpunosti pokrivene. Za usluge sa doplatom unaprijed dobijate pismeni plan troškova.',
+    faq2_q:'Koliko brzo dobijam termin kada me boli?',
+    faq2_a:'Kod akutnog bola isti dan. Svaki dan držimo slobodne hitne termine — jednostavno nazovite umjesto da zakazujete online.',
+    faq3_q:'Mogu li plaćati na rate?',
+    faq3_a:'Da. Od 500 € nudimo beskamatne rate do 12 mjeseci. O tome otvoreno razgovaramo uz plan troškova — niko ne treba odgađati liječenje zbog novca.',
+    faq4_q:'Šta ako me uhvati panika usred zahvata?',
+    faq4_a:'Podignete ruku i odmah prestajemo. Bez nagovaranja i rasprave. Kod jakog straha po želji liječimo uz smijući plin ili sedaciju.',
+    faq5_q:'Govorite li i druge jezike?',
+    faq5_a:'Da — u timu govorimo njemački, engleski, italijanski i bosanski/hrvatski/srpski. Javite nam pri zakazivanju i rasporedićemo vas kod odgovarajuće osobe.',
+    con_eyebrow:'Kontakt', con_title:'Kako do nas',
+    con_addr:'Adresa', con_phone:'Telefon', con_mail:'E-mail',
+    con_addr_d:'Primjerna ulica 1 (demo adresa)\n1080 Beč, Austrija',
+    con_transit:'Javni prevoz', con_transit_d:'Stanica metroa 3 min pješke · Tramvaj ispred ulaza · Garaža u zgradi',
+    hours_title:'Radno vrijeme',
+    d_mon:'Ponedjeljak', d_tue:'Utorak', d_wed:'Srijeda', d_thu:'Četvrtak', d_fri:'Petak', d_sat:'Subota', d_sun:'Nedjelja',
+    d_sat_t:'Samo hitni slučajevi', d_closed:'Zatvoreno',
+    em_t:'Zubobolja vikendom?', con_cta:'Zakaži termin odmah',
+    foot_p:'Stomatologija za ljude koji radije žele biti dobro liječeni nego brzo otpremljeni. U srcu 8. bečkog okruga.',
+    foot_c1:'Ordinacija', foot_c2:'Pravne informacije', nav_services2:'Usluge', nav_team2:'Tim', nav_comfort2:'Pacijenti sa strahom', nav_faq2:'Pitanja',
+    foot_imp:'Impressum', foot_ds:'Zaštita podataka', foot_agb:'Informacije za pacijente',
+    foot_copy:'© 2026 Dentavit stomatološka ordinacija — demo projekat, nije stvarna firma.',
+    foot_by:'Dizajn i razvoj', demo_note:'Demo stranica'
+  }
+};
+
+const LOCALE = {de:'de-AT', en:'en-GB', it:'it-IT', bs:'bs-BA'};
+let lang = localStorage.getItem('dentavit_lang') || 'de';
+
+function t(key){ return (I18N[lang] && I18N[lang][key]) || I18N.de[key] || key; }
+
+function applyLang(l){
+  lang = l;
+  localStorage.setItem('dentavit_lang', l);
+  document.documentElement.lang = l;
+
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const v = I18N[l][el.dataset.i18n];
+    if(v) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const v = I18N[l][el.dataset.i18nPh];
+    if(v) el.placeholder = v;
+  });
+  document.querySelectorAll('#langSwitch button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === l);
+  });
+
+  renderTreatments();
+  renderDays();
+  renderSlots();
+  updateSummary();
+}
+
+document.querySelectorAll('#langSwitch button').forEach(b=>{
+  b.addEventListener('click', ()=> applyLang(b.dataset.lang));
+});
+
+/* ============================================================
+   Theme
+   ============================================================ */
+const SUN = 'M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5v3m0 14v3M2 12h3m14 0h3M4.2 4.2l2.1 2.1m11.4 11.4 2.1 2.1M19.8 4.2l-2.1 2.1M6.3 17.7l-2.1 2.1';
+const MOON = 'M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4 5.39 5.39 0 0 1 2.26-4.4c-.44-.06-.9-.1-1.36-.1z';
+
+function applyTheme(mode){
+  document.documentElement.setAttribute('data-theme', mode);
+  localStorage.setItem('dentavit_theme', mode);
+  const icon = document.getElementById('themeIcon');
+  if(mode === 'dark'){
+    icon.innerHTML = '<path d="'+SUN+'" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>';
+  } else {
+    icon.innerHTML = '<path d="'+MOON+'"/>';
+  }
+}
+document.getElementById('themeBtn').addEventListener('click', ()=>{
+  const now = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  applyTheme(now);
+});
+
+/* ============================================================
+   Booking widget
+   ============================================================ */
+const TREATMENTS = [
+  {key:'t1', dur:30}, {key:'t2', dur:60}, {key:'t3', dur:30},
+  {key:'t4', dur:45}, {key:'t5', dur:45}, {key:'t6', dur:90}
+];
+const SLOT_TIMES = ['08:00','08:30','09:00','09:30','10:00','10:30','11:00',
+                    '13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00'];
+
+let selTreat = null, selDay = null, selSlot = null;
+let days = [];
+
+function buildDays(){
+  days = [];
+  const today = new Date();
+  let d = new Date(today);
+  d.setDate(d.getDate() + 1);            // ab morgen buchbar
+  while(days.length < 12){
+    const wd = d.getDay();
+    days.push({ date:new Date(d), closed: wd === 0 || wd === 6 });   // So + Sa zu
+    d.setDate(d.getDate() + 1);
+  }
+}
+
+/* deterministischer Pseudo-Zufall, damit belegte Slots beim Sprachwechsel gleich bleiben */
+function isTaken(date, time){
+  const seed = date.getDate() * 37 + date.getMonth() * 101 +
+               parseInt(time.replace(':',''), 10);
+  return (seed * 2654435761 % 100) < 38;
+}
+
+function renderTreatments(){
+  const row = document.getElementById('treatRow');
+  row.innerHTML = '';
+  TREATMENTS.forEach(tr=>{
+    const b = document.createElement('button');
+    b.className = 'chip' + (selTreat === tr.key ? ' sel' : '');
+    b.innerHTML = t(tr.key) + '<small>' + tr.dur + ' ' + t('min') + '</small>';
+    b.addEventListener('click', ()=>{ selTreat = tr.key; renderTreatments(); updateSummary(); });
+    row.appendChild(b);
+  });
+}
+
+function renderDays(){
+  const row = document.getElementById('dayRow');
+  row.innerHTML = '';
+  days.forEach((d, i)=>{
+    const el = document.createElement('button');
+    el.className = 'day' + (d.closed ? ' off' : '') + (selDay === i ? ' sel' : '');
+    el.disabled = d.closed;
+    const wd = d.date.toLocaleDateString(LOCALE[lang], {weekday:'short'});
+    const mo = d.date.toLocaleDateString(LOCALE[lang], {month:'short'});
+    el.innerHTML = '<div class="dw">'+wd+'</div><div class="dd">'+d.date.getDate()+'</div><div class="dm">'+mo+'</div>';
+    el.addEventListener('click', ()=>{
+      if(d.closed) return;
+      selDay = i; selSlot = null;
+      renderDays(); renderSlots(); updateSummary();
+    });
+    row.appendChild(el);
+  });
+}
+
+function renderSlots(){
+  const grid = document.getElementById('slotGrid');
+  const hint = document.getElementById('slotHint');
+  grid.innerHTML = '';
+
+  if(selDay === null){
+    hint.textContent = t('slot_hint');
+    hint.style.display = 'block';
+    return;
+  }
+
+  const d = days[selDay].date;
+  let free = 0;
+  SLOT_TIMES.forEach(time=>{
+    const taken = isTaken(d, time);
+    if(!taken) free++;
+    const b = document.createElement('button');
+    b.className = 'slot' + (taken ? ' taken' : '') + (selSlot === time ? ' sel' : '');
+    b.textContent = time;
+    b.disabled = taken;
+    b.addEventListener('click', ()=>{
+      if(taken) return;
+      selSlot = time; renderSlots(); updateSummary();
+    });
+    grid.appendChild(b);
+  });
+
+  hint.style.display = free ? 'none' : 'block';
+  if(!free) hint.textContent = t('slot_none');
+}
+
+function fmtDate(date){
+  return date.toLocaleDateString(LOCALE[lang], {weekday:'long', day:'numeric', month:'long'});
+}
+
+function updateSummary(){
+  const tr = TREATMENTS.find(x => x.key === selTreat);
+  document.getElementById('sumTreat').textContent = tr ? t(tr.key) : '—';
+  document.getElementById('sumDur').textContent  = tr ? tr.dur + ' ' + t('min') : '—';
+  document.getElementById('sumDate').textContent = selDay !== null ? fmtDate(days[selDay].date) : '—';
+  document.getElementById('sumTime').textContent = selSlot || '—';
+  document.getElementById('bookBtn').disabled = !(selTreat && selDay !== null && selSlot);
+}
+
+document.getElementById('bookBtn').addEventListener('click', ()=>{
+  const name = document.getElementById('fName').value.trim();
+  const mail = document.getElementById('fMail').value.trim();
+  if(!name || !mail){
+    document.getElementById(!name ? 'fName' : 'fMail').focus();
+    return;
+  }
+  document.getElementById('okText').textContent =
+    t('ok_text').replace('{d}', fmtDate(days[selDay].date)).replace('{t}', selSlot);
+  document.getElementById('sumMain').style.display = 'none';
+  document.getElementById('okBox').classList.add('show');
+});
+
+/* ============================================================
+   FAQ Accordion
+   ============================================================ */
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const q = item.querySelector('.faq-q');
+  const a = item.querySelector('.faq-a');
+  q.addEventListener('click', ()=>{
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(o=>{
+      o.classList.remove('open');
+      o.querySelector('.faq-a').style.maxHeight = null;
+    });
+    if(!open){
+      item.classList.add('open');
+      a.style.maxHeight = a.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ============================================================
+   Header / Burger / Reveal / Öffnungszeiten
+   ============================================================ */
+const hdr = document.getElementById('hdr');
+window.addEventListener('scroll', ()=> hdr.classList.toggle('scrolled', window.scrollY > 20));
+
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', ()=>{
+  burger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{
+  burger.classList.remove('open');
+  navLinks.classList.remove('open');
+}));
+
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, {threshold:.12, rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* heutigen Wochentag in den Öffnungszeiten hervorheben */
+document.querySelectorAll('.hrow').forEach(r=>{
+  if(Number(r.dataset.day) === new Date().getDay()) r.classList.add('today');
+});
+
+/* ============================================================
+   Init
+   ============================================================ */
+buildDays();
+applyTheme(localStorage.getItem('dentavit_theme') ||
+  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+applyLang(lang);
+</script>
+</body>
+</html>
