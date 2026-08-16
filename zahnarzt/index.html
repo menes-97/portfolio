@@ -124,7 +124,7 @@ header.scrolled{border-bottom-color:var(--line);box-shadow:0 4px 24px rgba(13,42
 .burger.open span:nth-child(2){opacity:0}
 .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-.hero{padding:150px 0 90px;overflow:hidden}
+.hero{padding:150px 0 90px;overflow:hidden;position:relative}
 .hero::before{
   content:'';position:absolute;top:-280px;right:-180px;width:720px;height:720px;
   background:radial-gradient(circle,var(--brand-soft) 0%,transparent 68%);
@@ -191,6 +191,8 @@ header.scrolled{border-bottom-color:var(--line);box-shadow:0 4px 24px rgba(13,42
 .comfort-visual img{width:100%;height:100%;object-fit:cover}
 
 .booking-shell{display:grid;grid-template-columns:1fr 400px;gap:28px;align-items:start}
+.booking-shell > *,.hero-grid > *,.comfort-grid > *,.contact-grid > *{min-width:0}
+.day-row{min-width:0}
 .booking-box{padding:34px;border-radius:24px;background:var(--surface);
   border:1px solid var(--line);box-shadow:var(--shadow)}
 .step{margin-bottom:2rem}
@@ -343,16 +345,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding:56px 0
   justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.84rem;color:var(--muted)}
 .foot-bottom a{color:var(--brand);font-weight:600}
 
-.demo-note{
-  position:fixed;bottom:18px;left:18px;z-index:99;
-  background:var(--ink);color:var(--bg);font-size:.76rem;font-weight:600;
-  padding:.6rem 1rem;border-radius:999px;box-shadow:var(--shadow-lg);
-  display:flex;align-items:center;gap:.5rem;max-width:calc(100vw - 36px);
-}
-.demo-note a{color:var(--accent);font-weight:700}
-.demo-note .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;
-  animation:blink 2s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+50%{opacity:.3}}
 
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
 .reveal.in{opacity:1;transform:none}
@@ -389,6 +382,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding:56px 0
   .lang-mobile{display:flex;align-self:center;margin:1.1rem 0 .2rem}
   .nav-menu-cta{display:inline-flex;align-self:center;margin-top:.9rem;border-bottom:0}
 
+  .eyebrow{font-size:.68rem;letter-spacing:.08em;padding:.4rem .8rem}
   .hero-grid > div:first-child{text-align:center}
   .hero-lead{margin-inline:auto}
   .hero-cta{justify-content:center}
@@ -423,7 +417,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding:56px 0
   .foot-grid p{margin-inline:auto}
   .foot-col a:hover{transform:none}
   .foot-bottom{justify-content:center;text-align:center}
-  .demo-note{font-size:.7rem;padding:.5rem .85rem;bottom:12px;left:50%;transform:translateX(-50%)}
+  
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition-duration:.01ms!important}
@@ -478,7 +472,7 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding:56px 0
 <div class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow" data-i18n="hero_badge">★ 4,9 von 5 — 312 Patientenbewertungen</span>
+      <span class="eyebrow" data-i18n="hero_badge">★ 4,9 von 5 · 312 Bewertungen</span>
       <h1><span data-i18n="hero_h1a">Zahnmedizin, die sich</span> <em data-i18n="hero_h1b">leicht anfühlt</em>.</h1>
       <p class="hero-lead" data-i18n="hero_lead">Moderne Behandlung ohne Hektik, ohne Druck und ohne Angst — mitten in Wien. Termin online buchen, ganz ohne Warteschleife am Telefon.</p>
       <div class="hero-cta">
@@ -821,19 +815,13 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding:56px 0
   </div>
 </footer>
 
-<div class="demo-note">
-  <span class="dot"></span>
-  <span data-i18n="demo_note">Demo-Website</span>
-  <a href="https://menesnasufoski.dev" target="_blank">menesnasufoski.dev</a>
-</div>
-
 <script>
 
 const I18N = {
   de:{
     logo_sub:'Zahnarztpraxis', logo_sub2:'Zahnarztpraxis',
     nav_services:'Leistungen', nav_comfort:'Ohne Angst', nav_booking:'Termin', nav_team:'Team', nav_faq:'FAQ', nav_contact:'Kontakt', nav_cta:'Termin buchen',
-    hero_badge:'★ 4,9 von 5 — 312 Patientenbewertungen',
+    hero_badge:'★ 4,9 von 5 · 312 Bewertungen',
     hero_h1a:'Zahnmedizin, die sich', hero_h1b:'leicht anfühlt',
     hero_lead:'Moderne Behandlung ohne Hektik, ohne Druck und ohne Angst — mitten in Wien. Termin online buchen, ganz ohne Warteschleife am Telefon.',
     hero_cta1:'Termin online buchen', hero_cta2:'Leistungen ansehen',
@@ -899,12 +887,12 @@ const I18N = {
     foot_c1:'Praxis', foot_c2:'Rechtliches', nav_services2:'Leistungen', nav_team2:'Team', nav_comfort2:'Angstpatienten', nav_faq2:'FAQ',
     foot_imp:'Impressum', foot_ds:'Datenschutz', foot_agb:'Patienteninformation',
     foot_copy:'© 2026 Dentavit Zahnarztpraxis — Demo-Projekt, kein echtes Unternehmen.',
-    foot_by:'Design & Entwicklung', demo_note:'Demo-Website'
+    foot_by:'Design & Entwicklung'
   },
   en:{
     logo_sub:'Dental Practice', logo_sub2:'Dental Practice',
     nav_services:'Services', nav_comfort:'No Fear', nav_booking:'Booking', nav_team:'Team', nav_faq:'FAQ', nav_contact:'Contact', nav_cta:'Book now',
-    hero_badge:'★ 4.9 out of 5 — 312 patient reviews',
+    hero_badge:'★ 4.9 out of 5 · 312 reviews',
     hero_h1a:'Dentistry that finally', hero_h1b:'feels easy',
     hero_lead:'Modern treatment without rush, pressure or fear — right in the heart of Vienna. Book online, no waiting on hold.',
     hero_cta1:'Book appointment online', hero_cta2:'See our services',
@@ -970,12 +958,12 @@ const I18N = {
     foot_c1:'Practice', foot_c2:'Legal', nav_services2:'Services', nav_team2:'Team', nav_comfort2:'Anxious patients', nav_faq2:'FAQ',
     foot_imp:'Imprint', foot_ds:'Privacy', foot_agb:'Patient information',
     foot_copy:'© 2026 Dentavit Dental Practice — demo project, not a real business.',
-    foot_by:'Design & development', demo_note:'Demo website'
+    foot_by:'Design & development'
   },
   it:{
     logo_sub:'Studio dentistico', logo_sub2:'Studio dentistico',
     nav_services:'Servizi', nav_comfort:'Senza paura', nav_booking:'Appuntamento', nav_team:'Team', nav_faq:'FAQ', nav_contact:'Contatti', nav_cta:'Prenota ora',
-    hero_badge:'★ 4,9 su 5 — 312 recensioni dei pazienti',
+    hero_badge:'★ 4,9 su 5 · 312 recensioni',
     hero_h1a:'Odontoiatria che finalmente', hero_h1b:'sembra leggera',
     hero_lead:'Cure moderne senza fretta, senza pressione e senza paura — nel cuore di Vienna. Prenota online, senza attese al telefono.',
     hero_cta1:'Prenota online', hero_cta2:'Scopri i servizi',
@@ -1041,12 +1029,12 @@ const I18N = {
     foot_c1:'Studio', foot_c2:'Note legali', nav_services2:'Servizi', nav_team2:'Team', nav_comfort2:'Pazienti ansiosi', nav_faq2:'FAQ',
     foot_imp:'Note legali', foot_ds:'Privacy', foot_agb:'Informazioni per i pazienti',
     foot_copy:'© 2026 Dentavit Studio dentistico — progetto demo, non un’azienda reale.',
-    foot_by:'Design e sviluppo', demo_note:'Sito demo'
+    foot_by:'Design e sviluppo'
   },
   bs:{
     logo_sub:'Stomatološka ordinacija', logo_sub2:'Stomatološka ordinacija',
     nav_services:'Usluge', nav_comfort:'Bez straha', nav_booking:'Termin', nav_team:'Tim', nav_faq:'Pitanja', nav_contact:'Kontakt', nav_cta:'Zakaži termin',
-    hero_badge:'★ 4,9 od 5 — 312 ocjena pacijenata',
+    hero_badge:'★ 4,9 od 5 · 312 ocjena',
     hero_h1a:'Stomatologija koja se konačno', hero_h1b:'čini lakom',
     hero_lead:'Moderno liječenje bez žurbe, pritiska i straha — u centru Beča. Zakažite online, bez čekanja na telefonu.',
     hero_cta1:'Zakaži termin online', hero_cta2:'Pogledaj usluge',
@@ -1112,7 +1100,7 @@ const I18N = {
     foot_c1:'Ordinacija', foot_c2:'Pravne informacije', nav_services2:'Usluge', nav_team2:'Tim', nav_comfort2:'Pacijenti sa strahom', nav_faq2:'Pitanja',
     foot_imp:'Impressum', foot_ds:'Zaštita podataka', foot_agb:'Informacije za pacijente',
     foot_copy:'© 2026 Dentavit stomatološka ordinacija — demo projekat, nije stvarna firma.',
-    foot_by:'Dizajn i razvoj', demo_note:'Demo stranica'
+    foot_by:'Dizajn i razvoj'
   }
 };
 
