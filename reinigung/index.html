@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumea Clean — Gebäudereinigung in Wien | Angebot in 30 Sekunden</title>
+
+<meta name="description" content="Lumea Clean: Unterhaltsreinigung, Büroreinigung, Grundreinigung, Bauendreinigung und Fensterputz in Wien. Preis online berechnen — transparent, versichert, ohne Vertragsbindung.">
+<meta name="author" content="Menes Nasufoski">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lumea Clean — Gebäudereinigung in Wien">
+<meta property="og:description" content="Sauberkeit ohne Diskussion. Preis in 30 Sekunden online berechnen — Festpreis, versichert, kurzfristig verfügbar.">
+<meta property="og:locale" content="de_AT">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231478E0'/%3E%3Cpath d='M16 6l1.9 4.9L23 12.8l-5.1 1.9L16 19.6l-1.9-4.9L9 12.8l5.1-1.9z' fill='%23fff'/%3E%3Ccircle cx='23' cy='22' r='2.6' fill='%237BE3C9'/%3E%3C/svg%3E">
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F3F7FC; --surface:#FFFFFF; --surface-2:#E9F1FB;
+  --ink:#0C2135; --ink-soft:#3A5470; --muted:#6C8298;
+  --brand:#1478E0; --brand-strong:#0E5FB5; --brand-soft:#DCEBFB;
+  --mint:#12B39A; --mint-soft:#D8F5EE;
+  --line:rgba(12,33,53,.10);
+  --shadow:0 1px 2px rgba(12,33,53,.05), 0 14px 34px rgba(12,33,53,.08);
+  --shadow-lg:0 28px 64px rgba(12,33,53,.16);
+  --radius:18px; --wrap:1180px;
+}
+html[data-theme="dark"]{
+  --bg:#08131F; --surface:#0F2131; --surface-2:#162E42;
+  --ink:#E8F1F9; --ink-soft:#B2C7DA; --muted:#8399AE;
+  --brand:#4C9BF0; --brand-strong:#6FB2F7; --brand-soft:#12334F;
+  --mint:#35D3B7; --mint-soft:#0F3A34;
+  --line:rgba(232,241,249,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 34px rgba(0,0,0,.42);
+  --shadow-lg:0 28px 64px rgba(0,0,0,.55);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  transition:background .3s ease,color .3s ease;
+}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;line-height:1.15;letter-spacing:-.02em;font-weight:700}
+h1{font-size:clamp(2.15rem,5.2vw,3.9rem);font-weight:800}
+h2{font-size:clamp(1.75rem,3.6vw,2.6rem)}
+h3{font-size:1.12rem;font-weight:700;letter-spacing:-.01em}
+p{color:var(--ink-soft)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+section{padding:94px 0;position:relative}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.73rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brand);background:var(--brand-soft);
+  padding:.4rem .85rem;border-radius:999px;margin-bottom:1rem;
+}
+.sec-head{max-width:640px;margin-bottom:52px}
+.sec-head p{font-size:1.03rem;margin-top:.85rem}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  font-family:'Inter',sans-serif;font-weight:600;font-size:.95rem;
+  padding:.85rem 1.6rem;border-radius:12px;border:1px solid transparent;
+  cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:0 10px 24px rgba(20,120,224,.28)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(20,120,224,.36);background:var(--brand-strong)}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-2px)}
+
+header{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid transparent;transition:border-color .3s ease,background .3s ease;
+}
+header.scrolled{border-bottom-color:var(--line)}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:74px}
+.logo{display:flex;align-items:center;gap:.6rem;font-family:'Outfit',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
+.logo-mark{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(140deg,var(--brand),var(--mint));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(20,120,224,.35);
+}
+.logo-mark svg{width:20px;height:20px;fill:#fff}
+.logo small{display:block;font-family:'Inter',sans-serif;font-size:.63rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:-2px}
+.nav-links{display:flex;gap:1.6rem;align-items:center}
+.nav-links a{font-size:.92rem;font-weight:500;color:var(--ink-soft);transition:color .2s ease;position:relative}
+.nav-links a:hover{color:var(--brand)}
+.nav-tools{display:flex;align-items:center;gap:.6rem}
+.lang-switch{display:flex;background:var(--surface-2);border-radius:10px;padding:3px;border:1px solid var(--line)}
+.lang-switch button{
+  border:0;background:transparent;cursor:pointer;color:var(--muted);
+  font-family:inherit;font-size:.74rem;font-weight:700;letter-spacing:.04em;
+  padding:.3rem .5rem;border-radius:7px;transition:all .2s ease;
+}
+.lang-switch button.active{background:var(--surface);color:var(--brand);box-shadow:0 1px 3px rgba(12,33,53,.12)}
+.icon-btn{
+  width:38px;height:38px;border-radius:10px;border:1px solid var(--line);
+  background:var(--surface);color:var(--ink);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .2s ease;
+}
+.icon-btn:hover{border-color:var(--brand);color:var(--brand)}
+.icon-btn svg{width:18px;height:18px;fill:currentColor}
+.burger{display:none;width:38px;height:38px;border:1px solid var(--line);border-radius:10px;
+  background:var(--surface);cursor:pointer;flex-direction:column;gap:4px;align-items:center;justify-content:center}
+.burger span{width:17px;height:2px;background:var(--ink);border-radius:2px;transition:all .25s ease}
+.burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.nav-menu-cta{display:none}
+
+.hero{padding:150px 0 90px;position:relative;overflow:hidden}
+.hero::before{
+  content:'';position:absolute;top:-220px;right:-160px;width:640px;height:640px;
+  background:radial-gradient(circle, rgba(20,120,224,.20) 0%, transparent 68%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-260px;left:-180px;width:560px;height:560px;
+  background:radial-gradient(circle, rgba(18,179,154,.18) 0%, transparent 68%);
+  pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;position:relative}
+.hero h1 em{font-style:normal;color:var(--brand);position:relative;white-space:nowrap}
+.hero h1 em::after{
+  content:'';position:absolute;left:0;right:0;bottom:.06em;height:.34em;
+  background:var(--mint);opacity:.28;border-radius:3px;z-index:-1;
+}
+.hero-lead{font-size:1.1rem;margin-top:1.25rem;max-width:520px}
+.hero-cta{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap}
+.hero-stats{display:flex;gap:2.4rem;margin-top:3rem;flex-wrap:wrap}
+.hero-stats .n{font-family:'Outfit',sans-serif;font-size:1.9rem;font-weight:800;color:var(--ink);line-height:1.1}
+.hero-stats .l{font-size:.8rem;color:var(--muted);font-weight:500}
+
+.hero-visual{position:relative}
+.shine-card{
+  position:relative;border-radius:24px;overflow:hidden;aspect-ratio:4/4.4;
+  background:linear-gradient(155deg,#1478E0 0%,#0E5FB5 48%,#0B3F7D 100%);
+  box-shadow:var(--shadow-lg);
+}
+.shine-card::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
+  background-size:56px 56px;
+}
+.shine-card::after{
+  content:'';position:absolute;top:-40%;left:-60%;width:60%;height:190%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.30),transparent);
+  transform:rotate(18deg);animation:sweep 5.5s ease-in-out infinite;
+}
+@keyframes sweep{0%{left:-60%}55%{left:120%}100%{left:120%}}
+.ring-wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;color:#fff}
+.ring{width:168px;height:168px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:11;stroke-linecap:round}
+.ring .bg{stroke:rgba(255,255,255,.18)}
+.ring .fg{stroke:#7BE3C9;stroke-dasharray:427;stroke-dashoffset:427;animation:fill 2.2s ease forwards .5s}
+@keyframes fill{to{stroke-dashoffset:36}}
+.ring-val{position:absolute;font-family:'Outfit',sans-serif;font-size:2.1rem;font-weight:800;
+  top:50%;left:50%;transform:translate(-50%,-64%)}
+.ring-lbl{position:absolute;top:50%;left:50%;transform:translate(-50%,42px);font-size:.78rem;
+  letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);font-weight:600;white-space:nowrap}
+.sparkle{position:absolute;fill:rgba(255,255,255,.55);animation:twinkle 3s ease-in-out infinite}
+.sparkle.s1{width:26px;height:26px;top:12%;left:14%}
+.sparkle.s2{width:18px;height:18px;top:74%;left:22%;animation-delay:.9s}
+.sparkle.s3{width:22px;height:22px;top:22%;right:16%;animation-delay:1.7s}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.85)}50%{opacity:.9;transform:scale(1.15)}}
+
+.float-card{
+  position:absolute;background:var(--surface);border:1px solid var(--line);
+  border-radius:14px;padding:.8rem 1rem;box-shadow:var(--shadow);
+  display:flex;align-items:center;gap:.7rem;animation:float 5s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+.float-card.f1{top:7%;left:-34px}
+.float-card.f2{bottom:9%;right:-28px;animation-delay:1.6s}
+.fc-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fc-ic svg{width:17px;height:17px}
+.fc-t{font-size:.83rem;font-weight:700;color:var(--ink);line-height:1.3}
+.fc-s{font-size:.72rem;color:var(--muted)}
+.stars{color:#F5A623;font-size:.8rem;letter-spacing:1px}
+
+.trustbar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+.trustbar .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;padding-top:26px;padding-bottom:26px}
+.trust-item{display:flex;align-items:center;gap:.7rem;font-size:.88rem;font-weight:600;color:var(--ink-soft)}
+.trust-item svg{width:20px;height:20px;fill:var(--mint);flex-shrink:0}
+
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.svc{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px 26px;box-shadow:var(--shadow);
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;position:relative;overflow:hidden;
+}
+.svc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brand),var(--mint));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.svc:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:transparent}
+.svc:hover::before{transform:scaleX(1)}
+.svc-ic{width:46px;height:46px;border-radius:13px;background:var(--brand-soft);
+  display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem}
+.svc-ic svg{width:23px;height:23px;fill:var(--brand)}
+.svc p{font-size:.92rem;margin-top:.55rem}
+.svc-price{display:inline-block;margin-top:1rem;font-size:.78rem;font-weight:700;color:var(--mint);
+  background:var(--mint-soft);padding:.28rem .7rem;border-radius:999px}
+
+.calc{background:var(--surface-2)}
+.calc-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:26px;align-items:start}
+.calc-panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;
+  padding:32px;box-shadow:var(--shadow)}
+.step{padding-bottom:26px;margin-bottom:26px;border-bottom:1px solid var(--line)}
+.step:last-child{padding-bottom:0;margin-bottom:0;border-bottom:0}
+.step-label{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.step-num{width:26px;height:26px;border-radius:8px;background:var(--brand);color:#fff;
+  font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chip-row{display:flex;flex-wrap:wrap;gap:.6rem}
+.chip{
+  border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+  font-family:inherit;font-size:.88rem;font-weight:600;padding:.65rem 1.05rem;border-radius:11px;
+  cursor:pointer;transition:all .2s ease;display:inline-flex;align-items:center;gap:.5rem;
+}
+.chip:hover{border-color:var(--brand);color:var(--brand)}
+.chip.active{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 8px 18px rgba(20,120,224,.26)}
+.chip .save{font-size:.68rem;font-weight:700;background:var(--mint-soft);color:var(--mint);padding:.1rem .4rem;border-radius:5px}
+.chip.active .save{background:rgba(255,255,255,.22);color:#fff}
+.chip[disabled]{opacity:.4;cursor:not-allowed}
+.chip[disabled]:hover{border-color:var(--line);color:var(--ink-soft)}
+
+.size-row{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;flex:1;min-width:200px;height:6px;border-radius:999px;
+  background:linear-gradient(90deg,var(--brand) var(--pct,30%),var(--surface-2) var(--pct,30%));outline:none;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;
+  border:4px solid var(--brand);cursor:pointer;box-shadow:0 3px 10px rgba(12,33,53,.22);
+}
+input[type=range]::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid var(--brand);
+  cursor:pointer;box-shadow:0 3px 10px rgba(12,33,53,.22);
+}
+.size-val{font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;min-width:104px}
+.size-val span{font-size:.9rem;color:var(--muted);font-weight:600}
+.hint{font-size:.83rem;color:var(--muted);margin-top:.8rem}
+
+.field{margin-bottom:.9rem}
+.field label{display:block;font-size:.82rem;font-weight:600;color:var(--ink-soft);margin-bottom:.35rem}
+.field input,.field textarea{
+  width:100%;font-family:inherit;font-size:.93rem;color:var(--ink);
+  background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:.75rem .9rem;
+  transition:border-color .2s ease,box-shadow .2s ease;
+}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.field textarea{min-height:92px;resize:vertical}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+
+.sum{
+  position:sticky;top:96px;border-radius:22px;padding:30px;color:#fff;
+  background:linear-gradient(160deg,#1478E0 0%,#0E5FB5 55%,#0B3F7D 100%);
+  box-shadow:var(--shadow-lg);overflow:hidden;
+}
+.sum h3{color:#fff;font-size:1.25rem}
+.sum > p{color:rgba(255,255,255,.72);font-size:.86rem;margin-top:.3rem}
+.price-box{margin:1.4rem 0 1.2rem;padding:1.1rem 0;border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18)}
+.price-main{font-family:'Outfit',sans-serif;font-size:2.9rem;font-weight:800;line-height:1;letter-spacing:-.03em}
+.price-main small{font-size:1.1rem;font-weight:700;margin-left:.15rem}
+.price-sub{font-size:.83rem;color:rgba(255,255,255,.78);margin-top:.35rem}
+.price-month{display:inline-block;margin-top:.7rem;font-size:.78rem;font-weight:700;
+  background:rgba(123,227,201,.22);color:#BEF3E4;padding:.28rem .7rem;border-radius:999px}
+.sum-line{display:flex;justify-content:space-between;gap:1rem;padding:.42rem 0;font-size:.88rem}
+.sum-line .k{color:rgba(255,255,255,.7)}
+.sum-line .v{font-weight:600;text-align:right}
+.sum .btn{width:100%;margin-top:1.3rem;background:#fff;color:var(--brand-strong);border:0}
+.sum .btn:hover{background:#EAF3FE;transform:translateY(-2px)}
+.sum-note{font-size:.75rem;color:rgba(255,255,255,.62);margin-top:.85rem;line-height:1.55}
+.ok-box{display:none;text-align:center;padding:1rem 0}
+.ok-box.show{display:block}
+.ok-ic{width:58px;height:58px;border-radius:50%;background:rgba(123,227,201,.2);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+.ok-ic svg{width:28px;height:28px;fill:#7BE3C9}
+.ok-box h3{color:#fff}
+
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.why-list{display:flex;flex-direction:column;gap:1.15rem}
+.why-item{display:flex;gap:1rem;align-items:flex-start}
+.why-item .tick{width:30px;height:30px;border-radius:9px;background:var(--mint-soft);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center}
+.why-item .tick svg{width:15px;height:15px;fill:var(--mint)}
+.why-item b{display:block;font-size:.98rem;font-weight:700;color:var(--ink)}
+.why-item span{font-size:.9rem;color:var(--ink-soft)}
+.checklist{background:var(--surface);border:1px solid var(--line);border-radius:22px;
+  padding:30px;box-shadow:var(--shadow)}
+.checklist h3{margin-bottom:.3rem}
+.checklist > p{font-size:.87rem;margin-bottom:1.3rem}
+.cl-item{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px dashed var(--line);font-size:.9rem;color:var(--ink-soft)}
+.cl-item:last-child{border-bottom:0}
+.cl-item .box{width:20px;height:20px;border-radius:6px;background:var(--brand);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center}
+.cl-item .box svg{width:12px;height:12px;fill:#fff}
+
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.stepc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px 24px;box-shadow:var(--shadow);position:relative}
+.stepc .num{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:800;
+  color:var(--brand);opacity:.22;line-height:1;margin-bottom:.4rem}
+.stepc p{font-size:.9rem;margin-top:.45rem}
+
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px 26px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.9rem}
+.rev q{font-size:.95rem;color:var(--ink-soft);font-style:normal;quotes:'„' '“'}
+.rev-who{display:flex;align-items:center;gap:.75rem;margin-top:auto}
+.avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(140deg,var(--brand),var(--mint));
+  color:#fff;font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rev-who b{font-size:.9rem;display:block}
+.rev-who span{font-size:.78rem;color:var(--muted)}
+
+.faq-list{max-width:820px;margin:0 auto}
+.faq-item{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  margin-bottom:.75rem;overflow:hidden;transition:border-color .2s ease,box-shadow .2s ease}
+.faq-item.open{border-color:var(--brand);box-shadow:var(--shadow)}
+.faq-q{width:100%;background:none;border:0;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:1.05rem 1.3rem;text-align:left;font-size:.98rem;font-weight:600;color:var(--ink)}
+.faq-q .pm{width:24px;height:24px;border-radius:7px;background:var(--brand-soft);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .25s ease}
+.faq-item.open .pm{transform:rotate(45deg);background:var(--brand);color:#fff}
+.faq-q .pm svg{width:12px;height:12px;fill:currentColor}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .32s ease}
+.faq-a p{padding:0 1.3rem 1.15rem;font-size:.92rem}
+
+.contact{background:var(--surface-2)}
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}
+.ci{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.5rem}
+.ci-ic{width:42px;height:42px;border-radius:12px;background:var(--brand-soft);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center}
+.ci-ic svg{width:19px;height:19px;fill:var(--brand)}
+.ci b{display:block;font-size:.94rem}
+.ci span{font-size:.9rem;color:var(--ink-soft)}
+.contact-form{background:var(--surface);border:1px solid var(--line);border-radius:22px;
+  padding:30px;box-shadow:var(--shadow)}
+.form-ok{display:none;background:var(--mint-soft);color:var(--mint);border-radius:12px;
+  padding:.85rem 1rem;font-size:.88rem;font-weight:600;margin-top:1rem}
+.form-ok.show{display:block}
+
+footer{background:var(--surface);border-top:1px solid var(--line);padding:46px 0 30px}
+.f-top{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:2rem}
+.f-links{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.9rem;color:var(--ink-soft)}
+.f-links a:hover{color:var(--brand)}
+.f-bottom{border-top:1px solid var(--line);padding-top:1.3rem;display:flex;
+  justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.82rem;color:var(--muted)}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:1000px){
+  .hero-grid{grid-template-columns:1fr;gap:52px}
+  .hero-visual{max-width:420px;margin:0 auto}
+  .calc-grid{grid-template-columns:1fr}
+  .sum{position:static}
+  .why-grid{grid-template-columns:1fr;gap:36px}
+  .svc-grid,.rev-grid{grid-template-columns:repeat(2,1fr)}
+  .steps-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-grid{grid-template-columns:1fr}
+  .trustbar .wrap{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  section{padding:70px 0}
+  .hero{padding:120px 0 70px}
+  .nav-links{
+    position:fixed;top:74px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+    background:var(--surface);border-bottom:1px solid var(--line);padding:.5rem 24px 1.2rem;
+    transform:translateY(-140%);transition:transform .3s ease;box-shadow:var(--shadow);
+  }
+  .nav-links.open{transform:translateY(0)}
+  .nav-links a{padding:.85rem 0;border-bottom:1px solid var(--line);font-size:1rem}
+  .nav-menu-cta{display:inline-flex;margin-top:1rem;border-bottom:0}
+  .nav-tools > .btn-primary{display:none}
+  .burger{display:flex}
+  .svc-grid,.rev-grid,.steps-grid{grid-template-columns:1fr}
+  .float-card.f1{left:-8px}
+  .float-card.f2{right:-8px}
+  .calc-panel,.sum,.contact-form,.checklist{padding:24px 20px}
+  .field-row{grid-template-columns:1fr}
+  .hero-stats{gap:1.6rem}
+  .price-main{font-size:2.4rem}
+}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap hdr-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2l2.1 5.4L19.5 9.5l-5.4 2.1L12 17l-2.1-5.4L4.5 9.5l5.4-2.1z"/><circle cx="18.5" cy="17.5" r="2.5"/></svg>
+      </span>
+      <span>Lumea Clean<small data-i18n="logo_sub">Gebäudereinigung</small></span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#leistungen" data-i18n="nav_services">Leistungen</a>
+      <a href="#rechner" data-i18n="nav_calc">Preisrechner</a>
+      <a href="#warum" data-i18n="nav_why">Warum wir</a>
+      <a href="#ablauf" data-i18n="nav_how">Ablauf</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+      <a href="#rechner" class="btn btn-primary nav-menu-cta" data-i18n="nav_cta">Preis berechnen</a>
+    </nav>
+
+    <div class="nav-tools">
+      <div class="lang-switch" id="langSwitch">
+        <button data-lang="de">DE</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="it">IT</button>
+        <button data-lang="bs">BS</button>
+      </div>
+      <button class="icon-btn" id="themeBtn" aria-label="Theme">
+        <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4 5.39 5.39 0 0 1 2.26-4.4c-.44-.06-.9-.1-1.36-.1z"/></svg>
+      </button>
+      <a href="#rechner" class="btn btn-primary" data-i18n="nav_cta">Preis berechnen</a>
+      <button class="burger" id="burger" aria-label="Menü"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow" data-i18n="hero_badge">★ 4,9 von 5 · 480 Bewertungen</span>
+      <h1><span data-i18n="hero_h1a">Sauberkeit, über die</span> <em data-i18n="hero_h1b">niemand redet</em>.</h1>
+      <p class="hero-lead" data-i18n="hero_lead">Weil sie einfach da ist. Unterhaltsreinigung, Büroreinigung und Grundreinigung in Wien — mit fixem Preis, geprüftem Personal und ohne Vertragsbindung.</p>
+      <div class="hero-cta">
+        <a href="#rechner" class="btn btn-primary" data-i18n="hero_cta1">Preis in 30 Sekunden berechnen</a>
+        <a href="#leistungen" class="btn btn-ghost" data-i18n="hero_cta2">Leistungen ansehen</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="n">14</div><div class="l" data-i18n="stat1">Jahre am Markt</div></div>
+        <div><div class="n">1.300+</div><div class="l" data-i18n="stat2">Objekte im Monat</div></div>
+        <div><div class="n">4,9<span style="font-size:1rem">/5</span></div><div class="l" data-i18n="stat3">Google Bewertung</div></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="shine-card">
+        <svg class="sparkle s1" viewBox="0 0 24 24"><path d="M12 2l2.1 5.4L19.5 9.5l-5.4 2.1L12 17l-2.1-5.4L4.5 9.5l5.4-2.1z"/></svg>
+        <svg class="sparkle s2" viewBox="0 0 24 24"><path d="M12 2l2.1 5.4L19.5 9.5l-5.4 2.1L12 17l-2.1-5.4L4.5 9.5l5.4-2.1z"/></svg>
+        <svg class="sparkle s3" viewBox="0 0 24 24"><path d="M12 2l2.1 5.4L19.5 9.5l-5.4 2.1L12 17l-2.1-5.4L4.5 9.5l5.4-2.1z"/></svg>
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 160 160">
+            <circle class="bg" cx="80" cy="80" r="68"></circle>
+            <circle class="fg" cx="80" cy="80" r="68"></circle>
+          </svg>
+          <div class="ring-val">98%</div>
+          <div class="ring-lbl" data-i18n="ring_lbl">Zufriedenheit</div>
+        </div>
+      </div>
+      <div class="float-card f1">
+        <span class="fc-ic" style="background:var(--brand-soft)">
+          <svg viewBox="0 0 24 24" fill="var(--brand)"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.6V6h-2v7.4l5.2 3.1 1-1.7-4.2-2.2z"/></svg>
+        </span>
+        <div><div class="fc-t" data-i18n="float1_t">Fixpreis vorab</div><div class="fc-s" data-i18n="float1_s">Keine Nachverrechnung</div></div>
+      </div>
+      <div class="float-card f2">
+        <span class="fc-ic" style="background:var(--mint-soft)">
+          <svg viewBox="0 0 24 24" fill="var(--mint)"><path d="M12 2l8 3.5v6c0 4.6-3.4 8.9-8 10.5-4.6-1.6-8-5.9-8-10.5v-6L12 2zm-1.2 13.6l5.4-5.4-1.4-1.4-4 4-1.8-1.8-1.4 1.4 3.2 3.2z"/></svg>
+        </span>
+        <div><div class="fc-t" data-i18n="float2_t">Voll versichert</div><div class="stars">★★★★★</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="trustbar">
+  <div class="wrap">
+    <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span data-i18n="trust1">Angemeldetes Personal</span></div>
+    <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span data-i18n="trust2">10 Mio. € Haftpflicht</span></div>
+    <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span data-i18n="trust3">Ökologische Reinigungsmittel</span></div>
+    <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg><span data-i18n="trust4">Termin in 48 Stunden</span></div>
+  </div>
+</div>
+
+<section id="leistungen">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="svc_eyebrow">Leistungen</span>
+      <h2 data-i18n="svc_title">Ein Team für alles, was sauber sein muss</h2>
+      <p data-i18n="svc_sub">Von der wöchentlichen Wohnungsreinigung bis zur Übergabe der Baustelle. Sie bekommen immer dieselben Reinigungskräfte — die wissen, wo bei Ihnen was steht.</p>
+    </div>
+
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M10 2v6.3L4 12v10h16V12l-6-3.7V2h-4zm2 12a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/></svg></div>
+        <h3 data-i18n="svc1_t">Wohnungsreinigung</h3>
+        <p data-i18n="svc1_d">Küche, Bad, Böden, Staub — nach einer festen Checkliste, die Sie selbst anpassen können. Wöchentlich, 14-tägig oder einmalig.</p>
+        <span class="svc-price" data-i18n="svc1_p">ab 89 € pro Einsatz</span>
+      </div>
+      <div class="svc reveal">
+        <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M3 21V7l8-4v4l8-3v17H3zm4-3h3v-3H7v3zm0-5h3v-3H7v3zm7 5h3v-3h-3v3zm0-5h3v-3h-3v3z"/></svg></div>
+        <h3 data-i18n="svc2_t">Büro- &amp; Praxisreinigung</h3>
+        <p data-i18n="svc2_d">Vor Arbeitsbeginn oder nach Feierabend — Ihr Team merkt nur das Ergebnis. Inklusive Sanitär, Küche und Müllentsorgung.</p>
+        <span class="svc-price" data-i18n="svc2_p">ab 79 € pro Einsatz</span>
+      </div>
+      <div class="svc reveal">
+        <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M4 3h16v18H4V3zm2 2v6h5V5H6zm7 0v6h5V5h-5zM6 13v6h5v-6H6zm7 0v6h5v-6h-5z"/></svg></div>
+        <h3 data-i18n="svc3_t">Fenster &amp; Glasflächen</h3>
+        <p data-i18n="svc3_d">Rahmen, Scheiben und Fensterbänke — streifenfrei mit entmineralisiertem Wasser. Auch für hohe Schaufenster.</p>
+        <span class="svc-price" data-i18n="svc3_p">ab 99 € pro Einsatz</span>
+      </div>
+      <div class="svc reveal">
+        <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M19.4 7.3l-2.7-2.7c-.8-.8-2-.8-2.8 0L3.6 15l5.4 5.4L19.4 10c.8-.7.8-2 0-2.7zM6.5 21H3v-3.5L6.5 21z"/></svg></div>
+        <h3 data-i18n="svc4_t">Grundreinigung</h3>
+        <p data-i18n="svc4_d">Einmal alles: Kalk, Fett, Fugen, Innenseiten der Schränke. Perfekt vor dem Einzug oder bei der Wohnungsübergabe.</p>
+        <span class="svc-price" data-i18n="svc4_p">ab 149 € pro Einsatz</span>
+      </div>
+      <div class="svc reveal">
+        <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M12 3L2 9v12h7v-6h6v6h7V9L12 3z"/></svg></div>
+        <h3 data-i18n="svc5_t">Bauendreinigung</h3>
+        <p data-i18n="svc5_d">Feinstaub, Mörtelreste, Farbspritzer und Klebefolien. Wir übergeben das Objekt bezugsfertig — auch am Wochenende.</p>
+        <span class="svc-price" data-i18n="svc5_p">ab 199 € pro Einsatz</span>
+      </div>
+      <div class="svc reveal">
+        <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M20 8H4a2 2 0 0 0-2 2v6h3v4h14v-4h3v-6a2 2 0 0 0-2-2zM7 4h10v3H7V4zm10 16H7v-4h10v4z"/></svg></div>
+        <h3 data-i18n="svc6_t">Teppich &amp; Polster</h3>
+        <p data-i18n="svc6_d">Sprühextraktion gegen Flecken und Gerüche. Nach 4–6 Stunden ist alles wieder trocken und benutzbar.</p>
+        <span class="svc-price" data-i18n="svc6_p">ab 6 € pro m²</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="calc" id="rechner">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="calc_eyebrow">Preisrechner</span>
+      <h2 data-i18n="calc_title">Was kostet es? Rechnen Sie selbst nach.</h2>
+      <p data-i18n="calc_sub">Kein Rückruf, kein Vertreter an der Tür. Wählen Sie Leistung, Größe und Intervall — der Preis steht sofort daneben.</p>
+    </div>
+
+    <div class="calc-grid">
+      <div class="calc-panel reveal">
+        <div class="step">
+          <div class="step-label"><span class="step-num">1</span><h3 data-i18n="calc_step1">Was soll gereinigt werden?</h3></div>
+          <div class="chip-row" id="typeRow"></div>
+        </div>
+
+        <div class="step">
+          <div class="step-label"><span class="step-num">2</span><h3 data-i18n="calc_step2">Wie groß ist die Fläche?</h3></div>
+          <div class="size-row">
+            <input type="range" id="sizeRange" min="20" max="400" step="5" value="75">
+            <div class="size-val"><span id="sizeVal">75</span> <span>m²</span></div>
+          </div>
+          <p class="hint" data-i18n="size_hint">Schätzen genügt — wir prüfen die Fläche beim ersten Termin kostenlos nach.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label"><span class="step-num">3</span><h3 data-i18n="calc_step3">Wie oft?</h3></div>
+          <div class="chip-row" id="freqRow"></div>
+          <p class="hint" id="freqHint" data-i18n="freq_hint">Je regelmäßiger, desto günstiger — jederzeit monatlich kündbar.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label"><span class="step-num">4</span><h3 data-i18n="calc_step4">Zusatzleistungen</h3></div>
+          <div class="chip-row" id="extraRow"></div>
+        </div>
+
+        <div class="step">
+          <div class="step-label"><span class="step-num">5</span><h3 data-i18n="calc_step5">Ihre Kontaktdaten</h3></div>
+          <div class="field-row">
+            <div class="field"><label data-i18n="f_name">Vor- und Nachname</label><input type="text" id="fName" placeholder="Anna Berger"></div>
+            <div class="field"><label data-i18n="f_phone">Telefon</label><input type="tel" id="fPhone" placeholder="+43 660 1234567"></div>
+          </div>
+          <div class="field"><label data-i18n="f_mail">E-Mail</label><input type="email" id="fMail" placeholder="anna@beispiel.at"></div>
+          <div class="field"><label data-i18n="f_addr">Adresse des Objekts</label><input type="text" id="fAddr" placeholder="Mariahilfer Straße 12, 1070 Wien"></div>
+        </div>
+      </div>
+
+      <div class="sum reveal">
+        <div id="sumMain">
+          <h3 data-i18n="sum_title">Ihr Richtpreis</h3>
+          <p data-i18n="sum_sub">Aktualisiert sich live, inkl. Material und Anfahrt.</p>
+          <div class="price-box">
+            <div class="price-main" id="priceMain">89 <small>€</small></div>
+            <div class="price-sub" id="priceSub" data-i18n="price_per">pro Einsatz, inkl. MwSt.</div>
+            <span class="price-month" id="priceMonth" style="display:none"></span>
+          </div>
+          <div class="sum-line"><span class="k" data-i18n="sum_type">Leistung</span><span class="v" id="sumType">—</span></div>
+          <div class="sum-line"><span class="k" data-i18n="sum_size">Fläche</span><span class="v" id="sumSize">—</span></div>
+          <div class="sum-line"><span class="k" data-i18n="sum_freq">Intervall</span><span class="v" id="sumFreq">—</span></div>
+          <div class="sum-line"><span class="k" data-i18n="sum_extras">Zusatzleistungen</span><span class="v" id="sumExtras">—</span></div>
+          <div class="sum-line"><span class="k" data-i18n="sum_dur">Dauer vor Ort</span><span class="v" id="sumDur">—</span></div>
+          <button class="btn" id="offerBtn" data-i18n="sum_btn">Angebot anfordern</button>
+          <p class="sum-note" data-i18n="sum_note">Unverbindlicher Richtwert. Nach einer kurzen Besichtigung (kostenlos, auch per Video) bekommen Sie den Festpreis schriftlich.</p>
+        </div>
+        <div class="ok-box" id="okBox">
+          <div class="ok-ic"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></div>
+          <h3 data-i18n="ok_title">Anfrage ist raus!</h3>
+          <p style="color:rgba(255,255,255,.85);font-size:.92rem;margin-top:.5rem" id="okText"></p>
+          <p class="sum-note" data-i18n="ok_note">Demo-Hinweis: Es wurde nichts wirklich versendet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="warum">
+  <div class="wrap why-grid">
+    <div class="reveal">
+      <span class="eyebrow" data-i18n="why_eyebrow">Warum Lumea</span>
+      <h2 data-i18n="why_title">Reinigung scheitert selten am Putzen. Sondern an der Verlässlichkeit.</h2>
+      <p style="margin:1rem 0 2rem" data-i18n="why_lead">Deshalb bekommen Sie bei uns ein festes Team, eine feste Ansprechperson und einen festen Preis. Wer einmal nicht kommt, meldet sich vorher — das ist bei uns keine Selbstverständlichkeit, sondern Regel.</p>
+      <div class="why-list">
+        <div class="why-item">
+          <span class="tick"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+          <div><b data-i18n="why1_t">Immer dieselben Reinigungskräfte</b><span data-i18n="why1_s">Kein wechselndes Personal in Ihrer Wohnung. Sie wissen, wer kommt — und wir wissen, wo der Schlüssel hängt.</span></div>
+        </div>
+        <div class="why-item">
+          <span class="tick"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+          <div><b data-i18n="why2_t">Angemeldet, versichert, geprüft</b><span data-i18n="why2_s">Alle Mitarbeiter sind fest angestellt und sozialversichert. Schäden deckt unsere Betriebshaftpflicht bis 10 Mio. €.</span></div>
+        </div>
+        <div class="why-item">
+          <span class="tick"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+          <div><b data-i18n="why3_t">Keine Vertragsbindung</b><span data-i18n="why3_s">Monatlich kündbar, ohne Kleingedrucktes. Wir behalten Sie durch Qualität, nicht durch Laufzeit.</span></div>
+        </div>
+        <div class="why-item">
+          <span class="tick"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+          <div><b data-i18n="why4_t">24-Stunden-Nachbesserung</b><span data-i18n="why4_s">Etwas übersehen? Sagen Sie Bescheid — wir kommen innerhalb eines Werktags zurück. Kostenlos.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist reveal">
+      <h3 data-i18n="cl_title">Was bei jeder Unterhaltsreinigung dabei ist</h3>
+      <p data-i18n="cl_sub">Diese Punkte sind im Standardpreis enthalten — nichts davon wird extra verrechnet.</p>
+      <div class="cl-item"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span data-i18n="cl1">Böden saugen und feucht wischen</span></div>
+      <div class="cl-item"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span data-i18n="cl2">Bad: WC, Dusche, Armaturen, Spiegel</span></div>
+      <div class="cl-item"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span data-i18n="cl3">Küche: Arbeitsflächen, Spüle, Fronten</span></div>
+      <div class="cl-item"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span data-i18n="cl4">Staubwischen aller freien Flächen</span></div>
+      <div class="cl-item"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span data-i18n="cl5">Müll entsorgen, Säcke erneuern</span></div>
+      <div class="cl-item"><span class="box"><svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span><span data-i18n="cl6">Reinigungsmittel und Geräte inklusive</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="ablauf" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="how_eyebrow">Ablauf</span>
+      <h2 data-i18n="how_title">Vier Schritte bis zur ersten Reinigung</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="stepc reveal"><div class="num">01</div><h3 data-i18n="st1_t">Preis berechnen</h3><p data-i18n="st1_d">Leistung und Fläche wählen, Richtpreis ablesen und Anfrage abschicken — dauert keine Minute.</p></div>
+      <div class="stepc reveal"><div class="num">02</div><h3 data-i18n="st2_t">Kurze Besichtigung</h3><p data-i18n="st2_d">Wir sehen uns das Objekt an — vor Ort oder per Videocall. Danach steht der Festpreis schriftlich.</p></div>
+      <div class="stepc reveal"><div class="num">03</div><h3 data-i18n="st3_t">Team &amp; Termin fix</h3><p data-i18n="st3_d">Sie lernen Ihr Reinigungsteam kennen und legen Wochentag und Uhrzeit fest. Schlüsselübergabe protokolliert.</p></div>
+      <div class="stepc reveal"><div class="num">04</div><h3 data-i18n="st4_t">Sauber. Immer wieder.</h3><p data-i18n="st4_d">Nach jedem Einsatz bekommen Sie ein kurzes Protokoll. Wünsche ändern? Eine Nachricht genügt.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="bewertungen">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="rev_eyebrow">Bewertungen</span>
+      <h2 data-i18n="rev_title">Was Kundinnen und Kunden sagen</h2>
+    </div>
+    <div class="rev-grid">
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <q data-i18n="rev1_q">Seit zwei Jahren dasselbe Team, immer pünktlich, immer gleich gründlich. Ich muss nicht mehr kontrollieren — und genau das war der Punkt.</q>
+        <div class="rev-who"><span class="avatar">SK</span><div><b>Sabine K.</b><span data-i18n="rev1_r">Wohnung, 1070 Wien</span></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <q data-i18n="rev2_q">Unsere Kanzlei wird abends gereinigt, wir merken davon nichts außer dem Ergebnis. Die Abrechnung ist so transparent wie versprochen.</q>
+        <div class="rev-who"><span class="avatar">MR</span><div><b>Markus R.</b><span data-i18n="rev2_r">Büro, 1010 Wien</span></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">★★★★★</div>
+        <q data-i18n="rev3_q">Nach dem Umbau sah es aus wie auf einer Baustelle. Zwei Tage später war die Wohnung übergabefertig — ohne einen Fleck.</q>
+        <div class="rev-who"><span class="avatar">EA</span><div><b>Elif A.</b><span data-i18n="rev3_r">Bauendreinigung, 1210 Wien</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="faq_eyebrow">FAQ</span>
+      <h2 data-i18n="faq_title">Häufige Fragen</h2>
+    </div>
+    <div class="faq-list" id="faqList">
+      <div class="faq-item reveal">
+        <button class="faq-q"><span data-i18n="q1">Muss ich zu Hause sein, während gereinigt wird?</span><span class="pm"><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg></span></button>
+        <div class="faq-a"><p data-i18n="a1">Nein. Die meisten Kunden übergeben uns einen Schlüssel — protokolliert und versichert. Sie können aber natürlich anwesend sein, gerade beim ersten Termin.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span data-i18n="q2">Muss ich Reinigungsmittel bereitstellen?</span><span class="pm"><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg></span></button>
+        <div class="faq-a"><p data-i18n="a2">Nein, Material und Geräte bringen wir mit — im Preis enthalten. Wenn Sie bestimmte Produkte bevorzugen (Allergien, empfindliche Böden), verwenden wir gerne Ihre.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span data-i18n="q3">Was passiert, wenn etwas beschädigt wird?</span><span class="pm"><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg></span></button>
+        <div class="faq-a"><p data-i18n="a3">Wir melden es Ihnen sofort, noch am selben Tag. Unsere Betriebshaftpflicht deckt Schäden bis 10 Mio. € — Sie müssen nichts vorstrecken.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span data-i18n="q4">Kann ich einen Termin verschieben oder absagen?</span><span class="pm"><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg></span></button>
+        <div class="faq-a"><p data-i18n="a4">Bis 24 Stunden vorher kostenlos, per Nachricht oder Anruf. Danach verrechnen wir 50 %, weil das Team den Tag bereits eingeplant hat.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span data-i18n="q5">Ist der berechnete Preis verbindlich?</span><span class="pm"><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg></span></button>
+        <div class="faq-a"><p data-i18n="a5">Der Rechner zeigt einen Richtwert auf Basis von Fläche und Leistung. Nach der kurzen Besichtigung erhalten Sie den Festpreis schriftlich — und der gilt dann auch.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span data-i18n="q6">Reinigen Sie auch am Wochenende?</span><span class="pm"><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2z"/><path d="M5 11h14v2H5z"/></svg></span></button>
+        <div class="faq-a"><p data-i18n="a6">Ja, Samstag zum Normaltarif, Sonntag mit 25 % Zuschlag. Bauendreinigungen legen wir auf Wunsch bewusst aufs Wochenende, damit der Montag frei ist.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="kontakt">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="contact_eyebrow">Kontakt</span>
+      <h2 data-i18n="contact_title">Lieber persönlich sprechen?</h2>
+      <p data-i18n="contact_sub">Rufen Sie an oder schreiben Sie kurz, worum es geht — wir melden uns am selben Werktag zurück.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="ci">
+          <span class="ci-ic"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></span>
+          <div><b data-i18n="ci1_t">Telefon</b><span>+43 1 234 56 78</span></div>
+        </div>
+        <div class="ci">
+          <span class="ci-ic"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
+          <div><b data-i18n="ci2_t">E-Mail</b><span>hallo@lumea-clean.at</span></div>
+        </div>
+        <div class="ci">
+          <span class="ci-ic"><svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></span>
+          <div><b data-i18n="ci3_t">Büro</b><span data-i18n="ci3_v">Gumpendorfer Straße 42, 1060 Wien</span></div>
+        </div>
+        <div class="ci">
+          <span class="ci-ic"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.6V6h-2v7.4l5.2 3.1 1-1.7-4.2-2.2z"/></svg></span>
+          <div><b data-i18n="ci4_t">Erreichbarkeit</b><span data-i18n="ci4_v">Mo–Fr 7:00–19:00 · Sa 8:00–14:00</span></div>
+        </div>
+      </div>
+
+      <div class="contact-form reveal">
+        <div class="field-row">
+          <div class="field"><label data-i18n="f_name">Vor- und Nachname</label><input type="text" id="cName" placeholder="Anna Berger"></div>
+          <div class="field"><label data-i18n="f_phone">Telefon</label><input type="tel" id="cPhone" placeholder="+43 660 1234567"></div>
+        </div>
+        <div class="field"><label data-i18n="f_mail">E-Mail</label><input type="email" id="cMail" placeholder="anna@beispiel.at"></div>
+        <div class="field"><label data-i18n="f_msg">Ihre Nachricht</label><textarea id="cMsg" data-i18n-ph="f_msg_ph" placeholder="Worum geht es? Wohnung, Büro, Baustelle — und ab wann?"></textarea></div>
+        <button class="btn btn-primary" id="cBtn" style="width:100%" data-i18n="c_btn">Nachricht senden</button>
+        <div class="form-ok" id="formOk" data-i18n="c_ok">Danke! Wir melden uns am selben Werktag. (Demo — es wurde nichts versendet.)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <a href="#top" class="logo">
+        <span class="logo-mark">
+          <svg viewBox="0 0 24 24"><path d="M12 2l2.1 5.4L19.5 9.5l-5.4 2.1L12 17l-2.1-5.4L4.5 9.5l5.4-2.1z"/><circle cx="18.5" cy="17.5" r="2.5"/></svg>
+        </span>
+        <span>Lumea Clean<small data-i18n="logo_sub">Gebäudereinigung</small></span>
+      </a>
+      <div class="f-links">
+        <a href="#leistungen" data-i18n="nav_services">Leistungen</a>
+        <a href="#rechner" data-i18n="nav_calc">Preisrechner</a>
+        <a href="#warum" data-i18n="nav_why">Warum wir</a>
+        <a href="#faq" data-i18n="nav_faq">FAQ</a>
+        <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span data-i18n="f_copy">© 2026 Lumea Clean GmbH · Gumpendorfer Straße 42, 1060 Wien</span>
+      <span data-i18n="f_demo">Demo-Projekt — fiktives Unternehmen, gestaltet von Menes Nasufoski.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+const I18N = {
+de:{
+  logo_sub:'Gebäudereinigung',
+  nav_services:'Leistungen', nav_calc:'Preisrechner', nav_why:'Warum wir', nav_how:'Ablauf',
+  nav_faq:'FAQ', nav_contact:'Kontakt', nav_cta:'Preis berechnen',
+  hero_badge:'★ 4,9 von 5 · 480 Bewertungen',
+  hero_h1a:'Sauberkeit, über die', hero_h1b:'niemand redet',
+  hero_lead:'Weil sie einfach da ist. Unterhaltsreinigung, Büroreinigung und Grundreinigung in Wien — mit fixem Preis, geprüftem Personal und ohne Vertragsbindung.',
+  hero_cta1:'Preis in 30 Sekunden berechnen', hero_cta2:'Leistungen ansehen',
+  stat1:'Jahre am Markt', stat2:'Objekte im Monat', stat3:'Google Bewertung',
+  ring_lbl:'Zufriedenheit',
+  float1_t:'Fixpreis vorab', float1_s:'Keine Nachverrechnung',
+  float2_t:'Voll versichert',
+  trust1:'Angemeldetes Personal', trust2:'10 Mio. € Haftpflicht',
+  trust3:'Ökologische Reinigungsmittel', trust4:'Termin in 48 Stunden',
+  svc_eyebrow:'Leistungen', svc_title:'Ein Team für alles, was sauber sein muss',
+  svc_sub:'Von der wöchentlichen Wohnungsreinigung bis zur Übergabe der Baustelle. Sie bekommen immer dieselben Reinigungskräfte — die wissen, wo bei Ihnen was steht.',
+  svc1_t:'Wohnungsreinigung', svc1_d:'Küche, Bad, Böden, Staub — nach einer festen Checkliste, die Sie selbst anpassen können. Wöchentlich, 14-tägig oder einmalig.', svc1_p:'ab 89 € pro Einsatz',
+  svc2_t:'Büro- & Praxisreinigung', svc2_d:'Vor Arbeitsbeginn oder nach Feierabend — Ihr Team merkt nur das Ergebnis. Inklusive Sanitär, Küche und Müllentsorgung.', svc2_p:'ab 79 € pro Einsatz',
+  svc3_t:'Fenster & Glasflächen', svc3_d:'Rahmen, Scheiben und Fensterbänke — streifenfrei mit entmineralisiertem Wasser. Auch für hohe Schaufenster.', svc3_p:'ab 99 € pro Einsatz',
+  svc4_t:'Grundreinigung', svc4_d:'Einmal alles: Kalk, Fett, Fugen, Innenseiten der Schränke. Perfekt vor dem Einzug oder bei der Wohnungsübergabe.', svc4_p:'ab 149 € pro Einsatz',
+  svc5_t:'Bauendreinigung', svc5_d:'Feinstaub, Mörtelreste, Farbspritzer und Klebefolien. Wir übergeben das Objekt bezugsfertig — auch am Wochenende.', svc5_p:'ab 199 € pro Einsatz',
+  svc6_t:'Teppich & Polster', svc6_d:'Sprühextraktion gegen Flecken und Gerüche. Nach 4–6 Stunden ist alles wieder trocken und benutzbar.', svc6_p:'ab 6 € pro m²',
+  calc_eyebrow:'Preisrechner', calc_title:'Was kostet es? Rechnen Sie selbst nach.',
+  calc_sub:'Kein Rückruf, kein Vertreter an der Tür. Wählen Sie Leistung, Größe und Intervall — der Preis steht sofort daneben.',
+  calc_step1:'Was soll gereinigt werden?', calc_step2:'Wie groß ist die Fläche?',
+  calc_step3:'Wie oft?', calc_step4:'Zusatzleistungen', calc_step5:'Ihre Kontaktdaten',
+  size_hint:'Schätzen genügt — wir prüfen die Fläche beim ersten Termin kostenlos nach.',
+  freq_hint:'Je regelmäßiger, desto günstiger — jederzeit monatlich kündbar.',
+  freq_off:'Diese Leistung wird einmalig durchgeführt — ein Intervall ist hier nicht nötig.',
+  ty1:'Wohnung', ty2:'Büro & Praxis', ty3:'Grundreinigung', ty4:'Bauendreinigung', ty5:'Fenster & Glas',
+  fr1:'Einmalig', fr2:'Monatlich', fr3:'Alle 2 Wochen', fr4:'Wöchentlich',
+  ex1:'Fenster innen & außen', ex2:'Backofen', ex3:'Kühlschrank innen', ex4:'Balkon & Terrasse', ex5:'Teppich-Tiefenreinigung',
+  sum_title:'Ihr Richtpreis', sum_sub:'Aktualisiert sich live, inkl. Material und Anfahrt.',
+  price_per:'pro Einsatz, inkl. MwSt.',
+  sum_type:'Leistung', sum_size:'Fläche', sum_freq:'Intervall', sum_extras:'Zusatzleistungen',
+  sum_dur:'Dauer vor Ort', sum_btn:'Angebot anfordern',
+  sum_note:'Unverbindlicher Richtwert. Nach einer kurzen Besichtigung (kostenlos, auch per Video) bekommen Sie den Festpreis schriftlich.',
+  ok_title:'Anfrage ist raus!', ok_note:'Demo-Hinweis: Es wurde nichts wirklich versendet.',
+  ok_text:'Danke, {name}! Wir melden uns innerhalb von 24 Stunden mit Ihrem Festpreis für {type} ({size} m²).',
+  none:'keine', month_est:'≈ {v} € pro Monat', hours:'ca. {h} Std.',
+  err_fill:'Bitte Name, Telefon und E-Mail ausfüllen.',
+  why_eyebrow:'Warum Lumea',
+  why_title:'Reinigung scheitert selten am Putzen. Sondern an der Verlässlichkeit.',
+  why_lead:'Deshalb bekommen Sie bei uns ein festes Team, eine feste Ansprechperson und einen festen Preis. Wer einmal nicht kommt, meldet sich vorher — das ist bei uns keine Selbstverständlichkeit, sondern Regel.',
+  why1_t:'Immer dieselben Reinigungskräfte', why1_s:'Kein wechselndes Personal in Ihrer Wohnung. Sie wissen, wer kommt — und wir wissen, wo der Schlüssel hängt.',
+  why2_t:'Angemeldet, versichert, geprüft', why2_s:'Alle Mitarbeiter sind fest angestellt und sozialversichert. Schäden deckt unsere Betriebshaftpflicht bis 10 Mio. €.',
+  why3_t:'Keine Vertragsbindung', why3_s:'Monatlich kündbar, ohne Kleingedrucktes. Wir behalten Sie durch Qualität, nicht durch Laufzeit.',
+  why4_t:'24-Stunden-Nachbesserung', why4_s:'Etwas übersehen? Sagen Sie Bescheid — wir kommen innerhalb eines Werktags zurück. Kostenlos.',
+  cl_title:'Was bei jeder Unterhaltsreinigung dabei ist',
+  cl_sub:'Diese Punkte sind im Standardpreis enthalten — nichts davon wird extra verrechnet.',
+  cl1:'Böden saugen und feucht wischen', cl2:'Bad: WC, Dusche, Armaturen, Spiegel',
+  cl3:'Küche: Arbeitsflächen, Spüle, Fronten', cl4:'Staubwischen aller freien Flächen',
+  cl5:'Müll entsorgen, Säcke erneuern', cl6:'Reinigungsmittel und Geräte inklusive',
+  how_eyebrow:'Ablauf', how_title:'Vier Schritte bis zur ersten Reinigung',
+  st1_t:'Preis berechnen', st1_d:'Leistung und Fläche wählen, Richtpreis ablesen und Anfrage abschicken — dauert keine Minute.',
+  st2_t:'Kurze Besichtigung', st2_d:'Wir sehen uns das Objekt an — vor Ort oder per Videocall. Danach steht der Festpreis schriftlich.',
+  st3_t:'Team & Termin fix', st3_d:'Sie lernen Ihr Reinigungsteam kennen und legen Wochentag und Uhrzeit fest. Schlüsselübergabe protokolliert.',
+  st4_t:'Sauber. Immer wieder.', st4_d:'Nach jedem Einsatz bekommen Sie ein kurzes Protokoll. Wünsche ändern? Eine Nachricht genügt.',
+  rev_eyebrow:'Bewertungen', rev_title:'Was Kundinnen und Kunden sagen',
+  rev1_q:'Seit zwei Jahren dasselbe Team, immer pünktlich, immer gleich gründlich. Ich muss nicht mehr kontrollieren — und genau das war der Punkt.', rev1_r:'Wohnung, 1070 Wien',
+  rev2_q:'Unsere Kanzlei wird abends gereinigt, wir merken davon nichts außer dem Ergebnis. Die Abrechnung ist so transparent wie versprochen.', rev2_r:'Büro, 1010 Wien',
+  rev3_q:'Nach dem Umbau sah es aus wie auf einer Baustelle. Zwei Tage später war die Wohnung übergabefertig — ohne einen Fleck.', rev3_r:'Bauendreinigung, 1210 Wien',
+  faq_eyebrow:'FAQ', faq_title:'Häufige Fragen',
+  q1:'Muss ich zu Hause sein, während gereinigt wird?',
+  a1:'Nein. Die meisten Kunden übergeben uns einen Schlüssel — protokolliert und versichert. Sie können aber natürlich anwesend sein, gerade beim ersten Termin.',
+  q2:'Muss ich Reinigungsmittel bereitstellen?',
+  a2:'Nein, Material und Geräte bringen wir mit — im Preis enthalten. Wenn Sie bestimmte Produkte bevorzugen (Allergien, empfindliche Böden), verwenden wir gerne Ihre.',
+  q3:'Was passiert, wenn etwas beschädigt wird?',
+  a3:'Wir melden es Ihnen sofort, noch am selben Tag. Unsere Betriebshaftpflicht deckt Schäden bis 10 Mio. € — Sie müssen nichts vorstrecken.',
+  q4:'Kann ich einen Termin verschieben oder absagen?',
+  a4:'Bis 24 Stunden vorher kostenlos, per Nachricht oder Anruf. Danach verrechnen wir 50 %, weil das Team den Tag bereits eingeplant hat.',
+  q5:'Ist der berechnete Preis verbindlich?',
+  a5:'Der Rechner zeigt einen Richtwert auf Basis von Fläche und Leistung. Nach der kurzen Besichtigung erhalten Sie den Festpreis schriftlich — und der gilt dann auch.',
+  q6:'Reinigen Sie auch am Wochenende?',
+  a6:'Ja, Samstag zum Normaltarif, Sonntag mit 25 % Zuschlag. Bauendreinigungen legen wir auf Wunsch bewusst aufs Wochenende, damit der Montag frei ist.',
+  contact_eyebrow:'Kontakt', contact_title:'Lieber persönlich sprechen?',
+  contact_sub:'Rufen Sie an oder schreiben Sie kurz, worum es geht — wir melden uns am selben Werktag zurück.',
+  ci1_t:'Telefon', ci2_t:'E-Mail', ci3_t:'Büro', ci3_v:'Gumpendorfer Straße 42, 1060 Wien',
+  ci4_t:'Erreichbarkeit', ci4_v:'Mo–Fr 7:00–19:00 · Sa 8:00–14:00',
+  f_name:'Vor- und Nachname', f_phone:'Telefon', f_mail:'E-Mail',
+  f_addr:'Adresse des Objekts', f_msg:'Ihre Nachricht',
+  f_msg_ph:'Worum geht es? Wohnung, Büro, Baustelle — und ab wann?',
+  c_btn:'Nachricht senden',
+  c_ok:'Danke! Wir melden uns am selben Werktag. (Demo — es wurde nichts versendet.)',
+  f_copy:'© 2026 Lumea Clean GmbH · Gumpendorfer Straße 42, 1060 Wien',
+  f_demo:'Demo-Projekt — fiktives Unternehmen, gestaltet von Menes Nasufoski.'
+},
+en:{
+  logo_sub:'Cleaning Services',
+  nav_services:'Services', nav_calc:'Price calculator', nav_why:'Why us', nav_how:'How it works',
+  nav_faq:'FAQ', nav_contact:'Contact', nav_cta:'Calculate price',
+  hero_badge:'★ 4.9 out of 5 · 480 reviews',
+  hero_h1a:'The kind of clean', hero_h1b:'nobody mentions',
+  hero_lead:'Because it is simply there. Regular home cleaning, office cleaning and deep cleaning in Vienna — fixed price, vetted staff, no long-term contract.',
+  hero_cta1:'Get your price in 30 seconds', hero_cta2:'See our services',
+  stat1:'Years in business', stat2:'Properties per month', stat3:'Google rating',
+  ring_lbl:'Satisfaction',
+  float1_t:'Fixed price upfront', float1_s:'No surprise invoices',
+  float2_t:'Fully insured',
+  trust1:'Employed, registered staff', trust2:'€10M liability cover',
+  trust3:'Eco-friendly products', trust4:'Start within 48 hours',
+  svc_eyebrow:'Services', svc_title:'One team for everything that needs to be clean',
+  svc_sub:'From the weekly apartment clean to handing over a finished construction site. You always get the same cleaners — the ones who know where everything belongs.',
+  svc1_t:'Home cleaning', svc1_d:'Kitchen, bathroom, floors, dusting — following a fixed checklist you can adjust yourself. Weekly, fortnightly or one-off.', svc1_p:'from €89 per visit',
+  svc2_t:'Office & practice cleaning', svc2_d:'Before the workday or after hours — your team only notices the result. Includes restrooms, kitchen and waste disposal.', svc2_p:'from €79 per visit',
+  svc3_t:'Windows & glass', svc3_d:'Frames, panes and sills — streak-free with demineralised water. Tall shop windows included.', svc3_p:'from €99 per visit',
+  svc4_t:'Deep cleaning', svc4_d:'Everything, once: limescale, grease, grout, the inside of every cupboard. Ideal before moving in or handing a flat back.', svc4_p:'from €149 per visit',
+  svc5_t:'Post-construction cleaning', svc5_d:'Fine dust, mortar residue, paint splatter and adhesive film. We hand the property over move-in ready — weekends included.', svc5_p:'from €199 per visit',
+  svc6_t:'Carpet & upholstery', svc6_d:'Spray extraction against stains and odours. Everything is dry and usable again after 4–6 hours.', svc6_p:'from €6 per m²',
+  calc_eyebrow:'Price calculator', calc_title:'What does it cost? Work it out yourself.',
+  calc_sub:'No callback, no salesperson at your door. Pick the service, the size and the interval — the price appears right next to it.',
+  calc_step1:'What needs cleaning?', calc_step2:'How large is the space?',
+  calc_step3:'How often?', calc_step4:'Add-ons', calc_step5:'Your contact details',
+  size_hint:'An estimate is fine — we measure the space for free at the first appointment.',
+  freq_hint:'The more regular, the cheaper — cancellable monthly at any time.',
+  freq_off:'This service is carried out once — no interval needed here.',
+  ty1:'Home', ty2:'Office & practice', ty3:'Deep clean', ty4:'Post-construction', ty5:'Windows & glass',
+  fr1:'One-off', fr2:'Monthly', fr3:'Every 2 weeks', fr4:'Weekly',
+  ex1:'Windows inside & out', ex2:'Oven', ex3:'Fridge interior', ex4:'Balcony & terrace', ex5:'Deep carpet clean',
+  sum_title:'Your estimate', sum_sub:'Updates live, materials and travel included.',
+  price_per:'per visit, VAT included',
+  sum_type:'Service', sum_size:'Area', sum_freq:'Interval', sum_extras:'Add-ons',
+  sum_dur:'Time on site', sum_btn:'Request a quote',
+  sum_note:'Non-binding estimate. After a short viewing (free, video call also possible) you receive the fixed price in writing.',
+  ok_title:'Request sent!', ok_note:'Demo note: nothing was actually sent.',
+  ok_text:'Thank you, {name}! We will get back to you within 24 hours with your fixed price for {type} ({size} m²).',
+  none:'none', month_est:'≈ €{v} per month', hours:'approx. {h} hrs',
+  err_fill:'Please fill in name, phone and email.',
+  why_eyebrow:'Why Lumea',
+  why_title:'Cleaning rarely fails at the scrubbing. It fails at reliability.',
+  why_lead:'That is why you get a fixed team, one contact person and one fixed price. If someone cannot make it, you hear about it beforehand — with us that is the rule, not a favour.',
+  why1_t:'Always the same cleaners', why1_s:'No rotating strangers in your home. You know who is coming — and we know where the key hangs.',
+  why2_t:'Registered, insured, vetted', why2_s:'All staff are permanently employed and fully insured. Our liability policy covers damage up to €10 million.',
+  why3_t:'No lock-in contract', why3_s:'Cancellable monthly, no small print. We keep you through quality, not through contract length.',
+  why4_t:'24-hour touch-up', why4_s:'Something missed? Just tell us — we come back within one working day. Free of charge.',
+  cl_title:'What every regular clean includes',
+  cl_sub:'These points are covered by the standard price — none of them is billed separately.',
+  cl1:'Vacuuming and mopping all floors', cl2:'Bathroom: toilet, shower, fittings, mirrors',
+  cl3:'Kitchen: worktops, sink, cabinet fronts', cl4:'Dusting all accessible surfaces',
+  cl5:'Emptying bins, replacing liners', cl6:'Cleaning products and equipment included',
+  how_eyebrow:'How it works', how_title:'Four steps to your first clean',
+  st1_t:'Calculate the price', st1_d:'Choose the service and area, read your estimate and send the request — it takes under a minute.',
+  st2_t:'Short viewing', st2_d:'We look at the property — on site or by video call. Then you get the fixed price in writing.',
+  st3_t:'Team & schedule fixed', st3_d:'You meet your cleaning team and set the weekday and time. Key handover is documented.',
+  st4_t:'Clean. Again and again.', st4_d:'After every visit you receive a short report. Want something changed? One message is enough.',
+  rev_eyebrow:'Reviews', rev_title:'What our customers say',
+  rev1_q:'The same team for two years, always on time, always equally thorough. I stopped checking after them — which was exactly the point.', rev1_r:'Apartment, Vienna 1070',
+  rev2_q:'Our law office is cleaned in the evening; we notice nothing but the result. The invoicing is as transparent as promised.', rev2_r:'Office, Vienna 1010',
+  rev3_q:'After the renovation it still looked like a building site. Two days later the flat was ready to hand over — without a single mark.', rev3_r:'Post-construction, Vienna 1210',
+  faq_eyebrow:'FAQ', faq_title:'Frequently asked questions',
+  q1:'Do I have to be home while you clean?',
+  a1:'No. Most customers hand us a key — documented and insured. You are of course welcome to be there, especially for the first appointment.',
+  q2:'Do I need to provide cleaning products?',
+  a2:'No, we bring materials and equipment — included in the price. If you prefer specific products (allergies, delicate floors), we happily use yours.',
+  q3:'What happens if something gets damaged?',
+  a3:'We tell you immediately, the same day. Our liability insurance covers damage up to €10 million — you never have to pay upfront.',
+  q4:'Can I reschedule or cancel an appointment?',
+  a4:'Free of charge up to 24 hours in advance, by message or phone. After that we charge 50 %, because the team has already blocked the day.',
+  q5:'Is the calculated price binding?',
+  a5:'The calculator shows an estimate based on area and service. After the short viewing you receive the fixed price in writing — and that one holds.',
+  q6:'Do you also clean on weekends?',
+  a6:'Yes. Saturday at the normal rate, Sunday with a 25 % surcharge. On request we deliberately schedule post-construction cleans for the weekend so Monday is free.',
+  contact_eyebrow:'Contact', contact_title:'Prefer to talk it through?',
+  contact_sub:'Call us or write briefly what it is about — we reply the same working day.',
+  ci1_t:'Phone', ci2_t:'Email', ci3_t:'Office', ci3_v:'Gumpendorfer Strasse 42, 1060 Vienna',
+  ci4_t:'Availability', ci4_v:'Mon–Fri 7:00–19:00 · Sat 8:00–14:00',
+  f_name:'Full name', f_phone:'Phone', f_mail:'Email',
+  f_addr:'Address of the property', f_msg:'Your message',
+  f_msg_ph:'What is it about? Home, office, building site — and from when?',
+  c_btn:'Send message',
+  c_ok:'Thank you! We will reply the same working day. (Demo — nothing was sent.)',
+  f_copy:'© 2026 Lumea Clean GmbH · Gumpendorfer Strasse 42, 1060 Vienna',
+  f_demo:'Demo project — fictional company, designed by Menes Nasufoski.'
+},
+it:{
+  logo_sub:'Impresa di pulizie',
+  nav_services:'Servizi', nav_calc:'Calcola prezzo', nav_why:'Perché noi', nav_how:'Come funziona',
+  nav_faq:'FAQ', nav_contact:'Contatti', nav_cta:'Calcola il prezzo',
+  hero_badge:'★ 4,9 su 5 · 480 recensioni',
+  hero_h1a:'Una pulizia di cui', hero_h1b:'nessuno parla',
+  hero_lead:'Perché c\'è e basta. Pulizie domestiche, uffici e pulizie a fondo a Vienna — prezzo fisso, personale verificato, senza vincoli contrattuali.',
+  hero_cta1:'Calcola il prezzo in 30 secondi', hero_cta2:'Scopri i servizi',
+  stat1:'Anni di attività', stat2:'Immobili al mese', stat3:'Valutazione Google',
+  ring_lbl:'Soddisfazione',
+  float1_t:'Prezzo fisso in anticipo', float1_s:'Nessun conguaglio',
+  float2_t:'Completamente assicurati',
+  trust1:'Personale regolarmente assunto', trust2:'Copertura di 10 mln €',
+  trust3:'Prodotti ecologici', trust4:'Si parte entro 48 ore',
+  svc_eyebrow:'Servizi', svc_title:'Una sola squadra per tutto ciò che deve essere pulito',
+  svc_sub:'Dalla pulizia settimanale dell\'appartamento alla consegna del cantiere. Riceve sempre le stesse persone — quelle che sanno dove va ogni cosa.',
+  svc1_t:'Pulizie domestiche', svc1_d:'Cucina, bagno, pavimenti, polvere — secondo una checklist fissa che può personalizzare. Settimanale, quindicinale o una tantum.', svc1_p:'da 89 € a intervento',
+  svc2_t:'Uffici e studi', svc2_d:'Prima dell\'orario o dopo la chiusura — il suo team nota solo il risultato. Inclusi bagni, cucina e smaltimento rifiuti.', svc2_p:'da 79 € a intervento',
+  svc3_t:'Vetri e superfici in vetro', svc3_d:'Telai, vetri e davanzali — senza aloni, con acqua demineralizzata. Anche vetrine alte.', svc3_p:'da 99 € a intervento',
+  svc4_t:'Pulizia a fondo', svc4_d:'Tutto, una volta: calcare, grasso, fughe e interni degli armadi. Perfetta prima del trasloco o alla riconsegna.', svc4_p:'da 149 € a intervento',
+  svc5_t:'Pulizia post cantiere', svc5_d:'Polvere fine, residui di malta, schizzi di vernice e pellicole adesive. Consegniamo l\'immobile pronto — anche nel weekend.', svc5_p:'da 199 € a intervento',
+  svc6_t:'Tappeti e imbottiti', svc6_d:'Estrazione a spruzzo contro macchie e odori. Dopo 4–6 ore è tutto asciutto e utilizzabile.', svc6_p:'da 6 € al m²',
+  calc_eyebrow:'Calcolatore', calc_title:'Quanto costa? Lo calcoli da solo.',
+  calc_sub:'Nessuna richiamata, nessun venditore alla porta. Scelga servizio, superficie e frequenza — il prezzo compare subito accanto.',
+  calc_step1:'Cosa va pulito?', calc_step2:'Quanto è grande la superficie?',
+  calc_step3:'Ogni quanto?', calc_step4:'Servizi aggiuntivi', calc_step5:'I suoi dati',
+  size_hint:'Basta una stima — misuriamo gratuitamente al primo appuntamento.',
+  freq_hint:'Più è regolare, più conviene — disdetta mensile in qualsiasi momento.',
+  freq_off:'Questo servizio si svolge una volta sola — qui la frequenza non serve.',
+  ty1:'Abitazione', ty2:'Ufficio e studio', ty3:'Pulizia a fondo', ty4:'Post cantiere', ty5:'Vetri',
+  fr1:'Una tantum', fr2:'Mensile', fr3:'Ogni 2 settimane', fr4:'Settimanale',
+  ex1:'Vetri interni ed esterni', ex2:'Forno', ex3:'Interno frigorifero', ex4:'Balcone e terrazzo', ex5:'Lavaggio tappeti a fondo',
+  sum_title:'Il suo preventivo', sum_sub:'Si aggiorna in tempo reale, materiali e trasferta inclusi.',
+  price_per:'a intervento, IVA inclusa',
+  sum_type:'Servizio', sum_size:'Superficie', sum_freq:'Frequenza', sum_extras:'Aggiuntivi',
+  sum_dur:'Tempo sul posto', sum_btn:'Richiedi preventivo',
+  sum_note:'Stima non vincolante. Dopo un breve sopralluogo (gratuito, anche in videochiamata) riceve il prezzo fisso per iscritto.',
+  ok_title:'Richiesta inviata!', ok_note:'Nota demo: non è stato inviato nulla.',
+  ok_text:'Grazie, {name}! Le risponderemo entro 24 ore con il prezzo fisso per {type} ({size} m²).',
+  none:'nessuno', month_est:'≈ {v} € al mese', hours:'circa {h} ore',
+  err_fill:'Inserisca nome, telefono ed e-mail.',
+  why_eyebrow:'Perché Lumea',
+  why_title:'Le pulizie raramente falliscono sullo straccio. Falliscono sull\'affidabilità.',
+  why_lead:'Per questo riceve una squadra fissa, un referente fisso e un prezzo fisso. Se qualcuno non può venire, lo saprà prima — da noi è la regola, non un favore.',
+  why1_t:'Sempre le stesse persone', why1_s:'Nessun via vai di sconosciuti in casa sua. Lei sa chi arriva — e noi sappiamo dov\'è la chiave.',
+  why2_t:'Assunti, assicurati, verificati', why2_s:'Tutti i collaboratori sono assunti a tempo indeterminato. La polizza copre i danni fino a 10 milioni di euro.',
+  why3_t:'Nessun vincolo', why3_s:'Disdetta mensile, senza clausole nascoste. La tratteniamo con la qualità, non con la durata del contratto.',
+  why4_t:'Ritocco entro 24 ore', why4_s:'Qualcosa è sfuggito? Ce lo dica — torniamo entro un giorno lavorativo. Gratis.',
+  cl_title:'Cosa è incluso in ogni pulizia ordinaria',
+  cl_sub:'Questi punti rientrano nel prezzo standard — nessuno viene fatturato a parte.',
+  cl1:'Aspirazione e lavaggio dei pavimenti', cl2:'Bagno: WC, doccia, rubinetteria, specchi',
+  cl3:'Cucina: piani, lavello, ante', cl4:'Spolveratura di tutte le superfici libere',
+  cl5:'Smaltimento rifiuti e cambio sacchi', cl6:'Prodotti e attrezzature inclusi',
+  how_eyebrow:'Come funziona', how_title:'Quattro passi fino alla prima pulizia',
+  st1_t:'Calcoli il prezzo', st1_d:'Scelga servizio e superficie, legga la stima e invii la richiesta — meno di un minuto.',
+  st2_t:'Breve sopralluogo', st2_d:'Guardiamo l\'immobile — di persona o in videochiamata. Poi il prezzo fisso arriva per iscritto.',
+  st3_t:'Squadra e orario fissi', st3_d:'Conosce la sua squadra e definisce giorno e orario. La consegna delle chiavi viene verbalizzata.',
+  st4_t:'Pulito. Ogni volta.', st4_d:'Dopo ogni intervento riceve un breve rapporto. Vuole cambiare qualcosa? Basta un messaggio.',
+  rev_eyebrow:'Recensioni', rev_title:'Cosa dicono i clienti',
+  rev1_q:'La stessa squadra da due anni, sempre puntuale, sempre accurata. Ho smesso di controllare — ed era proprio quello che volevo.', rev1_r:'Appartamento, 1070 Vienna',
+  rev2_q:'Il nostro studio viene pulito la sera, non ce ne accorgiamo se non dal risultato. La fatturazione è trasparente come promesso.', rev2_r:'Ufficio, 1010 Vienna',
+  rev3_q:'Dopo i lavori sembrava ancora un cantiere. Due giorni dopo l\'appartamento era pronto alla consegna — senza una macchia.', rev3_r:'Post cantiere, 1210 Vienna',
+  faq_eyebrow:'FAQ', faq_title:'Domande frequenti',
+  q1:'Devo essere presente durante la pulizia?',
+  a1:'No. La maggior parte dei clienti ci affida una chiave — con verbale e assicurazione. Naturalmente può essere presente, soprattutto al primo appuntamento.',
+  q2:'Devo mettere a disposizione i prodotti?',
+  a2:'No, portiamo materiali e attrezzature — sono compresi nel prezzo. Se preferisce prodotti specifici (allergie, pavimenti delicati), usiamo volentieri i suoi.',
+  q3:'Cosa succede se qualcosa viene danneggiato?',
+  a3:'Glielo comunichiamo subito, lo stesso giorno. La nostra polizza copre i danni fino a 10 milioni di euro — non deve anticipare nulla.',
+  q4:'Posso spostare o annullare un appuntamento?',
+  a4:'Gratuitamente fino a 24 ore prima, con un messaggio o una telefonata. Dopo addebitiamo il 50 %, perché la squadra ha già bloccato la giornata.',
+  q5:'Il prezzo calcolato è vincolante?',
+  a5:'Il calcolatore mostra una stima basata su superficie e servizio. Dopo il breve sopralluogo riceve il prezzo fisso per iscritto — e quello vale.',
+  q6:'Pulite anche nel weekend?',
+  a6:'Sì. Sabato a tariffa normale, domenica con un supplemento del 25 %. Le pulizie post cantiere le programmiamo volentieri nel weekend, così il lunedì è libero.',
+  contact_eyebrow:'Contatti', contact_title:'Preferisce parlarne di persona?',
+  contact_sub:'Ci chiami o ci scriva due righe — rispondiamo nella stessa giornata lavorativa.',
+  ci1_t:'Telefono', ci2_t:'E-mail', ci3_t:'Ufficio', ci3_v:'Gumpendorfer Strasse 42, 1060 Vienna',
+  ci4_t:'Reperibilità', ci4_v:'Lun–Ven 7:00–19:00 · Sab 8:00–14:00',
+  f_name:'Nome e cognome', f_phone:'Telefono', f_mail:'E-mail',
+  f_addr:'Indirizzo dell\'immobile', f_msg:'Il suo messaggio',
+  f_msg_ph:'Di cosa si tratta? Casa, ufficio, cantiere — e da quando?',
+  c_btn:'Invia messaggio',
+  c_ok:'Grazie! Rispondiamo nella stessa giornata lavorativa. (Demo — non è stato inviato nulla.)',
+  f_copy:'© 2026 Lumea Clean GmbH · Gumpendorfer Strasse 42, 1060 Vienna',
+  f_demo:'Progetto demo — azienda fittizia, realizzato da Menes Nasufoski.'
+},
+bs:{
+  logo_sub:'Usluge čišćenja',
+  nav_services:'Usluge', nav_calc:'Kalkulator cijena', nav_why:'Zašto mi', nav_how:'Kako ide',
+  nav_faq:'FAQ', nav_contact:'Kontakt', nav_cta:'Izračunaj cijenu',
+  hero_badge:'★ 4,9 od 5 · 480 recenzija',
+  hero_h1a:'Čistoća o kojoj', hero_h1b:'niko ne priča',
+  hero_lead:'Jer je jednostavno tu. Redovno čišćenje stanova, ureda i dubinsko čišćenje u Beču — fiksna cijena, provjereno osoblje, bez ugovorne obaveze.',
+  hero_cta1:'Izračunajte cijenu za 30 sekundi', hero_cta2:'Pogledaj usluge',
+  stat1:'Godina na tržištu', stat2:'Objekata mjesečno', stat3:'Google ocjena',
+  ring_lbl:'Zadovoljstvo',
+  float1_t:'Fiksna cijena unaprijed', float1_s:'Bez naknadnog obračuna',
+  float2_t:'Potpuno osigurani',
+  trust1:'Prijavljeno osoblje', trust2:'Osiguranje do 10 mil. €',
+  trust3:'Ekološka sredstva', trust4:'Termin u roku od 48 sati',
+  svc_eyebrow:'Usluge', svc_title:'Jedan tim za sve što mora biti čisto',
+  svc_sub:'Od sedmičnog čišćenja stana do predaje gradilišta. Uvijek dobijate iste ljude — one koji znaju gdje šta stoji kod vas.',
+  svc1_t:'Čišćenje stanova', svc1_d:'Kuhinja, kupatilo, podovi, prašina — po fiksnoj listi koju možete sami prilagoditi. Sedmično, svake dvije sedmice ili jednokratno.', svc1_p:'od 89 € po dolasku',
+  svc2_t:'Uredi i ordinacije', svc2_d:'Prije početka radnog dana ili nakon zatvaranja — vaš tim primijeti samo rezultat. Uključeni sanitarije, kuhinja i odvoz otpada.', svc2_p:'od 79 € po dolasku',
+  svc3_t:'Prozori i staklo', svc3_d:'Okviri, stakla i prozorske daske — bez tragova, demineraliziranom vodom. I visoki izlozi.', svc3_p:'od 99 € po dolasku',
+  svc4_t:'Dubinsko čišćenje', svc4_d:'Jednom sve: kamenac, masnoća, fuge, unutrašnjost ormara. Idealno prije useljenja ili kod predaje stana.', svc4_p:'od 149 € po dolasku',
+  svc5_t:'Čišćenje nakon gradnje', svc5_d:'Fina prašina, ostaci maltera, kapi boje i ljepljive folije. Objekat predajemo spreman za useljenje — i vikendom.', svc5_p:'od 199 € po dolasku',
+  svc6_t:'Tepisi i tapacirung', svc6_d:'Dubinsko pranje protiv mrlja i mirisa. Nakon 4–6 sati sve je suho i spremno za upotrebu.', svc6_p:'od 6 € po m²',
+  calc_eyebrow:'Kalkulator', calc_title:'Koliko košta? Izračunajte sami.',
+  calc_sub:'Bez povratnog poziva i bez prodavača na vratima. Odaberite uslugu, površinu i učestalost — cijena stoji odmah pored.',
+  calc_step1:'Šta treba očistiti?', calc_step2:'Kolika je površina?',
+  calc_step3:'Koliko često?', calc_step4:'Dodatne usluge', calc_step5:'Vaši podaci',
+  size_hint:'Dovoljna je procjena — površinu besplatno provjerimo na prvom terminu.',
+  freq_hint:'Što redovnije, to povoljnije — otkaz mjesečno, bilo kada.',
+  freq_off:'Ova usluga se izvodi jednokratno — učestalost ovdje nije potrebna.',
+  ty1:'Stan', ty2:'Ured i ordinacija', ty3:'Dubinsko čišćenje', ty4:'Nakon gradnje', ty5:'Prozori i staklo',
+  fr1:'Jednokratno', fr2:'Mjesečno', fr3:'Svake 2 sedmice', fr4:'Sedmično',
+  ex1:'Prozori iznutra i izvana', ex2:'Rerna', ex3:'Frižider iznutra', ex4:'Balkon i terasa', ex5:'Dubinsko pranje tepiha',
+  sum_title:'Vaša okvirna cijena', sum_sub:'Ažurira se uživo, materijal i dolazak uključeni.',
+  price_per:'po dolasku, PDV uključen',
+  sum_type:'Usluga', sum_size:'Površina', sum_freq:'Učestalost', sum_extras:'Dodatne usluge',
+  sum_dur:'Vrijeme na licu mjesta', sum_btn:'Zatraži ponudu',
+  sum_note:'Neobavezujuća procjena. Nakon kratkog obilaska (besplatno, moguće i videopozivom) dobijate fiksnu cijenu u pisanom obliku.',
+  ok_title:'Upit je poslan!', ok_note:'Demo napomena: ništa nije stvarno poslano.',
+  ok_text:'Hvala, {name}! Javljamo se u roku od 24 sata s fiksnom cijenom za {type} ({size} m²).',
+  none:'nema', month_est:'≈ {v} € mjesečno', hours:'oko {h} sati',
+  err_fill:'Molimo unesite ime, telefon i e-mail.',
+  why_eyebrow:'Zašto Lumea',
+  why_title:'Čišćenje rijetko pada na krpi. Pada na pouzdanosti.',
+  why_lead:'Zato kod nas dobijate stalni tim, jednu kontakt osobu i fiksnu cijenu. Ako neko ne može doći, saznat ćete ranije — kod nas je to pravilo, a ne usluga.',
+  why1_t:'Uvijek isti ljudi', why1_s:'Bez smjenjivanja nepoznatih u vašem stanu. Vi znate ko dolazi — a mi znamo gdje stoji ključ.',
+  why2_t:'Prijavljeni, osigurani, provjereni', why2_s:'Svi radnici su stalno zaposleni i socijalno osigurani. Štete pokriva naše osiguranje do 10 miliona eura.',
+  why3_t:'Bez ugovorne obaveze', why3_s:'Otkaz mjesečno, bez sitnih slova. Zadržavamo vas kvalitetom, a ne trajanjem ugovora.',
+  why4_t:'Popravka u roku od 24 sata', why4_s:'Nešto je promaklo? Javite nam — vraćamo se u roku od jednog radnog dana. Besplatno.',
+  cl_title:'Šta je uključeno u svako redovno čišćenje',
+  cl_sub:'Ove stavke su u standardnoj cijeni — ništa od toga se ne naplaćuje posebno.',
+  cl1:'Usisavanje i pranje podova', cl2:'Kupatilo: WC, tuš, armature, ogledala',
+  cl3:'Kuhinja: radne ploče, sudoper, fronte', cl4:'Brisanje prašine sa svih slobodnih površina',
+  cl5:'Odvoz otpada i zamjena vreća', cl6:'Sredstva i oprema uključeni',
+  how_eyebrow:'Kako ide', how_title:'Četiri koraka do prvog čišćenja',
+  st1_t:'Izračunajte cijenu', st1_d:'Odaberite uslugu i površinu, pogledajte procjenu i pošaljite upit — traje manje od minute.',
+  st2_t:'Kratak obilazak', st2_d:'Pogledamo objekat — uživo ili videopozivom. Nakon toga dobijate fiksnu cijenu u pisanom obliku.',
+  st3_t:'Tim i termin fiksni', st3_d:'Upoznajete svoj tim i dogovarate dan i vrijeme. Predaja ključa se zapisnički evidentira.',
+  st4_t:'Čisto. Svaki put.', st4_d:'Nakon svakog dolaska dobijate kratak izvještaj. Želite promjenu? Dovoljna je jedna poruka.',
+  rev_eyebrow:'Recenzije', rev_title:'Šta kažu naši klijenti',
+  rev1_q:'Isti tim već dvije godine, uvijek tačni, uvijek jednako temeljiti. Prestala sam provjeravati — a upravo to sam i htjela.', rev1_r:'Stan, 1070 Beč',
+  rev2_q:'Naša kancelarija se čisti navečer, ne primijetimo ništa osim rezultata. Obračun je transparentan kao što je obećano.', rev2_r:'Ured, 1010 Beč',
+  rev3_q:'Nakon renoviranja je izgledalo kao gradilište. Dva dana kasnije stan je bio spreman za predaju — bez ijedne mrlje.', rev3_r:'Nakon gradnje, 1210 Beč',
+  faq_eyebrow:'FAQ', faq_title:'Česta pitanja',
+  q1:'Moram li biti kod kuće dok se čisti?',
+  a1:'Ne. Većina klijenata nam preda ključ — uz zapisnik i osiguranje. Naravno da možete biti prisutni, posebno na prvom terminu.',
+  q2:'Moram li osigurati sredstva za čišćenje?',
+  a2:'Ne, materijal i opremu donosimo mi — uključeno je u cijenu. Ako preferirate određene proizvode (alergije, osjetljivi podovi), rado koristimo vaše.',
+  q3:'Šta ako se nešto ošteti?',
+  a3:'Javljamo vam odmah, istog dana. Naše osiguranje pokriva štete do 10 miliona eura — ne morate ništa plaćati unaprijed.',
+  q4:'Mogu li pomjeriti ili otkazati termin?',
+  a4:'Besplatno do 24 sata ranije, porukom ili pozivom. Nakon toga naplaćujemo 50 %, jer je tim već rezervisao taj dan.',
+  q5:'Je li izračunata cijena obavezujuća?',
+  a5:'Kalkulator prikazuje procjenu na osnovu površine i usluge. Nakon kratkog obilaska dobijate fiksnu cijenu u pisanom obliku — i ona onda vrijedi.',
+  q6:'Čistite li i vikendom?',
+  a6:'Da, subotom po normalnoj tarifi, nedjeljom uz doplatu od 25 %. Čišćenje nakon gradnje po želji namjerno stavljamo na vikend, da ponedjeljak bude slobodan.',
+  contact_eyebrow:'Kontakt', contact_title:'Radije biste razgovarali?',
+  contact_sub:'Nazovite ili nam ukratko napišite o čemu se radi — javljamo se istog radnog dana.',
+  ci1_t:'Telefon', ci2_t:'E-mail', ci3_t:'Ured', ci3_v:'Gumpendorfer Strasse 42, 1060 Beč',
+  ci4_t:'Dostupnost', ci4_v:'Pon–Pet 7:00–19:00 · Sub 8:00–14:00',
+  f_name:'Ime i prezime', f_phone:'Telefon', f_mail:'E-mail',
+  f_addr:'Adresa objekta', f_msg:'Vaša poruka',
+  f_msg_ph:'O čemu se radi? Stan, ured, gradilište — i od kada?',
+  c_btn:'Pošalji poruku',
+  c_ok:'Hvala! Javljamo se istog radnog dana. (Demo — ništa nije poslano.)',
+  f_copy:'© 2026 Lumea Clean GmbH · Gumpendorfer Strasse 42, 1060 Beč',
+  f_demo:'Demo projekat — fiktivna firma, dizajn: Menes Nasufoski.'
+}
+};
+
+let lang = localStorage.getItem('lumea_lang') || 'de';
+function t(key){ return (I18N[lang] && I18N[lang][key]) || I18N.de[key] || key; }
+
+function applyLang(l){
+  lang = l;
+  localStorage.setItem('lumea_lang', l);
+  document.documentElement.lang = l;
+
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const v = I18N[l][el.dataset.i18n];
+    if(v) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const v = I18N[l][el.dataset.i18nPh];
+    if(v) el.placeholder = v;
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === l);
+  });
+
+  renderTypes();
+  renderFreq();
+  renderExtras();
+  update();
+}
+
+document.querySelectorAll('.lang-switch button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    applyLang(b.dataset.lang);
+    document.getElementById('burger').classList.remove('open');
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+const SUN = 'M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5v3m0 14v3M2 12h3m14 0h3M4.2 4.2l2.1 2.1m11.4 11.4 2.1 2.1M19.8 4.2l-2.1 2.1M6.3 17.7l-2.1 2.1';
+const MOON = 'M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4 5.39 5.39 0 0 1 2.26-4.4c-.44-.06-.9-.1-1.36-.1z';
+
+function applyTheme(mode){
+  document.documentElement.setAttribute('data-theme', mode);
+  localStorage.setItem('lumea_theme', mode);
+  const icon = document.getElementById('themeIcon');
+  if(mode === 'dark'){
+    icon.innerHTML = '<path d="'+SUN+'" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>';
+  } else {
+    icon.innerHTML = '<path d="'+MOON+'"/>';
+  }
+}
+document.getElementById('themeBtn').addEventListener('click', ()=>{
+  const now = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  applyTheme(now);
+});
+
+const TYPES = [
+  { key:'ty1', rate:0.85, min:89,  recurring:true  },
+  { key:'ty2', rate:0.62, min:79,  recurring:true  },
+  { key:'ty3', rate:1.90, min:149, recurring:false },
+  { key:'ty4', rate:2.60, min:199, recurring:false },
+  { key:'ty5', rate:1.15, min:99,  recurring:false }
+];
+const FREQS = [
+  { key:'fr1', mult:1.00, save:0,  perMonth:0    },
+  { key:'fr2', mult:0.95, save:5,  perMonth:1    },
+  { key:'fr3', mult:0.90, save:10, perMonth:2.17 },
+  { key:'fr4', mult:0.85, save:15, perMonth:4.33 }
+];
+const EXTRAS = [
+  { key:'ex1', price:45, hrs:1.0 },
+  { key:'ex2', price:35, hrs:0.7 },
+  { key:'ex3', price:25, hrs:0.5 },
+  { key:'ex4', price:30, hrs:0.6 },
+  { key:'ex5', price:55, hrs:1.2 }
+];
+
+let selType = 'ty1';
+let selFreq = 'fr3';
+let selExtras = new Set();
+let size = 75;
+
+const typeRow  = document.getElementById('typeRow');
+const freqRow  = document.getElementById('freqRow');
+const extraRow = document.getElementById('extraRow');
+
+function renderTypes(){
+  typeRow.innerHTML = '';
+  TYPES.forEach(ty=>{
+    const b = document.createElement('button');
+    b.className = 'chip' + (ty.key === selType ? ' active' : '');
+    b.textContent = t(ty.key);
+    b.addEventListener('click', ()=>{
+      selType = ty.key;
+      if(!ty.recurring) selFreq = 'fr1';
+      renderTypes(); renderFreq(); update();
+    });
+    typeRow.appendChild(b);
+  });
+}
+
+function renderFreq(){
+  const ty = TYPES.find(x=>x.key === selType);
+  freqRow.innerHTML = '';
+  FREQS.forEach(fr=>{
+    const b = document.createElement('button');
+    b.className = 'chip' + (fr.key === selFreq ? ' active' : '');
+    b.innerHTML = t(fr.key) + (fr.save ? ' <span class="save">−' + fr.save + '%</span>' : '');
+    if(!ty.recurring && fr.key !== 'fr1') b.disabled = true;
+    b.addEventListener('click', ()=>{
+      if(b.disabled) return;
+      selFreq = fr.key;
+      renderFreq(); update();
+    });
+    freqRow.appendChild(b);
+  });
+  document.getElementById('freqHint').textContent = ty.recurring ? t('freq_hint') : t('freq_off');
+}
+
+function renderExtras(){
+  extraRow.innerHTML = '';
+  EXTRAS.forEach(ex=>{
+    const b = document.createElement('button');
+    b.className = 'chip' + (selExtras.has(ex.key) ? ' active' : '');
+    b.innerHTML = t(ex.key) + ' <span class="save">+' + ex.price + ' €</span>';
+    b.addEventListener('click', ()=>{
+      selExtras.has(ex.key) ? selExtras.delete(ex.key) : selExtras.add(ex.key);
+      renderExtras(); update();
+    });
+    extraRow.appendChild(b);
+  });
+}
+
+const sizeRange = document.getElementById('sizeRange');
+function paintRange(){
+  const pct = ((size - sizeRange.min) / (sizeRange.max - sizeRange.min)) * 100;
+  sizeRange.style.setProperty('--pct', pct + '%');
+}
+sizeRange.addEventListener('input', ()=>{
+  size = +sizeRange.value;
+  document.getElementById('sizeVal').textContent = size;
+  paintRange();
+  update();
+});
+
+function nf(n){ return n.toLocaleString(lang === 'en' ? 'en-GB' : 'de-AT'); }
+
+function update(){
+  const ty = TYPES.find(x=>x.key === selType);
+  const fr = FREQS.find(x=>x.key === selFreq);
+
+  const base    = Math.max(ty.min, size * ty.rate) * fr.mult;
+  const extrasP = [...selExtras].reduce((s,k)=> s + EXTRAS.find(e=>e.key===k).price, 0);
+  const total   = Math.round((base + extrasP) / 5) * 5;
+
+  let hrs = size / 55 + [...selExtras].reduce((s,k)=> s + EXTRAS.find(e=>e.key===k).hrs, 0);
+  if(!ty.recurring) hrs *= 1.6;
+  hrs = Math.max(2, Math.round(hrs * 2) / 2);
+
+  document.getElementById('priceMain').innerHTML = nf(total) + ' <small>€</small>';
+  document.getElementById('priceSub').textContent = t('price_per');
+
+  const pm = document.getElementById('priceMonth');
+  if(fr.perMonth){
+    pm.style.display = 'inline-block';
+    pm.textContent = t('month_est').replace('{v}', nf(Math.round(total * fr.perMonth)));
+  } else {
+    pm.style.display = 'none';
+  }
+
+  document.getElementById('sumType').textContent   = t(selType);
+  document.getElementById('sumSize').textContent   = size + ' m²';
+  document.getElementById('sumFreq').textContent   = t(selFreq);
+  document.getElementById('sumExtras').textContent = selExtras.size
+    ? [...selExtras].map(k=>t(k)).join(', ')
+    : t('none');
+  document.getElementById('sumDur').textContent    = t('hours').replace('{h}', String(hrs).replace('.', lang === 'en' ? '.' : ','));
+}
+
+document.getElementById('offerBtn').addEventListener('click', ()=>{
+  const name  = document.getElementById('fName').value.trim();
+  const phone = document.getElementById('fPhone').value.trim();
+  const mail  = document.getElementById('fMail').value.trim();
+  if(!name || !phone || !mail){
+    alert(t('err_fill'));
+    document.getElementById('fName').focus();
+    return;
+  }
+  document.getElementById('okText').textContent = t('ok_text')
+    .replace('{name}', name.split(' ')[0])
+    .replace('{type}', t(selType))
+    .replace('{size}', size);
+  document.getElementById('sumMain').style.display = 'none';
+  document.getElementById('okBox').classList.add('show');
+});
+
+document.getElementById('cBtn').addEventListener('click', ()=>{
+  const name = document.getElementById('cName').value.trim();
+  const mail = document.getElementById('cMail').value.trim();
+  if(!name || !mail){ alert(t('err_fill')); return; }
+  document.getElementById('formOk').classList.add('show');
+  ['cName','cPhone','cMail','cMsg'].forEach(id=> document.getElementById(id).value = '');
+});
+
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click', ()=>{
+    const item = q.parentElement;
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>{
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight = null;
+    });
+    if(!open){
+      item.classList.add('open');
+      const a = item.querySelector('.faq-a');
+      a.style.maxHeight = a.scrollHeight + 'px';
+    }
+  });
+});
+
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', ()=>{
+  burger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    burger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+
+const hdr = document.getElementById('hdr');
+window.addEventListener('scroll', ()=>{
+  hdr.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach((el,i)=>{
+  el.style.transitionDelay = (i % 3) * 0.08 + 's';
+  io.observe(el);
+});
+
+applyTheme(localStorage.getItem('lumea_theme') ||
+  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+paintRange();
+applyLang(lang);
+</script>
+</body>
+</html>
