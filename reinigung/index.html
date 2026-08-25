@@ -87,7 +87,8 @@ header{
 }
 header.scrolled{border-bottom-color:var(--line)}
 .hdr-inner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:74px}
-.logo{display:flex;align-items:center;gap:.6rem;font-family:'Outfit',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
+.logo{display:flex;align-items:center;gap:.6rem;font-family:'Outfit',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:-.02em;min-width:0;overflow:hidden}
+.logo > span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .logo-mark{
   width:36px;height:36px;border-radius:10px;flex-shrink:0;
   background:linear-gradient(140deg,var(--brand),var(--mint));
@@ -100,7 +101,7 @@ header.scrolled{border-bottom-color:var(--line)}
 .nav-links{display:flex;gap:1.6rem;align-items:center}
 .nav-links a{font-size:.92rem;font-weight:500;color:var(--ink-soft);transition:color .2s ease;position:relative}
 .nav-links a:hover{color:var(--brand)}
-.nav-tools{display:flex;align-items:center;gap:.6rem}
+.nav-tools{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
 .lang-switch{display:flex;background:var(--surface-2);border-radius:10px;padding:3px;border:1px solid var(--line)}
 .lang-switch button{
   border:0;background:transparent;cursor:pointer;color:var(--muted);
@@ -389,12 +390,30 @@ footer{background:var(--surface);border-top:1px solid var(--line);padding:46px 0
   .nav-tools > .btn-primary{display:none}
   .burger{display:flex}
   .svc-grid,.rev-grid,.steps-grid{grid-template-columns:1fr}
-  .float-card.f1{left:-8px}
-  .float-card.f2{right:-8px}
+  .float-card.f1{left:0}
+  .float-card.f2{right:0}
   .calc-panel,.sum,.contact-form,.checklist{padding:24px 20px}
   .field-row{grid-template-columns:1fr}
   .hero-stats{gap:1.6rem}
   .price-main{font-size:2.4rem}
+
+  .wrap{padding:0 16px}
+  .hdr-inner{gap:.5rem}
+  .logo{font-size:1rem;gap:.45rem;min-width:0}
+  .logo-mark{width:30px;height:30px;border-radius:8px}
+  .logo-mark svg{width:17px;height:17px}
+  .logo small{display:none}
+  .nav-tools{gap:.4rem}
+  .lang-switch{padding:2px}
+  .lang-switch button{font-size:.68rem;padding:.28rem .36rem}
+  .icon-btn,.burger{width:34px;height:34px}
+  .icon-btn svg{width:16px;height:16px}
+  .nav-links{padding:.5rem 16px 1.2rem}
+}
+@media(max-width:400px){
+  .logo{font-size:.92rem}
+  .lang-switch button{font-size:.64rem;padding:.26rem .28rem}
+  .icon-btn,.burger{width:32px;height:32px}
 }
 </style>
 </head>
