@@ -665,7 +665,11 @@
 
     // Register Service Worker (PWA)
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw-workout.js');
+        const registerScoped = () => navigator.serviceWorker.register('/sw-workout.js', { scope: '/workout-tracker.html' });
+        navigator.serviceWorker.getRegistrations()
+            .then(regs => Promise.all(regs.filter(r => new URL(r.scope).pathname === '/').map(r => r.unregister())))
+            .then(registerScoped)
+            .catch(registerScoped);
     }
 </script>
 </body>

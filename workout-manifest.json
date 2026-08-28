@@ -3,7 +3,7 @@
   "short_name": "Workout",
   "description": "Track your workouts, sets, reps and weight",
   "start_url": "/workout-tracker.html",
-  "scope": "/",
+  "scope": "/workout-tracker.html",
   "display": "standalone",
   "background_color": "#0a0a0f",
   "theme_color": "#22c55e",
