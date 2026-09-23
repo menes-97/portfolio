@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATRIA Immobilien — Immobilienmakler in Wien | Verkauf, Bewertung &amp; Finanzierung</title>
+
+<meta name="description" content="ATRIA Immobilien: Immobilienmakler in Wien. Aktuelle Objekte, kostenlose Online-Bewertung Ihrer Immobilie, Finanzierungs- und Nebenkostenrechner. Beratung in vier Sprachen.">
+<meta name="author" content="Menes Nasufoski">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="ATRIA Immobilien — Immobilienmakler in Wien">
+<meta property="og:description" content="Objekte ansehen, Immobilie online bewerten lassen und Finanzierung inklusive Nebenkosten berechnen.">
+<meta property="og:locale" content="de_AT">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230F5C4A'/%3E%3Cpath d='M7 15.5 16 8l9 7.5V25a1 1 0 0 1-1 1h-5.5v-6h-5v6H8a1 1 0 0 1-1-1z' fill='%23E3B85C'/%3E%3C/svg%3E">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F7F5F1; --surface:#FFFFFF; --surface-2:#EFEBE3;
+  --ink:#101A17; --ink-soft:#3D4B46; --muted:#707C77;
+  --brand:#0F5C4A; --brand-strong:#0B4739; --brand-soft:rgba(15,92,74,.10);
+  --brand-text:#0F5C4A;
+  --gold:#B8862B; --gold-soft:rgba(184,134,43,.13);
+  --line:rgba(16,26,23,.11);
+  --shadow:0 1px 2px rgba(16,26,23,.05), 0 14px 34px rgba(16,26,23,.08);
+  --shadow-lg:0 30px 70px rgba(16,26,23,.18);
+  --radius:18px; --wrap:1180px;
+}
+html[data-theme="dark"]{
+  --bg:#0A100E; --surface:#121A17; --surface-2:#1A2420;
+  --ink:#EAF2EE; --ink-soft:#B2C0BA; --muted:#84928C;
+  --brand:#3FAE8C; --brand-strong:#57C6A3; --brand-soft:rgba(63,174,140,.13);
+  --brand-text:#5CC4A4;
+  --gold:#E0B056; --gold-soft:rgba(224,176,86,.15);
+  --line:rgba(234,242,238,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 34px rgba(0,0,0,.45);
+  --shadow-lg:0 30px 70px rgba(0,0,0,.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  transition:background .3s ease,color .3s ease;
+}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;line-height:1.14;letter-spacing:-.015em;font-weight:600}
+h1{font-size:clamp(2.1rem,5.4vw,3.9rem);letter-spacing:-.025em}
+h2{font-size:clamp(1.7rem,3.6vw,2.6rem)}
+h3{font-size:1.12rem}
+p{color:var(--ink-soft)}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+section{padding:92px 0;position:relative}
+.soft{background:var(--surface-2)}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.71rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--brand-text);background:var(--brand-soft);
+  border:1px solid rgba(15,92,74,.26);
+  padding:.4rem .85rem;border-radius:999px;margin-bottom:1rem;
+}
+html[data-theme="dark"] .eyebrow{border-color:rgba(63,174,140,.3)}
+.sec-head{max-width:740px;margin-bottom:50px}
+.sec-head p{margin-top:.9rem;font-size:1.03rem}
+.center{text-align:center;margin-left:auto;margin-right:auto}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  padding:.92rem 1.6rem;border-radius:12px;border:1px solid transparent;
+  font-weight:600;font-size:.95rem;cursor:pointer;
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease,border-color .18s ease,color .18s ease;
+  white-space:nowrap;
+}
+.btn svg{width:18px;height:18px;flex-shrink:0}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:0 10px 26px rgba(15,92,74,.28)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(15,92,74,.36)}
+html[data-theme="dark"] .btn-primary{color:#06110D}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand-text);transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:#1A1204}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(184,134,43,.34)}
+.btn-dark{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.24);color:#fff}
+.btn-dark:hover{background:rgba(255,255,255,.17);transform:translateY(-2px)}
+
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  border-bottom:1px solid transparent;
+  transition:background .28s ease,border-color .28s ease;
+}
+header.scrolled{background:var(--bg);border-bottom-color:var(--line);box-shadow:0 6px 24px rgba(0,0,0,.06)}
+.hdr-in{max-width:var(--wrap);margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:1rem}
+.logo{display:flex;align-items:center;gap:.65rem;margin-right:auto;min-width:0;overflow:hidden}
+.logo-mark{
+  width:40px;height:40px;border-radius:11px;background:var(--brand);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  box-shadow:0 6px 18px rgba(15,92,74,.32);
+}
+.logo-mark svg{width:22px;height:22px}
+.logo-txt strong{
+  display:block;font-family:'Playfair Display',serif;font-weight:700;font-size:1.16rem;
+  letter-spacing:.02em;line-height:1.15;color:var(--ink);white-space:nowrap;
+}
+.logo-txt span{display:block;font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.nav-links{display:flex;align-items:center;gap:.1rem}
+.nav-links a{
+  padding:.55rem .7rem;border-radius:9px;font-size:.89rem;font-weight:500;color:var(--ink-soft);
+  transition:color .18s ease,background .18s ease;
+}
+.nav-links a:hover{color:var(--ink);background:var(--surface-2)}
+.hdr-tools{display:flex;align-items:center;gap:.5rem}
+.lang-switch{display:flex;gap:2px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:3px}
+.lang-switch button{
+  border:none;background:transparent;cursor:pointer;padding:.3rem .46rem;border-radius:7px;
+  font-size:.71rem;font-weight:800;letter-spacing:.04em;color:var(--muted);transition:all .18s ease;
+}
+.lang-switch button.active{background:var(--brand);color:#fff}
+html[data-theme="dark"] .lang-switch button.active{color:#06110D}
+.icon-btn{
+  width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--surface);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .18s ease;color:var(--ink);
+}
+.icon-btn:hover{border-color:var(--brand);color:var(--brand-text)}
+.icon-btn svg{width:19px;height:19px;fill:currentColor}
+.burger{display:none;width:38px;height:38px;border:1px solid var(--line);border-radius:10px;background:var(--surface);
+  flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer}
+.burger span{width:17px;height:2px;background:var(--ink);border-radius:2px;transition:all .25s ease}
+.burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+.hero{position:relative;padding:150px 0 92px;overflow:hidden;background:#08110E;color:#EAF2EE}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:60px 60px;
+  -webkit-mask-image:radial-gradient(ellipse 92% 72% at 50% 30%,#000 40%,transparent 100%);
+  mask-image:radial-gradient(ellipse 92% 72% at 50% 30%,#000 40%,transparent 100%);
+}
+.hero::after{
+  content:'';position:absolute;top:-250px;right:-180px;width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(63,174,140,.20) 0%,rgba(63,174,140,0) 66%);pointer-events:none;
+}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:rgba(224,176,86,.12);border:1px solid rgba(224,176,86,.34);color:#E7C179;
+  padding:.45rem .95rem;border-radius:999px;font-size:.77rem;font-weight:600;margin-bottom:1.4rem;
+}
+.hero h1{color:#fff}
+.hero h1 em{font-style:italic;color:#7FD7BA}
+.hero-lead{color:rgba(234,242,238,.72);font-size:1.07rem;margin-top:1.3rem;max-width:520px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.1rem}
+.hero-stats{display:flex;gap:2.4rem;margin-top:3rem;flex-wrap:wrap}
+.hero-stats .s b{display:block;font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;color:#fff;line-height:1;letter-spacing:-.02em}
+.hero-stats .s span{display:block;font-size:.73rem;color:rgba(234,242,238,.55);margin-top:.45rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+
+.hero-art{position:relative;display:flex;align-items:center;justify-content:center;min-height:410px}
+.obj-mock{
+  width:100%;max-width:392px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);
+  border-radius:22px;padding:18px;box-shadow:0 30px 70px rgba(0,0,0,.5);
+}
+.obj-mock .art{border-radius:14px;overflow:hidden;position:relative;height:172px}
+.obj-mock .art svg{width:100%;height:100%;display:block}
+.tag-live{
+  position:absolute;top:11px;left:11px;background:rgba(8,17,14,.82);border:1px solid rgba(255,255,255,.2);
+  color:#7FD7BA;font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  padding:.3rem .6rem;border-radius:7px;display:flex;align-items:center;gap:.4rem;
+}
+.tag-live i{width:6px;height:6px;border-radius:50%;background:#7FD7BA;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+.obj-mock .m-head{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;margin-top:16px}
+.obj-mock .m-head b{font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;font-weight:600;display:block}
+.obj-mock .m-head small{display:block;font-size:.74rem;color:rgba(234,242,238,.5);margin-top:.15rem}
+.obj-mock .m-price{font-size:1.1rem;font-weight:800;color:#E7C179;white-space:nowrap}
+.obj-mock .m-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:15px}
+.obj-mock .m-facts div{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.55rem .4rem;text-align:center}
+.obj-mock .m-facts b{display:block;font-size:.92rem;color:#fff;font-weight:700}
+.obj-mock .m-facts span{display:block;font-size:.62rem;color:rgba(234,242,238,.5);letter-spacing:.06em;text-transform:uppercase;margin-top:.1rem}
+.obj-mock .m-bar{margin-top:15px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)}
+.obj-mock .m-bar-top{display:flex;justify-content:space-between;font-size:.72rem;color:rgba(234,242,238,.55);margin-bottom:.45rem;font-weight:600}
+.obj-mock .m-track{height:7px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+.obj-mock .m-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#3FAE8C,#E0B056);width:0;animation:fillbar 1.4s cubic-bezier(.2,.8,.3,1) .3s forwards}
+@keyframes fillbar{to{width:72%}}
+
+.float-card{
+  position:absolute;background:rgba(18,26,23,.94);border:1px solid rgba(255,255,255,.14);
+  border-radius:14px;padding:.72rem .9rem;display:flex;align-items:center;gap:.7rem;
+  box-shadow:0 18px 44px rgba(0,0,0,.55);
+}
+.float-card .ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.float-card .ic svg{width:18px;height:18px}
+.float-card b{display:block;font-size:.81rem;color:#fff;font-weight:700;line-height:1.3}
+.float-card small{display:block;font-size:.69rem;color:rgba(234,242,238,.55)}
+.fc-1{top:-6%;left:-40px;animation:floaty 5s ease-in-out infinite}
+.fc-2{bottom:-7%;right:-34px;animation:floaty 5s ease-in-out .9s infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+
+.trust{background:#08110E;border-top:1px solid rgba(255,255,255,.09);padding:22px 0}
+.trust-in{display:flex;flex-wrap:wrap;gap:.9rem 2.2rem;justify-content:center;align-items:center}
+.trust-in div{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:rgba(234,242,238,.62);font-weight:500}
+.trust-in svg{width:17px;height:17px;fill:#E0B056;flex-shrink:0}
+
+.filter-bar{
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;
+  box-shadow:var(--shadow);margin-bottom:26px;
+}
+.filter-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
+.f-block{flex:1 1 190px;min-width:0}
+.f-label{display:block;font-size:.71rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.chip-row{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{
+  border:1px solid var(--line);background:var(--surface-2);border-radius:999px;
+  padding:.44rem .85rem;font-size:.83rem;font-weight:600;cursor:pointer;color:var(--ink-soft);
+  transition:all .18s ease;
+}
+.chip:hover{border-color:var(--brand);color:var(--brand-text)}
+.chip.active{background:var(--brand);border-color:var(--brand);color:#fff}
+html[data-theme="dark"] .chip.active{color:#06110D}
+select,input[type="text"],input[type="tel"],input[type="email"],textarea{
+  width:100%;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;
+  padding:.7rem .85rem;font-size:.92rem;outline:none;transition:border-color .18s ease,box-shadow .18s ease;
+}
+select:focus,input:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+textarea{min-height:112px;resize:vertical}
+input[type="range"]{
+  -webkit-appearance:none;appearance:none;width:100%;height:7px;border-radius:99px;
+  background:var(--surface-2);outline:none;cursor:pointer;
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;
+  background:var(--brand);border:3px solid var(--surface);cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.25);
+}
+input[type="range"]::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;background:var(--brand);
+  border:3px solid var(--surface);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25);
+}
+.range-line{display:flex;align-items:center;gap:.85rem}
+.range-val{
+  min-width:112px;text-align:right;font-weight:800;font-size:.95rem;color:var(--ink);white-space:nowrap;
+}
+.result-line{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;justify-content:space-between;margin-bottom:18px}
+.result-count{font-size:.92rem;color:var(--muted);font-weight:600}
+.result-count b{color:var(--ink);font-weight:800}
+.sort-wrap{display:flex;align-items:center;gap:.5rem}
+.sort-wrap select{width:auto;padding:.5rem .7rem;font-size:.85rem;font-weight:600}
+
+.obj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.obj-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow);cursor:pointer;display:flex;flex-direction:column;
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+  animation:cardIn .4s ease backwards;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.obj-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:rgba(15,92,74,.3)}
+.obj-art{position:relative;height:168px;overflow:hidden}
+.obj-art svg{width:100%;height:100%;display:block}
+.obj-flag{
+  position:absolute;top:11px;left:11px;padding:.28rem .6rem;border-radius:7px;
+  font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+}
+.flag-new{background:#0F5C4A;color:#fff}
+.flag-res{background:#B8862B;color:#1A1204}
+.flag-top{background:#FFFFFF;color:#101A17}
+.obj-energy{
+  position:absolute;bottom:11px;right:11px;width:30px;height:30px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;color:#0C1512;
+}
+.obj-body{padding:17px 18px 19px;display:flex;flex-direction:column;flex:1}
+.obj-loc{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.obj-title{font-family:'Playfair Display',serif;font-size:1.13rem;font-weight:600;margin:.3rem 0 .1rem;line-height:1.25}
+.obj-price{font-size:1.22rem;font-weight:800;color:var(--brand-text);margin-top:.5rem}
+.obj-price small{display:block;font-size:.73rem;font-weight:600;color:var(--muted);margin-top:.1rem}
+.obj-facts{display:flex;gap:1.1rem;margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--line);flex-wrap:wrap}
+.obj-facts div{display:flex;align-items:center;gap:.38rem;font-size:.84rem;color:var(--ink-soft);font-weight:600}
+.obj-facts svg{width:15px;height:15px;fill:none;stroke:var(--muted);stroke-width:2}
+.obj-more{margin-top:auto;padding-top:1rem;font-size:.85rem;font-weight:700;color:var(--brand-text);display:flex;align-items:center;gap:.35rem}
+.obj-more svg{width:15px;height:15px;transition:transform .2s ease}
+.obj-card:hover .obj-more svg{transform:translateX(3px)}
+.no-result{
+  grid-column:1/-1;text-align:center;padding:52px 20px;background:var(--surface);
+  border:1px dashed var(--line);border-radius:16px;color:var(--muted);font-weight:600;
+}
+.list-note{margin-top:22px;font-size:.83rem;color:var(--muted);text-align:center}
+
+.modal{
+  position:fixed;inset:0;z-index:200;background:rgba(6,12,10,.72);backdrop-filter:blur(5px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease;
+}
+.modal.open{opacity:1;visibility:visible}
+.modal-box{
+  background:var(--bg);border:1px solid var(--line);border-radius:20px;width:100%;max-width:720px;
+  max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg);transform:translateY(16px) scale(.98);
+  transition:transform .25s ease;
+}
+.modal.open .modal-box{transform:none}
+.modal-art{position:relative;height:210px;border-radius:20px 20px 0 0;overflow:hidden}
+.modal-art svg{width:100%;height:100%;display:block}
+.modal-close{
+  position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:10px;border:none;
+  background:rgba(8,17,14,.7);color:#fff;font-size:1.3rem;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:background .18s ease;
+}
+.modal-close:hover{background:rgba(8,17,14,.92)}
+.modal-in{padding:24px 26px 28px}
+.modal-in h3{font-size:1.5rem;margin-bottom:.2rem}
+.modal-loc{font-size:.76rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+.modal-price{font-size:1.65rem;font-weight:800;color:var(--brand-text);margin:.7rem 0 .2rem}
+.modal-price small{font-size:.8rem;font-weight:600;color:var(--muted);margin-left:.4rem}
+.modal-desc{margin:1rem 0 1.3rem;font-size:.97rem}
+.kv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.3rem}
+.kv{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.7rem .8rem}
+.kv span{display:block;font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.kv b{display:block;font-size:.98rem;font-weight:700;margin-top:.15rem}
+.feat-list{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.5rem}
+.feat{
+  display:inline-flex;align-items:center;gap:.4rem;background:var(--brand-soft);
+  border:1px solid rgba(15,92,74,.2);color:var(--brand-text);border-radius:999px;
+  padding:.35rem .8rem;font-size:.81rem;font-weight:600;
+}
+html[data-theme="dark"] .feat{border-color:rgba(63,174,140,.26)}
+.modal-cta{display:flex;flex-wrap:wrap;gap:.7rem}
+
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc{
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;
+  box-shadow:var(--shadow);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+.svc:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:rgba(15,92,74,.28)}
+.svc .ic{
+  width:46px;height:46px;border-radius:13px;background:var(--brand-soft);
+  display:flex;align-items:center;justify-content:center;margin-bottom:1rem;
+}
+.svc .ic svg{width:23px;height:23px;fill:none;stroke:var(--brand-text);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.svc p{font-size:.93rem;margin-top:.5rem}
+.svc .meta{
+  display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;font-size:.78rem;font-weight:700;
+  color:var(--gold);letter-spacing:.04em;
+}
+
+.calc-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:26px;align-items:start}
+.calc-form,.calc-out{
+  background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow);
+}
+.calc-out{position:sticky;top:104px}
+.cf-block{margin-bottom:1.35rem}
+.cf-block:last-child{margin-bottom:0}
+.slider-line{display:flex;align-items:center;gap:1rem}
+.slider-val{min-width:104px;text-align:right;font-weight:800;font-size:1.02rem;white-space:nowrap}
+.slider-val small{font-weight:600;color:var(--muted);font-size:.8rem}
+.switch-row{display:flex;gap:.4rem;flex-wrap:wrap}
+.toggle-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}
+.tgl{
+  display:flex;align-items:center;gap:.55rem;background:var(--surface-2);border:1px solid var(--line);
+  border-radius:11px;padding:.6rem .75rem;cursor:pointer;font-size:.86rem;font-weight:600;
+  color:var(--ink-soft);transition:all .18s ease;user-select:none;
+}
+.tgl:hover{border-color:var(--brand)}
+.tgl i{
+  width:18px;height:18px;border-radius:5px;border:1.5px solid var(--line);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;transition:all .18s ease;
+}
+.tgl.on{border-color:var(--brand);color:var(--ink);background:var(--brand-soft)}
+.tgl.on i{background:var(--brand);border-color:var(--brand)}
+.tgl.on i::after{content:'';width:9px;height:5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+html[data-theme="dark"] .tgl.on i::after{border-color:#06110D}
+
+.out-hero{text-align:center;padding-bottom:1.1rem;border-bottom:1px solid var(--line)}
+.out-hero span{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.out-hero b{
+  display:block;font-family:'Playfair Display',serif;font-size:2.35rem;font-weight:600;
+  color:var(--brand-text);line-height:1.1;margin:.35rem 0 .25rem;letter-spacing:-.02em;
+}
+.out-hero small{display:block;font-size:.86rem;color:var(--muted);font-weight:600}
+.out-line{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.62rem 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.out-line:last-of-type{border-bottom:none}
+.out-line .k{color:var(--ink-soft)}
+.out-line .v{font-weight:800;white-space:nowrap}
+.out-line.total{border-top:2px solid var(--line);margin-top:.4rem;padding-top:.85rem;font-size:1.02rem}
+.out-line.total .v{color:var(--brand-text);font-size:1.12rem}
+.calc-note{font-size:.79rem;color:var(--muted);margin-top:1.1rem;line-height:1.55}
+.range-scale{margin-top:1.1rem}
+.range-scale .rs-top{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);font-weight:700;margin-bottom:.4rem}
+.rs-track{position:relative;height:9px;border-radius:99px;background:linear-gradient(90deg,#8FBFB0,#0F5C4A,#B8862B);opacity:.85}
+html[data-theme="dark"] .rs-track{background:linear-gradient(90deg,#2C6B5B,#3FAE8C,#E0B056)}
+.rs-marker{
+  position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--surface);
+  border:3px solid var(--ink);transform:translate(-50%,-50%);transition:left .3s ease;box-shadow:0 2px 8px rgba(0,0,0,.28);
+}
+
+.stack{display:flex;height:32px;border-radius:9px;overflow:hidden;margin-top:.3rem;border:1px solid var(--line)}
+.stack i{display:block;transition:width .35s ease}
+.stack .s-tilg{background:var(--brand)}
+.stack .s-zins{background:var(--gold)}
+.stack-legend{display:flex;gap:1.2rem;margin-top:.6rem;flex-wrap:wrap}
+.stack-legend div{display:flex;align-items:center;gap:.42rem;font-size:.82rem;color:var(--ink-soft);font-weight:600}
+.stack-legend i{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:st}
+.step{
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;
+  position:relative;box-shadow:var(--shadow);
+}
+.step::before{
+  counter-increment:st;content:'0' counter(st);
+  font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;color:var(--brand-soft);
+  position:absolute;top:14px;right:18px;line-height:1;
+}
+html[data-theme="dark"] .step::before{color:rgba(63,174,140,.18)}
+.step h3{margin-bottom:.45rem;padding-right:2.4rem}
+.step p{font-size:.9rem}
+.step .st-time{
+  display:inline-block;margin-top:.9rem;font-size:.73rem;font-weight:800;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--gold);
+}
+
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.why{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:var(--shadow)}
+.why h3{margin-bottom:.4rem}
+.why p{font-size:.93rem}
+.why .ic{width:42px;height:42px;border-radius:12px;background:var(--gold-soft);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem}
+.why .ic svg{width:21px;height:21px;fill:none;stroke:var(--gold);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.num-band{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:26px;
+  background:var(--brand);border-radius:18px;padding:30px 26px;color:#fff;
+}
+html[data-theme="dark"] .num-band{background:#12332A;border:1px solid rgba(63,174,140,.24)}
+.num-band .n b{display:block;font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:600;line-height:1;letter-spacing:-.02em}
+.num-band .n span{display:block;font-size:.79rem;margin-top:.45rem;color:rgba(255,255,255,.72);font-weight:500}
+
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.member{
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;text-align:center;
+  box-shadow:var(--shadow);transition:transform .22s ease,box-shadow .22s ease;
+}
+.member:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.avatar{
+  width:76px;height:76px;border-radius:50%;margin:0 auto .95rem;display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:#fff;letter-spacing:.02em;
+}
+.member h3{font-size:1.05rem}
+.member .role{font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:.3rem 0 .7rem}
+.member p{font-size:.87rem}
+.member .langs{margin-top:.9rem;display:flex;gap:.3rem;justify-content:center;flex-wrap:wrap}
+.member .langs span{
+  font-size:.66rem;font-weight:800;letter-spacing:.06em;background:var(--surface-2);
+  border:1px solid var(--line);border-radius:6px;padding:.16rem .42rem;color:var(--muted);
+}
+
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev{
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;
+}
+.stars{display:flex;gap:.16rem;margin-bottom:.9rem}
+.stars svg{width:16px;height:16px;fill:var(--gold)}
+.rev q{font-size:.95rem;color:var(--ink-soft);font-style:normal;quotes:none;line-height:1.7}
+.rev-who{display:flex;align-items:center;gap:.7rem;margin-top:1.3rem;padding-top:1.1rem;border-top:1px solid var(--line)}
+.rev-who .av{
+  width:38px;height:38px;border-radius:50%;background:var(--brand-soft);color:var(--brand-text);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0;
+}
+.rev-who b{display:block;font-size:.9rem;font-weight:700}
+.rev-who span{display:block;font-size:.76rem;color:var(--muted)}
+
+.faq-list{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:.7rem}
+.faq-item{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .2s ease}
+.faq-item.open{border-color:rgba(15,92,74,.35)}
+.faq-q{
+  width:100%;background:none;border:none;text-align:left;cursor:pointer;
+  padding:1.05rem 1.25rem;font-size:1rem;font-weight:600;display:flex;align-items:center;
+  justify-content:space-between;gap:1rem;color:var(--ink);
+}
+.faq-q .plus{
+  width:26px;height:26px;border-radius:8px;background:var(--brand-soft);color:var(--brand-text);
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:600;
+  flex-shrink:0;transition:transform .25s ease;line-height:1;
+}
+.faq-item.open .plus{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a p{padding:0 1.25rem 1.15rem;font-size:.94rem}
+
+.contact{background:#08110E;color:#EAF2EE}
+.contact h2{color:#fff}
+.contact .eyebrow{background:rgba(224,176,86,.12);border-color:rgba(224,176,86,.3);color:#E7C179}
+.contact .sec-head p{color:rgba(234,242,238,.7)}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:32px;align-items:start}
+.ci-list{display:flex;flex-direction:column;gap:1rem}
+.ci{display:flex;gap:.9rem;align-items:flex-start;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1rem 1.1rem}
+.ci .ic{width:38px;height:38px;border-radius:10px;background:rgba(63,174,140,.16);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ci .ic svg{width:19px;height:19px;fill:none;stroke:#7FD7BA;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ci b{display:block;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(234,242,238,.5)}
+.ci span{display:block;font-size:.98rem;color:#fff;font-weight:600;margin-top:.15rem;word-break:break-word}
+.form-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:28px}
+.form-card .field{margin-bottom:1rem}
+.form-card label{display:block;font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:rgba(234,242,238,.55);margin-bottom:.42rem}
+.form-card input,.form-card select,.form-card textarea{
+  background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);color:#fff;
+}
+.form-card input::placeholder,.form-card textarea::placeholder{color:rgba(234,242,238,.35)}
+.form-card select option{background:#12241E;color:#fff}
+.form-card input:focus,.form-card select:focus,.form-card textarea:focus{border-color:#3FAE8C;box-shadow:0 0 0 3px rgba(63,174,140,.2)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-ok{
+  margin-top:.9rem;font-size:.9rem;color:#7FD7BA;font-weight:600;
+  opacity:0;transform:translateY(-6px);transition:all .3s ease;
+}
+.form-ok.show{opacity:1;transform:none}
+.form-hint{font-size:.78rem;color:rgba(234,242,238,.42);margin-top:.9rem}
+
+footer{background:#060D0B;color:rgba(234,242,238,.6);padding:52px 0 28px;font-size:.9rem}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:34px;margin-bottom:34px}
+.foot-logo{display:flex;align-items:center;gap:.65rem;margin-bottom:1rem}
+.foot-logo .logo-mark{width:38px;height:38px;border-radius:10px}
+.foot-logo strong{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;font-weight:700;letter-spacing:.02em}
+footer h4{font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:.9rem}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+footer a:hover{color:#7FD7BA}
+.foot-bot{
+  border-top:1px solid rgba(255,255,255,.1);padding-top:20px;display:flex;flex-wrap:wrap;
+  gap:.7rem 1.4rem;justify-content:space-between;align-items:center;font-size:.83rem;
+}
+.demo-pill{
+  display:inline-flex;align-items:center;gap:.45rem;background:rgba(224,176,86,.12);
+  border:1px solid rgba(224,176,86,.3);color:#E7C179;border-radius:999px;
+  padding:.3rem .8rem;font-size:.76rem;font-weight:700;
+}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  .reveal{opacity:1;transform:none}
+}
+
+@media (max-width:1300px){
+  .logo-txt span{display:none}
+  .nav-links a{padding:.5rem .52rem;font-size:.86rem}
+}
+@media (max-width:1150px){
+  .nav-cta{display:none}
+}
+@media (max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:46px}
+  .hero-art{min-height:auto}
+  .hero-lead{max-width:none}
+  .obj-grid,.svc-grid,.rev-grid{grid-template-columns:repeat(2,1fr)}
+  .steps,.team-grid{grid-template-columns:repeat(2,1fr)}
+  .calc-grid,.contact-grid{grid-template-columns:1fr}
+  .calc-out{position:static}
+  .num-band{grid-template-columns:repeat(2,1fr);gap:24px}
+  .fc-1{top:-2%;left:2px}
+  .fc-2{bottom:-2%;right:2px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:28px}
+}
+@media (max-width:860px){
+  .nav-links{
+    position:fixed;top:68px;left:12px;right:12px;background:var(--surface);border:1px solid var(--line);
+    border-radius:16px;flex-direction:column;align-items:stretch;padding:10px;gap:2px;
+    box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transform:translateY(-10px);
+    transition:all .25s ease;max-height:calc(100vh - 90px);overflow-y:auto;
+  }
+  .nav-links.open{opacity:1;visibility:visible;transform:none}
+  .nav-links a{padding:.8rem 1rem;font-size:.95rem}
+  .burger{display:flex}
+  .nav-cta{display:none}
+}
+@media (max-width:720px){
+  section{padding:66px 0}
+  .wrap{padding:0 18px}
+  .hdr-in{padding:11px 18px;gap:.5rem}
+  .hero{padding:118px 0 66px}
+  .hero-stats{gap:1.6rem}
+  .hero-stats .s b{font-size:1.6rem}
+  .sec-head{margin-bottom:34px}
+  .obj-grid,.svc-grid,.rev-grid,.why-grid,.steps,.team-grid,.field-row,.toggle-grid{grid-template-columns:1fr}
+  .kv-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr}
+  .calc-form,.calc-out,.form-card,.svc,.why,.rev,.step{padding:22px}
+  .float-card{display:none}
+  .filter-row{gap:14px}
+  .f-block{flex:1 1 100%}
+  .logo-txt span{display:none}
+  .lang-switch button{padding:.28rem .38rem;font-size:.68rem}
+  .icon-btn,.burger{width:34px;height:34px}
+  .out-hero b{font-size:2rem}
+  .modal-in{padding:20px 20px 24px}
+  .modal-art{height:170px}
+  .num-band{padding:24px 20px}
+  .result-line{gap:.5rem}
+}
+@media (max-width:400px){
+  h1{font-size:1.95rem}
+  .btn{padding:.85rem 1.15rem;font-size:.9rem;width:100%}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .modal-cta{flex-direction:column}
+  .hero-stats{gap:1.2rem}
+  .slider-val{min-width:88px;font-size:.92rem}
+  .range-val{min-width:96px;font-size:.88rem}
+  .logo-mark{width:36px;height:36px}
+  .logo-txt strong{font-size:1rem}
+  .kv-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="hdr-in">
+    <a href="#top" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E3B85C" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3.5l9 7"/><path d="M5 10v9.5h5V15h4v4.5h5V10"/></svg>
+      </span>
+      <span class="logo-txt">
+        <strong>ATRIA</strong>
+        <span data-i18n="logo_sub">Immobilien Wien</span>
+      </span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#objekte" data-i18n="nav_objects">Objekte</a>
+      <a href="#leistungen" data-i18n="nav_services">Leistungen</a>
+      <a href="#bewertung" data-i18n="nav_value">Wertrechner</a>
+      <a href="#finanzierung" data-i18n="nav_finance">Finanzierung</a>
+      <a href="#ablauf" data-i18n="nav_process">Ablauf</a>
+      <a href="#team" data-i18n="nav_team">Team</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+    </nav>
+
+    <div class="hdr-tools">
+      <div class="lang-switch" id="langSwitch">
+        <button data-lang="de" class="active">DE</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="it">IT</button>
+        <button data-lang="bs">BS</button>
+      </div>
+      <button class="icon-btn" id="themeBtn" aria-label="Theme">
+        <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4 5.39 5.39 0 0 1 2.26-4.4c-.44-.06-.9-.1-1.36-.1z"/></svg>
+      </button>
+      <a href="#bewertung" class="btn btn-primary nav-cta" style="padding:.6rem 1.05rem;font-size:.87rem" data-i18n="nav_cta">Immobilie bewerten</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="hero-badge">&#9733; <b>4,9</b> <span data-i18n="hero_badge">von 5 &middot; 287 Google-Bewertungen</span></span>
+      <h1><span data-i18n="hero_h1a">Ihre Immobilie verdient</span> <em data-i18n="hero_h1b">den richtigen Preis.</em></h1>
+      <p class="hero-lead" data-i18n="hero_lead">Wir verkaufen und vermieten Wohnungen, Häuser und Anlageobjekte in Wien — mit ehrlicher Bewertung, professioneller Vermarktung und Betreuung bis zur Schlüsselübergabe. In vier Sprachen.</p>
+      <div class="hero-cta">
+        <a href="#bewertung" class="btn btn-primary" data-i18n="hero_cta1">Immobilie kostenlos bewerten</a>
+        <a href="#objekte" class="btn btn-dark" data-i18n="hero_cta2">Objekte ansehen</a>
+      </div>
+      <div class="hero-stats">
+        <div class="s"><b>480+</b><span data-i18n="stat1">vermittelte Objekte</span></div>
+        <div class="s"><b>54</b><span data-i18n="stat2">Tage bis zum Abschluss</span></div>
+        <div class="s"><b>98%</b><span data-i18n="stat3">vom Angebotspreis</span></div>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="obj-mock">
+        <div class="art">
+          <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="hsky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#164137"/><stop offset="100%" stop-color="#0A1A16"/>
+              </linearGradient>
+              <linearGradient id="hfac" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#25423A"/><stop offset="100%" stop-color="#152A24"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="200" fill="url(#hsky)"/>
+            <circle cx="322" cy="46" r="26" fill="rgba(224,176,86,.22)"/>
+            <circle cx="322" cy="46" r="13" fill="rgba(224,176,86,.5)"/>
+            <rect x="24" y="82" width="86" height="118" fill="#122620"/>
+            <rect x="286" y="66" width="92" height="134" fill="#122620"/>
+            <rect x="104" y="38" width="188" height="162" fill="url(#hfac)"/>
+            <rect x="104" y="38" width="188" height="7" fill="#E0B056" opacity=".5"/>
+            <g fill="#E0B056">
+              <rect x="122" y="62" width="26" height="20" rx="2" opacity=".85"/>
+              <rect x="160" y="62" width="26" height="20" rx="2" opacity=".35"/>
+              <rect x="198" y="62" width="26" height="20" rx="2" opacity=".7"/>
+              <rect x="236" y="62" width="26" height="20" rx="2" opacity=".25"/>
+              <rect x="122" y="98" width="26" height="20" rx="2" opacity=".3"/>
+              <rect x="160" y="98" width="26" height="20" rx="2" opacity=".8"/>
+              <rect x="198" y="98" width="26" height="20" rx="2" opacity=".25"/>
+              <rect x="236" y="98" width="26" height="20" rx="2" opacity=".6"/>
+              <rect x="122" y="134" width="26" height="20" rx="2" opacity=".55"/>
+              <rect x="160" y="134" width="26" height="20" rx="2" opacity=".25"/>
+              <rect x="198" y="134" width="26" height="20" rx="2" opacity=".75"/>
+              <rect x="236" y="134" width="26" height="20" rx="2" opacity=".3"/>
+            </g>
+            <g fill="#3FAE8C" opacity=".55">
+              <rect x="38" y="100" width="18" height="14" rx="2"/><rect x="66" y="100" width="18" height="14" rx="2" opacity=".5"/>
+              <rect x="38" y="128" width="18" height="14" rx="2" opacity=".45"/><rect x="66" y="128" width="18" height="14" rx="2"/>
+              <rect x="300" y="88" width="18" height="14" rx="2" opacity=".6"/><rect x="330" y="88" width="18" height="14" rx="2"/>
+              <rect x="300" y="116" width="18" height="14" rx="2"/><rect x="330" y="116" width="18" height="14" rx="2" opacity=".4"/>
+            </g>
+            <rect x="176" y="168" width="44" height="32" rx="3" fill="#0A1A16"/>
+            <rect x="176" y="168" width="44" height="32" rx="3" fill="none" stroke="#E0B056" stroke-width="1.5" opacity=".7"/>
+            <rect y="192" width="400" height="8" fill="#08110E"/>
+          </svg>
+          <span class="tag-live"><i></i><span data-i18n="mock_live">Neu im Angebot</span></span>
+        </div>
+        <div class="m-head">
+          <div>
+            <b data-i18n="mock_title">Altbau mit Balkon</b>
+            <small data-i18n="mock_loc">1070 Wien &middot; Neubaugasse</small>
+          </div>
+          <span class="m-price">€ 489.000</span>
+        </div>
+        <div class="m-facts">
+          <div><b>84</b><span data-i18n="mock_f1">m&sup2;</span></div>
+          <div><b>3</b><span data-i18n="mock_f2">Zimmer</span></div>
+          <div><b>B</b><span data-i18n="mock_f3">Energie</span></div>
+        </div>
+        <div class="m-bar">
+          <div class="m-bar-top"><span data-i18n="mock_bar">Vermarktungsfortschritt</span><span>72%</span></div>
+          <div class="m-track"><div class="m-fill"></div></div>
+        </div>
+      </div>
+
+      <div class="float-card fc-1">
+        <span class="ic" style="background:rgba(63,174,140,.16)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7FD7BA" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 4 4-7 5 5"/></svg>
+        </span>
+        <div><b data-i18n="float1_t">Marktwert in 2 Minuten</b><small data-i18n="float1_s">online &amp; kostenlos</small></div>
+      </div>
+      <div class="float-card fc-2">
+        <span class="ic" style="background:rgba(224,176,86,.16)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E0B056" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </span>
+        <div><b data-i18n="float2_t">Provision erst bei Erfolg</b><small data-i18n="float2_s">keine Vorabkosten</small></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="trust">
+  <div class="wrap trust-in">
+    <div><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1 14-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7z"/></svg><span data-i18n="trust1">Konzessionierter Makler</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1 14-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7z"/></svg><span data-i18n="trust2">Bewertung kostenlos</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1 14-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7z"/></svg><span data-i18n="trust3">Beratung in 4 Sprachen</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1 14-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7z"/></svg><span data-i18n="trust4">Treuhandabwicklung</span></div>
+  </div>
+</div>
+
+<section id="objekte">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="ob_eyebrow">Aktuelle Objekte</span>
+      <h2 data-i18n="ob_title">Filtern Sie in Ruhe — ohne Anmeldung, ohne Maklerkontakt.</h2>
+      <p data-i18n="ob_sub">Alle Objekte mit Preis, Fläche, Zimmern und Energiekennwert. Tippen Sie auf ein Objekt für Details und eine unverbindliche Besichtigungsanfrage.</p>
+    </div>
+
+    <div class="filter-bar reveal">
+      <div class="filter-row">
+        <div class="f-block" style="flex:1 1 100%">
+          <span class="f-label" data-i18n="fl_type">Objektart</span>
+          <div class="chip-row" id="typeRow"></div>
+        </div>
+      </div>
+      <div class="filter-row" style="margin-top:16px">
+        <div class="f-block">
+          <span class="f-label" data-i18n="fl_rooms">Zimmer ab</span>
+          <div class="chip-row" id="roomRow"></div>
+        </div>
+        <div class="f-block" style="flex:1 1 300px">
+          <span class="f-label" data-i18n="fl_price">Preis bis</span>
+          <div class="range-line">
+            <input type="range" id="priceRange" min="150000" max="1600000" step="25000" value="1600000">
+            <span class="range-val" id="priceVal">1.600.000 €</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-line reveal">
+      <span class="result-count"><b id="resCount">8</b> <span data-i18n="fl_results">Objekte gefunden</span></span>
+      <div class="sort-wrap">
+        <span class="f-label" style="margin:0" data-i18n="fl_sort">Sortierung</span>
+        <select id="sortSel">
+          <option value="new" data-i18n="so_new">Neueste zuerst</option>
+          <option value="asc" data-i18n="so_asc">Preis aufsteigend</option>
+          <option value="desc" data-i18n="so_desc">Preis absteigend</option>
+          <option value="area" data-i18n="so_area">Größte Fläche</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="obj-grid" id="objGrid"></div>
+    <p class="list-note" data-i18n="ob_note">Demo-Objekte. Alle Adressen, Preise und Kennwerte sind frei erfunden.</p>
+  </div>
+</section>
+
+<div class="modal" id="objModal">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<section id="leistungen" class="soft">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="sv_eyebrow">Leistungen</span>
+      <h2 data-i18n="sv_title">Vom ersten Gespräch bis zur Schlüsselübergabe.</h2>
+      <p data-i18n="sv_sub">Wir übernehmen den Teil, der Zeit und Nerven kostet — Unterlagen, Vermarktung, Besichtigungen, Verhandlung und Vertragsabwicklung.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3.5l9 7"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-5.5h5V20"/></svg></span>
+        <h3 data-i18n="s1_t">Verkauf von Wohnungen &amp; Häusern</h3>
+        <p data-i18n="s1_d">Marktkonforme Preisfindung, professionelle Aufbereitung, Vermarktung auf allen großen Plattformen und Verhandlung bis zum Notartermin.</p>
+        <span class="meta" data-i18n="s1_m">Provision erst bei Abschluss</span>
+      </div>
+      <div class="svc reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/><path d="M8 12h.01M16 12h.01"/></svg></span>
+        <h3 data-i18n="s2_t">Vermietung &amp; Mieterauswahl</h3>
+        <p data-i18n="s2_d">Wir prüfen Bonität und Unterlagen, führen Besichtigungen durch und erstellen den Mietvertrag inklusive Übergabeprotokoll.</p>
+        <span class="meta" data-i18n="s2_m">Inklusive Bonitätsprüfung</span>
+      </div>
+      <div class="svc reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 4-7 5 5"/><path d="M3 21h18"/></svg></span>
+        <h3 data-i18n="s3_t">Immobilienbewertung</h3>
+        <p data-i18n="s3_d">Online in zwei Minuten als Richtwert — oder vor Ort mit Vergleichsdaten, Zustandsbewertung und schriftlichem Gutachten.</p>
+        <span class="meta" data-i18n="s3_m">Online-Richtwert kostenlos</span>
+      </div>
+      <div class="svc reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M17 6.5c0-2-2.2-3-5-3s-5 .9-5 2.9c0 4.6 10 2.6 10 7.2 0 2.1-2.2 3.1-5 3.1s-5-1-5-3"/></svg></span>
+        <h3 data-i18n="s4_t">Anlageimmobilien</h3>
+        <p data-i18n="s4_d">Zinshäuser, Vorsorgewohnungen und Kleingewerbe — mit Renditerechnung, Mietzinsliste und realistischer Einschätzung des Sanierungsbedarfs.</p>
+        <span class="meta" data-i18n="s4_m">Renditeberechnung inklusive</span>
+      </div>
+      <div class="svc reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4z"/><path d="M4 7l8-4 8 4"/><path d="M9 20v-6h6v6"/></svg></span>
+        <h3 data-i18n="s5_t">Unterlagen &amp; Behördenwege</h3>
+        <p data-i18n="s5_d">Grundbuchauszug, Energieausweis, Wohnungseigentumsvertrag, Nutzwertgutachten — wir besorgen, was fehlt, und erklären, was drinsteht.</p>
+        <span class="meta" data-i18n="s5_m">Energieausweis organisiert</span>
+      </div>
+      <div class="svc reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-8.5a8.4 8.4 0 1 1 16.9-1z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg></span>
+        <h3 data-i18n="s6_t">Beratung in vier Sprachen</h3>
+        <p data-i18n="s6_d">Deutsch, Englisch, Italienisch und Bosnisch/Kroatisch/Serbisch — damit auch die Vertragsdetails wirklich verstanden werden.</p>
+        <span class="meta" data-i18n="s6_m">DE &middot; EN &middot; IT &middot; BKS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bewertung">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="wr_eyebrow">Wertrechner</span>
+      <h2 data-i18n="wr_title">Was ist Ihre Immobilie heute wert?</h2>
+      <p data-i18n="wr_sub">Stellen Sie die Eckdaten ein — Sie bekommen sofort eine Preisspanne, den Quadratmeterpreis und eine Einschätzung der Vermarktungsdauer. Ohne Anmeldung, ohne dass jemand anruft.</p>
+    </div>
+
+    <div class="calc-grid">
+      <div class="calc-form reveal">
+        <div class="cf-block">
+          <span class="f-label" data-i18n="wr_s1">Objektart</span>
+          <div class="chip-row" id="wArtRow"></div>
+        </div>
+        <div class="cf-block">
+          <span class="f-label" data-i18n="wr_s2">Lage</span>
+          <div class="chip-row" id="wLageRow"></div>
+        </div>
+        <div class="cf-block">
+          <span class="f-label" data-i18n="wr_s3">Wohnfläche</span>
+          <div class="slider-line">
+            <input type="range" id="wArea" min="25" max="320" step="1" value="82">
+            <span class="slider-val"><span id="wAreaVal">82</span> <small>m&sup2;</small></span>
+          </div>
+        </div>
+        <div class="cf-block">
+          <span class="f-label" data-i18n="wr_s4">Zimmer</span>
+          <div class="slider-line">
+            <input type="range" id="wRooms" min="1" max="8" step="1" value="3">
+            <span class="slider-val"><span id="wRoomsVal">3</span></span>
+          </div>
+        </div>
+        <div class="cf-block">
+          <span class="f-label" data-i18n="wr_s5">Baujahr</span>
+          <div class="slider-line">
+            <input type="range" id="wYear" min="1880" max="2026" step="1" value="1968">
+            <span class="slider-val"><span id="wYearVal">1968</span></span>
+          </div>
+        </div>
+        <div class="cf-block">
+          <span class="f-label" data-i18n="wr_s6">Zustand</span>
+          <div class="chip-row" id="wZustRow"></div>
+        </div>
+        <div class="cf-block">
+          <span class="f-label" data-i18n="wr_s7">Ausstattung</span>
+          <div class="toggle-grid" id="wExtraRow"></div>
+        </div>
+      </div>
+
+      <div class="calc-out reveal">
+        <div class="out-hero">
+          <span data-i18n="wr_out_t">Geschätzter Marktwert</span>
+          <b id="wValue">€ 452.000</b>
+          <small id="wRange">€ 421.000 – € 483.000</small>
+        </div>
+        <div class="range-scale">
+          <div class="rs-top"><span data-i18n="wr_scale_lo">unterer Marktbereich</span><span data-i18n="wr_scale_hi">Spitzenpreis</span></div>
+          <div class="rs-track"><span class="rs-marker" id="wMarker" style="left:50%"></span></div>
+        </div>
+        <div style="margin-top:1.3rem">
+          <div class="out-line"><span class="k" data-i18n="wr_o1">Quadratmeterpreis</span><span class="v" id="wSqm">—</span></div>
+          <div class="out-line"><span class="k" data-i18n="wr_o2">Erzielbare Monatsmiete</span><span class="v" id="wRent">—</span></div>
+          <div class="out-line"><span class="k" data-i18n="wr_o3">Bruttorendite für Käufer</span><span class="v" id="wYield">—</span></div>
+          <div class="out-line"><span class="k" data-i18n="wr_o4">Erwartete Vermarktungsdauer</span><span class="v" id="wTime">—</span></div>
+        </div>
+        <a href="#kontakt" class="btn btn-primary" style="width:100%;margin-top:1.3rem" data-i18n="wr_btn">Genaue Bewertung anfordern</a>
+        <p class="calc-note" data-i18n="wr_note">Automatischer Richtwert auf Basis von Fläche, Lage, Zustand und Baujahr. Er ersetzt keine Besichtigung und kein Gutachten — der reale Preis hängt auch von Grundriss, Stockwerk, Ausblick und Hausverwaltung ab.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="finanzierung" class="soft">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="fi_eyebrow">Finanzierung</span>
+      <h2 data-i18n="fi_title">Kaufpreis ist nicht Gesamtpreis.</h2>
+      <p data-i18n="fi_sub">Rechnen Sie Rate, Zinsen und alle Kaufnebenkosten durch, bevor Sie zur Bank gehen. So sehen Sie sofort, wie viel Eigenkapital wirklich nötig ist.</p>
+    </div>
+
+    <div class="calc-grid">
+      <div class="calc-form reveal">
+        <div class="cf-block">
+          <span class="f-label" data-i18n="fi_s1">Kaufpreis</span>
+          <div class="slider-line">
+            <input type="range" id="fPrice" min="100000" max="1500000" step="5000" value="450000">
+            <span class="slider-val" id="fPriceVal">450.000 €</span>
+          </div>
+        </div>
+        <div class="cf-block">
+          <span class="f-label" data-i18n="fi_s2">Eigenkapital</span>
+          <div class="slider-line">
+            <input type="range" id="fEquity" min="0" max="70" step="1" value="35">
+            <span class="slider-val"><span id="fEquityVal">35</span> <small>%</small></span>
+          </div>
+        </div>
+        <div class="cf-block">
+          <span class="f-label" data-i18n="fi_s3">Sollzinssatz</span>
+          <div class="slider-line">
+            <input type="range" id="fRate" min="1" max="8" step="0.05" value="3.6">
+            <span class="slider-val"><span id="fRateVal">3,60</span> <small>%</small></span>
+          </div>
+        </div>
+        <div class="cf-block">
+          <span class="f-label" data-i18n="fi_s4">Laufzeit</span>
+          <div class="slider-line">
+            <input type="range" id="fYears" min="10" max="35" step="1" value="30">
+            <span class="slider-val"><span id="fYearsVal">30</span> <small data-i18n="fi_years">Jahre</small></span>
+          </div>
+        </div>
+        <div class="cf-block">
+          <span class="f-label" data-i18n="fi_s5">Nebenkosten im Detail</span>
+          <div class="out-line"><span class="k" data-i18n="fi_n1">Grunderwerbsteuer (3,5 %)</span><span class="v" id="fGrest">—</span></div>
+          <div class="out-line"><span class="k" data-i18n="fi_n2">Grundbucheintragung (1,1 %)</span><span class="v" id="fGb">—</span></div>
+          <div class="out-line"><span class="k" data-i18n="fi_n3">Maklerprovision (3 % + USt)</span><span class="v" id="fProv">—</span></div>
+          <div class="out-line"><span class="k" data-i18n="fi_n4">Vertrag &amp; Treuhand (ca. 1,5 %)</span><span class="v" id="fNotar">—</span></div>
+          <div class="out-line"><span class="k" data-i18n="fi_n5">Pfandrechtseintragung (1,2 %)</span><span class="v" id="fPfand">—</span></div>
+          <div class="out-line total"><span class="k" data-i18n="fi_n6">Nebenkosten gesamt</span><span class="v" id="fNkTotal">—</span></div>
+        </div>
+      </div>
+
+      <div class="calc-out reveal">
+        <div class="out-hero">
+          <span data-i18n="fi_out_t">Monatliche Rate</span>
+          <b id="fRateMonth">€ 1.596</b>
+          <small id="fLoanLbl">—</small>
+        </div>
+        <div style="margin-top:1.2rem">
+          <div class="out-line"><span class="k" data-i18n="fi_o1">Gesamtkosten des Kaufs</span><span class="v" id="fTotalCost">—</span></div>
+          <div class="out-line"><span class="k" data-i18n="fi_o2">Benötigtes Eigenkapital</span><span class="v" id="fEqNeed">—</span></div>
+          <div class="out-line"><span class="k" data-i18n="fi_o3">Darlehensbetrag</span><span class="v" id="fLoan">—</span></div>
+          <div class="out-line"><span class="k" data-i18n="fi_o4">Zinskosten über die Laufzeit</span><span class="v" id="fInterest">—</span></div>
+          <div class="out-line"><span class="k" data-i18n="fi_o5">Rückzahlung gesamt</span><span class="v" id="fRepay">—</span></div>
+        </div>
+        <div style="margin-top:1.3rem">
+          <span class="f-label" data-i18n="fi_stack">Woraus die Rückzahlung besteht</span>
+          <div class="stack"><i class="s-tilg" id="stTilg" style="width:66%"></i><i class="s-zins" id="stZins" style="width:34%"></i></div>
+          <div class="stack-legend">
+            <div><i class="s-tilg" style="background:var(--brand)"></i><span data-i18n="fi_leg1">Tilgung</span> <b id="stTilgV">—</b></div>
+            <div><i class="s-zins" style="background:var(--gold)"></i><span data-i18n="fi_leg2">Zinsen</span> <b id="stZinsV">—</b></div>
+          </div>
+        </div>
+        <div id="fWarn" class="calc-note" style="color:var(--gold);font-weight:600"></div>
+        <a href="#kontakt" class="btn btn-primary" style="width:100%;margin-top:1rem" data-i18n="fi_btn">Finanzierungsgespräch vereinbaren</a>
+        <p class="calc-note" data-i18n="fi_note">Annuitätenrechnung mit gleichbleibender Rate, ohne Kontoführung, Bearbeitungsgebühr und Versicherungen. Unverbindliche Demo-Berechnung, keine Finanzierungsberatung.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ablauf">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="ab_eyebrow">Ablauf</span>
+      <h2 data-i18n="ab_title">So läuft ein Verkauf mit uns ab.</h2>
+      <p data-i18n="ab_sub">Vier Schritte, feste Ansprechperson, klare Zeitangaben. Sie wissen jederzeit, was gerade passiert und was als Nächstes kommt.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <h3 data-i18n="ab1_t">Erstgespräch &amp; Bewertung</h3>
+        <p data-i18n="ab1_d">Wir sehen uns die Immobilie an, prüfen Unterlagen und legen gemeinsam einen realistischen Angebotspreis fest — schriftlich, mit Vergleichsobjekten.</p>
+        <span class="st-time" data-i18n="ab1_m">Woche 1</span>
+      </div>
+      <div class="step reveal">
+        <h3 data-i18n="ab2_t">Aufbereitung &amp; Unterlagen</h3>
+        <p data-i18n="ab2_d">Fotos, Grundriss, Energieausweis und Exposé. Fehlende Dokumente holen wir bei Grundbuch, Hausverwaltung und Baubehörde ein.</p>
+        <span class="st-time" data-i18n="ab2_m">Woche 2–3</span>
+      </div>
+      <div class="step reveal">
+        <h3 data-i18n="ab3_t">Vermarktung &amp; Besichtigungen</h3>
+        <p data-i18n="ab3_d">Veröffentlichung auf allen relevanten Portalen, Vorauswahl der Interessenten und Besichtigungen zu Terminen, die Ihnen passen.</p>
+        <span class="st-time" data-i18n="ab3_m">Woche 3–8</span>
+      </div>
+      <div class="step reveal">
+        <h3 data-i18n="ab4_t">Abschluss &amp; Übergabe</h3>
+        <p data-i18n="ab4_d">Verhandlung, Kaufanbot, Vertragserrichtung über Treuhänder und Übergabeprotokoll mit Zählerständen. Danach ist wirklich alles erledigt.</p>
+        <span class="st-time" data-i18n="ab4_m">Woche 8–12</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="warum" class="soft">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="wh_eyebrow">Warum ATRIA</span>
+      <h2 data-i18n="wh_title">Der Preis entsteht nicht im Inserat, sondern in der Vorbereitung.</h2>
+      <p data-i18n="wh_sub">Zu hoch angesetzt, und das Objekt bleibt monatelang stehen. Zu niedrig, und Sie verschenken Geld. Wir arbeiten mit Zahlen statt mit Bauchgefühl.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 4 4-7 5 5"/><path d="M3 21h18"/></svg></span>
+        <h3 data-i18n="w1_t">Preisfindung mit echten Abschlüssen</h3>
+        <p data-i18n="w1_d">Wir vergleichen nicht mit Inseratspreisen, sondern mit tatsächlich erzielten Kaufpreisen aus dem Grundbuch — im selben Bezirk und derselben Objektklasse.</p>
+      </div>
+      <div class="why reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M17 6.5c0-2-2.2-3-5-3s-5 .9-5 2.9c0 4.6 10 2.6 10 7.2 0 2.1-2.2 3.1-5 3.1s-5-1-5-3"/></svg></span>
+        <h3 data-i18n="w2_t">Provision nur im Erfolgsfall</h3>
+        <p data-i18n="w2_d">Keine Vorabkosten, keine Inseratspauschale, keine Alleinvermittlung über zwölf Monate. Wenn nicht verkauft wird, zahlen Sie nichts.</p>
+      </div>
+      <div class="why reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        <h3 data-i18n="w3_t">Eine Ansprechperson, nicht fünf</h3>
+        <p data-i18n="w3_d">Dieselbe Person führt die Bewertung durch, macht die Besichtigungen und sitzt beim Notartermin dabei. Sie erklären Ihre Immobilie genau einmal.</p>
+      </div>
+      <div class="why reveal">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4z"/><path d="M4 7l8-4 8 4"/><path d="M9 20v-6h6v6"/></svg></span>
+        <h3 data-i18n="w4_t">Interessenten, die auch kaufen können</h3>
+        <p data-i18n="w4_d">Vor der Besichtigung klären wir Finanzierungsstand und Zeitplan ab. Das erspart Ihnen Wohnungsführungen für Menschen, die nur schauen wollen.</p>
+      </div>
+    </div>
+    <div class="num-band reveal">
+      <div class="n"><b>480+</b><span data-i18n="nb1">vermittelte Objekte seit 2014</span></div>
+      <div class="n"><b>54</b><span data-i18n="nb2">Tage durchschnittlich bis zum Abschluss</span></div>
+      <div class="n"><b>98%</b><span data-i18n="nb3">des Angebotspreises im Schnitt erzielt</span></div>
+      <div class="n"><b>4,9</b><span data-i18n="nb4">Sterne aus 287 Bewertungen</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="tm_eyebrow">Team</span>
+      <h2 data-i18n="tm_title">Vier Personen, die Sie beim Namen kennen.</h2>
+      <p data-i18n="tm_sub">Kein Callcenter, keine wechselnden Zuständigkeiten. Sie bekommen die Durchwahl und die Mobilnummer Ihrer Betreuung.</p>
+    </div>
+    <div class="team-grid">
+      <div class="member reveal">
+        <div class="avatar" style="background:linear-gradient(140deg,#0F5C4A,#1F8A6E)">MK</div>
+        <h3 data-i18n="c1_n">M. K.</h3>
+        <div class="role" data-i18n="c1_r">Geschäftsführung</div>
+        <p data-i18n="c1_d">Konzessionierter Immobilienmakler, seit 2014 selbstständig. Schwerpunkt Altbau und Zinshäuser in den Innenbezirken.</p>
+        <div class="langs"><span>DE</span><span>EN</span><span>BKS</span></div>
+      </div>
+      <div class="member reveal">
+        <div class="avatar" style="background:linear-gradient(140deg,#B8862B,#D9A94F)">TR</div>
+        <h3 data-i18n="c2_n">T. R.</h3>
+        <div class="role" data-i18n="c2_r">Verkauf &amp; Bewertung</div>
+        <p data-i18n="c2_d">Betreut Eigentumswohnungen und Einfamilienhäuser. Erstellt Bewertungen mit Vergleichsdaten aus dem Grundbuch.</p>
+        <div class="langs"><span>DE</span><span>IT</span><span>EN</span></div>
+      </div>
+      <div class="member reveal">
+        <div class="avatar" style="background:linear-gradient(140deg,#2B6B8C,#4E9CBF)">DS</div>
+        <h3 data-i18n="c3_n">D. S.</h3>
+        <div class="role" data-i18n="c3_r">Vermietung</div>
+        <p data-i18n="c3_d">Von der Anzeige bis zum Übergabeprotokoll. Kümmert sich um Bonitätsprüfung, Mietverträge und Kautionsabwicklung.</p>
+        <div class="langs"><span>DE</span><span>EN</span><span>BKS</span></div>
+      </div>
+      <div class="member reveal">
+        <div class="avatar" style="background:linear-gradient(140deg,#6B3F8C,#9A6BC0)">AP</div>
+        <h3 data-i18n="c4_n">A. P.</h3>
+        <div class="role" data-i18n="c4_r">Anlage &amp; Finanzierung</div>
+        <p data-i18n="c4_d">Rechnet Renditen, begleitet zu Bankterminen und prüft Mietzinslisten bei Anlageobjekten.</p>
+        <div class="langs"><span>DE</span><span>EN</span><span>IT</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stimmen" class="soft">
+  <div class="wrap">
+    <div class="sec-head center reveal" style="text-align:center">
+      <span class="eyebrow" data-i18n="rv_eyebrow">Bewertungen</span>
+      <h2 data-i18n="rv_title">Was Eigentümer und Käufer sagen</h2>
+    </div>
+    <div class="rev-grid">
+      <div class="rev reveal">
+        <div class="stars"><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg></div>
+        <q data-i18n="rv1_q">Zwei andere Makler hatten uns einen Preis versprochen, den offensichtlich niemand zahlt. Hier haben wir eine Aufstellung mit echten Abschlüssen bekommen — und exakt zu diesem Preis verkauft, nach sieben Wochen.</q>
+        <div class="rev-who"><span class="av">MB</span><div><b data-i18n="rv1_n">M. B.</b><span data-i18n="rv1_r">Wohnungsverkauf &middot; 1030 Wien</span></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars"><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg></div>
+        <q data-i18n="rv2_q">Als Käufer war mir die Nebenkostenrechnung am wichtigsten. Ich habe vorher nicht gewusst, dass über zehn Prozent zusätzlich anfallen. Das wurde mir in einem Termin sauber vorgerechnet, ohne Verkaufsdruck.</q>
+        <div class="rev-who"><span class="av">ST</span><div><b data-i18n="rv2_n">S. T.</b><span data-i18n="rv2_r">Erstkäufer &middot; 1210 Wien</span></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars"><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24"><path d="m12 2 3 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.5 4 1.6-7.4-5.6-5 7.5-.7z"/></svg></div>
+        <q data-i18n="rv3_q">Wir leben im Ausland und haben die Wohnung unserer Eltern verkauft. Alles lief per Video und Mail, die Unterlagen wurden selbst besorgt. Beim Notartermin war jemand vor Ort, der uns vertreten hat.</q>
+        <div class="rev-who"><span class="av">LH</span><div><b data-i18n="rv3_n">L. H.</b><span data-i18n="rv3_r">Erbschaftsverkauf &middot; 1150 Wien</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head center reveal" style="text-align:center">
+      <span class="eyebrow" data-i18n="fq_eyebrow">FAQ</span>
+      <h2 data-i18n="fq_title">Häufige Fragen</h2>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<section id="kontakt" class="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="ct_eyebrow">Kontakt</span>
+      <h2 data-i18n="ct_title">Reden wir über Ihre Immobilie.</h2>
+      <p data-i18n="ct_sub">Ein kurzes Gespräch reicht, um einzuschätzen, was sinnvoll ist. Wir melden uns am selben Werktag zurück — auch wenn Sie nur eine Einschätzung wollen.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="ci-list reveal">
+        <div class="ci">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+          <div><b data-i18n="ci1">Telefon</b><span>+43 1 234 56 78</span></div>
+        </div>
+        <div class="ci">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg></span>
+          <div><b data-i18n="ci2">E-Mail</b><span>office@atria-demo.at</span></div>
+        </div>
+        <div class="ci">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <div><b data-i18n="ci3">Büro</b><span data-i18n="ci3_v">Beispielgasse 24, 1040 Wien</span></div>
+        </div>
+        <div class="ci">
+          <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+          <div><b data-i18n="ci4">Öffnungszeiten</b><span data-i18n="ci4_v">Mo–Fr 9:00–18:00 · Sa nach Vereinbarung</span></div>
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <div class="field-row">
+          <div class="field"><label data-i18n="f_name">Vor- und Nachname</label><input type="text" id="fmName" data-i18n-ph="f_name_ph" placeholder="M. Beispiel"></div>
+          <div class="field"><label data-i18n="f_phone">Telefon</label><input type="tel" id="fmPhone" placeholder="+43 660 1234567"></div>
+        </div>
+        <div class="field"><label data-i18n="f_mail">E-Mail</label><input type="email" id="fmMail" placeholder="name@beispiel.at"></div>
+        <div class="field">
+          <label data-i18n="f_topic">Worum geht es?</label>
+          <select id="fmTopic">
+            <option value="t1" data-i18n="f_t1">Ich möchte verkaufen</option>
+            <option value="t2" data-i18n="f_t2">Ich möchte vermieten</option>
+            <option value="t3" data-i18n="f_t3">Ich suche eine Immobilie</option>
+            <option value="t4" data-i18n="f_t4">Besichtigungstermin</option>
+            <option value="t5" data-i18n="f_t5">Bewertung / Gutachten</option>
+            <option value="t6" data-i18n="f_t6">Anlageobjekt / Rendite</option>
+          </select>
+        </div>
+        <div class="field"><label data-i18n="f_msg">Nachricht</label><textarea id="fmMsg" data-i18n-ph="f_msg_ph" placeholder="Objektart, Bezirk, ungefähre Größe — und wann wir Sie am besten erreichen."></textarea></div>
+        <button class="btn btn-primary" id="sendBtn" style="width:100%" data-i18n="f_btn">Unverbindlich anfragen</button>
+        <div class="form-ok" id="formOk" data-i18n="f_ok">Danke! Wir melden uns am selben Werktag.</div>
+        <p class="form-hint" data-i18n="f_hint">Demo-Formular — es wird nichts versendet und nichts gespeichert.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">
+          <span class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E3B85C" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3.5l9 7"/><path d="M5 10v9.5h5V15h4v4.5h5V10"/></svg>
+          </span>
+          <strong>ATRIA Immobilien</strong>
+        </div>
+        <p style="color:rgba(234,242,238,.55);max-width:330px" data-i18n="ft_txt">Immobilienmakler in Wien. Verkauf, Vermietung und Bewertung von Wohnungen, Häusern und Anlageobjekten — in vier Sprachen.</p>
+      </div>
+      <div>
+        <h4 data-i18n="ft_c1">Leistungen</h4>
+        <ul>
+          <li><a href="#leistungen" data-i18n="ft_l1">Verkauf</a></li>
+          <li><a href="#leistungen" data-i18n="ft_l2">Vermietung</a></li>
+          <li><a href="#bewertung" data-i18n="ft_l3">Bewertung</a></li>
+          <li><a href="#leistungen" data-i18n="ft_l4">Anlageimmobilien</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="ft_c2">Service</h4>
+        <ul>
+          <li><a href="#objekte" data-i18n="ft_s1">Aktuelle Objekte</a></li>
+          <li><a href="#finanzierung" data-i18n="ft_s2">Finanzierungsrechner</a></li>
+          <li><a href="#ablauf" data-i18n="ft_s3">Ablauf</a></li>
+          <li><a href="#faq" data-i18n="ft_s4">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="ft_c3">Kontakt</h4>
+        <ul>
+          <li>+43 1 234 56 78</li>
+          <li>office@atria-demo.at</li>
+          <li data-i18n="ci3_v">Beispielgasse 24, 1040 Wien</li>
+          <li data-i18n="ft_h1">Mo–Fr 9:00–18:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; <span id="yr">2026</span> ATRIA Immobilien &middot; <span data-i18n="ft_by">Demo-Projekt von Menes Nasufoski</span></span>
+      <span class="demo-pill" data-i18n="ft_demo">Demo-Seite — fiktives Unternehmen, keine echten Objekte</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+const I18N = {
+de:{
+  logo_sub:'Immobilien Wien',
+  nav_objects:'Objekte', nav_services:'Leistungen', nav_value:'Wertrechner',
+  nav_finance:'Finanzierung', nav_process:'Ablauf', nav_team:'Team',
+  nav_faq:'FAQ', nav_contact:'Kontakt', nav_cta:'Immobilie bewerten',
+
+  hero_badge:'von 5 · 287 Google-Bewertungen',
+  hero_h1a:'Ihre Immobilie verdient', hero_h1b:'den richtigen Preis.',
+  hero_lead:'Wir verkaufen und vermieten Wohnungen, Häuser und Anlageobjekte in Wien — mit ehrlicher Bewertung, professioneller Vermarktung und Betreuung bis zur Schlüsselübergabe. In vier Sprachen.',
+  hero_cta1:'Immobilie kostenlos bewerten', hero_cta2:'Objekte ansehen',
+  stat1:'vermittelte Objekte', stat2:'Tage bis zum Abschluss', stat3:'vom Angebotspreis',
+  mock_live:'Neu im Angebot', mock_title:'Altbau mit Balkon', mock_loc:'1070 Wien · Neubaugasse',
+  mock_f1:'m²', mock_f2:'Zimmer', mock_f3:'Energie', mock_bar:'Vermarktungsfortschritt',
+  float1_t:'Marktwert in 2 Minuten', float1_s:'online & kostenlos',
+  float2_t:'Provision erst bei Erfolg', float2_s:'keine Vorabkosten',
+  trust1:'Konzessionierter Makler', trust2:'Bewertung kostenlos',
+  trust3:'Beratung in 4 Sprachen', trust4:'Treuhandabwicklung',
+
+  ob_eyebrow:'Aktuelle Objekte', ob_title:'Filtern Sie in Ruhe — ohne Anmeldung, ohne Maklerkontakt.',
+  ob_sub:'Alle Objekte mit Preis, Fläche, Zimmern und Energiekennwert. Tippen Sie auf ein Objekt für Details und eine unverbindliche Besichtigungsanfrage.',
+  ob_note:'Demo-Objekte. Alle Adressen, Preise und Kennwerte sind frei erfunden.',
+  fl_type:'Objektart', fl_rooms:'Zimmer ab', fl_price:'Preis bis',
+  fl_results:'Objekte gefunden', fl_sort:'Sortierung',
+  so_new:'Neueste zuerst', so_asc:'Preis aufsteigend', so_desc:'Preis absteigend', so_area:'Größte Fläche',
+  ty_all:'Alle', ty_flat:'Wohnung', ty_house:'Haus', ty_invest:'Anlageobjekt', ty_comm:'Gewerbe',
+  rm_any:'egal',
+  fg_new:'Neu', fg_res:'Reserviert', fg_top:'Top-Lage',
+  c_rooms:'Zimmer', c_year:'Baujahr', c_more:'Details ansehen',
+  pr_sqm:'{v} € / m²',
+  no_res:'Kein Objekt passt zu diesen Filtern.', no_res_hint:'Setzen Sie den Preis höher oder wählen Sie eine andere Objektart.',
+
+  md_kv1:'Wohnfläche', md_kv2:'Zimmer', md_kv3:'Baujahr', md_kv4:'Zustand',
+  md_kv5:'Energieausweis', md_kv6:'Provision', md_prov_v:'3 % + 20 % USt',
+  md_feat:'Ausstattung', md_cta1:'Besichtigung anfragen', md_cta2:'Finanzierung berechnen',
+
+  zs1:'Sanierungsbedürftig', zs2:'Gepflegt', zs3:'Saniert', zs4:'Erstbezug',
+  ft_balkon:'Balkon', ft_loggia:'Loggia', ft_terrasse:'Terrasse', ft_dach:'Dachterrasse',
+  ft_garten:'Garten', ft_lift:'Lift', ft_garage:'Garage / Stellplatz', ft_keller:'Kellerabteil',
+  ft_ruhig:'Ruhelage', ft_altbau:'Altbau-Charakter', ft_klima:'Klimaanlage', ft_kueche:'Einbauküche',
+  ft_vermietet:'Vermietet', ft_uwb:'U-Bahn in Gehweite',
+
+  o1_t:'Altbauwohnung mit Balkon', o1_d:'Sanierte Altbauwohnung im dritten Liftstock mit 3,20 m Raumhöhe, Fischgrätparkett und einem ruhigen Balkon in den Innenhof. Zwei Zimmer gehen straßenseitig weg, Schlafzimmer und Bad liegen hofseitig.',
+  o2_t:'Dachgeschoss-Maisonette', o2_d:'Maisonette über zwei Ebenen mit 26 m² Dachterrasse und Blick über die Dächer. Fußbodenheizung, Kühlung über die Lüftung, Garagenplatz im Haus. Erstbezug nach Fertigstellung 2019.',
+  o3_t:'Familienhaus mit Garten', o3_d:'Freistehendes Einfamilienhaus mit 420 m² Grund, Süd-West-Garten und Doppelgarage. Vier Schlafzimmer im Obergeschoss, Wohnküche mit Zugang zur Terrasse, Vollkeller mit Werkstatt.',
+  o4_t:'Starterwohnung mit Loggia', o4_d:'Kompakte Zweizimmerwohnung im vierten Liftstock, komplett neu ausgemalt und mit neuen Böden. Loggia nach Westen, Fernwärme, monatliche Betriebskosten unter 160 €.',
+  o5_t:'Zinshausanteil als Anlage', o5_d:'Anteil an einem Gründerzeithaus mit acht Einheiten, davon sechs vermietet. Dachboden mit Ausbaupotenzial und bereits vorliegender Widmungsauskunft. Aktuelle Bruttorendite 3,4 %.',
+  o6_t:'Vorsorgewohnung, vermietet', o6_d:'Neubauwohnung mit unbefristetem Mietvertrag, Nettomiete 810 € monatlich. Balkon nach Süden, Tiefgaragenplatz inklusive, U-Bahn-Station in fünf Gehminuten.',
+  o7_t:'Geschäftslokal in Frequenzlage', o7_d:'Lokal mit 6,5 m Auslagenfront in stark frequentierter Einkaufsstraße. Derzeit als Büro genutzt, Widmung Geschäftslokal, Klimaanlage und Lagerraum im Souterrain.',
+  o8_t:'Reihenhaus mit Eigengarten', o8_d:'Reihenhaus in ruhiger Sackgasse mit 95 m² Eigengarten, Carport und Abstellraum. Bad und Heizung 2021 erneuert, Kinderzimmer mit Blick ins Grüne.',
+  o9_t:'Neubauwohnung, Erstbezug', o9_d:'Erstbezug mit Fußbodenheizung, Vollwärmeschutz und dreifach verglasten Fenstern. Balkon nach Osten, Fahrradraum und Kinderwagenabstellplatz im Haus, Garagenplatz optional.',
+
+  wr_eyebrow:'Wertrechner', wr_title:'Was ist Ihre Immobilie heute wert?',
+  wr_sub:'Stellen Sie die Eckdaten ein — Sie bekommen sofort eine Preisspanne, den Quadratmeterpreis und eine Einschätzung der Vermarktungsdauer. Ohne Anmeldung, ohne dass jemand anruft.',
+  wr_s1:'Objektart', wr_s2:'Lage', wr_s3:'Wohnfläche', wr_s4:'Zimmer',
+  wr_s5:'Baujahr', wr_s6:'Zustand', wr_s7:'Ausstattung',
+  wa_flat:'Wohnung', wa_house:'Haus',
+  lg1:'Einfache Lage', lg2:'Gute Lage', lg3:'Sehr gute Lage', lg4:'Top-Lage',
+  ex1:'Balkon / Terrasse', ex2:'Garten', ex3:'Garage / Stellplatz', ex4:'Lift', ex5:'Ruhelage', ex6:'Keller',
+  wr_out_t:'Geschätzter Marktwert', wr_scale_lo:'unterer Marktbereich', wr_scale_hi:'Spitzenpreis',
+  wr_o1:'Quadratmeterpreis', wr_o2:'Erzielbare Monatsmiete', wr_o3:'Bruttorendite für Käufer', wr_o4:'Erwartete Vermarktungsdauer',
+  wr_weeks:'{n} Wochen', wr_month:'€ / Monat',
+  wr_btn:'Genaue Bewertung anfordern',
+  wr_note:'Automatischer Richtwert auf Basis von Fläche, Lage, Zustand und Baujahr. Er ersetzt keine Besichtigung und kein Gutachten — der reale Preis hängt auch von Grundriss, Stockwerk, Ausblick und Hausverwaltung ab.',
+
+  fi_eyebrow:'Finanzierung', fi_title:'Kaufpreis ist nicht Gesamtpreis.',
+  fi_sub:'Rechnen Sie Rate, Zinsen und alle Kaufnebenkosten durch, bevor Sie zur Bank gehen. So sehen Sie sofort, wie viel Eigenkapital wirklich nötig ist.',
+  fi_s1:'Kaufpreis', fi_s2:'Eigenkapital', fi_s3:'Sollzinssatz', fi_s4:'Laufzeit', fi_years:'Jahre',
+  fi_s5:'Nebenkosten im Detail',
+  fi_n1:'Grunderwerbsteuer (3,5 %)', fi_n2:'Grundbucheintragung (1,1 %)',
+  fi_n3:'Maklerprovision (3 % + USt)', fi_n4:'Vertrag & Treuhand (ca. 1,5 %)',
+  fi_n5:'Pfandrechtseintragung (1,2 %)', fi_n6:'Nebenkosten gesamt',
+  fi_out_t:'Monatliche Rate',
+  fi_loan_lbl:'Darlehen {v} · {y} Jahre · {r} %',
+  fi_o1:'Gesamtkosten des Kaufs', fi_o2:'Benötigtes Eigenkapital', fi_o3:'Darlehensbetrag',
+  fi_o4:'Zinskosten über die Laufzeit', fi_o5:'Rückzahlung gesamt',
+  fi_stack:'Woraus die Rückzahlung besteht', fi_leg1:'Tilgung', fi_leg2:'Zinsen',
+  fi_warn:'Ihr Eigenkapital deckt die Nebenkosten nicht vollständig. Banken erwarten in Österreich meist 20 % des Kaufpreises plus Nebenkosten aus Eigenmitteln.',
+  fi_btn:'Finanzierungsgespräch vereinbaren',
+  fi_note:'Annuitätenrechnung mit gleichbleibender Rate, ohne Kontoführung, Bearbeitungsgebühr und Versicherungen. Unverbindliche Demo-Berechnung, keine Finanzierungsberatung.',
+
+  ab_eyebrow:'Ablauf', ab_title:'So läuft ein Verkauf mit uns ab.',
+  ab_sub:'Vier Schritte, feste Ansprechperson, klare Zeitangaben. Sie wissen jederzeit, was gerade passiert und was als Nächstes kommt.',
+  ab1_t:'Erstgespräch & Bewertung', ab1_d:'Wir sehen uns die Immobilie an, prüfen Unterlagen und legen gemeinsam einen realistischen Angebotspreis fest — schriftlich, mit Vergleichsobjekten.', ab1_m:'Woche 1',
+  ab2_t:'Aufbereitung & Unterlagen', ab2_d:'Fotos, Grundriss, Energieausweis und Exposé. Fehlende Dokumente holen wir bei Grundbuch, Hausverwaltung und Baubehörde ein.', ab2_m:'Woche 2–3',
+  ab3_t:'Vermarktung & Besichtigungen', ab3_d:'Veröffentlichung auf allen relevanten Portalen, Vorauswahl der Interessenten und Besichtigungen zu Terminen, die Ihnen passen.', ab3_m:'Woche 3–8',
+  ab4_t:'Abschluss & Übergabe', ab4_d:'Verhandlung, Kaufanbot, Vertragserrichtung über Treuhänder und Übergabeprotokoll mit Zählerständen. Danach ist wirklich alles erledigt.', ab4_m:'Woche 8–12',
+
+  sv_eyebrow:'Leistungen', sv_title:'Vom ersten Gespräch bis zur Schlüsselübergabe.',
+  sv_sub:'Wir übernehmen den Teil, der Zeit und Nerven kostet — Unterlagen, Vermarktung, Besichtigungen, Verhandlung und Vertragsabwicklung.',
+  s1_t:'Verkauf von Wohnungen & Häusern', s1_d:'Marktkonforme Preisfindung, professionelle Aufbereitung, Vermarktung auf allen großen Plattformen und Verhandlung bis zum Notartermin.', s1_m:'Provision erst bei Abschluss',
+  s2_t:'Vermietung & Mieterauswahl', s2_d:'Wir prüfen Bonität und Unterlagen, führen Besichtigungen durch und erstellen den Mietvertrag inklusive Übergabeprotokoll.', s2_m:'Inklusive Bonitätsprüfung',
+  s3_t:'Immobilienbewertung', s3_d:'Online in zwei Minuten als Richtwert — oder vor Ort mit Vergleichsdaten, Zustandsbewertung und schriftlichem Gutachten.', s3_m:'Online-Richtwert kostenlos',
+  s4_t:'Anlageimmobilien', s4_d:'Zinshäuser, Vorsorgewohnungen und Kleingewerbe — mit Renditerechnung, Mietzinsliste und realistischer Einschätzung des Sanierungsbedarfs.', s4_m:'Renditeberechnung inklusive',
+  s5_t:'Unterlagen & Behördenwege', s5_d:'Grundbuchauszug, Energieausweis, Wohnungseigentumsvertrag, Nutzwertgutachten — wir besorgen, was fehlt, und erklären, was drinsteht.', s5_m:'Energieausweis organisiert',
+  s6_t:'Beratung in vier Sprachen', s6_d:'Deutsch, Englisch, Italienisch und Bosnisch/Kroatisch/Serbisch — damit auch die Vertragsdetails wirklich verstanden werden.', s6_m:'DE · EN · IT · BKS',
+
+  wh_eyebrow:'Warum ATRIA', wh_title:'Der Preis entsteht nicht im Inserat, sondern in der Vorbereitung.',
+  wh_sub:'Zu hoch angesetzt, und das Objekt bleibt monatelang stehen. Zu niedrig, und Sie verschenken Geld. Wir arbeiten mit Zahlen statt mit Bauchgefühl.',
+  w1_t:'Preisfindung mit echten Abschlüssen', w1_d:'Wir vergleichen nicht mit Inseratspreisen, sondern mit tatsächlich erzielten Kaufpreisen aus dem Grundbuch — im selben Bezirk und derselben Objektklasse.',
+  w2_t:'Provision nur im Erfolgsfall', w2_d:'Keine Vorabkosten, keine Inseratspauschale, keine Alleinvermittlung über zwölf Monate. Wenn nicht verkauft wird, zahlen Sie nichts.',
+  w3_t:'Eine Ansprechperson, nicht fünf', w3_d:'Dieselbe Person führt die Bewertung durch, macht die Besichtigungen und sitzt beim Notartermin dabei. Sie erklären Ihre Immobilie genau einmal.',
+  w4_t:'Interessenten, die auch kaufen können', w4_d:'Vor der Besichtigung klären wir Finanzierungsstand und Zeitplan ab. Das erspart Ihnen Wohnungsführungen für Menschen, die nur schauen wollen.',
+  nb1:'vermittelte Objekte seit 2014', nb2:'Tage durchschnittlich bis zum Abschluss',
+  nb3:'des Angebotspreises im Schnitt erzielt', nb4:'Sterne aus 287 Bewertungen',
+
+  tm_eyebrow:'Team', tm_title:'Vier Personen, die Sie beim Namen kennen.',
+  tm_sub:'Kein Callcenter, keine wechselnden Zuständigkeiten. Sie bekommen die Durchwahl und die Mobilnummer Ihrer Betreuung.',
+  c1_n:'M. K.', c1_r:'Geschäftsführung', c1_d:'Konzessionierter Immobilienmakler, seit 2014 selbstständig. Schwerpunkt Altbau und Zinshäuser in den Innenbezirken.',
+  c2_n:'T. R.', c2_r:'Verkauf & Bewertung', c2_d:'Betreut Eigentumswohnungen und Einfamilienhäuser. Erstellt Bewertungen mit Vergleichsdaten aus dem Grundbuch.',
+  c3_n:'D. S.', c3_r:'Vermietung', c3_d:'Von der Anzeige bis zum Übergabeprotokoll. Kümmert sich um Bonitätsprüfung, Mietverträge und Kautionsabwicklung.',
+  c4_n:'A. P.', c4_r:'Anlage & Finanzierung', c4_d:'Rechnet Renditen, begleitet zu Bankterminen und prüft Mietzinslisten bei Anlageobjekten.',
+
+  rv_eyebrow:'Bewertungen', rv_title:'Was Eigentümer und Käufer sagen',
+  rv1_q:'Zwei andere Makler hatten uns einen Preis versprochen, den offensichtlich niemand zahlt. Hier haben wir eine Aufstellung mit echten Abschlüssen bekommen — und exakt zu diesem Preis verkauft, nach sieben Wochen.',
+  rv1_n:'M. B.', rv1_r:'Wohnungsverkauf · 1030 Wien',
+  rv2_q:'Als Käufer war mir die Nebenkostenrechnung am wichtigsten. Ich habe vorher nicht gewusst, dass über zehn Prozent zusätzlich anfallen. Das wurde mir in einem Termin sauber vorgerechnet, ohne Verkaufsdruck.',
+  rv2_n:'S. T.', rv2_r:'Erstkäufer · 1210 Wien',
+  rv3_q:'Wir leben im Ausland und haben die Wohnung unserer Eltern verkauft. Alles lief per Video und Mail, die Unterlagen wurden selbst besorgt. Beim Notartermin war jemand vor Ort, der uns vertreten hat.',
+  rv3_n:'L. H.', rv3_r:'Erbschaftsverkauf · 1150 Wien',
+
+  fq_eyebrow:'FAQ', fq_title:'Häufige Fragen',
+  fq_q1:'Was kostet mich die Bewertung?',
+  fq_a1:'Der Online-Richtwert auf dieser Seite ist kostenlos und unverbindlich. Auch die Besichtigung vor Ort mit mündlicher Einschätzung kostet nichts. Erst ein schriftliches Verkehrswertgutachten für Gericht, Bank oder Finanzamt wird gesondert verrechnet.',
+  fq_q2:'Wie hoch ist die Maklerprovision?',
+  fq_a2:'Beim Verkauf 3 % des Kaufpreises zuzüglich 20 % USt, fällig erst bei erfolgreichem Abschluss. Bei der Vermietung gilt seit Juli 2023 das Bestellerprinzip — die Provision zahlt, wer den Makler beauftragt hat, in der Regel also die Eigentümerseite.',
+  fq_q3:'Welche Nebenkosten kommen als Käufer auf mich zu?',
+  fq_a3:'In Österreich rechnet man mit rund 10 %: 3,5 % Grunderwerbsteuer, 1,1 % Grundbucheintragung, etwa 1,5 % für Vertragserrichtung und Treuhand, 3,6 % Maklerprovision inklusive USt sowie 1,2 % Pfandrechtseintragung, wenn finanziert wird. Der Rechner auf dieser Seite zeigt Ihre konkreten Beträge.',
+  fq_q4:'Wie lange dauert ein Verkauf im Schnitt?',
+  fq_a4:'Von der Beauftragung bis zur Unterschrift meist acht bis zwölf Wochen, bei gut vorbereiteten Unterlagen auch weniger. Die Kaufpreiszahlung über den Treuhänder und die Grundbucheintragung brauchen danach noch einmal etwa vier bis acht Wochen.',
+  fq_q5:'Welche Unterlagen brauche ich als Verkäufer?',
+  fq_a5:'Grundbuchauszug, Energieausweis, Wohnungseigentumsvertrag beziehungsweise Nutzwertgutachten, aktuelle Betriebskostenabrechnung und bei Wohnungen die letzten Protokolle der Eigentümerversammlung. Was fehlt, holen wir für Sie ein — der Energieausweis ist gesetzlich verpflichtend.',
+  fq_q6:'Muss ich beim Verkauf Steuer zahlen?',
+  fq_a6:'Für Gewinne aus dem Verkauf gilt die Immobilienertragsteuer von 30 %. Die Hauptwohnsitzbefreiung greift, wenn Sie zwei Jahre durchgehend dort gemeldet waren oder fünf der letzten zehn Jahre. Wir sagen Ihnen im Erstgespräch, welcher Fall vorliegt — die verbindliche Auskunft kommt von Ihrer Steuerberatung.',
+
+  ct_eyebrow:'Kontakt', ct_title:'Reden wir über Ihre Immobilie.',
+  ct_sub:'Ein kurzes Gespräch reicht, um einzuschätzen, was sinnvoll ist. Wir melden uns am selben Werktag zurück — auch wenn Sie nur eine Einschätzung wollen.',
+  ci1:'Telefon', ci2:'E-Mail', ci3:'Büro', ci3_v:'Beispielgasse 24, 1040 Wien',
+  ci4:'Öffnungszeiten', ci4_v:'Mo–Fr 9:00–18:00 · Sa nach Vereinbarung',
+  f_name:'Vor- und Nachname', f_name_ph:'M. Beispiel', f_phone:'Telefon', f_mail:'E-Mail',
+  f_topic:'Worum geht es?',
+  f_t1:'Ich möchte verkaufen', f_t2:'Ich möchte vermieten', f_t3:'Ich suche eine Immobilie',
+  f_t4:'Besichtigungstermin', f_t5:'Bewertung / Gutachten', f_t6:'Anlageobjekt / Rendite',
+  f_msg:'Nachricht', f_msg_ph:'Objektart, Bezirk, ungefähre Größe — und wann wir Sie am besten erreichen.',
+  f_btn:'Unverbindlich anfragen',
+  f_ok:'Danke, {name}! Wir melden uns am selben Werktag.',
+  f_err:'Bitte Name, Telefon und E-Mail ausfüllen.',
+  f_hint:'Demo-Formular — es wird nichts versendet und nichts gespeichert.',
+  f_prefill:'Ich interessiere mich für das Objekt „{obj}" ({loc}) und hätte gerne einen Besichtigungstermin.',
+
+  ft_txt:'Immobilienmakler in Wien. Verkauf, Vermietung und Bewertung von Wohnungen, Häusern und Anlageobjekten — in vier Sprachen.',
+  ft_c1:'Leistungen', ft_c2:'Service', ft_c3:'Kontakt',
+  ft_l1:'Verkauf', ft_l2:'Vermietung', ft_l3:'Bewertung', ft_l4:'Anlageimmobilien',
+  ft_s1:'Aktuelle Objekte', ft_s2:'Finanzierungsrechner', ft_s3:'Ablauf', ft_s4:'FAQ',
+  ft_h1:'Mo–Fr 9:00–18:00',
+  ft_by:'Demo-Projekt von Menes Nasufoski',
+  ft_demo:'Demo-Seite — fiktives Unternehmen, keine echten Objekte'
+},
+
+en:{
+  logo_sub:'Real Estate Vienna',
+  nav_objects:'Listings', nav_services:'Services', nav_value:'Valuation',
+  nav_finance:'Financing', nav_process:'Process', nav_team:'Team',
+  nav_faq:'FAQ', nav_contact:'Contact', nav_cta:'Value my property',
+
+  hero_badge:'out of 5 · 287 Google reviews',
+  hero_h1a:'Your property deserves', hero_h1b:'the right price.',
+  hero_lead:'We sell and let apartments, houses and investment properties in Vienna — with an honest valuation, professional marketing and support all the way to handover. In four languages.',
+  hero_cta1:'Get a free valuation', hero_cta2:'Browse listings',
+  stat1:'properties closed', stat2:'days to completion', stat3:'of the asking price',
+  mock_live:'New listing', mock_title:'Period flat with balcony', mock_loc:'1070 Vienna · Neubaugasse',
+  mock_f1:'sqm', mock_f2:'rooms', mock_f3:'energy', mock_bar:'Marketing progress',
+  float1_t:'Market value in 2 minutes', float1_s:'online & free',
+  float2_t:'Commission only on success', float2_s:'no upfront costs',
+  trust1:'Licensed estate agent', trust2:'Valuation free of charge',
+  trust3:'Advice in 4 languages', trust4:'Escrow handling',
+
+  ob_eyebrow:'Current listings', ob_title:'Filter in peace — no sign-up, no agent calling you.',
+  ob_sub:'Every listing with price, floor area, rooms and energy rating. Tap a property for details and a no-obligation viewing request.',
+  ob_note:'Demo listings. All addresses, prices and figures are fictional.',
+  fl_type:'Property type', fl_rooms:'Rooms from', fl_price:'Price up to',
+  fl_results:'properties found', fl_sort:'Sort by',
+  so_new:'Newest first', so_asc:'Price ascending', so_desc:'Price descending', so_area:'Largest area',
+  ty_all:'All', ty_flat:'Apartment', ty_house:'House', ty_invest:'Investment', ty_comm:'Commercial',
+  rm_any:'any',
+  fg_new:'New', fg_res:'Reserved', fg_top:'Prime location',
+  c_rooms:'rooms', c_year:'built', c_more:'View details',
+  pr_sqm:'{v} € / sqm',
+  no_res:'No property matches these filters.', no_res_hint:'Raise the price limit or pick a different property type.',
+
+  md_kv1:'Floor area', md_kv2:'Rooms', md_kv3:'Year built', md_kv4:'Condition',
+  md_kv5:'Energy rating', md_kv6:'Commission', md_prov_v:'3 % + 20 % VAT',
+  md_feat:'Features', md_cta1:'Request a viewing', md_cta2:'Calculate financing',
+
+  zs1:'Needs renovation', zs2:'Well maintained', zs3:'Renovated', zs4:'Brand new',
+  ft_balkon:'Balcony', ft_loggia:'Loggia', ft_terrasse:'Terrace', ft_dach:'Roof terrace',
+  ft_garten:'Garden', ft_lift:'Lift', ft_garage:'Garage / parking', ft_keller:'Storage unit',
+  ft_ruhig:'Quiet location', ft_altbau:'Period character', ft_klima:'Air conditioning', ft_kueche:'Fitted kitchen',
+  ft_vermietet:'Tenanted', ft_uwb:'Metro within walking distance',
+
+  o1_t:'Period apartment with balcony', o1_d:'Renovated period flat on the third floor with lift, 3.20 m ceilings, herringbone parquet and a quiet balcony facing the courtyard. Two rooms face the street, bedroom and bathroom face the courtyard.',
+  o2_t:'Penthouse maisonette', o2_d:'Maisonette over two levels with a 26 sqm roof terrace and views across the rooftops. Underfloor heating, cooling via the ventilation system, garage space in the building. First occupancy after completion in 2019.',
+  o3_t:'Family house with garden', o3_d:'Detached family house on a 420 sqm plot with a south-west garden and double garage. Four bedrooms upstairs, open kitchen with terrace access, full basement with workshop.',
+  o4_t:'Starter flat with loggia', o4_d:'Compact two-room flat on the fourth floor with lift, freshly painted and with new flooring. West-facing loggia, district heating, monthly service charge under €160.',
+  o5_t:'Share in a period building', o5_d:'Share in a late 19th-century building with eight units, six of them tenanted. Attic with conversion potential and zoning confirmation already obtained. Current gross yield 3.4 %.',
+  o6_t:'Buy-to-let flat, tenanted', o6_d:'New-build flat with an open-ended lease, net rent €810 per month. South-facing balcony, underground parking space included, metro station five minutes on foot.',
+  o7_t:'Retail unit on a busy street', o7_d:'Unit with a 6.5 m shop front on a high-footfall shopping street. Currently used as an office, zoned for retail, air conditioning and storage room in the basement.',
+  o8_t:'Terraced house with garden', o8_d:'Terraced house in a quiet cul-de-sac with a 95 sqm private garden, carport and storage room. Bathroom and heating renewed in 2021, children’s rooms overlooking greenery.',
+  o9_t:'New-build flat, first occupancy', o9_d:'First occupancy with underfloor heating, full thermal insulation and triple glazing. East-facing balcony, bike room and pram storage in the building, garage space optional.',
+
+  wr_eyebrow:'Valuation tool', wr_title:'What is your property worth today?',
+  wr_sub:'Set the key figures and you immediately get a price range, the price per square metre and an estimate of how long marketing will take. No sign-up, nobody calling you.',
+  wr_s1:'Property type', wr_s2:'Location', wr_s3:'Floor area', wr_s4:'Rooms',
+  wr_s5:'Year built', wr_s6:'Condition', wr_s7:'Features',
+  wa_flat:'Apartment', wa_house:'House',
+  lg1:'Simple area', lg2:'Good area', lg3:'Very good area', lg4:'Prime area',
+  ex1:'Balcony / terrace', ex2:'Garden', ex3:'Garage / parking', ex4:'Lift', ex5:'Quiet location', ex6:'Basement',
+  wr_out_t:'Estimated market value', wr_scale_lo:'lower market range', wr_scale_hi:'top price',
+  wr_o1:'Price per square metre', wr_o2:'Achievable monthly rent', wr_o3:'Gross yield for a buyer', wr_o4:'Expected marketing time',
+  wr_weeks:'{n} weeks', wr_month:'€ / month',
+  wr_btn:'Request a detailed valuation',
+  wr_note:'Automatic guide value based on area, location, condition and year of construction. It does not replace a viewing or a formal appraisal — the real price also depends on the layout, floor, view and building management.',
+
+  fi_eyebrow:'Financing', fi_title:'The purchase price is not the total price.',
+  fi_sub:'Work out the instalment, the interest and every purchase cost before you go to the bank. You will see straight away how much equity you really need.',
+  fi_s1:'Purchase price', fi_s2:'Equity', fi_s3:'Interest rate', fi_s4:'Term', fi_years:'years',
+  fi_s5:'Purchase costs in detail',
+  fi_n1:'Property transfer tax (3.5 %)', fi_n2:'Land register entry (1.1 %)',
+  fi_n3:'Agent commission (3 % + VAT)', fi_n4:'Contract & escrow (approx. 1.5 %)',
+  fi_n5:'Mortgage registration (1.2 %)', fi_n6:'Total purchase costs',
+  fi_out_t:'Monthly instalment',
+  fi_loan_lbl:'Loan {v} · {y} years · {r} %',
+  fi_o1:'Total cost of the purchase', fi_o2:'Equity required', fi_o3:'Loan amount',
+  fi_o4:'Interest over the term', fi_o5:'Total repayment',
+  fi_stack:'What the repayment consists of', fi_leg1:'Principal', fi_leg2:'Interest',
+  fi_warn:'Your equity does not fully cover the purchase costs. In Austria banks usually expect 20 % of the price plus all costs to come from your own funds.',
+  fi_btn:'Book a financing consultation',
+  fi_note:'Annuity calculation with a constant instalment, excluding account fees, arrangement fees and insurance. Non-binding demo calculation, not financial advice.',
+
+  ab_eyebrow:'Process', ab_title:'How a sale works with us.',
+  ab_sub:'Four steps, one dedicated contact, clear timings. You always know what is happening and what comes next.',
+  ab1_t:'First meeting & valuation', ab1_d:'We view the property, check the documents and agree a realistic asking price together — in writing, with comparable sales.', ab1_m:'Week 1',
+  ab2_t:'Preparation & documents', ab2_d:'Photos, floor plan, energy certificate and brochure. Missing documents we obtain from the land register, the building management and the planning authority.', ab2_m:'Week 2–3',
+  ab3_t:'Marketing & viewings', ab3_d:'Publication on all relevant portals, pre-screening of prospects and viewings at times that suit you.', ab3_m:'Week 3–8',
+  ab4_t:'Closing & handover', ab4_d:'Negotiation, purchase offer, contract via a trustee and a handover protocol with meter readings. After that everything really is done.', ab4_m:'Week 8–12',
+
+  sv_eyebrow:'Services', sv_title:'From the first conversation to the handover of keys.',
+  sv_sub:'We take on the part that costs time and nerves — documents, marketing, viewings, negotiation and contract handling.',
+  s1_t:'Selling apartments & houses', s1_d:'Market-based pricing, professional preparation, marketing on all major platforms and negotiation right through to the notary appointment.', s1_m:'Commission only on completion',
+  s2_t:'Letting & tenant selection', s2_d:'We check creditworthiness and documents, run the viewings and prepare the lease including the handover protocol.', s2_m:'Credit check included',
+  s3_t:'Property valuation', s3_d:'Online in two minutes as a guide value — or on site with comparable data, a condition assessment and a written appraisal.', s3_m:'Online guide value free',
+  s4_t:'Investment properties', s4_d:'Period buildings, buy-to-let flats and small commercial units — with yield calculation, rent roll and a realistic view of the renovation needed.', s4_m:'Yield calculation included',
+  s5_t:'Documents & authorities', s5_d:'Land register extract, energy certificate, condominium contract, utility value appraisal — we obtain what is missing and explain what it says.', s5_m:'Energy certificate arranged',
+  s6_t:'Advice in four languages', s6_d:'German, English, Italian and Bosnian/Croatian/Serbian — so the contract details are genuinely understood too.', s6_m:'DE · EN · IT · BCS',
+
+  wh_eyebrow:'Why ATRIA', wh_title:'The price is made in the preparation, not in the ad.',
+  wh_sub:'Set it too high and the property sits there for months. Too low and you give money away. We work with numbers, not gut feeling.',
+  w1_t:'Pricing based on real transactions', w1_d:'We do not compare with asking prices but with prices actually achieved, taken from the land register — same district, same class of property.',
+  w2_t:'Commission only if we succeed', w2_d:'No upfront costs, no advertising flat fee, no twelve-month exclusive mandate. If it does not sell, you pay nothing.',
+  w3_t:'One contact, not five', w3_d:'The same person does the valuation, runs the viewings and sits with you at the notary. You explain your property exactly once.',
+  w4_t:'Prospects who can actually buy', w4_d:'Before a viewing we clarify financing status and timing. That saves you showing people around who only want a look.',
+  nb1:'properties sold since 2014', nb2:'days on average to completion',
+  nb3:'of the asking price achieved on average', nb4:'stars from 287 reviews',
+
+  tm_eyebrow:'Team', tm_title:'Four people you know by name.',
+  tm_sub:'No call centre, no changing responsibilities. You get the direct line and the mobile number of your contact.',
+  c1_n:'M. K.', c1_r:'Managing director', c1_d:'Licensed estate agent, self-employed since 2014. Focus on period buildings and apartment houses in the central districts.',
+  c2_n:'T. R.', c2_r:'Sales & valuation', c2_d:'Looks after owner-occupied flats and family houses. Prepares valuations using comparable data from the land register.',
+  c3_n:'D. S.', c3_r:'Lettings', c3_d:'From the advert to the handover protocol. Handles credit checks, leases and deposit processing.',
+  c4_n:'A. P.', c4_r:'Investment & financing', c4_d:'Calculates yields, comes along to bank appointments and reviews rent rolls for investment properties.',
+
+  rv_eyebrow:'Reviews', rv_title:'What owners and buyers say',
+  rv1_q:'Two other agents had promised us a price that obviously nobody pays. Here we got a list of actual completed sales — and sold at exactly that price, after seven weeks.',
+  rv1_n:'M. B.', rv1_r:'Apartment sale · 1030 Vienna',
+  rv2_q:'As a buyer the cost breakdown mattered most to me. I had no idea that over ten per cent comes on top. It was calculated for me properly in one appointment, without any sales pressure.',
+  rv2_n:'S. T.', rv2_r:'First-time buyer · 1210 Vienna',
+  rv3_q:'We live abroad and sold our parents’ flat. Everything ran by video and email, the documents were obtained for us. At the notary appointment someone was there in person to represent us.',
+  rv3_n:'L. H.', rv3_r:'Inherited property · 1150 Vienna',
+
+  fq_eyebrow:'FAQ', fq_title:'Frequently asked questions',
+  fq_q1:'What does the valuation cost me?',
+  fq_a1:'The online guide value on this page is free and non-binding. The on-site viewing with a verbal assessment costs nothing either. Only a written market value appraisal for a court, a bank or the tax office is charged separately.',
+  fq_q2:'How high is the agent commission?',
+  fq_a2:'For a sale it is 3 % of the purchase price plus 20 % VAT, payable only on successful completion. For lettings the "who orders, pays" rule has applied in Austria since July 2023 — the commission is paid by whoever instructed the agent, usually the owner.',
+  fq_q3:'What extra costs do I face as a buyer?',
+  fq_a3:'In Austria you should budget around 10 %: 3.5 % property transfer tax, 1.1 % land register entry, roughly 1.5 % for the contract and escrow, 3.6 % agent commission including VAT, plus 1.2 % mortgage registration if you finance. The calculator on this page shows your actual amounts.',
+  fq_q4:'How long does a sale usually take?',
+  fq_a4:'From instruction to signature it is usually eight to twelve weeks, and less if the documents are ready. Payment through the trustee and the land register entry then take another four to eight weeks.',
+  fq_q5:'Which documents do I need as a seller?',
+  fq_a5:'Land register extract, energy certificate, condominium contract or utility value appraisal, the current service charge statement and, for flats, the latest owners’ meeting minutes. Anything missing we obtain for you — the energy certificate is a legal requirement.',
+  fq_q6:'Do I have to pay tax when I sell?',
+  fq_a6:'Profits from a sale are subject to 30 % real estate income tax. The main residence exemption applies if you were registered there continuously for two years, or for five of the last ten. We will tell you at the first meeting which case applies — the binding answer comes from your tax adviser.',
+
+  ct_eyebrow:'Contact', ct_title:'Let us talk about your property.',
+  ct_sub:'A short conversation is enough to judge what makes sense. We reply the same working day — even if you only want an assessment.',
+  ci1:'Phone', ci2:'Email', ci3:'Office', ci3_v:'Beispielgasse 24, 1040 Vienna',
+  ci4:'Opening hours', ci4_v:'Mon–Fri 9:00–18:00 · Sat by appointment',
+  f_name:'First and last name', f_name_ph:'M. Example', f_phone:'Phone', f_mail:'Email',
+  f_topic:'What is it about?',
+  f_t1:'I want to sell', f_t2:'I want to let', f_t3:'I am looking for a property',
+  f_t4:'Viewing appointment', f_t5:'Valuation / appraisal', f_t6:'Investment / yield',
+  f_msg:'Message', f_msg_ph:'Property type, district, rough size — and when we can best reach you.',
+  f_btn:'Send a no-obligation enquiry',
+  f_ok:'Thank you, {name}! We will get back to you the same working day.',
+  f_err:'Please fill in name, phone and email.',
+  f_hint:'Demo form — nothing is sent and nothing is stored.',
+  f_prefill:'I am interested in the property "{obj}" ({loc}) and would like to arrange a viewing.',
+
+  ft_txt:'Estate agents in Vienna. Sales, lettings and valuations of apartments, houses and investment properties — in four languages.',
+  ft_c1:'Services', ft_c2:'Service', ft_c3:'Contact',
+  ft_l1:'Sales', ft_l2:'Lettings', ft_l3:'Valuation', ft_l4:'Investment properties',
+  ft_s1:'Current listings', ft_s2:'Financing calculator', ft_s3:'Process', ft_s4:'FAQ',
+  ft_h1:'Mon–Fri 9:00–18:00',
+  ft_by:'Demo project by Menes Nasufoski',
+  ft_demo:'Demo page — fictional company, no real listings'
+},
+
+it:{
+  logo_sub:'Immobiliare Vienna',
+  nav_objects:'Immobili', nav_services:'Servizi', nav_value:'Valutazione',
+  nav_finance:'Finanziamento', nav_process:'Come funziona', nav_team:'Team',
+  nav_faq:'FAQ', nav_contact:'Contatti', nav_cta:'Valuta il tuo immobile',
+
+  hero_badge:'su 5 · 287 recensioni Google',
+  hero_h1a:'Il tuo immobile merita', hero_h1b:'il prezzo giusto.',
+  hero_lead:'Vendiamo e affittiamo appartamenti, case e immobili da reddito a Vienna — con una valutazione onesta, una promozione professionale e assistenza fino alla consegna delle chiavi. In quattro lingue.',
+  hero_cta1:'Valutazione gratuita', hero_cta2:'Guarda gli immobili',
+  stat1:'immobili venduti', stat2:'giorni fino al rogito', stat3:'del prezzo richiesto',
+  mock_live:'Nuovo annuncio', mock_title:'Appartamento d’epoca con balcone', mock_loc:'1070 Vienna · Neubaugasse',
+  mock_f1:'m²', mock_f2:'locali', mock_f3:'energia', mock_bar:'Avanzamento della vendita',
+  float1_t:'Valore di mercato in 2 minuti', float1_s:'online e gratuito',
+  float2_t:'Provvigione solo a successo', float2_s:'nessun costo anticipato',
+  trust1:'Agente abilitato', trust2:'Valutazione gratuita',
+  trust3:'Consulenza in 4 lingue', trust4:'Gestione fiduciaria',
+
+  ob_eyebrow:'Immobili disponibili', ob_title:'Filtra con calma — senza registrazione e senza telefonate.',
+  ob_sub:'Ogni immobile con prezzo, superficie, locali e classe energetica. Tocca un immobile per i dettagli e per richiedere una visita senza impegno.',
+  ob_note:'Immobili dimostrativi. Indirizzi, prezzi e dati sono inventati.',
+  fl_type:'Tipo di immobile', fl_rooms:'Locali da', fl_price:'Prezzo fino a',
+  fl_results:'immobili trovati', fl_sort:'Ordina per',
+  so_new:'Più recenti', so_asc:'Prezzo crescente', so_desc:'Prezzo decrescente', so_area:'Superficie maggiore',
+  ty_all:'Tutti', ty_flat:'Appartamento', ty_house:'Casa', ty_invest:'Investimento', ty_comm:'Commerciale',
+  rm_any:'tutti',
+  fg_new:'Nuovo', fg_res:'Riservato', fg_top:'Posizione top',
+  c_rooms:'locali', c_year:'anno', c_more:'Vedi dettagli',
+  pr_sqm:'{v} € / m²',
+  no_res:'Nessun immobile corrisponde a questi filtri.', no_res_hint:'Alza il limite di prezzo oppure scegli un altro tipo di immobile.',
+
+  md_kv1:'Superficie', md_kv2:'Locali', md_kv3:'Anno di costruzione', md_kv4:'Stato',
+  md_kv5:'Classe energetica', md_kv6:'Provvigione', md_prov_v:'3 % + 20 % IVA',
+  md_feat:'Dotazioni', md_cta1:'Richiedi una visita', md_cta2:'Calcola il finanziamento',
+
+  zs1:'Da ristrutturare', zs2:'In buono stato', zs3:'Ristrutturato', zs4:'Nuovo',
+  ft_balkon:'Balcone', ft_loggia:'Loggia', ft_terrasse:'Terrazza', ft_dach:'Terrazza sul tetto',
+  ft_garten:'Giardino', ft_lift:'Ascensore', ft_garage:'Garage / posto auto', ft_keller:'Cantina',
+  ft_ruhig:'Posizione tranquilla', ft_altbau:'Carattere d’epoca', ft_klima:'Aria condizionata', ft_kueche:'Cucina attrezzata',
+  ft_vermietet:'Affittato', ft_uwb:'Metro a pochi passi',
+
+  o1_t:'Appartamento d’epoca con balcone', o1_d:'Appartamento d’epoca ristrutturato al terzo piano con ascensore, soffitti di 3,20 m, parquet a spina di pesce e un balcone tranquillo sul cortile interno. Due stanze affacciano sulla strada, camera e bagno sul cortile.',
+  o2_t:'Attico su due livelli', o2_d:'Attico su due livelli con terrazza di 26 m² e vista sui tetti. Riscaldamento a pavimento, raffrescamento tramite la ventilazione, posto garage nell’edificio. Prima occupazione dopo il completamento nel 2019.',
+  o3_t:'Casa familiare con giardino', o3_d:'Casa indipendente su un terreno di 420 m² con giardino a sud-ovest e doppio garage. Quattro camere al piano superiore, cucina abitabile con accesso alla terrazza, cantina con laboratorio.',
+  o4_t:'Bilocale con loggia', o4_d:'Bilocale compatto al quarto piano con ascensore, appena ritinteggiato e con pavimenti nuovi. Loggia a ovest, teleriscaldamento, spese condominiali sotto i 160 € al mese.',
+  o5_t:'Quota di stabile da reddito', o5_d:'Quota di un edificio di fine Ottocento con otto unità, sei delle quali affittate. Sottotetto con potenziale di ampliamento e destinazione d’uso già verificata. Rendimento lordo attuale 3,4 %.',
+  o6_t:'Immobile da reddito, affittato', o6_d:'Appartamento di nuova costruzione con contratto a tempo indeterminato, canone netto 810 € al mese. Balcone a sud, posto auto interrato incluso, metro a cinque minuti a piedi.',
+  o7_t:'Locale commerciale di passaggio', o7_d:'Locale con vetrina di 6,5 m in una via commerciale molto frequentata. Attualmente usato come ufficio, destinazione commerciale, aria condizionata e magazzino nel seminterrato.',
+  o8_t:'Villetta a schiera con giardino', o8_d:'Villetta a schiera in una via chiusa e tranquilla con 95 m² di giardino privato, posto auto coperto e ripostiglio. Bagno e riscaldamento rinnovati nel 2021, camere affacciate sul verde.',
+  o9_t:'Nuova costruzione, prima occupazione', o9_d:'Prima occupazione con riscaldamento a pavimento, cappotto termico e vetri tripli. Balcone a est, locale bici e deposito passeggini nell’edificio, garage opzionale.',
+
+  wr_eyebrow:'Calcolatore', wr_title:'Quanto vale oggi il tuo immobile?',
+  wr_sub:'Imposta i dati principali e ottieni subito una fascia di prezzo, il prezzo al metro quadro e una stima dei tempi di vendita. Senza registrazione e senza che nessuno ti chiami.',
+  wr_s1:'Tipo di immobile', wr_s2:'Posizione', wr_s3:'Superficie', wr_s4:'Locali',
+  wr_s5:'Anno di costruzione', wr_s6:'Stato', wr_s7:'Dotazioni',
+  wa_flat:'Appartamento', wa_house:'Casa',
+  lg1:'Posizione semplice', lg2:'Buona posizione', lg3:'Ottima posizione', lg4:'Posizione top',
+  ex1:'Balcone / terrazza', ex2:'Giardino', ex3:'Garage / posto auto', ex4:'Ascensore', ex5:'Posizione tranquilla', ex6:'Cantina',
+  wr_out_t:'Valore di mercato stimato', wr_scale_lo:'fascia bassa', wr_scale_hi:'prezzo massimo',
+  wr_o1:'Prezzo al metro quadro', wr_o2:'Canone mensile realizzabile', wr_o3:'Rendimento lordo per l’acquirente', wr_o4:'Tempo di vendita previsto',
+  wr_weeks:'{n} settimane', wr_month:'€ / mese',
+  wr_btn:'Richiedi una valutazione dettagliata',
+  wr_note:'Valore indicativo automatico basato su superficie, posizione, stato e anno di costruzione. Non sostituisce una visita né una perizia — il prezzo reale dipende anche da distribuzione, piano, vista e amministrazione condominiale.',
+
+  fi_eyebrow:'Finanziamento', fi_title:'Il prezzo d’acquisto non è il costo totale.',
+  fi_sub:'Calcola rata, interessi e tutte le spese accessorie prima di andare in banca. Vedrai subito quanto capitale proprio serve davvero.',
+  fi_s1:'Prezzo d’acquisto', fi_s2:'Capitale proprio', fi_s3:'Tasso di interesse', fi_s4:'Durata', fi_years:'anni',
+  fi_s5:'Spese accessorie in dettaglio',
+  fi_n1:'Imposta di trasferimento (3,5 %)', fi_n2:'Iscrizione al catasto (1,1 %)',
+  fi_n3:'Provvigione agenzia (3 % + IVA)', fi_n4:'Contratto e fiduciario (ca. 1,5 %)',
+  fi_n5:'Iscrizione ipotecaria (1,2 %)', fi_n6:'Totale spese accessorie',
+  fi_out_t:'Rata mensile',
+  fi_loan_lbl:'Mutuo {v} · {y} anni · {r} %',
+  fi_o1:'Costo totale dell’acquisto', fi_o2:'Capitale proprio necessario', fi_o3:'Importo del mutuo',
+  fi_o4:'Interessi sull’intera durata', fi_o5:'Rimborso totale',
+  fi_stack:'Di cosa è fatto il rimborso', fi_leg1:'Capitale', fi_leg2:'Interessi',
+  fi_warn:'Il capitale proprio non copre del tutto le spese accessorie. In Austria le banche chiedono di solito il 20 % del prezzo più le spese con mezzi propri.',
+  fi_btn:'Fissa un colloquio sul finanziamento',
+  fi_note:'Calcolo a rata costante, senza spese di conto, commissioni di istruttoria e assicurazioni. Calcolo dimostrativo non vincolante, non è consulenza finanziaria.',
+
+  ab_eyebrow:'Come funziona', ab_title:'Come si svolge una vendita con noi.',
+  ab_sub:'Quattro passaggi, un referente fisso, tempi chiari. Sai sempre cosa sta succedendo e cosa viene dopo.',
+  ab1_t:'Primo incontro e valutazione', ab1_d:'Visitiamo l’immobile, controlliamo i documenti e definiamo insieme un prezzo realistico — per iscritto, con immobili comparabili.', ab1_m:'Settimana 1',
+  ab2_t:'Preparazione e documenti', ab2_d:'Foto, planimetria, certificato energetico e dossier. I documenti mancanti li richiediamo a catasto, amministrazione e ufficio tecnico.', ab2_m:'Settimana 2–3',
+  ab3_t:'Promozione e visite', ab3_d:'Pubblicazione su tutti i portali rilevanti, selezione degli interessati e visite negli orari che preferisci.', ab3_m:'Settimana 3–8',
+  ab4_t:'Rogito e consegna', ab4_d:'Trattativa, proposta d’acquisto, contratto tramite fiduciario e verbale di consegna con le letture dei contatori. Poi è davvero tutto fatto.', ab4_m:'Settimana 8–12',
+
+  sv_eyebrow:'Servizi', sv_title:'Dal primo colloquio alla consegna delle chiavi.',
+  sv_sub:'Ci occupiamo della parte che costa tempo e nervi — documenti, promozione, visite, trattativa e gestione del contratto.',
+  s1_t:'Vendita di appartamenti e case', s1_d:'Prezzo in linea con il mercato, preparazione professionale, promozione su tutte le principali piattaforme e trattativa fino al rogito.', s1_m:'Provvigione solo alla firma',
+  s2_t:'Affitto e selezione inquilini', s2_d:'Verifichiamo solvibilità e documenti, gestiamo le visite e prepariamo il contratto con il verbale di consegna.', s2_m:'Verifica solvibilità inclusa',
+  s3_t:'Valutazione immobiliare', s3_d:'Online in due minuti come valore indicativo — oppure sul posto con dati comparabili, analisi dello stato e perizia scritta.', s3_m:'Valore online gratuito',
+  s4_t:'Immobili da reddito', s4_d:'Stabili storici, immobili da reddito e piccoli spazi commerciali — con calcolo del rendimento, elenco canoni e una stima realistica degli interventi.', s4_m:'Calcolo del rendimento incluso',
+  s5_t:'Documenti e pratiche', s5_d:'Visura catastale, certificato energetico, atto di condominio, perizia dei millesimi — otteniamo ciò che manca e spieghiamo cosa c’è scritto.', s5_m:'Certificato energetico incluso',
+  s6_t:'Consulenza in quattro lingue', s6_d:'Tedesco, inglese, italiano e bosniaco/croato/serbo — così anche i dettagli del contratto sono davvero chiari.', s6_m:'DE · EN · IT · BKS',
+
+  wh_eyebrow:'Perché ATRIA', wh_title:'Il prezzo nasce dalla preparazione, non dall’annuncio.',
+  wh_sub:'Troppo alto e l’immobile resta fermo per mesi. Troppo basso e regali denaro. Noi lavoriamo con i numeri, non con le sensazioni.',
+  w1_t:'Prezzi basati su vendite reali', w1_d:'Non confrontiamo i prezzi richiesti ma quelli effettivamente realizzati, presi dal catasto — stesso distretto e stessa categoria di immobile.',
+  w2_t:'Provvigione solo in caso di successo', w2_d:'Nessun costo anticipato, nessuna quota per gli annunci, nessun mandato esclusivo di dodici mesi. Se non si vende, non paghi nulla.',
+  w3_t:'Un referente, non cinque', w3_d:'La stessa persona fa la valutazione, conduce le visite ed è presente al rogito. Spieghi il tuo immobile una volta sola.',
+  w4_t:'Interessati che possono comprare', w4_d:'Prima della visita verifichiamo la situazione finanziaria e i tempi. Così eviti di far visitare casa a chi vuole solo dare un’occhiata.',
+  nb1:'immobili venduti dal 2014', nb2:'giorni in media fino al rogito',
+  nb3:'del prezzo richiesto in media', nb4:'stelle su 287 recensioni',
+
+  tm_eyebrow:'Team', tm_title:'Quattro persone che conosci per nome.',
+  tm_sub:'Nessun call center, nessun cambio di referente. Ricevi il numero diretto e il cellulare della persona che ti segue.',
+  c1_n:'M. K.', c1_r:'Direzione', c1_d:'Agente immobiliare abilitato, in proprio dal 2014. Specializzato in stabili d’epoca nei distretti centrali.',
+  c2_n:'T. R.', c2_r:'Vendite e valutazioni', c2_d:'Segue appartamenti e case unifamiliari. Prepara le valutazioni con dati comparabili tratti dal catasto.',
+  c3_n:'D. S.', c3_r:'Affitti', c3_d:'Dall’annuncio al verbale di consegna. Si occupa di verifiche di solvibilità, contratti e cauzioni.',
+  c4_n:'A. P.', c4_r:'Investimenti e finanziamenti', c4_d:'Calcola i rendimenti, accompagna agli appuntamenti in banca e verifica gli elenchi dei canoni.',
+
+  rv_eyebrow:'Recensioni', rv_title:'Cosa dicono proprietari e acquirenti',
+  rv1_q:'Due altre agenzie ci avevano promesso un prezzo che evidentemente nessuno paga. Qui abbiamo ricevuto un elenco di vendite realmente concluse — e abbiamo venduto esattamente a quel prezzo, dopo sette settimane.',
+  rv1_n:'M. B.', rv1_r:'Vendita appartamento · 1030 Vienna',
+  rv2_q:'Da acquirente la cosa più importante era il calcolo delle spese accessorie. Non sapevo che si aggiungesse oltre il dieci per cento. Mi è stato calcolato con chiarezza in un solo incontro, senza pressioni.',
+  rv2_n:'S. T.', rv2_r:'Primo acquisto · 1210 Vienna',
+  rv3_q:'Viviamo all’estero e abbiamo venduto l’appartamento dei nostri genitori. Tutto per videochiamata ed e-mail, i documenti li hanno procurati loro. Al rogito c’era una persona sul posto a rappresentarci.',
+  rv3_n:'L. H.', rv3_r:'Vendita ereditaria · 1150 Vienna',
+
+  fq_eyebrow:'FAQ', fq_title:'Domande frequenti',
+  fq_q1:'Quanto costa la valutazione?',
+  fq_a1:'Il valore indicativo online di questa pagina è gratuito e senza impegno. Anche il sopralluogo con una stima verbale non costa nulla. Solo una perizia scritta per tribunale, banca o fisco viene conteggiata a parte.',
+  fq_q2:'Quanto è la provvigione?',
+  fq_a2:'Per la vendita il 3 % del prezzo più il 20 % di IVA, dovuta solo a conclusione avvenuta. Per gli affitti in Austria vale da luglio 2023 il principio "paga chi incarica" — la provvigione la paga chi ha dato l’incarico, di norma la proprietà.',
+  fq_q3:'Quali spese accessorie ho come acquirente?',
+  fq_a3:'In Austria si calcola circa il 10 %: 3,5 % di imposta di trasferimento, 1,1 % di iscrizione catastale, circa 1,5 % per contratto e fiduciario, 3,6 % di provvigione IVA inclusa e 1,2 % di iscrizione ipotecaria in caso di mutuo. Il calcolatore di questa pagina mostra i tuoi importi reali.',
+  fq_q4:'Quanto dura in media una vendita?',
+  fq_a4:'Dall’incarico alla firma di solito otto-dodici settimane, meno se i documenti sono pronti. Il pagamento tramite fiduciario e l’iscrizione catastale richiedono poi altre quattro-otto settimane.',
+  fq_q5:'Quali documenti servono al venditore?',
+  fq_a5:'Visura catastale, certificato energetico, atto di condominio o perizia dei millesimi, ultimo rendiconto delle spese e, per gli appartamenti, gli ultimi verbali dell’assemblea. Ciò che manca lo richiediamo noi — il certificato energetico è obbligatorio per legge.',
+  fq_q6:'Devo pagare tasse sulla vendita?',
+  fq_a6:'Sui guadagni si applica l’imposta immobiliare del 30 %. L’esenzione per abitazione principale vale se vi hai avuto la residenza per due anni consecutivi oppure per cinque degli ultimi dieci. Al primo incontro ti diciamo quale caso si applica — la risposta vincolante arriva dal tuo commercialista.',
+
+  ct_eyebrow:'Contatti', ct_title:'Parliamo del tuo immobile.',
+  ct_sub:'Basta una breve conversazione per capire cosa ha senso fare. Rispondiamo lo stesso giorno lavorativo — anche se vuoi solo una stima.',
+  ci1:'Telefono', ci2:'E-mail', ci3:'Ufficio', ci3_v:'Beispielgasse 24, 1040 Vienna',
+  ci4:'Orari', ci4_v:'Lun–Ven 9:00–18:00 · Sab su appuntamento',
+  f_name:'Nome e cognome', f_name_ph:'M. Esempio', f_phone:'Telefono', f_mail:'E-mail',
+  f_topic:'Di cosa si tratta?',
+  f_t1:'Voglio vendere', f_t2:'Voglio affittare', f_t3:'Cerco un immobile',
+  f_t4:'Appuntamento per una visita', f_t5:'Valutazione / perizia', f_t6:'Investimento / rendimento',
+  f_msg:'Messaggio', f_msg_ph:'Tipo di immobile, distretto, superficie indicativa — e quando possiamo contattarti.',
+  f_btn:'Richiesta senza impegno',
+  f_ok:'Grazie, {name}! Ti ricontattiamo lo stesso giorno lavorativo.',
+  f_err:'Inserisci nome, telefono ed e-mail.',
+  f_hint:'Modulo dimostrativo — non viene inviato né salvato nulla.',
+  f_prefill:'Sono interessato all’immobile "{obj}" ({loc}) e vorrei fissare una visita.',
+
+  ft_txt:'Agenzia immobiliare a Vienna. Vendita, affitto e valutazione di appartamenti, case e immobili da reddito — in quattro lingue.',
+  ft_c1:'Servizi', ft_c2:'Servizio', ft_c3:'Contatti',
+  ft_l1:'Vendita', ft_l2:'Affitto', ft_l3:'Valutazione', ft_l4:'Immobili da reddito',
+  ft_s1:'Immobili disponibili', ft_s2:'Calcolatore finanziamento', ft_s3:'Come funziona', ft_s4:'FAQ',
+  ft_h1:'Lun–Ven 9:00–18:00',
+  ft_by:'Progetto demo di Menes Nasufoski',
+  ft_demo:'Pagina demo — azienda fittizia, nessun immobile reale'
+},
+
+bs:{
+  logo_sub:'Nekretnine Beč',
+  nav_objects:'Nekretnine', nav_services:'Usluge', nav_value:'Procjena',
+  nav_finance:'Finansiranje', nav_process:'Kako ide', nav_team:'Tim',
+  nav_faq:'FAQ', nav_contact:'Kontakt', nav_cta:'Procijeni nekretninu',
+
+  hero_badge:'od 5 · 287 Google recenzija',
+  hero_h1a:'Vaša nekretnina zaslužuje', hero_h1b:'pravu cijenu.',
+  hero_lead:'Prodajemo i iznajmljujemo stanove, kuće i investicijske nekretnine u Beču — uz poštenu procjenu, profesionalnu prodaju i podršku sve do primopredaje ključeva. Na četiri jezika.',
+  hero_cta1:'Besplatna procjena', hero_cta2:'Pogledaj ponudu',
+  stat1:'posredovanih nekretnina', stat2:'dana do zaključenja', stat3:'od tražene cijene',
+  mock_live:'Novo u ponudi', mock_title:'Stan u staroj gradnji s balkonom', mock_loc:'1070 Beč · Neubaugasse',
+  mock_f1:'m²', mock_f2:'sobe', mock_f3:'energija', mock_bar:'Napredak prodaje',
+  float1_t:'Tržišna vrijednost za 2 minute', float1_s:'online i besplatno',
+  float2_t:'Provizija tek po uspjehu', float2_s:'bez troškova unaprijed',
+  trust1:'Licencirani posrednik', trust2:'Procjena besplatna',
+  trust3:'Savjetovanje na 4 jezika', trust4:'Fiducijarna isplata',
+
+  ob_eyebrow:'Aktuelna ponuda', ob_title:'Filtrirajte na miru — bez registracije i bez poziva agenta.',
+  ob_sub:'Svaka nekretnina s cijenom, kvadraturom, brojem soba i energetskim razredom. Dodirnite nekretninu za detalje i neobavezujući zahtjev za razgledanje.',
+  ob_note:'Demo nekretnine. Sve adrese, cijene i podaci su izmišljeni.',
+  fl_type:'Vrsta nekretnine', fl_rooms:'Soba od', fl_price:'Cijena do',
+  fl_results:'nekretnina pronađeno', fl_sort:'Sortiranje',
+  so_new:'Najnovije prvo', so_asc:'Cijena rastuće', so_desc:'Cijena opadajuće', so_area:'Najveća površina',
+  ty_all:'Sve', ty_flat:'Stan', ty_house:'Kuća', ty_invest:'Investicija', ty_comm:'Poslovni prostor',
+  rm_any:'svejedno',
+  fg_new:'Novo', fg_res:'Rezervisano', fg_top:'Top lokacija',
+  c_rooms:'sobe', c_year:'godina', c_more:'Pogledaj detalje',
+  pr_sqm:'{v} € / m²',
+  no_res:'Nijedna nekretnina ne odgovara ovim filterima.', no_res_hint:'Povećajte granicu cijene ili odaberite drugu vrstu nekretnine.',
+
+  md_kv1:'Površina', md_kv2:'Sobe', md_kv3:'Godina gradnje', md_kv4:'Stanje',
+  md_kv5:'Energetski razred', md_kv6:'Provizija', md_prov_v:'3 % + 20 % PDV',
+  md_feat:'Oprema', md_cta1:'Zatraži razgledanje', md_cta2:'Izračunaj finansiranje',
+
+  zs1:'Za renoviranje', zs2:'Održavano', zs3:'Renovirano', zs4:'Novogradnja',
+  ft_balkon:'Balkon', ft_loggia:'Lođa', ft_terrasse:'Terasa', ft_dach:'Krovna terasa',
+  ft_garten:'Vrt', ft_lift:'Lift', ft_garage:'Garaža / parking', ft_keller:'Podrum',
+  ft_ruhig:'Mirna lokacija', ft_altbau:'Stara gradnja', ft_klima:'Klima uređaj', ft_kueche:'Ugradbena kuhinja',
+  ft_vermietet:'Izdato', ft_uwb:'Metro na par minuta',
+
+  o1_t:'Stan u staroj gradnji s balkonom', o1_d:'Renoviran stan u staroj gradnji na trećem spratu s liftom, visina 3,20 m, riblja kost parket i miran balkon prema unutrašnjem dvorištu. Dvije sobe gledaju na ulicu, spavaća soba i kupatilo na dvorište.',
+  o2_t:'Potkrovni dupleks', o2_d:'Dupleks na dvije etaže s krovnom terasom od 26 m² i pogledom preko krovova. Podno grijanje, hlađenje preko ventilacije, garažno mjesto u zgradi. Prvo useljenje nakon izgradnje 2019.',
+  o3_t:'Porodična kuća s vrtom', o3_d:'Samostojeća kuća na parceli od 420 m² s vrtom prema jugozapadu i duplom garažom. Četiri spavaće sobe na spratu, kuhinja s izlazom na terasu, podrum s radionicom.',
+  o4_t:'Starter stan s lođom', o4_d:'Kompaktan dvosoban stan na četvrtom spratu s liftom, svježe okrečen i s novim podovima. Lođa prema zapadu, daljinsko grijanje, mjesečni režijski troškovi ispod 160 €.',
+  o5_t:'Udio u stambenoj zgradi', o5_d:'Udio u zgradi iz 19. stoljeća s osam jedinica, od kojih su šest izdate. Tavan s potencijalom za nadogradnju i već pribavljenom potvrdom o namjeni. Trenutni bruto prinos 3,4 %.',
+  o6_t:'Investicijski stan, izdat', o6_d:'Novogradnja s ugovorom na neodređeno, neto najamnina 810 € mjesečno. Balkon prema jugu, mjesto u podzemnoj garaži uključeno, metro stanica pet minuta pješke.',
+  o7_t:'Poslovni prostor u prometnoj ulici', o7_d:'Prostor s izlogom od 6,5 m u prometnoj trgovačkoj ulici. Trenutno se koristi kao kancelarija, namjena poslovni prostor, klima uređaj i skladište u suterenu.',
+  o8_t:'Kuća u nizu s vlastitim vrtom', o8_d:'Kuća u nizu u mirnoj slijepoj ulici s 95 m² vlastitog vrta, nadstrešnicom za auto i ostavom. Kupatilo i grijanje obnovljeni 2021, dječije sobe s pogledom na zelenilo.',
+  o9_t:'Novogradnja, prvo useljenje', o9_d:'Prvo useljenje s podnim grijanjem, punom termoizolacijom i trostrukim staklima. Balkon prema istoku, prostorija za bicikle i kolica u zgradi, garažno mjesto opcionalno.',
+
+  wr_eyebrow:'Kalkulator', wr_title:'Koliko vrijedi vaša nekretnina danas?',
+  wr_sub:'Podesite osnovne podatke i odmah dobijate raspon cijene, cijenu po kvadratu i procjenu trajanja prodaje. Bez registracije i bez da vas neko zove.',
+  wr_s1:'Vrsta nekretnine', wr_s2:'Lokacija', wr_s3:'Stambena površina', wr_s4:'Sobe',
+  wr_s5:'Godina gradnje', wr_s6:'Stanje', wr_s7:'Oprema',
+  wa_flat:'Stan', wa_house:'Kuća',
+  lg1:'Jednostavna lokacija', lg2:'Dobra lokacija', lg3:'Vrlo dobra lokacija', lg4:'Top lokacija',
+  ex1:'Balkon / terasa', ex2:'Vrt', ex3:'Garaža / parking', ex4:'Lift', ex5:'Mirna lokacija', ex6:'Podrum',
+  wr_out_t:'Procijenjena tržišna vrijednost', wr_scale_lo:'donji dio tržišta', wr_scale_hi:'vrhunska cijena',
+  wr_o1:'Cijena po kvadratu', wr_o2:'Ostvariva mjesečna najamnina', wr_o3:'Bruto prinos za kupca', wr_o4:'Očekivano trajanje prodaje',
+  wr_weeks:'{n} sedmica', wr_month:'€ / mjesec',
+  wr_btn:'Zatraži detaljnu procjenu',
+  wr_note:'Automatska orijentaciona vrijednost na osnovu površine, lokacije, stanja i godine gradnje. Ne zamjenjuje obilazak ni procjenu vještaka — stvarna cijena zavisi i od rasporeda, sprata, pogleda i upravitelja zgrade.',
+
+  fi_eyebrow:'Finansiranje', fi_title:'Kupoprodajna cijena nije ukupan trošak.',
+  fi_sub:'Izračunajte ratu, kamate i sve troškove kupovine prije odlaska u banku. Odmah vidite koliko vlastitih sredstava stvarno treba.',
+  fi_s1:'Kupoprodajna cijena', fi_s2:'Vlastita sredstva', fi_s3:'Kamatna stopa', fi_s4:'Rok otplate', fi_years:'godina',
+  fi_s5:'Troškovi kupovine detaljno',
+  fi_n1:'Porez na promet (3,5 %)', fi_n2:'Upis u zemljišnu knjigu (1,1 %)',
+  fi_n3:'Provizija agencije (3 % + PDV)', fi_n4:'Ugovor i fiducijar (oko 1,5 %)',
+  fi_n5:'Upis hipoteke (1,2 %)', fi_n6:'Ukupni dodatni troškovi',
+  fi_out_t:'Mjesečna rata',
+  fi_loan_lbl:'Kredit {v} · {y} god. · {r} %',
+  fi_o1:'Ukupan trošak kupovine', fi_o2:'Potrebna vlastita sredstva', fi_o3:'Iznos kredita',
+  fi_o4:'Kamate tokom cijelog roka', fi_o5:'Ukupna otplata',
+  fi_stack:'Od čega se sastoji otplata', fi_leg1:'Glavnica', fi_leg2:'Kamate',
+  fi_warn:'Vaša vlastita sredstva ne pokrivaju u potpunosti dodatne troškove. Banke u Austriji obično traže 20 % cijene plus troškove iz vlastitih sredstava.',
+  fi_btn:'Dogovori razgovor o finansiranju',
+  fi_note:'Anuitetski izračun s jednakom ratom, bez naknada za vođenje računa, obrade i osiguranja. Neobavezujući demo izračun, ne predstavlja finansijski savjet.',
+
+  ab_eyebrow:'Kako ide', ab_title:'Ovako izgleda prodaja s nama.',
+  ab_sub:'Četiri koraka, jedna osoba za kontakt, jasni rokovi. U svakom trenutku znate šta se dešava i šta slijedi.',
+  ab1_t:'Prvi razgovor i procjena', ab1_d:'Pogledamo nekretninu, provjerimo dokumentaciju i zajedno odredimo realnu cijenu — pismeno, s uporedivim nekretninama.', ab1_m:'Sedmica 1',
+  ab2_t:'Priprema i dokumentacija', ab2_d:'Fotografije, tlocrt, energetski certifikat i prospekt. Ono što nedostaje pribavljamo iz zemljišne knjige, od upravitelja i općine.', ab2_m:'Sedmica 2–3',
+  ab3_t:'Oglašavanje i razgledanja', ab3_d:'Objava na svim važnim portalima, selekcija zainteresovanih i razgledanja u terminima koji vama odgovaraju.', ab3_m:'Sedmica 3–8',
+  ab4_t:'Zaključenje i primopredaja', ab4_d:'Pregovori, ponuda, ugovor preko fiducijara i zapisnik o primopredaji sa stanjem brojila. Nakon toga je zaista sve završeno.', ab4_m:'Sedmica 8–12',
+
+  sv_eyebrow:'Usluge', sv_title:'Od prvog razgovora do predaje ključeva.',
+  sv_sub:'Preuzimamo dio koji troši vrijeme i živce — dokumentaciju, oglašavanje, razgledanja, pregovore i ugovornu proceduru.',
+  s1_t:'Prodaja stanova i kuća', s1_d:'Cijena u skladu s tržištem, profesionalna priprema, oglašavanje na svim velikim portalima i pregovori sve do notara.', s1_m:'Provizija tek po zaključenju',
+  s2_t:'Iznajmljivanje i izbor stanara', s2_d:'Provjeravamo kreditnu sposobnost i dokumente, vodimo razgledanja i pripremamo ugovor sa zapisnikom o primopredaji.', s2_m:'Provjera solventnosti uključena',
+  s3_t:'Procjena nekretnine', s3_d:'Online za dvije minute kao orijentacija — ili na licu mjesta s uporedivim podacima, ocjenom stanja i pisanim nalazom.', s3_m:'Online procjena besplatna',
+  s4_t:'Investicijske nekretnine', s4_d:'Stambene zgrade, investicijski stanovi i manji poslovni prostori — s izračunom prinosa, pregledom najamnina i realnom procjenom potrebnih ulaganja.', s4_m:'Izračun prinosa uključen',
+  s5_t:'Dokumentacija i institucije', s5_d:'Izvod iz zemljišne knjige, energetski certifikat, ugovor o etažnom vlasništvu, procjena udjela — pribavljamo što nedostaje i objašnjavamo šta piše.', s5_m:'Energetski certifikat organizovan',
+  s6_t:'Savjetovanje na četiri jezika', s6_d:'Njemački, engleski, italijanski i bosanski/hrvatski/srpski — da i detalji ugovora budu zaista jasni.', s6_m:'DE · EN · IT · BKS',
+
+  wh_eyebrow:'Zašto ATRIA', wh_title:'Cijena nastaje u pripremi, a ne u oglasu.',
+  wh_sub:'Previsoka cijena i nekretnina stoji mjesecima. Preniska i poklanjate novac. Mi radimo s brojkama, a ne s osjećajem.',
+  w1_t:'Cijena na osnovu stvarnih prodaja', w1_d:'Ne poredimo s cijenama iz oglasa nego sa stvarno postignutim cijenama iz zemljišne knjige — isti kvart i ista kategorija nekretnine.',
+  w2_t:'Provizija samo u slučaju uspjeha', w2_d:'Bez troškova unaprijed, bez paušala za oglase, bez ekskluzivnog ugovora na dvanaest mjeseci. Ako se ne proda, ne plaćate ništa.',
+  w3_t:'Jedna osoba za kontakt, ne pet', w3_d:'Ista osoba radi procjenu, vodi razgledanja i prisutna je kod notara. Svoju nekretninu objašnjavate tačno jednom.',
+  w4_t:'Zainteresovani koji zaista mogu kupiti', w4_d:'Prije razgledanja provjeravamo status finansiranja i rokove. Tako ne vodite kroz stan ljude koji samo razgledaju.',
+  nb1:'posredovanih nekretnina od 2014.', nb2:'dana prosječno do zaključenja',
+  nb3:'od tražene cijene u prosjeku', nb4:'zvjezdica iz 287 recenzija',
+
+  tm_eyebrow:'Tim', tm_title:'Četiri osobe koje znate po imenu.',
+  tm_sub:'Bez call centra i bez stalne promjene zaduženja. Dobijate direktan broj i mobitel osobe koja vas vodi.',
+  c1_n:'M. K.', c1_r:'Direkcija', c1_d:'Licencirani posrednik u prometu nekretnina, samostalno od 2014. Fokus na staru gradnju i stambene zgrade u centralnim kvartovima.',
+  c2_n:'T. R.', c2_r:'Prodaja i procjene', c2_d:'Vodi stanove i porodične kuće. Radi procjene s uporedivim podacima iz zemljišne knjige.',
+  c3_n:'D. S.', c3_r:'Iznajmljivanje', c3_d:'Od oglasa do zapisnika o primopredaji. Brine o provjeri solventnosti, ugovorima i depozitima.',
+  c4_n:'A. P.', c4_r:'Investicije i finansiranje', c4_d:'Računa prinose, ide s vama na sastanke u banci i provjerava preglede najamnina.',
+
+  rv_eyebrow:'Recenzije', rv_title:'Šta kažu vlasnici i kupci',
+  rv1_q:'Dvije druge agencije obećale su nam cijenu koju očito niko ne plaća. Ovdje smo dobili pregled stvarno zaključenih prodaja — i prodali tačno po toj cijeni, nakon sedam sedmica.',
+  rv1_n:'M. B.', rv1_r:'Prodaja stana · 1030 Beč',
+  rv2_q:'Kao kupcu mi je najvažniji bio izračun dodatnih troškova. Nisam znao da se dodaje preko deset posto. Sve mi je uredno izračunato na jednom sastanku, bez pritiska na prodaju.',
+  rv2_n:'S. T.', rv2_r:'Prvi kupac · 1210 Beč',
+  rv3_q:'Živimo u inostranstvu i prodali smo stan naših roditelja. Sve je išlo preko videopoziva i mejla, dokumentaciju su sami pribavili. Kod notara je bila osoba koja nas je zastupala.',
+  rv3_n:'L. H.', rv3_r:'Prodaja naslijeđa · 1150 Beč',
+
+  fq_eyebrow:'FAQ', fq_title:'Česta pitanja',
+  fq_q1:'Koliko košta procjena?',
+  fq_a1:'Online orijentaciona vrijednost na ovoj stranici je besplatna i neobavezujuća. Ni obilazak na licu mjesta s usmenom procjenom ne košta ništa. Samo pisani nalaz o tržišnoj vrijednosti za sud, banku ili poreznu upravu naplaćuje se posebno.',
+  fq_q2:'Kolika je provizija agencije?',
+  fq_a2:'Kod prodaje 3 % kupoprodajne cijene plus 20 % PDV-a, i to tek po uspješnom zaključenju. Kod iznajmljivanja u Austriji od jula 2023. vrijedi pravilo da proviziju plaća onaj ko je angažovao agenciju, dakle po pravilu vlasnik.',
+  fq_q3:'Koje dodatne troškove imam kao kupac?',
+  fq_a3:'U Austriji se računa oko 10 %: 3,5 % poreza na promet, 1,1 % upisa u zemljišnu knjigu, oko 1,5 % za ugovor i fiducijara, 3,6 % provizije s PDV-om te 1,2 % upisa hipoteke ako se finansira kreditom. Kalkulator na ovoj stranici prikazuje vaše konkretne iznose.',
+  fq_q4:'Koliko prosječno traje prodaja?',
+  fq_a4:'Od naloga do potpisa obično osam do dvanaest sedmica, a s pripremljenom dokumentacijom i kraće. Isplata preko fiducijara i upis u zemljišnu knjigu traju nakon toga još četiri do osam sedmica.',
+  fq_q5:'Koja dokumenta trebam kao prodavac?',
+  fq_a5:'Izvod iz zemljišne knjige, energetski certifikat, ugovor o etažnom vlasništvu odnosno procjenu udjela, aktuelni obračun režija i kod stanova zadnje zapisnike skupštine vlasnika. Ono što nedostaje pribavljamo mi — energetski certifikat je zakonska obaveza.',
+  fq_q6:'Moram li platiti porez pri prodaji?',
+  fq_a6:'Na dobit od prodaje plaća se porez na promet nekretnina od 30 %. Oslobođenje za glavno prebivalište vrijedi ako ste tamo bili prijavljeni dvije godine neprekidno ili pet od zadnjih deset. Na prvom sastanku kažemo koji slučaj vrijedi — obavezujući odgovor daje vaš porezni savjetnik.',
+
+  ct_eyebrow:'Kontakt', ct_title:'Razgovarajmo o vašoj nekretnini.',
+  ct_sub:'Kratak razgovor je dovoljan da procijenimo šta ima smisla. Javljamo se isti radni dan — i ako želite samo procjenu.',
+  ci1:'Telefon', ci2:'E-mail', ci3:'Kancelarija', ci3_v:'Beispielgasse 24, 1040 Beč',
+  ci4:'Radno vrijeme', ci4_v:'Pon–Pet 9:00–18:00 · Sub po dogovoru',
+  f_name:'Ime i prezime', f_name_ph:'M. Primjer', f_phone:'Telefon', f_mail:'E-mail',
+  f_topic:'O čemu se radi?',
+  f_t1:'Želim prodati', f_t2:'Želim iznajmiti', f_t3:'Tražim nekretninu',
+  f_t4:'Termin za razgledanje', f_t5:'Procjena / nalaz', f_t6:'Investicija / prinos',
+  f_msg:'Poruka', f_msg_ph:'Vrsta nekretnine, kvart, okvirna veličina — i kada vas najlakše dobijemo.',
+  f_btn:'Neobavezujući upit',
+  f_ok:'Hvala, {name}! Javljamo se isti radni dan.',
+  f_err:'Molimo unesite ime, telefon i e-mail.',
+  f_hint:'Demo forma — ništa se ne šalje i ništa se ne sprema.',
+  f_prefill:'Zanima me nekretnina "{obj}" ({loc}) i želio bih dogovoriti razgledanje.',
+
+  ft_txt:'Agencija za nekretnine u Beču. Prodaja, iznajmljivanje i procjena stanova, kuća i investicijskih nekretnina — na četiri jezika.',
+  ft_c1:'Usluge', ft_c2:'Servis', ft_c3:'Kontakt',
+  ft_l1:'Prodaja', ft_l2:'Iznajmljivanje', ft_l3:'Procjena', ft_l4:'Investicijske nekretnine',
+  ft_s1:'Aktuelna ponuda', ft_s2:'Kalkulator finansiranja', ft_s3:'Kako ide', ft_s4:'FAQ',
+  ft_h1:'Pon–Pet 9:00–18:00',
+  ft_by:'Demo projekat Menesa Nasufoskog',
+  ft_demo:'Demo stranica — izmišljena firma, nema stvarnih nekretnina'
+}
+};
+
+let lang  = localStorage.getItem('atria_lang') || 'de';
+if(!I18N[lang]) lang = 'de';
+const LOC  = { de:'de-DE', en:'en-GB', it:'it-IT', bs:'bs-BA' };
+const CITY = { de:'Wien', en:'Vienna', it:'Vienna', bs:'Beč' };
+
+const t = k => (I18N[lang] && I18N[lang][k]) || I18N.de[k] || k;
+const nInt = v => new Intl.NumberFormat(LOC[lang], { maximumFractionDigits:0, useGrouping:true }).format(Math.round(v));
+const nDec = (v,d) => new Intl.NumberFormat(LOC[lang], { minimumFractionDigits:d, maximumFractionDigits:d, useGrouping:true }).format(v);
+const eur  = v => '€ ' + nInt(v);
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+
+const PROPS = [
+  { id:1, art:'alt',    pal:0, type:'flat',   price:489000, area:84,  rooms:3, year:1908, energy:'B', zust:'zs3', flag:'new', d:'1070', street:'Neubaugasse',        added:2,  feats:['ft_balkon','ft_lift','ft_altbau','ft_keller'] },
+  { id:2, art:'mod',    pal:1, type:'flat',   price:785000, area:112, rooms:4, year:2019, energy:'A', zust:'zs4', flag:'top', d:'1030', street:'Landstraße',         added:9,  feats:['ft_dach','ft_lift','ft_garage','ft_klima','ft_kueche'] },
+  { id:3, art:'house',  pal:2, type:'house',  price:895000, area:168, rooms:5, year:1996, energy:'C', zust:'zs2', flag:'',    d:'1230', street:'Liesing',            added:21, feats:['ft_garten','ft_garage','ft_keller','ft_ruhig'] },
+  { id:4, art:'mod',    pal:3, type:'flat',   price:268000, area:52,  rooms:2, year:1975, energy:'D', zust:'zs2', flag:'new', d:'1160', street:'Ottakring',          added:4,  feats:['ft_loggia','ft_lift','ft_uwb'] },
+  { id:5, art:'invest', pal:4, type:'invest', price:1450000,area:420, rooms:8, year:1901, energy:'D', zust:'zs1', flag:'',    d:'1050', street:'Margareten',         added:34, feats:['ft_altbau','ft_keller','ft_vermietet'] },
+  { id:6, art:'mod',    pal:5, type:'invest', price:329000, area:58,  rooms:2, year:2021, energy:'A', zust:'zs4', flag:'',    d:'1220', street:'Donaustadt',         added:16, feats:['ft_balkon','ft_lift','ft_garage','ft_vermietet','ft_uwb'] },
+  { id:7, art:'shop',   pal:6, type:'comm',   price:640000, area:96,  rooms:3, year:1960, energy:'C', zust:'zs2', flag:'res', d:'1060', street:'Mariahilfer Straße', added:27, feats:['ft_klima','ft_lift','ft_keller','ft_uwb'] },
+  { id:8, art:'row',    pal:7, type:'house',  price:615000, area:132, rooms:4, year:2008, energy:'B', zust:'zs3', flag:'',    d:'1210', street:'Floridsdorf',        added:12, feats:['ft_garten','ft_garage','ft_keller','ft_ruhig'] },
+  { id:9, art:'mod',    pal:8, type:'flat',   price:398000, area:68,  rooms:3, year:2025, energy:'A', zust:'zs4', flag:'new', d:'1100', street:'Favoriten',          added:1,  feats:['ft_balkon','ft_lift','ft_kueche','ft_uwb'] }
+];
+
+const PAL = [
+  ['#1B4A3E','#0C221C','#2A4A40','#E0B056','#E0B056'],
+  ['#1F3F52','#0C1C26','#274554','#7FD7BA','#7FD7BA'],
+  ['#234A33','#0E2118','#2E4B36','#E0B056','#9BD17E'],
+  ['#3A3352','#171428','#3C3A55','#C9A8E8','#C9A8E8'],
+  ['#4A3A2A','#221A12','#463726','#E0B056','#E0B056'],
+  ['#1C4652','#0A1E24','#25454F','#7FD7BA','#7FD7BA'],
+  ['#4A2A2E','#200F12','#452A2E','#E8A38F','#E8A38F'],
+  ['#2A3C4A','#101C24','#31434F','#9BC6E0','#9BC6E0'],
+  ['#28453A','#0D1F19','#2F4A3F','#7FD7BA','#7FD7BA']
+];
+const ENERGY_COLOR = { A:'#2FAE6A', B:'#7DC242', C:'#C9D22B', D:'#F2C300', E:'#F08A24', F:'#E2502B' };
+
+function artSVG(p, uid){
+  const c = PAL[p.pal], gid = 'g' + uid + '_' + p.id;
+  const rnd = i => (0.22 + ((i * 37) % 5) * 0.17).toFixed(2);
+  const win = (x,y,w,h,o,rx) => '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+(rx||2)+'" fill="'+c[3]+'" opacity="'+o+'"/>';
+  let body = '';
+
+  if(p.art === 'alt' || p.art === 'invest'){
+    const cols = p.art === 'invest' ? 6 : 4;
+    const x0 = p.art === 'invest' ? 26 : 68, wBlock = p.art === 'invest' ? 348 : 264;
+    body += '<rect x="'+x0+'" y="34" width="'+wBlock+'" height="186" fill="'+c[2]+'"/>';
+    body += '<rect x="'+(x0-6)+'" y="30" width="'+(wBlock+12)+'" height="9" rx="2" fill="'+c[4]+'" opacity=".55"/>';
+    body += '<rect x="'+x0+'" y="96" width="'+wBlock+'" height="4" fill="'+c[4]+'" opacity=".22"/>';
+    const gap = wBlock / cols, ww = gap * 0.46, k = 0;
+    for(let r = 0; r < 3; r++){
+      for(let i = 0; i < cols; i++){
+        const x = x0 + gap * i + (gap - ww) / 2, y = 50 + r * 52;
+        body += win(x, y, ww, 34, rnd(r * cols + i + k));
+        body += '<path d="M'+x+' '+y+' a'+(ww/2)+' '+(ww/2)+' 0 0 1 '+ww+' 0" fill="'+c[3]+'" opacity="'+rnd(r+i)+'"/>';
+      }
+    }
+    body += '<rect x="'+(x0 + wBlock/2 - 22)+'" y="178" width="44" height="42" rx="3" fill="'+c[1]+'"/>';
+    body += '<rect x="'+(x0 + wBlock/2 - 22)+'" y="178" width="44" height="42" rx="3" fill="none" stroke="'+c[4]+'" stroke-width="1.6" opacity=".7"/>';
+  }
+  else if(p.art === 'mod'){
+    body += '<rect x="40" y="96" width="70" height="124" fill="'+c[1]+'" opacity=".8"/>';
+    body += '<rect x="96" y="52" width="210" height="168" fill="'+c[2]+'"/>';
+    body += '<rect x="292" y="80" width="72" height="140" fill="'+c[1]+'" opacity=".75"/>';
+    for(let r = 0; r < 4; r++){
+      for(let i = 0; i < 5; i++){
+        body += win(110 + i * 39, 66 + r * 38, 28, 22, rnd(r * 5 + i));
+      }
+      body += '<rect x="104" y="'+(92 + r * 38)+'" width="194" height="3" fill="'+c[4]+'" opacity=".2"/>';
+    }
+    body += '<rect x="182" y="184" width="40" height="36" rx="3" fill="'+c[1]+'"/>';
+    body += '<rect x="182" y="184" width="40" height="36" rx="3" fill="none" stroke="'+c[4]+'" stroke-width="1.6" opacity=".7"/>';
+    body += win(46, 118, 22, 16, '.4') + win(78, 118, 22, 16, '.6') + win(46, 150, 22, 16, '.55') + win(78, 150, 22, 16, '.3');
+    body += win(302, 100, 22, 16, '.5') + win(332, 100, 22, 16, '.3') + win(302, 132, 22, 16, '.35') + win(332, 132, 22, 16, '.55');
+  }
+  else if(p.art === 'house'){
+    body += '<path d="M110 118 L200 58 L290 118 Z" fill="'+c[4]+'" opacity=".62"/>';
+    body += '<rect x="122" y="116" width="156" height="104" fill="'+c[2]+'"/>';
+    body += win(140, 134, 38, 30, '.7') + win(222, 134, 38, 30, '.45');
+    body += '<rect x="182" y="170" width="36" height="50" rx="3" fill="'+c[1]+'"/>';
+    body += '<rect x="182" y="170" width="36" height="50" rx="3" fill="none" stroke="'+c[4]+'" stroke-width="1.6" opacity=".7"/>';
+    body += '<rect x="248" y="66" width="16" height="30" fill="'+c[2]+'"/>';
+    body += '<circle cx="74" cy="176" r="30" fill="'+c[4]+'" opacity=".26"/><rect x="71" y="176" width="6" height="44" fill="'+c[1]+'" opacity=".7"/>';
+    body += '<circle cx="330" cy="188" r="22" fill="'+c[4]+'" opacity=".2"/><rect x="327" y="188" width="6" height="32" fill="'+c[1]+'" opacity=".7"/>';
+  }
+  else if(p.art === 'row'){
+    [60, 152, 244].forEach((x, i) => {
+      body += '<path d="M'+x+' 112 L'+(x+46)+' 72 L'+(x+92)+' 112 Z" fill="'+c[4]+'" opacity="'+(0.5 + i * 0.08).toFixed(2)+'"/>';
+      body += '<rect x="'+(x+6)+'" y="110" width="80" height="110" fill="'+c[2]+'"/>';
+      body += win(x + 16, 126, 26, 22, rnd(i)) + win(x + 54, 126, 26, 22, rnd(i + 2));
+      body += '<rect x="'+(x+32)+'" y="168" width="28" height="52" rx="3" fill="'+c[1]+'"/>';
+    });
+    body += '<rect x="0" y="210" width="400" height="10" fill="'+c[4]+'" opacity=".18"/>';
+  }
+  else {
+    body += '<rect x="46" y="48" width="308" height="172" fill="'+c[2]+'"/>';
+    for(let r = 0; r < 2; r++){
+      for(let i = 0; i < 5; i++) body += win(62 + i * 58, 62 + r * 44, 40, 28, rnd(r * 5 + i));
+    }
+    body += '<rect x="46" y="150" width="308" height="6" fill="'+c[4]+'" opacity=".5"/>';
+    body += '<rect x="62" y="166" width="276" height="54" rx="3" fill="'+c[1]+'"/>';
+    body += '<rect x="76" y="176" width="110" height="44" rx="2" fill="'+c[3]+'" opacity=".5"/>';
+    body += '<rect x="196" y="176" width="70" height="44" rx="2" fill="'+c[3]+'" opacity=".32"/>';
+    body += '<rect x="276" y="176" width="46" height="44" rx="2" fill="'+c[3]+'" opacity=".6"/>';
+    for(let i = 0; i < 8; i++){
+      body += '<rect x="'+(62 + i * 35)+'" y="152" width="35" height="14" fill="'+(i % 2 ? c[4] : c[1])+'" opacity=".8"/>';
+    }
+  }
+
+  return '<svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
+    '<defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0%" stop-color="'+c[0]+'"/><stop offset="100%" stop-color="'+c[1]+'"/></linearGradient></defs>' +
+    '<rect width="400" height="220" fill="url(#'+gid+')"/>' +
+    '<circle cx="336" cy="44" r="22" fill="'+c[4]+'" opacity=".2"/><circle cx="336" cy="44" r="11" fill="'+c[4]+'" opacity=".45"/>' +
+    body + '<rect y="214" width="400" height="6" fill="'+c[1]+'"/></svg>';
+}
+
+const TYPES = [{k:'ty_all',v:'all'},{k:'ty_flat',v:'flat'},{k:'ty_house',v:'house'},{k:'ty_invest',v:'invest'},{k:'ty_comm',v:'comm'}];
+const ROOMS = [0,2,3,4];
+let fType = 'all', fRooms = 0, fMaxPrice = 1600000, fSort = 'new';
+
+const locOf = p => p.d + ' ' + CITY[lang] + ' · ' + p.street;
+
+function renderTypes(){
+  const box = document.getElementById('typeRow');
+  box.innerHTML = '';
+  TYPES.forEach(ty => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (ty.v === fType ? ' active' : '');
+    b.textContent = t(ty.k);
+    b.addEventListener('click', () => { fType = ty.v; renderTypes(); renderObjects(); });
+    box.appendChild(b);
+  });
+}
+function renderRooms(){
+  const box = document.getElementById('roomRow');
+  box.innerHTML = '';
+  ROOMS.forEach(r => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (r === fRooms ? ' active' : '');
+    b.textContent = r === 0 ? t('rm_any') : r + '+';
+    b.addEventListener('click', () => { fRooms = r; renderRooms(); renderObjects(); });
+    box.appendChild(b);
+  });
+}
+function paintRange(el){
+  const p = (el.value - el.min) / (el.max - el.min) * 100;
+  el.style.background = 'linear-gradient(90deg,var(--brand) ' + p + '%,var(--surface-2) ' + p + '%)';
+}
+
+function filtered(){
+  let list = PROPS.filter(p =>
+    (fType === 'all' || p.type === fType) &&
+    p.rooms >= fRooms &&
+    p.price <= fMaxPrice
+  );
+  if(fSort === 'asc')       list.sort((a,b) => a.price - b.price);
+  else if(fSort === 'desc') list.sort((a,b) => b.price - a.price);
+  else if(fSort === 'area') list.sort((a,b) => b.area - a.area);
+  else                      list.sort((a,b) => a.added - b.added);
+  return list;
+}
+
+function renderObjects(){
+  const box = document.getElementById('objGrid');
+  const list = filtered();
+  document.getElementById('resCount').textContent = list.length;
+  box.innerHTML = '';
+
+  if(!list.length){
+    box.innerHTML = '<div class="no-result"><b>' + t('no_res') + '</b><br>' + t('no_res_hint') + '</div>';
+    return;
+  }
+
+  list.forEach((p, i) => {
+    const card = document.createElement('article');
+    card.className = 'obj-card';
+    card.style.animationDelay = (i % 3) * 0.06 + 's';
+    const flag = p.flag
+      ? '<span class="obj-flag flag-' + p.flag + '">' + t('fg_' + p.flag) + '</span>'
+      : '';
+    card.innerHTML =
+      '<div class="obj-art">' + artSVG(p, 'c') + flag +
+        '<span class="obj-energy" style="background:' + ENERGY_COLOR[p.energy] + '">' + p.energy + '</span>' +
+      '</div>' +
+      '<div class="obj-body">' +
+        '<span class="obj-loc">' + locOf(p) + '</span>' +
+        '<h3 class="obj-title">' + t('o' + p.id + '_t') + '</h3>' +
+        '<div class="obj-price">' + eur(p.price) +
+          '<small>' + t('pr_sqm').replace('{v}', nInt(p.price / p.area)) + '</small></div>' +
+        '<div class="obj-facts">' +
+          '<div><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 10h16M10 4v16"/></svg>' + p.area + ' m²</div>' +
+          '<div><svg viewBox="0 0 24 24"><path d="M3 20V9l9-6 9 6v11"/><path d="M9 20v-6h6v6"/></svg>' + p.rooms + ' ' + t('c_rooms') + '</div>' +
+          '<div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>' + p.year + '</div>' +
+        '</div>' +
+        '<span class="obj-more">' + t('c_more') +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span>' +
+      '</div>';
+    card.addEventListener('click', () => openModal(p));
+    box.appendChild(card);
+  });
+}
+
+const priceRange = document.getElementById('priceRange');
+priceRange.addEventListener('input', () => {
+  fMaxPrice = +priceRange.value;
+  document.getElementById('priceVal').textContent = nInt(fMaxPrice) + ' €';
+  paintRange(priceRange);
+  renderObjects();
+});
+document.getElementById('sortSel').addEventListener('change', e => { fSort = e.target.value; renderObjects(); });
+
+const modal = document.getElementById('objModal');
+const modalBox = document.getElementById('modalBox');
+let openProp = null;
+
+function openModal(p){
+  openProp = p;
+  modalBox.innerHTML =
+    '<div class="modal-art">' + artSVG(p, 'm') +
+      '<button class="modal-close" id="mClose" aria-label="Close">&times;</button>' +
+      '<span class="obj-energy" style="background:' + ENERGY_COLOR[p.energy] + ';top:auto;bottom:12px;right:12px;width:34px;height:34px">' + p.energy + '</span>' +
+    '</div>' +
+    '<div class="modal-in">' +
+      '<span class="modal-loc">' + locOf(p) + '</span>' +
+      '<h3>' + t('o' + p.id + '_t') + '</h3>' +
+      '<div class="modal-price">' + eur(p.price) +
+        '<small>' + t('pr_sqm').replace('{v}', nInt(p.price / p.area)) + '</small></div>' +
+      '<p class="modal-desc">' + t('o' + p.id + '_d') + '</p>' +
+      '<div class="kv-grid">' +
+        '<div class="kv"><span>' + t('md_kv1') + '</span><b>' + p.area + ' m²</b></div>' +
+        '<div class="kv"><span>' + t('md_kv2') + '</span><b>' + p.rooms + '</b></div>' +
+        '<div class="kv"><span>' + t('md_kv3') + '</span><b>' + p.year + '</b></div>' +
+        '<div class="kv"><span>' + t('md_kv4') + '</span><b>' + t(p.zust) + '</b></div>' +
+        '<div class="kv"><span>' + t('md_kv5') + '</span><b>' + p.energy + '</b></div>' +
+        '<div class="kv"><span>' + t('md_kv6') + '</span><b>' + t('md_prov_v') + '</b></div>' +
+      '</div>' +
+      '<span class="f-label">' + t('md_feat') + '</span>' +
+      '<div class="feat-list">' + p.feats.map(f => '<span class="feat">' + t(f) + '</span>').join('') + '</div>' +
+      '<div class="modal-cta">' +
+        '<button class="btn btn-primary" id="mAsk">' + t('md_cta1') + '</button>' +
+        '<button class="btn btn-ghost" id="mFin">' + t('md_cta2') + '</button>' +
+      '</div>' +
+    '</div>';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('mClose').addEventListener('click', closeModal);
+  document.getElementById('mAsk').addEventListener('click', () => {
+    document.getElementById('fmTopic').value = 't4';
+    document.getElementById('fmMsg').value =
+      t('f_prefill').replace('{obj}', t('o' + p.id + '_t')).replace('{loc}', locOf(p));
+    closeModal();
+    document.getElementById('kontakt').scrollIntoView({ behavior:'smooth' });
+  });
+  document.getElementById('mFin').addEventListener('click', () => {
+    const el = document.getElementById('fPrice');
+    el.value = clamp(Math.round(p.price / 5000) * 5000, +el.min, +el.max);
+    calcFin();
+    closeModal();
+    document.getElementById('finanzierung').scrollIntoView({ behavior:'smooth' });
+  });
+}
+function closeModal(){
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  openProp = null;
+}
+modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+const LAGE   = [{k:'lg1',f:.78},{k:'lg2',f:1},{k:'lg3',f:1.26},{k:'lg4',f:1.62}];
+const ZUST   = [{k:'zs1',f:.82},{k:'zs2',f:1},{k:'zs3',f:1.12},{k:'zs4',f:1.22}];
+const EXTRAS = [{k:'ex1',f:.04},{k:'ex2',f:.06},{k:'ex3',f:.035},{k:'ex4',f:.025},{k:'ex5',f:.03},{k:'ex6',f:.015}];
+let wArt = 'flat', wLage = 1, wZust = 1;
+let wExtras = [true, false, false, true, false, true];
+
+const wArea  = document.getElementById('wArea');
+const wRooms = document.getElementById('wRooms');
+const wYear  = document.getElementById('wYear');
+
+function chipRow(id, items, activeIdx, onPick){
+  const box = document.getElementById(id);
+  box.innerHTML = '';
+  items.forEach((it, i) => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (i === activeIdx ? ' active' : '');
+    b.textContent = t(it.k);
+    b.addEventListener('click', () => onPick(i));
+    box.appendChild(b);
+  });
+}
+function renderWChips(){
+  chipRow('wArtRow', [{k:'wa_flat'},{k:'wa_house'}], wArt === 'flat' ? 0 : 1,
+    i => { wArt = i === 0 ? 'flat' : 'house'; renderWChips(); calcWert(); });
+  chipRow('wLageRow', LAGE, wLage, i => { wLage = i; renderWChips(); calcWert(); });
+  chipRow('wZustRow', ZUST, wZust, i => { wZust = i; renderWChips(); calcWert(); });
+
+  const box = document.getElementById('wExtraRow');
+  box.innerHTML = '';
+  EXTRAS.forEach((ex, i) => {
+    const b = document.createElement('button');
+    b.className = 'tgl' + (wExtras[i] ? ' on' : '');
+    b.innerHTML = '<i></i><span>' + t(ex.k) + '</span>';
+    b.addEventListener('click', () => { wExtras[i] = !wExtras[i]; renderWChips(); calcWert(); });
+    box.appendChild(b);
+  });
+}
+
+function calcWert(){
+  const area  = +wArea.value, rooms = +wRooms.value, year = +wYear.value;
+  document.getElementById('wAreaVal').textContent  = area;
+  document.getElementById('wRoomsVal').textContent = rooms;
+  document.getElementById('wYearVal').textContent  = year;
+  [wArea, wRooms, wYear].forEach(paintRange);
+
+  const base = wArt === 'flat' ? 5200 : 4300;
+  const fYear = year < 1945 ? 1.06 : year < 1980 ? .88 : year < 2005 ? .98 : year < 2020 ? 1.10 : 1.16;
+  const ref = wArt === 'flat' ? 75 : 145;
+  const fSize = clamp(1 + (ref - area) * 0.0012, 0.90, 1.14);
+  const fRooms = clamp(1 + (rooms - area / 28) * 0.012, 0.95, 1.06);
+  const fExtra = 1 + EXTRAS.reduce((s, ex, i) => s + (wExtras[i] ? ex.f : 0), 0);
+
+  const value = base * area * LAGE[wLage].f * ZUST[wZust].f * fYear * fSize * fRooms * fExtra;
+  const sqm   = value / area;
+  const rent  = value * (0.0034 - wLage * 0.00025);
+  const yld   = rent * 12 / value * 100;
+  const weeks = clamp(Math.round(6 + value / 150000 - wLage * 1.3 + (wZust === 0 ? 4 : 0)), 3, 30);
+
+  document.getElementById('wValue').textContent = eur(Math.round(value / 1000) * 1000);
+  document.getElementById('wRange').textContent =
+    eur(Math.round(value * 0.93 / 1000) * 1000) + ' – ' + eur(Math.round(value * 1.07 / 1000) * 1000);
+  document.getElementById('wSqm').textContent   = t('pr_sqm').replace('{v}', nInt(sqm));
+  document.getElementById('wRent').textContent  = eur(Math.round(rent / 10) * 10) + ' ' + t('wr_month').replace('€ ', '');
+  document.getElementById('wYield').textContent = nDec(yld, 1) + ' %';
+  document.getElementById('wTime').textContent  = t('wr_weeks').replace('{n}', weeks);
+  document.getElementById('wMarker').style.left = clamp((sqm - 2400) / 7600 * 100, 2, 98) + '%';
+}
+[wArea, wRooms, wYear].forEach(el => el.addEventListener('input', calcWert));
+
+const fPrice  = document.getElementById('fPrice');
+const fEquity = document.getElementById('fEquity');
+const fRate   = document.getElementById('fRate');
+const fYears  = document.getElementById('fYears');
+
+function calcFin(){
+  const price = +fPrice.value, eqPct = +fEquity.value, rate = +fRate.value, years = +fYears.value;
+  document.getElementById('fPriceVal').textContent  = nInt(price) + ' €';
+  document.getElementById('fEquityVal').textContent = eqPct;
+  document.getElementById('fRateVal').textContent   = nDec(rate, 2);
+  document.getElementById('fYearsVal').textContent  = years;
+  [fPrice, fEquity, fRate, fYears].forEach(paintRange);
+
+  const equity = price * eqPct / 100;
+  const loan   = Math.max(price - equity, 0);
+  const grest  = price * .035, gb = price * .011, prov = price * .036, notar = price * .015;
+  const pfand  = loan * .012;
+  const nk     = grest + gb + prov + notar + pfand;
+
+  const i = rate / 100 / 12, n = years * 12;
+  const monthly = loan > 0 ? (i > 0 ? loan * i / (1 - Math.pow(1 + i, -n)) : loan / n) : 0;
+  const repay   = monthly * n;
+  const interest = repay - loan;
+
+  document.getElementById('fGrest').textContent  = eur(grest);
+  document.getElementById('fGb').textContent     = eur(gb);
+  document.getElementById('fProv').textContent   = eur(prov);
+  document.getElementById('fNotar').textContent  = eur(notar);
+  document.getElementById('fPfand').textContent  = eur(pfand);
+  document.getElementById('fNkTotal').textContent = eur(nk);
+
+  document.getElementById('fRateMonth').textContent = eur(monthly);
+  document.getElementById('fLoanLbl').textContent =
+    t('fi_loan_lbl').replace('{v}', eur(loan)).replace('{y}', years).replace('{r}', nDec(rate, 2));
+  document.getElementById('fTotalCost').textContent = eur(price + nk);
+  document.getElementById('fEqNeed').textContent    = eur(equity + nk);
+  document.getElementById('fLoan').textContent      = eur(loan);
+  document.getElementById('fInterest').textContent  = eur(interest);
+  document.getElementById('fRepay').textContent     = eur(repay);
+
+  const tilgPct = repay > 0 ? loan / repay * 100 : 100;
+  document.getElementById('stTilg').style.width = tilgPct + '%';
+  document.getElementById('stZins').style.width = (100 - tilgPct) + '%';
+  document.getElementById('stTilgV').textContent = eur(loan);
+  document.getElementById('stZinsV').textContent = eur(interest);
+
+  document.getElementById('fWarn').textContent = (equity < nk + price * 0.2) ? t('fi_warn') : '';
+}
+[fPrice, fEquity, fRate, fYears].forEach(el => el.addEventListener('input', calcFin));
+
+const FAQ = [1,2,3,4,5,6].map(i => ({ q:'fq_q' + i, a:'fq_a' + i }));
+function renderFaq(){
+  const box = document.getElementById('faqList');
+  const openIdx = [...box.children].findIndex(el => el.classList.contains('open'));
+  box.innerHTML = '';
+  FAQ.forEach((f, i) => {
+    const item = document.createElement('div');
+    item.className = 'faq-item';
+    item.innerHTML =
+      '<button class="faq-q">' + t(f.q) + '<span class="plus">+</span></button>' +
+      '<div class="faq-a"><p>' + t(f.a) + '</p></div>';
+    const btn = item.querySelector('.faq-q');
+    const ans = item.querySelector('.faq-a');
+    btn.addEventListener('click', () => {
+      const open = item.classList.contains('open');
+      box.querySelectorAll('.faq-item').forEach(x => {
+        x.classList.remove('open');
+        x.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!open){ item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; }
+    });
+    box.appendChild(item);
+    if(i === openIdx){ item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; }
+  });
+}
+
+function applyLang(l){
+  lang = l;
+  localStorage.setItem('atria_lang', l);
+  document.documentElement.lang = l;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = I18N[l][el.dataset.i18n];
+    if(v) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const v = I18N[l][el.dataset.i18nPh];
+    if(v) el.placeholder = v;
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === l);
+  });
+
+  document.getElementById('priceVal').textContent = nInt(fMaxPrice) + ' €';
+  renderTypes(); renderRooms(); renderObjects(); renderWChips(); renderFaq();
+  calcWert(); calcFin();
+  if(openProp) openModal(openProp);
+}
+document.querySelectorAll('.lang-switch button').forEach(b => {
+  b.addEventListener('click', () => {
+    applyLang(b.dataset.lang);
+    document.getElementById('burger').classList.remove('open');
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+const SUN  = 'M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5v3m0 14v3M2 12h3m14 0h3M4.2 4.2l2.1 2.1m11.4 11.4 2.1 2.1M19.8 4.2l-2.1 2.1M6.3 17.7l-2.1 2.1';
+const MOON = 'M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4 5.39 5.39 0 0 1 2.26-4.4c-.44-.06-.9-.1-1.36-.1z';
+function applyTheme(mode){
+  document.documentElement.setAttribute('data-theme', mode);
+  localStorage.setItem('atria_theme', mode);
+  document.getElementById('themeIcon').innerHTML = mode === 'dark'
+    ? '<path d="' + SUN + '" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>'
+    : '<path d="' + MOON + '"/>';
+  [priceRange, wArea, wRooms, wYear, fPrice, fEquity, fRate, fYears].forEach(paintRange);
+}
+document.getElementById('themeBtn').addEventListener('click', () => {
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+document.getElementById('sendBtn').addEventListener('click', () => {
+  const name  = document.getElementById('fmName').value.trim();
+  const phone = document.getElementById('fmPhone').value.trim();
+  const mail  = document.getElementById('fmMail').value.trim();
+  const ok    = document.getElementById('formOk');
+  if(!name || !phone || !mail){
+    ok.textContent = t('f_err');
+    ok.style.color = 'var(--gold)';
+    ok.classList.add('show');
+    return;
+  }
+  ok.style.color = '';
+  ok.textContent = t('f_ok').replace('{name}', name.split(' ')[0]);
+  ok.classList.add('show');
+});
+
+const burger   = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+const hdr = document.getElementById('hdr');
+window.addEventListener('scroll', () => {
+  hdr.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const io = 'IntersectionObserver' in window
+  ? new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold:.10, rootMargin:'0px 0px -40px 0px' })
+  : null;
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  if(!io){ el.classList.add('in'); return; }
+  el.style.transitionDelay = (i % 3) * 0.08 + 's';
+  io.observe(el);
+});
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+applyTheme(localStorage.getItem('atria_theme') ||
+  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+applyLang(lang);
+</script>
+</body>
+</html>
