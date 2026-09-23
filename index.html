@@ -316,6 +316,7 @@
         /* Hero Section */
         .hero {
             min-height: 100vh;
+            min-height: 100svh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -467,6 +468,24 @@
             background: var(--accent);
             vertical-align: text-bottom;
             animation: blink 1s steps(1) infinite;
+        }
+
+        .hero-content h1 .tw-line {
+            display: block;
+            position: relative;
+        }
+
+        .hero-content h1 .tw-ghost {
+            visibility: hidden;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-content h1 .tw-anim {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
         }
 
         .hero-content h1 .typewriter {
@@ -954,6 +973,7 @@
 
             .hero-content h1 {
                 font-size: 2.5rem;
+                margin-bottom: 0.4rem;
             }
 
             .about-content {
@@ -1018,7 +1038,7 @@
         <div class="hero-inner">
             <div class="hero-content">
                 <span class="hero-eyebrow"><span class="status-dot"></span><span data-translate="hero_badge">Verfügbar für Projekte</span></span>
-                <h1><span data-translate="hero_hello">Hallo, ich bin</span> <span class="typewriter" id="typewriter"></span><span class="cursor">|</span></h1>
+                <h1><span data-translate="hero_hello">Hallo, ich bin</span> <span class="tw-line"><span class="tw-ghost" id="twGhost" aria-hidden="true">Menes Nasufoski|</span><span class="tw-anim"><span class="typewriter" id="typewriter"></span><span class="cursor">|</span></span></span></h1>
                 <p data-translate="hero_description">Ich entwickle moderne, responsive und benutzerfreundliche Webanwendungen mit den neuesten Technologien.</p>
                 <div class="cta-buttons">
                     <a href="#projects" class="btn btn-primary" data-translate="hero_btn_projects">Meine Projekte</a>
@@ -1739,6 +1759,7 @@
 
             // Update typewriter texts
             texts = translations[lang].typewriter;
+            sizeTypewriterLine();
             textIndex = 0;
             charIndex = 0;
             isDeleting = false;
@@ -1751,6 +1772,29 @@
         let charIndex = 0;
         let isDeleting = false;
         let typeSpeed = 100;
+
+        const twGhost = document.getElementById('twGhost');
+
+        function sizeTypewriterLine() {
+            if (!twGhost) return;
+            let tallest = texts[0];
+            let max = 0;
+            texts.forEach(function (txt) {
+                twGhost.textContent = txt + '|';
+                const h = twGhost.offsetHeight;
+                if (h > max) {
+                    max = h;
+                    tallest = txt;
+                }
+            });
+            twGhost.textContent = tallest + '|';
+        }
+
+        let twResizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(twResizeTimer);
+            twResizeTimer = setTimeout(sizeTypewriterLine, 150);
+        });
 
         function type() {
             const currentText = texts[textIndex];
@@ -1779,6 +1823,7 @@
 
         // Initialize language and start typewriter
         setLanguage(currentLang);
+        sizeTypewriterLine();
         type();
 
         // Email obfuscation (protection against spam bots)
