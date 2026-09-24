@@ -96,7 +96,7 @@ header{
 }
 header.scrolled{background:var(--bg);border-bottom-color:var(--line);box-shadow:0 6px 24px rgba(0,0,0,.06)}
 .hdr-in{max-width:var(--wrap);margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:1rem}
-.logo{display:flex;align-items:center;gap:.65rem;margin-right:auto;min-width:0;overflow:hidden}
+.logo{display:flex;align-items:center;gap:.65rem;margin-right:auto;flex-shrink:0}
 .logo-mark{
   width:40px;height:40px;border-radius:11px;background:var(--brand);
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
@@ -110,8 +110,8 @@ header.scrolled{background:var(--bg);border-bottom-color:var(--line);box-shadow:
 .logo-txt span{display:block;font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .nav-links{display:flex;align-items:center;gap:.1rem}
 .nav-links a{
-  padding:.55rem .7rem;border-radius:9px;font-size:.89rem;font-weight:500;color:var(--ink-soft);
-  transition:color .18s ease,background .18s ease;
+  padding:.55rem .5rem;border-radius:9px;font-size:.89rem;font-weight:500;color:var(--ink-soft);
+  white-space:nowrap;transition:color .18s ease,background .18s ease;
 }
 .nav-links a:hover{color:var(--ink);background:var(--surface-2)}
 .hdr-tools{display:flex;align-items:center;gap:.5rem}
@@ -131,7 +131,7 @@ html[data-theme="light"] header:not(.scrolled) .burger span{background:#fff}
 html[data-theme="light"] header:not(.scrolled) .lang-switch{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.26)}
 html[data-theme="light"] header:not(.scrolled) .lang-switch button{color:rgba(255,255,255,.72)}
 html[data-theme="light"] header:not(.scrolled) .lang-switch button.active{background:#fff;color:#0F5C4A}
-@media (min-width:861px){
+@media (min-width:1024px){
   html[data-theme="light"] header:not(.scrolled) .nav-links a{color:rgba(255,255,255,.8)}
   html[data-theme="light"] header:not(.scrolled) .nav-links a:hover{color:#fff;background:rgba(255,255,255,.14)}
 }
@@ -556,11 +556,10 @@ footer a:hover{color:#7FD7BA}
   .reveal{opacity:1;transform:none}
 }
 
-@media (max-width:1300px){
+@media (min-width:1024px){
   .logo-txt span{display:none}
-  .nav-links a{padding:.5rem .52rem;font-size:.86rem}
 }
-@media (max-width:1150px){
+@media (max-width:1239px){
   .nav-cta{display:none}
 }
 @media (max-width:1024px){
@@ -576,9 +575,9 @@ footer a:hover{color:#7FD7BA}
   .fc-2{bottom:-2%;right:2px}
   .foot-grid{grid-template-columns:1fr 1fr;gap:28px}
 }
-@media (max-width:860px){
+@media (max-width:1023px){
   .nav-links{
-    position:fixed;top:68px;left:12px;right:12px;background:var(--surface);border:1px solid var(--line);
+    position:fixed;top:68px;left:12px;right:12px;max-width:380px;margin-left:auto;background:var(--surface);border:1px solid var(--line);
     border-radius:16px;flex-direction:column;align-items:stretch;padding:10px;gap:2px;
     box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transform:translateY(-10px);
     transition:all .25s ease;max-height:calc(100vh - 90px);overflow-y:auto;
@@ -1590,8 +1589,8 @@ en:{
 it:{
   logo_sub:'Immobiliare Vienna',
   nav_objects:'Immobili', nav_services:'Servizi', nav_value:'Valutazione',
-  nav_finance:'Finanziamento', nav_process:'Come funziona', nav_team:'Team',
-  nav_faq:'FAQ', nav_contact:'Contatti', nav_cta:'Valuta il tuo immobile',
+  nav_finance:'Finanziamento', nav_process:'Processo', nav_team:'Team',
+  nav_faq:'FAQ', nav_contact:'Contatti', nav_cta:'Valuta l\u2019immobile',
 
   hero_badge:'su 5 · 287 recensioni Google',
   hero_h1a:'Il tuo immobile merita', hero_h1b:'il prezzo giusto.',
