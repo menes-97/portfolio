@@ -419,19 +419,6 @@ footer li a:hover{color:var(--accent-2)}
   padding:.22rem .74rem;font-size:.75rem;font-weight:600;
 }
 
-.demo-switch{
-  position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:90;
-  display:flex;align-items:center;gap:10px;background:#101418;
-  border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:7px 8px 7px 14px;
-  box-shadow:0 14px 34px rgba(0,0,0,.45);
-}
-.demo-switch b{color:#8B949E;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;white-space:nowrap}
-.demo-switch a{background:#F0A42B;color:#101418;font-size:12px;font-weight:700;padding:7px 14px;border-radius:999px;white-space:nowrap}
-.demo-switch a:hover{background:#FFC352}
-
-@media(min-width:721px){
-  .demo-switch{left:auto;right:20px;transform:none}
-}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
 
@@ -474,9 +461,6 @@ footer li a:hover{color:var(--accent-2)}
   .lang-switch button{padding:.28rem .38rem;font-size:.68rem}
   .icon-btn,.burger{width:34px;height:34px}
   .burger{padding:8px}
-  .demo-switch{bottom:14px;padding:6px 7px 6px 13px;gap:8px}
-  .demo-switch b{font-size:10px}
-  .demo-switch a{font-size:11.5px;padding:6px 12px}
   html{scroll-padding-top:70px}
 }
 @media(max-width:400px){
@@ -490,7 +474,6 @@ footer li a:hover{color:var(--accent-2)}
   .stats{gap:1.2rem}
   .logo-mark{width:36px;height:36px}
   .logo-txt b{font-size:1rem}
-  .demo-switch a{width:auto}
 }
 @media(max-width:352px){
   .logo-txt{display:none}
@@ -1107,10 +1090,6 @@ footer li a:hover{color:var(--accent-2)}
   </div>
 </div>
 
-<div class="demo-switch">
-  <b data-i18n="sw_now">Nachher</b>
-  <a href="vorher.html" data-i18n="sw_link">Vorher ansehen &rarr;</a>
-</div>
 
 <script>
 const I18N = {
@@ -1246,7 +1225,6 @@ de:{
   ft_h1:'Mo–Fr 7:00–17:00',
   ft_by:'Demo-Projekt von Menes Nasufoski',
   ft_demo:'Demo-Seite — fiktives Unternehmen, keine echten Projekte',
-  sw_now:'Nachher', sw_link:'Vorher ansehen →'
 },
 
 en:{
@@ -1381,7 +1359,6 @@ en:{
   ft_h1:'Mon–Fri 7:00–17:00',
   ft_by:'Demo project by Menes Nasufoski',
   ft_demo:'Demo page — fictional company, no real projects',
-  sw_now:'After', sw_link:'See the before →'
 },
 
 it:{
@@ -1516,7 +1493,6 @@ it:{
   ft_h1:'Lun–Ven 7:00–17:00',
   ft_by:'Progetto dimostrativo di Menes Nasufoski',
   ft_demo:'Pagina dimostrativa — azienda fittizia, nessun progetto reale',
-  sw_now:'Dopo', sw_link:'Guarda il prima →'
 },
 
 bs:{
@@ -1651,7 +1627,6 @@ bs:{
   ft_h1:'Pon–Pet 7:00–17:00',
   ft_by:'Demo projekat Menesa Nasufoskog',
   ft_demo:'Demo stranica — izmišljena firma, nema stvarnih projekata',
-  sw_now:'Poslije', sw_link:'Pogledaj prije →'
 }
 };
 
