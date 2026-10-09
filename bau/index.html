@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEINKLAR Bau — Baumeister in Wien | Neubau, Sanierung &amp; Zubau</title>
+
+<meta name="description" content="STEINKLAR Bau: Baumeisterbetrieb in Wien. Neubau, Sanierung, Zubau und Fassade mit Festpreisangebot. Baukosten online berechnen, Referenzprojekte ansehen, Beratung in vier Sprachen.">
+<meta name="author" content="Menes Nasufoski">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="STEINKLAR Bau — Baumeister in Wien">
+<meta property="og:description" content="Neubau, Sanierung und Zubau mit Festpreis. Baukosten in zwei Minuten online berechnen.">
+<meta property="og:locale" content="de_AT">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2316202A'/%3E%3Cpath d='M6 23h20M9 23V13l7-5 7 5v10' stroke='%23F0A42B' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F3F3EF; --surface:#FFFFFF; --surface-2:#E8E8E1;
+  --ink:#111619; --ink-soft:#39444B; --muted:#6B767E;
+  --brand:#16202A; --brand-2:#223141; --brand-ink:#FFFFFF;
+  --accent:#D98A0B; --accent-2:#F0A42B; --accent-soft:rgba(217,138,11,.12);
+  --line:rgba(17,22,25,.11); --line-2:rgba(17,22,25,.2);
+  --ok:#1E7F52;
+  --shadow:0 1px 2px rgba(17,22,25,.05), 0 16px 36px rgba(17,22,25,.08);
+  --shadow-lg:0 32px 74px rgba(17,22,25,.2);
+  --radius:16px; --wrap:1180px;
+}
+html[data-theme="dark"]{
+  --bg:#0B0F12; --surface:#141A1F; --surface-2:#1A2228;
+  --ink:#ECF1F4; --ink-soft:#B4C0C8; --muted:#86939B;
+  --brand:#F0A42B; --brand-2:#1F2A33; --brand-ink:#11171B;
+  --accent:#F0A42B; --accent-2:#FFB94A; --accent-soft:rgba(240,164,43,.14);
+  --line:rgba(236,241,244,.12); --line-2:rgba(236,241,244,.22);
+  --ok:#3FBF84;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 16px 36px rgba(0,0,0,.45);
+  --shadow-lg:0 32px 74px rgba(0,0,0,.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:86px}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  transition:background .3s ease,color .3s ease;
+}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 22px}
+h1,h2,h3,h4{font-family:'Archivo','Inter',sans-serif;line-height:1.1;letter-spacing:-.02em;font-weight:700}
+h1{font-size:clamp(2.1rem,5.6vw,3.8rem);letter-spacing:-.034em;text-transform:uppercase}
+h2{font-size:clamp(1.6rem,3.5vw,2.5rem);text-transform:uppercase;letter-spacing:-.028em}
+h3{font-size:1.08rem}
+p{color:var(--ink-soft)}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+section{padding:88px 0;position:relative}
+.soft{background:var(--surface-2)}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;font-size:.74rem;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;
+}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--accent)}
+.sec-head{max-width:720px;margin-bottom:46px}
+.sec-head p{margin-top:.9rem;font-size:1.03rem}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.92rem 1.55rem;border-radius:10px;font-weight:700;font-size:.93rem;
+  border:1.5px solid transparent;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease;
+  letter-spacing:.01em;
+}
+.btn svg{width:17px;height:17px;flex:none}
+.btn-primary{background:var(--accent);color:#1A1205;box-shadow:0 10px 24px rgba(217,138,11,.28)}
+.btn-primary:hover{background:var(--accent-2);transform:translateY(-2px)}
+.btn-dark{background:var(--brand);color:var(--brand-ink)}
+.btn-dark:hover{background:var(--brand-2);color:#fff;transform:translateY(-2px)}
+html[data-theme="dark"] .btn-dark{background:#1F2A33;color:#ECF1F4;border-color:rgba(236,241,244,.16)}
+html[data-theme="dark"] .btn-dark:hover{background:#2A3843;color:#fff}
+.btn-ghost{border-color:var(--line-2);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+header{
+  position:fixed;top:0;left:0;right:0;z-index:70;
+  background:var(--bg);
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .25s ease,background .25s ease;
+}
+header.scrolled{border-bottom-color:var(--line);background:var(--bg);background:color-mix(in srgb, var(--bg) 94%, transparent)}
+.hdr-in{max-width:var(--wrap);margin:0 auto;padding:.72rem 22px;display:flex;align-items:center;gap:1.1rem}
+.logo{display:flex;align-items:center;gap:.6rem;flex:none;min-width:0}
+.logo-mark{
+  width:38px;height:38px;border-radius:10px;background:var(--brand);
+  display:grid;place-items:center;flex:none;
+}
+html[data-theme="dark"] .logo-mark{background:#1F2A33}
+.logo-mark svg{width:22px;height:22px}
+.logo-txt b{font-family:'Archivo',sans-serif;font-size:1.06rem;font-weight:800;letter-spacing:.01em;display:block;line-height:1.1;text-transform:uppercase;white-space:nowrap}
+.logo-txt span{font-size:.64rem;letter-spacing:.21em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.nav-links{display:flex;gap:.2rem;margin-left:auto}
+.nav-links a{
+  padding:.5rem .7rem;border-radius:8px;font-size:.88rem;font-weight:600;color:var(--ink-soft);
+  transition:color .18s ease,background .18s ease;white-space:nowrap;
+}
+.nav-links a:hover{color:var(--ink);background:var(--surface-2)}
+.hdr-side{display:flex;align-items:center;gap:.5rem;flex:none}
+.lang-switch{display:flex;background:var(--surface-2);border-radius:9px;padding:3px;border:1px solid var(--line)}
+.lang-switch button{
+  background:none;border:none;cursor:pointer;padding:.3rem .44rem;border-radius:6px;
+  font-size:.72rem;font-weight:700;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;
+}
+.lang-switch button.active{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.14)}
+.icon-btn{
+  width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:var(--surface-2);
+  display:grid;place-items:center;cursor:pointer;color:var(--ink);
+}
+.icon-btn svg{width:18px;height:18px;fill:currentColor}
+.burger{display:none;width:38px;height:36px;border:1px solid var(--line);background:var(--surface-2);border-radius:9px;cursor:pointer;padding:9px 9px}
+.burger span{display:block;height:2px;background:var(--ink);border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+.burger span+span{margin-top:4px}
+.burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+.hero{padding:126px 0 72px;position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:-2;
+  background:
+    radial-gradient(900px 420px at 86% 8%, var(--accent-soft), transparent 70%),
+    linear-gradient(180deg, var(--surface-2) 0%, var(--bg) 62%);
+}
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:-1;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:linear-gradient(180deg,rgba(0,0,0,.6),transparent 72%);
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.6),transparent 72%);
+}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:54px;align-items:center}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);
+  border:1px solid var(--line);border-radius:999px;padding:.4rem .9rem;
+  font-size:.8rem;font-weight:600;color:var(--ink-soft);box-shadow:var(--shadow);margin-bottom:1.2rem;
+}
+.hero-badge b{color:var(--ink)}
+.hero h1 em{font-style:normal;color:var(--accent);display:block}
+.hero-lead{font-size:1.09rem;margin:1.25rem 0 1.8rem;max-width:560px}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap}
+.stats{display:flex;gap:2.4rem;margin-top:2.6rem;flex-wrap:wrap}
+.stats .s b{font-family:'Archivo',sans-serif;font-size:1.72rem;font-weight:800;display:block;line-height:1.1}
+.stats .s span{font-size:.79rem;color:var(--muted);font-weight:500}
+
+.hero-art{position:relative}
+.art-frame{
+  border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+  box-shadow:var(--shadow-lg);background:#0E1419;
+}
+.art-frame svg{display:block;width:100%;height:auto}
+.mock{
+  position:absolute;left:-16px;bottom:-30px;width:272px;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;padding:.95rem 1.05rem;box-shadow:var(--shadow-lg);
+}
+.tag-live{
+  display:inline-flex;align-items:center;gap:.4rem;font-size:.68rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ok);margin-bottom:.55rem;
+}
+.tag-live i{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.mock-h b{display:block;font-family:'Archivo',sans-serif;font-size:.97rem;font-weight:700}
+.mock-h small{color:var(--muted);font-size:.76rem}
+.mock-bar-top{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);font-weight:600;margin:.75rem 0 .3rem}
+.mock-track{height:7px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.mock-fill{height:100%;width:68%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.mock-steps{display:flex;gap:.3rem;margin-top:.75rem}
+.mock-steps div{flex:1;height:4px;border-radius:99px;background:var(--surface-2)}
+.mock-steps div.on{background:var(--accent)}
+.float{
+  position:absolute;display:flex;align-items:center;gap:.6rem;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:.68rem .9rem;box-shadow:var(--shadow-lg);
+}
+.float svg{width:19px;height:19px;flex:none;fill:var(--accent)}
+.float b{display:block;font-size:.83rem;font-weight:700;line-height:1.25}
+.float small{color:var(--muted);font-size:.72rem}
+.float.f1{top:-18px;right:-10px}
+.float.f2{top:46%;right:-26px}
+
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)}
+.trust-in{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:1.15rem 0}
+.trust-in>div{display:flex;align-items:center;gap:.6rem;font-size:.87rem;font-weight:600;color:var(--ink-soft)}
+.trust-in svg{width:19px;height:19px;fill:var(--accent);flex:none}
+
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.srv{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.6rem 1.5rem;box-shadow:var(--shadow);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+  position:relative;overflow:hidden;
+}
+.srv:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--line-2)}
+.srv-ico{
+  width:46px;height:46px;border-radius:12px;background:var(--accent-soft);
+  display:grid;place-items:center;margin-bottom:1.05rem;
+}
+.srv-ico svg{width:24px;height:24px;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.srv h3{margin-bottom:.5rem}
+.srv p{font-size:.92rem}
+.srv ul{list-style:none;margin-top:.95rem;display:grid;gap:.4rem}
+.srv li{font-size:.84rem;color:var(--ink-soft);display:flex;gap:.5rem;align-items:flex-start}
+.srv li::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--accent);margin-top:.5rem;flex:none}
+.srv-num{
+  position:absolute;top:1rem;right:1.2rem;font-family:'Archivo',sans-serif;font-size:2.2rem;
+  font-weight:800;color:var(--ink);opacity:.06;line-height:1;
+}
+
+.chip-row{display:flex;gap:.45rem;flex-wrap:wrap}
+.chip{
+  padding:.46rem .92rem;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);
+  font-size:.83rem;font-weight:600;cursor:pointer;color:var(--ink-soft);transition:all .18s ease;
+}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+.chip.active{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.proj-bar{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:26px}
+.result-count{font-size:.86rem;color:var(--muted);font-weight:600}
+.result-count b{color:var(--ink);font-family:'Archivo',sans-serif}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pcard{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column;
+}
+.pcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.pcard-art{position:relative;background:#0E1419}
+.pcard-art svg{display:block;width:100%;height:auto}
+.pflag{
+  position:absolute;top:.75rem;left:.75rem;background:var(--accent);color:#1A1205;
+  font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .58rem;border-radius:6px;
+}
+.pflag.done{background:#2C3B47;color:#E7EEF3}
+.pcard-b{padding:1.15rem 1.2rem 1.3rem;flex:1;display:flex;flex-direction:column}
+.pcard-b h3{margin-bottom:.25rem;font-size:1.02rem}
+.pcard-loc{font-size:.78rem;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.pcard-facts{display:flex;gap:1.05rem;margin:.9rem 0 .2rem;flex-wrap:wrap}
+.pcard-facts div{font-size:.78rem;color:var(--muted)}
+.pcard-facts b{display:block;font-family:'Archivo',sans-serif;font-size:.97rem;color:var(--ink);font-weight:700}
+.pcard-more{margin-top:auto;padding-top:1rem;font-size:.84rem;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:.4rem}
+.pcard-more svg{width:14px;height:14px;fill:currentColor;transition:transform .2s ease}
+.pcard:hover .pcard-more svg{transform:translateX(3px)}
+.no-res{text-align:center;padding:3.2rem 1rem;border:1px dashed var(--line-2);border-radius:var(--radius);grid-column:1/-1}
+.no-res b{display:block;font-family:'Archivo',sans-serif;font-size:1.06rem;margin-bottom:.3rem}
+.no-res span{color:var(--muted);font-size:.9rem}
+
+.modal{
+  position:fixed;inset:0;z-index:120;background:rgba(8,11,14,.72);backdrop-filter:blur(5px);
+  display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .22s ease;
+}
+.modal.open{opacity:1;pointer-events:auto}
+.modal-box{
+  background:var(--surface);border:1px solid var(--line);border-radius:18px;max-width:760px;width:100%;
+  max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg);transform:translateY(14px) scale(.985);transition:transform .22s ease;
+}
+.modal.open .modal-box{transform:none}
+.modal-art{position:relative;background:#0E1419}
+.modal-art svg{display:block;width:100%;height:auto}
+.modal-x{
+  position:absolute;top:.8rem;right:.8rem;width:36px;height:36px;border-radius:9px;border:none;
+  background:rgba(10,14,18,.6);color:#fff;cursor:pointer;font-size:1.3rem;line-height:1;display:grid;place-items:center;
+}
+.modal-b{padding:1.7rem 1.8rem 1.9rem}
+.modal-b h3{font-size:1.45rem;margin-bottom:.2rem}
+.modal-kv{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin:1.35rem 0}
+.modal-kv>div{background:var(--surface-2);border-radius:11px;padding:.75rem .85rem}
+.modal-kv span{display:block;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.modal-kv b{font-family:'Archivo',sans-serif;font-size:1.02rem}
+.feat-list{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 1.5rem}
+.feat-list span{
+  font-size:.79rem;font-weight:600;background:var(--accent-soft);color:var(--accent);
+  padding:.3rem .66rem;border-radius:999px;
+}
+html[data-theme="dark"] .feat-list span{color:var(--accent-2)}
+.modal-cta{display:flex;gap:.7rem;flex-wrap:wrap}
+.sub-h{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:.4rem}
+
+.calc{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:start}
+.calc-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.7rem 1.65rem;box-shadow:var(--shadow)}
+.field{margin-bottom:1.35rem}
+.field:last-child{margin-bottom:0}
+.f-label{display:flex;justify-content:space-between;align-items:baseline;font-size:.8rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:.55rem}
+.f-label b{font-family:'Archivo',sans-serif;font-size:1rem;color:var(--ink);letter-spacing:0;text-transform:none}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;outline:none;
+  background:linear-gradient(90deg,var(--accent) 0 var(--p,50%),var(--surface-2) var(--p,50%) 100%);
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--surface);
+  border:2.5px solid var(--accent);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+input[type=range]::-moz-range-thumb{
+  width:18px;height:18px;border-radius:50%;background:var(--surface);
+  border:2.5px solid var(--accent);cursor:pointer;
+}
+.ck-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.ck{
+  display:flex;align-items:center;gap:.55rem;padding:.6rem .75rem;border:1px solid var(--line-2);
+  border-radius:10px;cursor:pointer;font-size:.86rem;font-weight:600;color:var(--ink-soft);transition:all .18s ease;
+}
+.ck:hover{border-color:var(--accent)}
+.ck.on{border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.ck i{
+  width:17px;height:17px;border-radius:5px;border:1.5px solid var(--line-2);flex:none;
+  display:grid;place-items:center;font-style:normal;font-size:.7rem;color:transparent;
+}
+.ck.on i{background:var(--accent);border-color:var(--accent);color:#1A1205}
+.out{
+  background:var(--brand);color:#F2F6F9;border-radius:var(--radius);padding:1.7rem 1.65rem;
+  box-shadow:var(--shadow-lg);position:sticky;top:96px;
+}
+html[data-theme="dark"] .out{background:#1A2228;border:1px solid var(--line)}
+.out .sub-h{color:rgba(242,246,249,.5)}
+.out-main{font-family:'Archivo',sans-serif;font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.12}
+.out-main small{display:block;font-size:.82rem;font-weight:500;color:rgba(242,246,249,.55);letter-spacing:0;margin-top:.3rem;font-family:'Inter',sans-serif}
+.out-rows{display:grid;gap:.8rem;margin:1.5rem 0}
+.out-rows>div{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-bottom:.8rem;border-bottom:1px solid rgba(242,246,249,.12)}
+.out-rows span{font-size:.84rem;color:rgba(242,246,249,.6)}
+.out-rows b{font-family:'Archivo',sans-serif;font-size:1.02rem;white-space:nowrap}
+.split{margin:1.4rem 0 1.2rem}
+.split-row{display:flex;justify-content:space-between;font-size:.78rem;color:rgba(242,246,249,.6);margin-bottom:.35rem}
+.split-track{display:flex;height:9px;border-radius:99px;overflow:hidden;background:rgba(242,246,249,.1)}
+.split-track i{display:block;height:100%}
+.split-legend{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.7rem}
+.split-legend div{display:flex;align-items:center;gap:.38rem;font-size:.75rem;color:rgba(242,246,249,.6)}
+.split-legend i{width:9px;height:9px;border-radius:3px;display:block}
+.note{font-size:.78rem;color:var(--muted);margin-top:1rem;line-height:1.55}
+.out .note{color:rgba(242,246,249,.45)}
+
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:st}
+.step{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem 1.45rem;
+  position:relative;box-shadow:var(--shadow);
+}
+.step b.n{
+  font-family:'Archivo',sans-serif;font-size:.78rem;font-weight:800;letter-spacing:.14em;color:var(--accent);
+  display:block;margin-bottom:.7rem;
+}
+.step h3{margin-bottom:.45rem}
+.step p{font-size:.9rem}
+.step-dur{display:inline-block;margin-top:.9rem;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-2);border-radius:999px;padding:.22rem .6rem}
+
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.member{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem 1.3rem;text-align:center;box-shadow:var(--shadow)}
+.avatar{
+  width:74px;height:74px;border-radius:50%;margin:0 auto .95rem;display:grid;place-items:center;
+  font-family:'Archivo',sans-serif;font-size:1.44rem;font-weight:800;color:#1A1205;
+  background:linear-gradient(140deg,var(--accent-2),var(--accent));
+}
+.member h3{font-size:1rem}
+.member .role{font-size:.8rem;color:var(--accent);font-weight:700;margin-bottom:.5rem}
+.member p{font-size:.84rem}
+.member .langs{margin-top:.75rem;font-size:.72rem;color:var(--muted);letter-spacing:.08em;font-weight:600;text-transform:uppercase}
+
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.5rem 1.45rem;box-shadow:var(--shadow)}
+.rev .stars{color:var(--accent);letter-spacing:.14em;font-size:.95rem;margin-bottom:.75rem}
+.rev p{font-size:.93rem;font-style:italic}
+.rev .who{margin-top:1.05rem;display:flex;align-items:center;gap:.65rem}
+.rev .who i{width:34px;height:34px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:.82rem;font-family:'Archivo',sans-serif}
+.rev .who b{display:block;font-size:.86rem}
+.rev .who small{color:var(--muted);font-size:.76rem}
+
+.faq-box{max-width:830px;margin:0 auto;display:grid;gap:.7rem}
+.faq-item{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.faq-q{
+  width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:1.15rem 1.3rem;
+  display:flex;justify-content:space-between;gap:1rem;align-items:center;font-weight:700;font-size:.97rem;
+  font-family:'Archivo',sans-serif;
+}
+.faq-q i{
+  flex:none;width:24px;height:24px;border-radius:7px;background:var(--surface-2);display:grid;place-items:center;
+  font-style:normal;font-size:1.1rem;color:var(--accent);transition:transform .25s ease;
+}
+.faq-item.open .faq-q i{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a p{padding:0 1.3rem 1.25rem;font-size:.92rem}
+
+.ct-grid{display:grid;grid-template-columns:.86fr 1.14fr;gap:30px;align-items:start}
+.ct-info{display:grid;gap:.7rem}
+.ct-row{display:flex;gap:.85rem;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+.ct-row svg{width:20px;height:20px;fill:var(--accent);flex:none;margin-top:.15rem}
+.ct-row span{display:block;font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.ct-row b{font-size:.95rem;font-weight:600}
+.form{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.7rem 1.65rem;box-shadow:var(--shadow)}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.f-grid .full{grid-column:1/-1}
+label.lb{display:block;font-size:.76rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.inp{
+  width:100%;padding:.78rem .9rem;border-radius:10px;border:1px solid var(--line-2);
+  background:var(--bg);transition:border-color .18s ease,box-shadow .18s ease;
+}
+.inp:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+textarea.inp{min-height:118px;resize:vertical}
+.form-msg{margin-top:.9rem;font-size:.88rem;font-weight:600;color:var(--ok);opacity:0;transform:translateY(-4px);transition:all .25s ease}
+.form-msg.show{opacity:1;transform:none}
+
+footer{background:#0D1317;color:#DCE5EA;padding:58px 0 26px;margin-top:0}
+html[data-theme="dark"] footer{border-top:1px solid var(--line)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:30px;padding-bottom:30px}
+.foot-logo{display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem}
+.foot-logo .logo-mark{background:#19242C}
+.foot-logo strong{font-family:'Archivo',sans-serif;font-size:1.04rem;letter-spacing:.01em;text-transform:uppercase}
+footer h4{font-size:.76rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(220,229,234,.45);margin-bottom:.85rem}
+footer ul{list-style:none;display:grid;gap:.45rem}
+footer li,footer li a{font-size:.88rem;color:rgba(220,229,234,.72)}
+footer li a:hover{color:var(--accent-2)}
+.foot-bot{
+  border-top:1px solid rgba(220,229,234,.12);padding-top:18px;display:flex;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;font-size:.8rem;color:rgba(220,229,234,.5);
+}
+.demo-pill{
+  border:1px dashed rgba(240,164,43,.5);color:var(--accent-2);border-radius:999px;
+  padding:.22rem .74rem;font-size:.75rem;font-weight:600;
+}
+
+.demo-switch{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:90;
+  display:flex;align-items:center;gap:10px;background:#101418;
+  border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:7px 8px 7px 14px;
+  box-shadow:0 14px 34px rgba(0,0,0,.45);
+}
+.demo-switch b{color:#8B949E;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;white-space:nowrap}
+.demo-switch a{background:#F0A42B;color:#101418;font-size:12px;font-weight:700;padding:7px 14px;border-radius:999px;white-space:nowrap}
+.demo-switch a:hover{background:#FFC352}
+
+@media(min-width:721px){
+  .demo-switch{left:auto;right:20px;transform:none}
+}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:1040px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;padding:.7rem 22px 1.1rem;gap:.1rem}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:.7rem .4rem;font-size:.95rem}
+  .burger{display:block}
+  .nav-cta{display:none}
+  .hero-grid{grid-template-columns:1fr;gap:64px}
+  .hero-art{max-width:560px}
+  .calc{grid-template-columns:1fr}
+  .out{position:static}
+  .srv-grid,.proj-grid,.flow,.rev-grid{grid-template-columns:1fr 1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .ct-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  section{padding:66px 0}
+  .wrap{padding:0 18px}
+  .hero{padding:112px 0 56px}
+  .sec-head{margin-bottom:34px}
+  .trust-in{grid-template-columns:1fr 1fr;gap:.8rem}
+  .srv-grid,.proj-grid,.flow,.rev-grid,.team-grid{grid-template-columns:1fr}
+  .mock{position:static;width:100%;margin-top:18px;left:0;bottom:0}
+  .float{display:none}
+  .stats{gap:1.6rem}
+  .stats .s b{font-size:1.6rem}
+  .hero-badge{align-items:flex-start;font-size:.78rem;line-height:1.45}
+  .modal-kv{grid-template-columns:repeat(2,1fr)}
+  .modal-b{padding:20px 20px 24px}
+  .f-grid{grid-template-columns:1fr}
+  .ck-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .calc-panel,.out,.srv,.step,.rev,.member,.form{padding:22px}
+  .hdr-in{padding:11px 18px;gap:.5rem}
+  .nav-links{padding:.6rem 18px 1rem}
+  .logo-txt span{display:none}
+  .lang-switch button{padding:.28rem .38rem;font-size:.68rem}
+  .icon-btn,.burger{width:34px;height:34px}
+  .burger{padding:8px}
+  .demo-switch{bottom:14px;padding:6px 7px 6px 13px;gap:8px}
+  .demo-switch b{font-size:10px}
+  .demo-switch a{font-size:11.5px;padding:6px 12px}
+  html{scroll-padding-top:70px}
+}
+@media(max-width:400px){
+  h1{font-size:1.95rem}
+  .hdr-in{padding:11px 14px;gap:.4rem}
+  .hdr-side{gap:.35rem}
+  .lang-switch button{padding:.26rem .3rem;font-size:.66rem}
+  .btn{padding:.85rem 1.15rem;font-size:.9rem;width:100%}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .modal-cta{flex-direction:column}
+  .stats{gap:1.2rem}
+  .logo-mark{width:36px;height:36px}
+  .logo-txt b{font-size:1rem}
+  .demo-switch a{width:auto}
+}
+@media(max-width:352px){
+  .logo-txt{display:none}
+}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="hdr-in">
+    <a href="#top" class="logo">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F0A42B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6.5 20V11L12 7l5.5 4v9"/><path d="M10 20v-5h4v5"/></svg>
+      </span>
+      <span class="logo-txt">
+        <b>Steinklar</b>
+        <span data-i18n="logo_sub">Baumeister Wien</span>
+      </span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#leistungen" data-i18n="nav_srv">Leistungen</a>
+      <a href="#projekte" data-i18n="nav_proj">Projekte</a>
+      <a href="#rechner" data-i18n="nav_calc">Baukosten</a>
+      <a href="#ablauf" data-i18n="nav_flow">Ablauf</a>
+      <a href="#team" data-i18n="nav_team">Team</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+    </nav>
+
+    <div class="hdr-side">
+      <div class="lang-switch" id="langSwitch">
+        <button data-lang="de">DE</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="it">IT</button>
+        <button data-lang="bs">BS</button>
+      </div>
+      <button class="icon-btn" id="themeBtn" aria-label="Theme">
+        <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4 5.39 5.39 0 0 1 2.26-4.4c-.44-.06-.9-.1-1.36-.1z"/></svg>
+      </button>
+      <a href="#rechner" class="btn btn-primary nav-cta" style="padding:.58rem 1.05rem;font-size:.86rem" data-i18n="nav_cta">Baukosten rechnen</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="hero-badge">&#9733; <b>4,9</b> <span data-i18n="hero_badge">von 5 &middot; 142 Bewertungen &middot; Baumeister seit 1998</span></span>
+      <h1><span data-i18n="hero_h1a">Gebaut wird,</span> <em data-i18n="hero_h1b">was besprochen war.</em></h1>
+      <p class="hero-lead" data-i18n="hero_lead">Neubau, Sanierung und Zubau in Wien und Umgebung — mit Festpreisangebot vor Baustart, einem festen Bauleiter als Ansprechpartner und einem Wochenbericht, der zeigt, wo Ihr Projekt gerade steht.</p>
+      <div class="hero-cta">
+        <a href="#rechner" class="btn btn-primary" data-i18n="hero_cta1">Baukosten berechnen</a>
+        <a href="#projekte" class="btn btn-dark" data-i18n="hero_cta2">Projekte ansehen</a>
+      </div>
+      <div class="stats">
+        <div class="s"><b>340+</b><span data-i18n="stat1">fertige Projekte</span></div>
+        <div class="s"><b>26</b><span data-i18n="stat2">Jahre Erfahrung</span></div>
+        <div class="s"><b>94%</b><span data-i18n="stat3">Fertigstellung im Termin</span></div>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="art-frame">
+        <svg viewBox="0 0 520 390" role="img" aria-label="Baustelle">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#18242D"/><stop offset="1" stop-color="#0C1216"/>
+            </linearGradient>
+            <linearGradient id="fac" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2A3A47"/><stop offset="1" stop-color="#1B2731"/>
+            </linearGradient>
+            <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F0A42B" stop-opacity=".55"/><stop offset="1" stop-color="#F0A42B" stop-opacity=".12"/>
+            </linearGradient>
+            <radialGradient id="hglow" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stop-color="#F0A42B" stop-opacity=".18"/><stop offset="1" stop-color="#F0A42B" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <rect width="520" height="390" fill="url(#sky)"/>
+          <circle cx="408" cy="92" r="104" fill="url(#hglow)"/>
+          <g stroke="#F2F6F9" stroke-width="1" opacity=".05">
+            <path d="M0 60h520M0 130h520M0 200h520M0 270h520M80 0v390M180 0v390M280 0v390M380 0v390M480 0v390"/>
+          </g>
+
+          <g opacity=".3">
+            <path d="M14 330V206l34-22 34 22v124z" fill="#16222B"/>
+            <path d="M448 330V228l30-18 30 18v102z" fill="#16222B"/>
+          </g>
+
+          <rect x="118" y="150" width="212" height="180" fill="url(#fac)"/>
+          <g fill="#F0A42B">
+            <rect x="134" y="168" width="40" height="28" rx="2" opacity=".55"/>
+            <rect x="186" y="168" width="40" height="28" rx="2" opacity=".24"/>
+            <rect x="238" y="168" width="40" height="28" rx="2" opacity=".62"/>
+            <rect x="290" y="168" width="24" height="28" rx="2" opacity=".2"/>
+            <rect x="134" y="214" width="40" height="28" rx="2" opacity=".3"/>
+            <rect x="186" y="214" width="40" height="28" rx="2" opacity=".58"/>
+            <rect x="238" y="214" width="40" height="28" rx="2" opacity=".22"/>
+            <rect x="290" y="214" width="24" height="28" rx="2" opacity=".48"/>
+            <rect x="134" y="260" width="40" height="28" rx="2" opacity=".5"/>
+            <rect x="186" y="260" width="40" height="28" rx="2" opacity=".26"/>
+            <rect x="238" y="260" width="40" height="28" rx="2" opacity=".4"/>
+            <rect x="290" y="260" width="24" height="28" rx="2" opacity=".2"/>
+          </g>
+          <g fill="#F2F6F9" opacity=".08">
+            <rect x="118" y="204" width="212" height="4"/>
+            <rect x="118" y="250" width="212" height="4"/>
+            <rect x="118" y="296" width="212" height="4"/>
+          </g>
+
+          <g stroke="#3C4D5B" stroke-width="5" fill="none">
+            <path d="M118 150v-34M160 150v-34M202 150v-34M244 150v-34M286 150v-34M330 150v-34"/>
+            <path d="M118 116h212"/>
+          </g>
+          <rect x="118" y="112" width="212" height="8" fill="#4A5D6C"/>
+
+          <g stroke="#F0A42B" stroke-width="2" opacity=".75" fill="none">
+            <path d="M104 330V140h22v190M104 140h22"/>
+            <path d="M104 182h22M104 224h22M104 266h22M104 308h22"/>
+            <path d="M104 140l22 42M126 140l-22 42M104 182l22 42M126 182l-22 42M104 224l22 42M126 224l-22 42M104 266l22 42M126 266l-22 42"/>
+          </g>
+
+          <g stroke="#6E8192" stroke-width="4" fill="none">
+            <path d="M402 330V86"/>
+            <path d="M396 330V86M408 330V86"/>
+            <path d="M396 300l12-22M408 300l-12-22M396 256l12-22M408 256l-12-22M396 212l12-22M408 212l-12-22M396 168l12-22M408 168l-12-22M396 124l12-22M408 124l-12-22"/>
+          </g>
+          <path d="M402 86h-26l26-26z" fill="#6E8192"/>
+          <rect x="176" y="72" width="248" height="9" rx="2" fill="#F0A42B"/>
+          <rect x="424" y="72" width="62" height="9" rx="2" fill="#8EA0AE"/>
+          <path d="M402 62 196 76M402 62l82 10" stroke="#8EA0AE" stroke-width="1.6" fill="none"/>
+          <rect x="398" y="54" width="9" height="20" rx="2" fill="#8EA0AE"/>
+          <path d="M224 81v58" stroke="#8EA0AE" stroke-width="1.6"/>
+          <rect x="214" y="139" width="20" height="13" rx="2" fill="#F0A42B"/>
+          <rect x="474" y="62" width="22" height="18" rx="3" fill="#56697A"/>
+
+          <path d="M0 330h520v60H0z" fill="#121A20"/>
+          <rect x="0" y="330" width="520" height="4" fill="#F0A42B" opacity=".5"/>
+          <g fill="#223141">
+            <rect x="24" y="344" width="78" height="12" rx="2"/>
+            <rect x="30" y="356" width="66" height="12" rx="2"/>
+            <rect x="340" y="348" width="62" height="10" rx="2"/>
+            <rect x="346" y="358" width="50" height="10" rx="2"/>
+          </g>
+          <g fill="url(#glow)" opacity=".5">
+            <path d="M118 150h212v180H118z"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="mock">
+        <span class="tag-live"><i></i><span data-i18n="mock_live">Laufendes Projekt</span></span>
+        <div class="mock-h">
+          <b data-i18n="mock_title">Sanierung Zinshaus</b>
+          <small data-i18n="mock_loc">1050 Wien &middot; 14 Wohnungen</small>
+        </div>
+        <div class="mock-bar-top"><span data-i18n="mock_bar">Baufortschritt</span><span>68%</span></div>
+        <div class="mock-track"><div class="mock-fill"></div></div>
+        <div class="mock-steps">
+          <div class="on"></div><div class="on"></div><div class="on"></div><div class="on"></div><div></div><div></div>
+        </div>
+      </div>
+
+      <div class="float f1">
+        <svg viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.25 3.84 10.15 9 11.4 5.16-1.25 9-6.15 9-11.4V5l-9-4zm-1.1 15.1-3.5-3.5 1.4-1.4 2.1 2.1 4.9-4.9 1.4 1.4-6.3 6.3z"/></svg>
+        <div><b data-i18n="float1_t">Festpreis vor Baustart</b><small data-i18n="float1_s">schriftlich, mit Leistungsliste</small></div>
+      </div>
+      <div class="float f2">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 11h-5v-2h3V6h2v7z"/></svg>
+        <div><b data-i18n="float2_t">Wochenbericht</b><small data-i18n="float2_s">jeden Freitag per Mail</small></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="trust">
+  <div class="wrap trust-in">
+    <div><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1 14-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7z"/></svg><span data-i18n="trust1">Konzessionierter Baumeister</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1 14-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7z"/></svg><span data-i18n="trust2">Festpreisgarantie</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1 14-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7z"/></svg><span data-i18n="trust3">5 Jahre Gew&auml;hrleistung</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1 14-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9l-7 7z"/></svg><span data-i18n="trust4">Beratung in 4 Sprachen</span></div>
+  </div>
+</div>
+
+<section id="leistungen">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="srv_eyebrow">Leistungen</span>
+      <h2 data-i18n="srv_title">Vom Fundament bis zur &Uuml;bergabe — aus einer Hand.</h2>
+      <p data-i18n="srv_sub">Wir planen, kalkulieren und bauen mit eigenen Partien. Was wir nicht selbst machen, koordinieren wir: Sie haben einen Vertrag, einen Ansprechpartner und einen Termin.</p>
+    </div>
+
+    <div class="srv-grid">
+      <div class="srv reveal">
+        <span class="srv-num">01</span>
+        <div class="srv-ico"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9.5 21v-6h5v6"/></svg></div>
+        <h3 data-i18n="s1_t">Neubau &amp; Rohbau</h3>
+        <p data-i18n="s1_d">Einfamilienh&auml;user, Doppelh&auml;user und kleine Wohnbauten — schl&uuml;sselfertig oder als Rohbau mit definierter Schnittstelle.</p>
+        <ul>
+          <li data-i18n="s1_l1">Aushub, Fundament, Bodenplatte</li>
+          <li data-i18n="s1_l2">Mauerwerk, Decken, Stiegen</li>
+          <li data-i18n="s1_l3">Dachstuhl &uuml;ber Partnerbetrieb</li>
+        </ul>
+      </div>
+
+      <div class="srv reveal">
+        <span class="srv-num">02</span>
+        <div class="srv-ico"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-2.1-2.1z"/><path d="M15 4l5 5"/></svg></div>
+        <h3 data-i18n="s2_t">Sanierung &amp; Altbau</h3>
+        <p data-i18n="s2_d">Zinsh&auml;user, Wohnungen und ganze Geschosse: Statik, Feuchtigkeit und Grundriss in der richtigen Reihenfolge.</p>
+        <ul>
+          <li data-i18n="s2_l1">Mauerdurchbr&uuml;che mit Statiker</li>
+          <li data-i18n="s2_l2">Trockenlegung &amp; Kellersanierung</li>
+          <li data-i18n="s2_l3">Grundriss&auml;nderung, Estrich, Putz</li>
+        </ul>
+      </div>
+
+      <div class="srv reveal">
+        <span class="srv-num">03</span>
+        <div class="srv-ico"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/><path d="M14 20v-6h5v6"/></svg></div>
+        <h3 data-i18n="s3_t">Zubau &amp; Dachgeschoss</h3>
+        <p data-i18n="s3_d">Mehr Platz ohne Umzug: Anbau, Aufstockung oder Dachgeschossausbau inklusive Einreichplanung.</p>
+        <ul>
+          <li data-i18n="s3_l1">Einreichung bei der Baubeh&ouml;rde</li>
+          <li data-i18n="s3_l2">Statik, Decken, Stahlbau</li>
+          <li data-i18n="s3_l3">Bauen im bewohnten Zustand</li>
+        </ul>
+      </div>
+
+      <div class="srv reveal">
+        <span class="srv-num">04</span>
+        <div class="srv-ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></div>
+        <h3 data-i18n="s4_t">Fassade &amp; W&auml;rmed&auml;mmung</h3>
+        <p data-i18n="s4_d">Vollw&auml;rmeschutz, Sanierputz und Fassadenanstrich — mit Begleitung bei Sanierungsf&ouml;rderungen.</p>
+        <ul>
+          <li data-i18n="s4_l1">WDVS inkl. Sockel &amp; Detailanschl&uuml;sse</li>
+          <li data-i18n="s4_l2">Ger&uuml;st, Abdeckung, Entsorgung</li>
+          <li data-i18n="s4_l3">Unterlagen f&uuml;r F&ouml;rderantr&auml;ge</li>
+        </ul>
+      </div>
+
+      <div class="srv reveal">
+        <span class="srv-num">05</span>
+        <div class="srv-ico"><svg viewBox="0 0 24 24"><path d="M4 20h16M4 20V8l8-4 8 4v12"/><path d="M8 20v-7h8v7"/><path d="M4 12h16"/></svg></div>
+        <h3 data-i18n="s5_t">Keller &amp; Fundament</h3>
+        <p data-i18n="s5_d">Unterkellerung, Fundamentverst&auml;rkung und Abdichtung — auch nachtr&auml;glich im bestehenden Haus.</p>
+        <ul>
+          <li data-i18n="s5_l1">Wei&szlig;e Wanne, Abdichtung, Dr&auml;nage</li>
+          <li data-i18n="s5_l2">Unterfangung bestehender Mauern</li>
+          <li data-i18n="s5_l3">Aushub inkl. Entsorgungsnachweis</li>
+        </ul>
+      </div>
+
+      <div class="srv reveal">
+        <span class="srv-num">06</span>
+        <div class="srv-ico"><svg viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M5 20v-5h5v5M14 20v-9h5v9"/><path d="M8 11 5 8l3-3 3 3z"/></svg></div>
+        <h3 data-i18n="s6_t">Au&szlig;enanlagen &amp; Pflaster</h3>
+        <p data-i18n="s6_d">Einfahrt, Terrasse, St&uuml;tzmauer und Zaunfundament — damit die Baustelle auch au&szlig;en fertig aussieht.</p>
+        <ul>
+          <li data-i18n="s6_l1">Pflaster, Platten, Randsteine</li>
+          <li data-i18n="s6_l2">St&uuml;tzmauern &amp; Treppen</li>
+          <li data-i18n="s6_l3">Entw&auml;sserung &amp; Sickerschacht</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projekte" class="soft">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="pr_eyebrow">Referenzen</span>
+      <h2 data-i18n="pr_title">Projekte, die Sie auch von innen sehen d&uuml;rfen.</h2>
+      <p data-i18n="pr_sub">Jedes Projekt mit Leistungsumfang, Fl&auml;che, Bauzeit und Baujahr. Tippen Sie auf ein Projekt f&uuml;r die Details und die Besichtigung einer Referenz.</p>
+    </div>
+
+    <div class="proj-bar reveal">
+      <div>
+        <span class="f-label" style="margin-bottom:.5rem" data-i18n="pr_filter">Bereich</span>
+        <div class="chip-row" id="catRow"></div>
+      </div>
+      <span class="result-count"><b id="projCount">6</b> <span data-i18n="pr_count">Projekte</span></span>
+    </div>
+
+    <div class="proj-grid" id="projGrid"></div>
+    <p class="note" data-i18n="pr_note">Demo-Projekte: Adressen, Zahlen und Bauzeiten sind erfunden.</p>
+  </div>
+</section>
+
+<section id="rechner">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="ca_eyebrow">Baukostenrechner</span>
+      <h2 data-i18n="ca_title">Was kostet Ihr Vorhaben ungef&auml;hr?</h2>
+      <p data-i18n="ca_sub">Stellen Sie Vorhaben, Fl&auml;che und Ausbaustandard ein — Sie sehen sofort einen Kostenrahmen, den Quadratmeterpreis und eine realistische Bauzeit. Ohne Anmeldung, ohne R&uuml;ckruf.</p>
+    </div>
+
+    <div class="calc">
+      <div class="calc-panel reveal">
+        <div class="field">
+          <span class="f-label" data-i18n="ca_f1">Vorhaben</span>
+          <div class="chip-row" id="kindRow"></div>
+        </div>
+
+        <div class="field">
+          <span class="f-label"><span data-i18n="ca_f2">Fl&auml;che</span><b id="areaVal">160 m&sup2;</b></span>
+          <input type="range" id="cArea" min="40" max="420" step="5" value="160">
+        </div>
+
+        <div class="field">
+          <span class="f-label" data-i18n="ca_f3">Ausbaustandard</span>
+          <div class="chip-row" id="levelRow"></div>
+        </div>
+
+        <div class="field">
+          <span class="f-label" data-i18n="ca_f4">Geschosse</span>
+          <div class="chip-row" id="floorRow"></div>
+        </div>
+
+        <div class="field">
+          <span class="f-label" data-i18n="ca_f5">Zus&auml;tzlich</span>
+          <div class="ck-grid" id="extraGrid"></div>
+        </div>
+      </div>
+
+      <div class="out reveal">
+        <span class="sub-h" data-i18n="ca_out_t">Gesch&auml;tzter Kostenrahmen</span>
+        <div class="out-main" id="outRange">&euro; 352.000 &ndash; 416.000</div>
+        <div class="out-rows">
+          <div><span data-i18n="ca_o1">Pro Quadratmeter</span><b id="outSqm">&euro; 2.400</b></div>
+          <div><span data-i18n="ca_o2">Bauzeit ab Baustart</span><b id="outTime">9 Monate</b></div>
+          <div><span data-i18n="ca_o3">Anzahlung bei Auftrag</span><b id="outDown">&euro; 35.200</b></div>
+        </div>
+
+        <div class="split">
+          <div class="split-row"><span data-i18n="ca_split">Aufteilung der Kosten</span></div>
+          <div class="split-track" id="splitTrack"></div>
+          <div class="split-legend" id="splitLegend"></div>
+        </div>
+
+        <a href="#kontakt" class="btn btn-primary" style="width:100%" data-i18n="ca_btn">Festpreisangebot anfragen</a>
+        <p class="note" data-i18n="ca_note">Richtwert auf Basis von Fl&auml;che, Ausbaustandard und Zusatzleistungen — ohne Grundst&uuml;ck, Anschlussgeb&uuml;hren und Einrichtung. Das verbindliche Angebot entsteht nach Besichtigung und Planunterlagen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ablauf" class="soft">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="fl_eyebrow">Ablauf</span>
+      <h2 data-i18n="fl_title">Sechs Schritte, die Sie jederzeit nachvollziehen k&ouml;nnen.</h2>
+      <p data-i18n="fl_sub">Sie wissen vorher, was wann passiert — und wer gerade dran ist. Kein Projekt startet bei uns ohne unterschriebenen Terminplan.</p>
+    </div>
+
+    <div class="flow">
+      <div class="step reveal">
+        <b class="n">01</b>
+        <h3 data-i18n="f1_t">Erstgespr&auml;ch vor Ort</h3>
+        <p data-i18n="f1_d">Wir sehen uns Bestand, Zugang und Platz f&uuml;r die Baustelle an und sagen offen, was realistisch ist.</p>
+        <span class="step-dur" data-i18n="f1_x">kostenlos &middot; ca. 1 Stunde</span>
+      </div>
+      <div class="step reveal">
+        <b class="n">02</b>
+        <h3 data-i18n="f2_t">Planung &amp; Einreichung</h3>
+        <p data-i18n="f2_d">Plan, Statik und Einreichung bei der Baubeh&ouml;rde — inklusive aller Unterlagen f&uuml;r F&ouml;rderungen.</p>
+        <span class="step-dur" data-i18n="f2_x">2&ndash;8 Wochen</span>
+      </div>
+      <div class="step reveal">
+        <b class="n">03</b>
+        <h3 data-i18n="f3_t">Festpreisangebot</h3>
+        <p data-i18n="f3_d">Eine Leistungsliste, Position f&uuml;r Position, mit Preis und Termin. Was nicht drinsteht, verrechnen wir nicht.</p>
+        <span class="step-dur" data-i18n="f3_x">in 10 Werktagen</span>
+      </div>
+      <div class="step reveal">
+        <b class="n">04</b>
+        <h3 data-i18n="f4_t">Baustart</h3>
+        <p data-i18n="f4_d">Baustelleneinrichtung, Anmeldungen und Nachbarinfo. Ab jetzt gibt es einen Bauleiter mit Handynummer.</p>
+        <span class="step-dur" data-i18n="f4_x">fixer Termin</span>
+      </div>
+      <div class="step reveal">
+        <b class="n">05</b>
+        <h3 data-i18n="f5_t">Bauphase mit Bericht</h3>
+        <p data-i18n="f5_d">Jeden Freitag ein kurzer Bericht mit Fotos, erledigten Positionen und dem Plan f&uuml;r die kommende Woche.</p>
+        <span class="step-dur" data-i18n="f5_x">w&ouml;chentlich</span>
+      </div>
+      <div class="step reveal">
+        <b class="n">06</b>
+        <h3 data-i18n="f6_t">&Uuml;bergabe &amp; Gew&auml;hrleistung</h3>
+        <p data-i18n="f6_d">Gemeinsame Abnahme mit Protokoll, Unterlagen, Garantien — und 5 Jahre Gew&auml;hrleistung auf unsere Arbeit.</p>
+        <span class="step-dur" data-i18n="f6_x">inkl. Nachbetreuung</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="tm_eyebrow">Team</span>
+      <h2 data-i18n="tm_title">Die Menschen, die auf Ihrer Baustelle stehen.</h2>
+      <p data-i18n="tm_sub">Kein Callcenter und keine wechselnden Subfirmen: Sie haben vom ersten Gespr&auml;ch bis zur &Uuml;bergabe dieselben Ansprechpartner.</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="member reveal">
+        <div class="avatar">DK</div>
+        <h3>Daniel K.</h3>
+        <div class="role" data-i18n="m1_r">Baumeister &amp; Gesch&auml;ftsf&uuml;hrung</div>
+        <p data-i18n="m1_d">Macht das Erstgespr&auml;ch und unterschreibt jedes Angebot selbst.</p>
+        <div class="langs">DE &middot; EN &middot; BS</div>
+      </div>
+      <div class="member reveal">
+        <div class="avatar">SM</div>
+        <h3>Senada M.</h3>
+        <div class="role" data-i18n="m2_r">Bauleitung</div>
+        <p data-i18n="m2_d">Koordiniert Partien und Gewerke und schreibt den Wochenbericht.</p>
+        <div class="langs">DE &middot; BS &middot; EN</div>
+      </div>
+      <div class="member reveal">
+        <div class="avatar">LR</div>
+        <h3>Luca R.</h3>
+        <div class="role" data-i18n="m3_r">Kalkulation &amp; Angebote</div>
+        <p data-i18n="m3_d">Rechnet Leistungsverzeichnisse und pr&uuml;ft jede Position vor dem Festpreis.</p>
+        <div class="langs">DE &middot; IT &middot; EN</div>
+      </div>
+      <div class="member reveal">
+        <div class="avatar">TW</div>
+        <h3>Thomas W.</h3>
+        <div class="role" data-i18n="m4_r">Polier</div>
+        <p data-i18n="m4_d">F&uuml;hrt die Partie auf der Baustelle und h&auml;lt Ordnung und Termine.</p>
+        <div class="langs">DE &middot; EN</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bewertungen" class="soft">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="rv_eyebrow">Bewertungen</span>
+      <h2 data-i18n="rv_title">Was Bauherren nach der &Uuml;bergabe sagen.</h2>
+    </div>
+    <div class="rev-grid">
+      <div class="rev reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p data-i18n="r1_q">Angebot, Terminplan und Endabrechnung haben zusammengepasst. Nachtr&auml;ge gab es nur dort, wo wir selbst etwas ge&auml;ndert haben — und die wurden vorher besprochen.</p>
+        <div class="who"><i>FK</i><div><b>Familie K.</b><small data-i18n="r1_w">Neubau Einfamilienhaus, 1230 Wien</small></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p data-i18n="r2_q">Wir haben w&auml;hrend der Sanierung im Haus gewohnt. Staubschutz, Zeitfenster f&uuml;r L&auml;rm und die Baustelle am Freitag aufger&auml;umt — das war der Unterschied.</p>
+        <div class="who"><i>MB</i><div><b>M. B.</b><small data-i18n="r2_w">Altbausanierung, 1050 Wien</small></div></div>
+      </div>
+      <div class="rev reveal">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p data-i18n="r3_q">Der Wochenbericht mit Fotos war Gold wert, weil ich beruflich viel unterwegs bin. Ich wusste immer, wo das Projekt steht, ohne anrufen zu m&uuml;ssen.</p>
+        <div class="who"><i>AH</i><div><b>A. H.</b><small data-i18n="r3_w">Dachgeschossausbau, 1070 Wien</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow" style="justify-content:center" data-i18n="fq_eyebrow">H&auml;ufige Fragen</span>
+      <h2 data-i18n="fq_title">Was Bauherren vor dem Start wissen wollen.</h2>
+    </div>
+    <div class="faq-box" id="faqBox"></div>
+  </div>
+</section>
+
+<section id="kontakt" class="soft">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="ct_eyebrow">Kontakt</span>
+      <h2 data-i18n="ct_title">Erz&auml;hlen Sie uns von Ihrem Vorhaben.</h2>
+      <p data-i18n="ct_sub">Ein kurzes Gespr&auml;ch reicht meist, um zu sagen, was sinnvoll ist und was es kostet. Wir antworten am selben Werktag.</p>
+    </div>
+
+    <div class="ct-grid">
+      <div class="ct-info reveal">
+        <div class="ct-row">
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+          <div><span data-i18n="ci1">Telefon</span><b>+43 1 000 00 00</b></div>
+        </div>
+        <div class="ct-row">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <div><span data-i18n="ci2">E-Mail</span><b>office@steinklar-demo.at</b></div>
+        </div>
+        <div class="ct-row">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          <div><span data-i18n="ci3">B&uuml;ro &amp; Bauhof</span><b data-i18n="ci3_v">Beispielgasse 7, 1110 Wien</b></div>
+        </div>
+        <div class="ct-row">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 11h-5v-2h3V6h2v7z"/></svg>
+          <div><span data-i18n="ci4">Erreichbarkeit</span><b data-i18n="ci4_v">Mo&ndash;Fr 7:00&ndash;17:00 &middot; Sa nach Vereinbarung</b></div>
+        </div>
+        <div class="ct-row">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H5V9h14v10z"/></svg>
+          <div><span data-i18n="ci5">Baustellen-Besichtigung</span><b data-i18n="ci5_v">freitags, nach Anmeldung</b></div>
+        </div>
+      </div>
+
+      <div class="form reveal">
+        <div class="f-grid">
+          <div>
+            <label class="lb" for="fmName" data-i18n="f_name">Vor- und Nachname</label>
+            <input class="inp" id="fmName" type="text" data-i18n-ph="f_name_ph" placeholder="M. Muster">
+          </div>
+          <div>
+            <label class="lb" for="fmPhone" data-i18n="f_phone">Telefon</label>
+            <input class="inp" id="fmPhone" type="tel" placeholder="+43 ...">
+          </div>
+          <div>
+            <label class="lb" for="fmMail" data-i18n="f_mail">E-Mail</label>
+            <input class="inp" id="fmMail" type="email" placeholder="name@mail.at">
+          </div>
+          <div>
+            <label class="lb" for="fmTopic" data-i18n="f_topic">Worum geht es?</label>
+            <select class="inp" id="fmTopic">
+              <option data-i18n="f_t1">Neubau</option>
+              <option data-i18n="f_t2">Sanierung</option>
+              <option data-i18n="f_t3">Zubau / Dachgeschoss</option>
+              <option data-i18n="f_t4">Fassade &amp; D&auml;mmung</option>
+              <option data-i18n="f_t5">Keller &amp; Fundament</option>
+              <option data-i18n="f_t6">Au&szlig;enanlagen</option>
+            </select>
+          </div>
+          <div class="full">
+            <label class="lb" for="fmMsg" data-i18n="f_msg">Nachricht</label>
+            <textarea class="inp" id="fmMsg" data-i18n-ph="f_msg_ph" placeholder="Adresse, Baujahr, gew&uuml;nschter Baustart — und wann wir Sie am besten erreichen."></textarea>
+          </div>
+        </div>
+        <div style="margin-top:1.1rem;display:flex;gap:.8rem;flex-wrap:wrap;align-items:center">
+          <button class="btn btn-primary" id="sendBtn" data-i18n="f_btn">Unverbindlich anfragen</button>
+          <span class="note" style="margin:0" data-i18n="f_hint">Demo-Formular — es wird nichts gesendet und nichts gespeichert.</span>
+        </div>
+        <div class="form-msg" id="formOk"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">
+          <span class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F0A42B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><path d="M6.5 20V11L12 7l5.5 4v9"/><path d="M10 20v-5h4v5"/></svg>
+          </span>
+          <strong>Steinklar Bau</strong>
+        </div>
+        <p style="color:rgba(220,229,234,.55);max-width:320px" data-i18n="ft_txt">Baumeisterbetrieb in Wien. Neubau, Sanierung, Zubau und Fassade — mit Festpreis, Terminplan und einem Ansprechpartner.</p>
+      </div>
+      <div>
+        <h4 data-i18n="ft_c1">Leistungen</h4>
+        <ul>
+          <li><a href="#leistungen" data-i18n="ft_l1">Neubau &amp; Rohbau</a></li>
+          <li><a href="#leistungen" data-i18n="ft_l2">Sanierung</a></li>
+          <li><a href="#leistungen" data-i18n="ft_l3">Zubau &amp; Dachgeschoss</a></li>
+          <li><a href="#leistungen" data-i18n="ft_l4">Fassade &amp; D&auml;mmung</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="ft_c2">Service</h4>
+        <ul>
+          <li><a href="#rechner" data-i18n="ft_s1">Baukostenrechner</a></li>
+          <li><a href="#projekte" data-i18n="ft_s2">Referenzprojekte</a></li>
+          <li><a href="#ablauf" data-i18n="ft_s3">Ablauf</a></li>
+          <li><a href="#faq" data-i18n="ft_s4">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="ft_c3">Kontakt</h4>
+        <ul>
+          <li>+43 1 000 00 00</li>
+          <li>office@steinklar-demo.at</li>
+          <li data-i18n="ci3_v">Beispielgasse 7, 1110 Wien</li>
+          <li data-i18n="ft_h1">Mo&ndash;Fr 7:00&ndash;17:00</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; <span id="yr">2026</span> STEINKLAR Bau &middot; <span data-i18n="ft_by">Demo-Projekt von Menes Nasufoski</span></span>
+      <span class="demo-pill" data-i18n="ft_demo">Demo-Seite — fiktives Unternehmen, keine echten Projekte</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="projModal">
+  <div class="modal-box">
+    <div class="modal-art" id="modalArt">
+      <button class="modal-x" id="modalX" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-b">
+      <span class="sub-h" id="modalCat">Neubau</span>
+      <h3 id="modalTitle">Projekt</h3>
+      <div class="pcard-loc" id="modalLoc">Wien</div>
+      <div class="modal-kv" id="modalKv"></div>
+      <span class="sub-h" id="modalFeatH" data-i18n="md_feat">Leistungsumfang</span>
+      <div class="feat-list" id="modalFeat"></div>
+      <p id="modalDesc"></p>
+      <div class="modal-cta" style="margin-top:1.5rem">
+        <a href="#kontakt" class="btn btn-primary" id="modalCta1" data-i18n="md_cta1">Referenz besichtigen</a>
+        <a href="#rechner" class="btn btn-ghost" id="modalCta2" data-i18n="md_cta2">&Auml;hnliches Vorhaben rechnen</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="demo-switch">
+  <b data-i18n="sw_now">Nachher</b>
+  <a href="vorher.html" data-i18n="sw_link">Vorher ansehen &rarr;</a>
+</div>
+
+<script>
+const I18N = {
+de:{
+  logo_sub:'Baumeister Wien',
+  nav_srv:'Leistungen', nav_proj:'Projekte', nav_calc:'Baukosten', nav_flow:'Ablauf',
+  nav_team:'Team', nav_faq:'FAQ', nav_contact:'Kontakt', nav_cta:'Baukosten rechnen',
+
+  hero_badge:'von 5 · 142 Bewertungen · Baumeister seit 1998',
+  hero_h1a:'Gebaut wird,', hero_h1b:'was besprochen war.',
+  hero_lead:'Neubau, Sanierung und Zubau in Wien und Umgebung — mit Festpreisangebot vor Baustart, einem festen Bauleiter als Ansprechpartner und einem Wochenbericht, der zeigt, wo Ihr Projekt gerade steht.',
+  hero_cta1:'Baukosten berechnen', hero_cta2:'Projekte ansehen',
+  stat1:'fertige Projekte', stat2:'Jahre Erfahrung', stat3:'Fertigstellung im Termin',
+  mock_live:'Laufendes Projekt', mock_title:'Sanierung Zinshaus', mock_loc:'1050 Wien · 14 Wohnungen',
+  mock_bar:'Baufortschritt',
+  float1_t:'Festpreis vor Baustart', float1_s:'schriftlich, mit Leistungsliste',
+  float2_t:'Wochenbericht', float2_s:'jeden Freitag per Mail',
+  trust1:'Konzessionierter Baumeister', trust2:'Festpreisgarantie',
+  trust3:'5 Jahre Gewährleistung', trust4:'Beratung in 4 Sprachen',
+
+  srv_eyebrow:'Leistungen', srv_title:'Vom Fundament bis zur Übergabe — aus einer Hand.',
+  srv_sub:'Wir planen, kalkulieren und bauen mit eigenen Partien. Was wir nicht selbst machen, koordinieren wir: Sie haben einen Vertrag, einen Ansprechpartner und einen Termin.',
+  s1_t:'Neubau & Rohbau', s1_d:'Einfamilienhäuser, Doppelhäuser und kleine Wohnbauten — schlüsselfertig oder als Rohbau mit definierter Schnittstelle.',
+  s1_l1:'Aushub, Fundament, Bodenplatte', s1_l2:'Mauerwerk, Decken, Stiegen', s1_l3:'Dachstuhl über Partnerbetrieb',
+  s2_t:'Sanierung & Altbau', s2_d:'Zinshäuser, Wohnungen und ganze Geschosse: Statik, Feuchtigkeit und Grundriss in der richtigen Reihenfolge.',
+  s2_l1:'Mauerdurchbrüche mit Statiker', s2_l2:'Trockenlegung & Kellersanierung', s2_l3:'Grundrissänderung, Estrich, Putz',
+  s3_t:'Zubau & Dachgeschoss', s3_d:'Mehr Platz ohne Umzug: Anbau, Aufstockung oder Dachgeschossausbau inklusive Einreichplanung.',
+  s3_l1:'Einreichung bei der Baubehörde', s3_l2:'Statik, Decken, Stahlbau', s3_l3:'Bauen im bewohnten Zustand',
+  s4_t:'Fassade & Wärmedämmung', s4_d:'Vollwärmeschutz, Sanierputz und Fassadenanstrich — mit Begleitung bei Sanierungsförderungen.',
+  s4_l1:'WDVS inkl. Sockel & Detailanschlüsse', s4_l2:'Gerüst, Abdeckung, Entsorgung', s4_l3:'Unterlagen für Förderanträge',
+  s5_t:'Keller & Fundament', s5_d:'Unterkellerung, Fundamentverstärkung und Abdichtung — auch nachträglich im bestehenden Haus.',
+  s5_l1:'Weiße Wanne, Abdichtung, Dränage', s5_l2:'Unterfangung bestehender Mauern', s5_l3:'Aushub inkl. Entsorgungsnachweis',
+  s6_t:'Außenanlagen & Pflaster', s6_d:'Einfahrt, Terrasse, Stützmauer und Zaunfundament — damit die Baustelle auch außen fertig aussieht.',
+  s6_l1:'Pflaster, Platten, Randsteine', s6_l2:'Stützmauern & Treppen', s6_l3:'Entwässerung & Sickerschacht',
+
+  pr_eyebrow:'Referenzen', pr_title:'Projekte, die Sie auch von innen sehen dürfen.',
+  pr_sub:'Jedes Projekt mit Leistungsumfang, Fläche, Bauzeit und Baujahr. Tippen Sie auf ein Projekt für die Details und die Besichtigung einer Referenz.',
+  pr_filter:'Bereich', pr_count:'Projekte', pr_note:'Demo-Projekte: Adressen, Zahlen und Bauzeiten sind erfunden.',
+  cat_all:'Alle', cat_new:'Neubau', cat_san:'Sanierung', cat_add:'Zubau & Dach', cat_com:'Gewerbe', cat_out:'Außenanlagen',
+  fg_run:'In Bau', fg_done:'Fertig', fg_new:'Neu',
+  c_area:'Fläche', c_time:'Bauzeit', c_year:'Baujahr', c_more:'Projekt ansehen',
+  u_m2:'m²', u_months:'Monate', u_month:'Monat',
+  md_feat:'Leistungsumfang', md_cta1:'Referenz besichtigen', md_cta2:'Ähnliches Vorhaben rechnen',
+  no_res:'Kein Projekt in diesem Bereich.', no_res_hint:'Wählen Sie einen anderen Bereich oder sehen Sie sich alle Projekte an.',
+
+  x_abbruch:'Abbruch & Entsorgung', x_rohbau:'Rohbau', x_statik:'Statik & Durchbrüche',
+  x_keller:'Keller & Abdichtung', x_wdvs:'Vollwärmeschutz', x_estrich:'Estrich & Putz',
+  x_dach:'Dach & Spengler', x_aussen:'Außenanlagen', x_trocken:'Trockenbau',
+  x_fenster:'Fenstertausch', x_bad:'Bäder & Steigleitungen', x_pflaster:'Pflasterung',
+  x_unterfang:'Unterfangung', x_halle:'Hallenboden & Tore', x_geruest:'Gerüst & Einrüstung',
+  x_bodenplatte:'Bodenplatte', x_stiegen:'Stiegen & Decken', x_stuetz:'Stützmauer',
+
+  p1_t:'Einfamilienhaus, schlüsselfertig', p1_d:'Neubau auf einem Hanggrundstück mit Vollkeller und Doppelgarage. Bodenplatte im März, Rohbau vor dem Sommer fertig, Übergabe zwei Wochen vor dem vereinbarten Termin. Außenanlagen inklusive Einfahrt waren Teil des Festpreises.',
+  p2_t:'Zinshaus-Sanierung, 14 Wohnungen', p2_d:'Generalsanierung eines Gründerzeithauses im bewohnten Zustand: neue Steigleitungen, Bäder, Elektrik und Fassade. Gearbeitet wurde geschossweise mit fixen Lärmfenstern, damit Mieter im Haus bleiben konnten.',
+  p3_t:'Dachgeschossausbau mit Terrasse', p3_d:'Ausbau eines ungenutzten Dachbodens zu einer Wohnung mit 22 m² Terrasse. Statik über Stahlträger, neue Decke, Einreichung und Bauaufsicht von uns. Der Lift wurde während der Bauzeit durchgehend benutzbar gehalten.',
+  p4_t:'Zubau mit Unterkellerung', p4_d:'Anbau an ein bestehendes Doppelhaus: zwei Räume plus Keller, angebunden an den Bestand. Die bestehende Mauer wurde unterfangen, das Dach fugenlos weitergeführt — von außen sieht man den Übergang nicht.',
+  p5_t:'Fassade & Vollwärmeschutz', p5_d:'Wohnhausanlage mit 1.850 m² Fassadenfläche: Gerüst, 18 cm WDVS, neue Sockelabdichtung und Anstrich. Wir haben die Unterlagen für die Sanierungsförderung mitgeliefert, die Bauzeit lag unter vier Monaten.',
+  p6_t:'Umbau Gewerbehalle', p6_d:'Umbau einer Lagerhalle zu Werkstatt mit Büroteil: neuer Hallenboden, zwei Sektionaltore, Trennwände und Sanitärbereich. Der Betrieb lief in einer Hallenhälfte weiter, daher wurde in zwei Etappen gebaut.',
+  p7_t:'Einfahrt & Außenanlagen', p7_d:'Einfahrt, Terrasse und Stützmauer bei einem Einfamilienhaus. Drainage und Sickerschacht neu, Pflaster mit Randsteinen in Beton, Höhen an die bestehende Garage angepasst. Fertig in fünf Wochen.',
+  p8_t:'Kellersanierung & Unterfangung', p8_d:'Feuchter Keller eines Altbaus: Außenabdichtung, Dränage, Horizontalsperre und Unterfangung eines Mauerteils für die neue Treppe. Der Keller ist seither trocken und wird als Werkstatt genutzt.',
+
+  ca_eyebrow:'Baukostenrechner', ca_title:'Was kostet Ihr Vorhaben ungefähr?',
+  ca_sub:'Stellen Sie Vorhaben, Fläche und Ausbaustandard ein — Sie sehen sofort einen Kostenrahmen, den Quadratmeterpreis und eine realistische Bauzeit. Ohne Anmeldung, ohne Rückruf.',
+  ca_f1:'Vorhaben', ca_f2:'Fläche', ca_f3:'Ausbaustandard', ca_f4:'Geschosse', ca_f5:'Zusätzlich',
+  k_new:'Neubau', k_san:'Sanierung', k_add:'Zubau', k_dach:'Dachgeschoss',
+  lv1:'Basis', lv2:'Standard', lv3:'Hochwertig',
+  ex1:'Keller', ex2:'Garage', ex3:'Wärmepumpe', ex4:'PV-Anlage', ex5:'Smart Home', ex6:'Außenanlagen',
+  ca_out_t:'Geschätzter Kostenrahmen', ca_note_short:'inkl. USt. · ohne Grundstück',
+  ca_o1:'Pro Quadratmeter', ca_o2:'Bauzeit ab Baustart', ca_o3:'Anzahlung bei Auftrag',
+  ca_split:'Aufteilung der Kosten',
+  sp1:'Rohbau', sp2:'Ausbau', sp3:'Technik', sp4:'Außen & Neben',
+  ca_btn:'Festpreisangebot anfragen',
+  ca_note:'Richtwert auf Basis von Fläche, Ausbaustandard und Zusatzleistungen — ohne Grundstück, Anschlussgebühren und Einrichtung. Das verbindliche Angebot entsteht nach Besichtigung und Planunterlagen.',
+
+  fl_eyebrow:'Ablauf', fl_title:'Sechs Schritte, die Sie jederzeit nachvollziehen können.',
+  fl_sub:'Sie wissen vorher, was wann passiert — und wer gerade dran ist. Kein Projekt startet bei uns ohne unterschriebenen Terminplan.',
+  f1_t:'Erstgespräch vor Ort', f1_d:'Wir sehen uns Bestand, Zugang und Platz für die Baustelle an und sagen offen, was realistisch ist.', f1_x:'kostenlos · ca. 1 Stunde',
+  f2_t:'Planung & Einreichung', f2_d:'Plan, Statik und Einreichung bei der Baubehörde — inklusive aller Unterlagen für Förderungen.', f2_x:'2–8 Wochen',
+  f3_t:'Festpreisangebot', f3_d:'Eine Leistungsliste, Position für Position, mit Preis und Termin. Was nicht drinsteht, verrechnen wir nicht.', f3_x:'in 10 Werktagen',
+  f4_t:'Baustart', f4_d:'Baustelleneinrichtung, Anmeldungen und Nachbarinfo. Ab jetzt gibt es einen Bauleiter mit Handynummer.', f4_x:'fixer Termin',
+  f5_t:'Bauphase mit Bericht', f5_d:'Jeden Freitag ein kurzer Bericht mit Fotos, erledigten Positionen und dem Plan für die kommende Woche.', f5_x:'wöchentlich',
+  f6_t:'Übergabe & Gewährleistung', f6_d:'Gemeinsame Abnahme mit Protokoll, Unterlagen, Garantien — und 5 Jahre Gewährleistung auf unsere Arbeit.', f6_x:'inkl. Nachbetreuung',
+
+  tm_eyebrow:'Team', tm_title:'Die Menschen, die auf Ihrer Baustelle stehen.',
+  tm_sub:'Kein Callcenter und keine wechselnden Subfirmen: Sie haben vom ersten Gespräch bis zur Übergabe dieselben Ansprechpartner.',
+  m1_r:'Baumeister & Geschäftsführung', m1_d:'Macht das Erstgespräch und unterschreibt jedes Angebot selbst.',
+  m2_r:'Bauleitung', m2_d:'Koordiniert Partien und Gewerke und schreibt den Wochenbericht.',
+  m3_r:'Kalkulation & Angebote', m3_d:'Rechnet Leistungsverzeichnisse und prüft jede Position vor dem Festpreis.',
+  m4_r:'Polier', m4_d:'Führt die Partie auf der Baustelle und hält Ordnung und Termine.',
+
+  rv_eyebrow:'Bewertungen', rv_title:'Was Bauherren nach der Übergabe sagen.',
+  r1_q:'Angebot, Terminplan und Endabrechnung haben zusammengepasst. Nachträge gab es nur dort, wo wir selbst etwas geändert haben — und die wurden vorher besprochen.',
+  r1_w:'Neubau Einfamilienhaus, 1230 Wien',
+  r2_q:'Wir haben während der Sanierung im Haus gewohnt. Staubschutz, Zeitfenster für Lärm und die Baustelle am Freitag aufgeräumt — das war der Unterschied.',
+  r2_w:'Altbausanierung, 1050 Wien',
+  r3_q:'Der Wochenbericht mit Fotos war Gold wert, weil ich beruflich viel unterwegs bin. Ich wusste immer, wo das Projekt steht, ohne anrufen zu müssen.',
+  r3_w:'Dachgeschossausbau, 1070 Wien',
+
+  fq_eyebrow:'Häufige Fragen', fq_title:'Was Bauherren vor dem Start wissen wollen.',
+  fq_q1:'Wie verbindlich ist der Festpreis?',
+  fq_a1:'Der Festpreis gilt für die Leistungen, die im Leistungsverzeichnis stehen, und ist vier Monate gültig. Teurer wird es nur, wenn Sie etwas dazubestellen oder wenn beim Aufgraben etwas auftaucht, das vorher niemand sehen konnte — zum Beispiel ein alter Öltank. In diesem Fall bekommen Sie ein Nachtragsangebot, bevor wir weiterarbeiten.',
+  fq_q2:'Wie lange dauert es vom Erstgespräch bis zum Baustart?',
+  fq_a2:'Ohne Einreichung, etwa bei einer Wohnungssanierung, sind es meist drei bis fünf Wochen. Mit Einreichplanung und Behördenverfahren rechnen Sie mit drei bis sechs Monaten, abhängig vom Bezirk. Wir sagen Ihnen beim Erstgespräch, in welchen Bereich Ihr Vorhaben fällt.',
+  fq_q3:'Können wir während der Sanierung in der Wohnung bleiben?',
+  fq_a3:'Bei Sanierungen einzelner Räume und bei Fassadenarbeiten ja. Wenn Estrich, Steigleitungen oder die Elektrik im ganzen Objekt getauscht werden, ist das Wohnen für zwei bis sechs Wochen nicht sinnvoll. Wir planen den Bauablauf so, dass dieser Zeitraum so kurz wie möglich bleibt, und sagen ihn Ihnen im Terminplan.',
+  fq_q4:'Übernehmen Sie die Einreichung bei der Baubehörde?',
+  fq_a4:'Ja. Planung, Statik und Einreichung laufen über unser Büro und die Ziviltechniker, mit denen wir fix zusammenarbeiten. Sie unterschreiben als Bauwerber, den Behördenweg und die Nachforderungen erledigen wir.',
+  fq_q5:'Wie wird abgerechnet?',
+  fq_a5:'Nach Baufortschritt: eine Anzahlung von 10 % bei Auftrag, danach Teilrechnungen nach erbrachten Leistungen, und 5 % Haftrücklass bleiben bis zur mängelfreien Abnahme offen. Jede Teilrechnung weist aus, welche Positionen abgearbeitet sind.',
+  fq_q6:'Gibt es Förderungen für eine Sanierung?',
+  fq_a6:'In Wien gibt es Förderungen für thermische Sanierung, Heizungstausch und Kellerdeckendämmung, zusätzlich zur Bundesförderung. Wir liefern die Unterlagen, die der Antrag braucht — Fotos, Rechnungen, technische Datenblätter. Welchen Betrag Sie bekommen, entscheidet die Förderstelle, nicht wir.',
+
+  ct_eyebrow:'Kontakt', ct_title:'Erzählen Sie uns von Ihrem Vorhaben.',
+  ct_sub:'Ein kurzes Gespräch reicht meist, um zu sagen, was sinnvoll ist und was es kostet. Wir antworten am selben Werktag.',
+  ci1:'Telefon', ci2:'E-Mail', ci3:'Büro & Bauhof', ci3_v:'Beispielgasse 7, 1110 Wien',
+  ci4:'Erreichbarkeit', ci4_v:'Mo–Fr 7:00–17:00 · Sa nach Vereinbarung',
+  ci5:'Baustellen-Besichtigung', ci5_v:'freitags, nach Anmeldung',
+  f_name:'Vor- und Nachname', f_name_ph:'M. Muster', f_phone:'Telefon', f_mail:'E-Mail',
+  f_topic:'Worum geht es?',
+  f_t1:'Neubau', f_t2:'Sanierung', f_t3:'Zubau / Dachgeschoss', f_t4:'Fassade & Dämmung',
+  f_t5:'Keller & Fundament', f_t6:'Außenanlagen',
+  f_msg:'Nachricht', f_msg_ph:'Adresse, Baujahr, gewünschter Baustart — und wann wir Sie am besten erreichen.',
+  f_btn:'Unverbindlich anfragen',
+  f_ok:'Danke, {name}! Wir melden uns am selben Werktag.',
+  f_err:'Bitte Name, Telefon und E-Mail ausfüllen.',
+  f_hint:'Demo-Formular — es wird nichts gesendet und nichts gespeichert.',
+  f_prefill:'Ich interessiere mich für das Projekt "{obj}" ({loc}) und würde gerne eine Referenz besichtigen.',
+
+  ft_txt:'Baumeisterbetrieb in Wien. Neubau, Sanierung, Zubau und Fassade — mit Festpreis, Terminplan und einem Ansprechpartner.',
+  ft_c1:'Leistungen', ft_c2:'Service', ft_c3:'Kontakt',
+  ft_l1:'Neubau & Rohbau', ft_l2:'Sanierung', ft_l3:'Zubau & Dachgeschoss', ft_l4:'Fassade & Dämmung',
+  ft_s1:'Baukostenrechner', ft_s2:'Referenzprojekte', ft_s3:'Ablauf', ft_s4:'FAQ',
+  ft_h1:'Mo–Fr 7:00–17:00',
+  ft_by:'Demo-Projekt von Menes Nasufoski',
+  ft_demo:'Demo-Seite — fiktives Unternehmen, keine echten Projekte',
+  sw_now:'Nachher', sw_link:'Vorher ansehen →'
+},
+
+en:{
+  logo_sub:'Master Builder Vienna',
+  nav_srv:'Services', nav_proj:'Projects', nav_calc:'Costs', nav_flow:'Process',
+  nav_team:'Team', nav_faq:'FAQ', nav_contact:'Contact', nav_cta:'Calculate costs',
+
+  hero_badge:'out of 5 · 142 reviews · master builder since 1998',
+  hero_h1a:'What we agreed on', hero_h1b:'is what gets built.',
+  hero_lead:'New builds, renovations and extensions in and around Vienna — with a fixed-price offer before work starts, one site manager as your contact, and a weekly report showing exactly where your project stands.',
+  hero_cta1:'Calculate building costs', hero_cta2:'See our projects',
+  stat1:'completed projects', stat2:'years of experience', stat3:'finished on schedule',
+  mock_live:'Project in progress', mock_title:'Period building renovation', mock_loc:'1050 Vienna · 14 flats',
+  mock_bar:'Construction progress',
+  float1_t:'Fixed price before we start', float1_s:'in writing, with a scope list',
+  float2_t:'Weekly report', float2_s:'every Friday by email',
+  trust1:'Licensed master builder', trust2:'Fixed-price guarantee',
+  trust3:'5-year warranty', trust4:'Advice in 4 languages',
+
+  srv_eyebrow:'Services', srv_title:'From the foundation to the handover — all from one firm.',
+  srv_sub:'We plan, cost and build with our own crews. What we do not do ourselves we coordinate: you get one contract, one contact and one completion date.',
+  s1_t:'New build & shell', s1_d:'Detached and semi-detached houses and small apartment buildings — turnkey or as a shell with a clearly defined handover point.',
+  s1_l1:'Excavation, foundation, floor slab', s1_l2:'Masonry, slabs, stairs', s1_l3:'Roof structure via partner firm',
+  s2_t:'Renovation & period buildings', s2_d:'Period buildings, flats and whole floors: structure, damp and layout tackled in the right order.',
+  s2_l1:'Wall openings with a structural engineer', s2_l2:'Damp proofing & basement works', s2_l3:'Layout changes, screed, plaster',
+  s3_t:'Extension & loft conversion', s3_d:'More space without moving: an extension, an added storey or a loft conversion, including the planning application.',
+  s3_l1:'Submission to the building authority', s3_l2:'Structure, slabs, steelwork', s3_l3:'Building while you stay in the house',
+  s4_t:'Facade & insulation', s4_d:'External insulation, renovation render and facade paintwork — with support for renovation grants.',
+  s4_l1:'Insulation system incl. plinth and details', s4_l2:'Scaffolding, covering, disposal', s4_l3:'Documents for grant applications',
+  s5_t:'Basement & foundations', s5_d:'New basements, reinforced foundations and waterproofing — also retrofitted in an existing house.',
+  s5_l1:'Waterproof concrete, sealing, drainage', s5_l2:'Underpinning of existing walls', s5_l3:'Excavation incl. disposal records',
+  s6_t:'Outdoor works & paving', s6_d:'Driveway, terrace, retaining wall and fence foundations — so the site looks finished outside too.',
+  s6_l1:'Paving, slabs, kerbs', s6_l2:'Retaining walls & steps', s6_l3:'Drainage & soakaway',
+
+  pr_eyebrow:'References', pr_title:'Projects you are welcome to see from the inside.',
+  pr_sub:'Every project with its scope, area, build time and year. Tap a project for the details and to arrange a viewing of a reference site.',
+  pr_filter:'Field', pr_count:'projects', pr_note:'Demo projects: addresses, figures and build times are invented.',
+  cat_all:'All', cat_new:'New build', cat_san:'Renovation', cat_add:'Extension & loft', cat_com:'Commercial', cat_out:'Outdoor works',
+  fg_run:'On site', fg_done:'Completed', fg_new:'New',
+  c_area:'Area', c_time:'Build time', c_year:'Year', c_more:'View project',
+  u_m2:'m²', u_months:'months', u_month:'month',
+  md_feat:'Scope of work', md_cta1:'Arrange a viewing', md_cta2:'Cost a similar project',
+  no_res:'No project in this field.', no_res_hint:'Pick another field or look at all projects.',
+
+  x_abbruch:'Demolition & disposal', x_rohbau:'Shell construction', x_statik:'Structure & openings',
+  x_keller:'Basement & waterproofing', x_wdvs:'External insulation', x_estrich:'Screed & plaster',
+  x_dach:'Roof & sheet metal', x_aussen:'Outdoor works', x_trocken:'Drywall',
+  x_fenster:'Window replacement', x_bad:'Bathrooms & risers', x_pflaster:'Paving',
+  x_unterfang:'Underpinning', x_halle:'Hall floor & doors', x_geruest:'Scaffolding',
+  x_bodenplatte:'Floor slab', x_stiegen:'Stairs & slabs', x_stuetz:'Retaining wall',
+
+  p1_t:'Detached house, turnkey', p1_d:'New build on a sloping plot with a full basement and a double garage. Slab in March, shell finished before the summer, handover two weeks ahead of the agreed date. The outdoor works including the driveway were part of the fixed price.',
+  p2_t:'Period building, 14 flats', p2_d:'Full renovation of a late-19th-century building with tenants in place: new risers, bathrooms, wiring and facade. We worked floor by floor with fixed noise windows so tenants could stay in the building.',
+  p3_t:'Loft conversion with terrace', p3_d:'An unused loft turned into a flat with a 22 m² terrace. Structure carried by steel beams, new slab, planning application and site supervision by us. The lift stayed usable throughout the works.',
+  p4_t:'Extension with basement', p4_d:'Extension to an existing semi-detached house: two rooms plus a basement, tied into the existing structure. The existing wall was underpinned and the roof continued without a joint — from outside you cannot see the transition.',
+  p5_t:'Facade & external insulation', p5_d:'Housing block with 1,850 m² of facade: scaffolding, 18 cm of external insulation, new plinth sealing and paintwork. We supplied the paperwork for the renovation grant and finished in under four months.',
+  p6_t:'Commercial hall conversion', p6_d:'A storage hall turned into a workshop with an office section: new hall floor, two sectional doors, partition walls and sanitary facilities. The business kept running in one half, so we built in two stages.',
+  p7_t:'Driveway & outdoor works', p7_d:'Driveway, terrace and retaining wall at a detached house. New drainage and soakaway, paving with kerbs set in concrete, levels matched to the existing garage. Finished in five weeks.',
+  p8_t:'Basement works & underpinning', p8_d:'A damp basement in a period building: external sealing, drainage, a horizontal damp barrier and underpinning of one wall section for the new stairs. The basement has been dry since and is used as a workshop.',
+
+  ca_eyebrow:'Cost calculator', ca_title:'Roughly what will your project cost?',
+  ca_sub:'Set the type of project, the area and the finish level — you immediately see a cost range, the price per square metre and a realistic build time. No sign-up, no sales call.',
+  ca_f1:'Project', ca_f2:'Area', ca_f3:'Finish level', ca_f4:'Storeys', ca_f5:'Add-ons',
+  k_new:'New build', k_san:'Renovation', k_add:'Extension', k_dach:'Loft conversion',
+  lv1:'Basic', lv2:'Standard', lv3:'High-end',
+  ex1:'Basement', ex2:'Garage', ex3:'Heat pump', ex4:'Solar panels', ex5:'Smart home', ex6:'Outdoor works',
+  ca_out_t:'Estimated cost range', ca_note_short:'incl. VAT · plot not included',
+  ca_o1:'Per square metre', ca_o2:'Build time from start', ca_o3:'Deposit on signing',
+  ca_split:'How the costs split up',
+  sp1:'Shell', sp2:'Fit-out', sp3:'Services', sp4:'Outdoor & extras',
+  ca_btn:'Request a fixed-price offer',
+  ca_note:'A guide figure based on area, finish level and add-ons — excluding the plot, connection fees and furnishing. The binding offer follows a site visit and the drawings.',
+
+  fl_eyebrow:'Process', fl_title:'Six steps you can follow at any point.',
+  fl_sub:'You know in advance what happens when — and who is on site. No project starts here without a signed schedule.',
+  f1_t:'First visit on site', f1_d:'We look at the existing structure, the access and the space for the site, and say openly what is realistic.', f1_x:'free · about 1 hour',
+  f2_t:'Planning & submission', f2_d:'Drawings, structural design and submission to the building authority — including everything needed for grants.', f2_x:'2–8 weeks',
+  f3_t:'Fixed-price offer', f3_d:'A scope list, item by item, with a price and a date. What is not on the list is not invoiced.', f3_x:'within 10 working days',
+  f4_t:'Start on site', f4_d:'Site setup, notifications and a note to the neighbours. From now on you have a site manager with a mobile number.', f4_x:'fixed date',
+  f5_t:'Build phase with reports', f5_d:'Every Friday a short report with photos, the items completed and the plan for the coming week.', f5_x:'weekly',
+  f6_t:'Handover & warranty', f6_d:'A joint inspection with a record, documents and guarantees — plus a 5-year warranty on our work.', f6_x:'incl. aftercare',
+
+  tm_eyebrow:'Team', tm_title:'The people who will be on your site.',
+  tm_sub:'No call centre and no rotating subcontractors: you deal with the same people from the first meeting to the handover.',
+  m1_r:'Master builder & management', m1_d:'Runs the first meeting and signs every offer personally.',
+  m2_r:'Site management', m2_d:'Coordinates the crews and trades and writes the weekly report.',
+  m3_r:'Costing & offers', m3_d:'Prepares the scope lists and checks every item before the fixed price.',
+  m4_r:'Foreman', m4_d:'Leads the crew on site and keeps order and dates.',
+
+  rv_eyebrow:'Reviews', rv_title:'What clients say after the handover.',
+  r1_q:'The offer, the schedule and the final invoice matched. The only extras were the ones we asked for ourselves — and they were agreed beforehand.',
+  r1_w:'New detached house, 1230 Vienna',
+  r2_q:'We lived in the house during the renovation. Dust protection, fixed time windows for noise and a site tidied up on Friday — that was the difference.',
+  r2_w:'Period building renovation, 1050 Vienna',
+  r3_q:'The weekly report with photos was worth a lot, because I travel for work. I always knew where the project stood without having to phone anyone.',
+  r3_w:'Loft conversion, 1070 Vienna',
+
+  fq_eyebrow:'Frequent questions', fq_title:'What clients want to know before starting.',
+  fq_q1:'How binding is the fixed price?',
+  fq_a1:'The fixed price covers the items in the scope list and is valid for four months. It only rises if you order something in addition, or if digging reveals something nobody could see beforehand — an old oil tank, for example. In that case you get a supplementary offer before we carry on.',
+  fq_q2:'How long from the first meeting to the start on site?',
+  fq_a2:'Without a planning application, for a flat renovation say, it is usually three to five weeks. With planning and an authority procedure, expect three to six months depending on the district. At the first meeting we tell you which range your project falls into.',
+  fq_q3:'Can we stay in the flat during the renovation?',
+  fq_a3:'For single-room work and facade works, yes. If the screed, the risers or the wiring are replaced throughout, living there does not make sense for two to six weeks. We plan the sequence so that period stays as short as possible and state it in the schedule.',
+  fq_q4:'Do you handle the submission to the building authority?',
+  fq_a4:'Yes. Planning, structural design and submission run through our office and the engineers we work with regularly. You sign as the applicant; we handle the authority and any follow-up requests.',
+  fq_q5:'How is the work invoiced?',
+  fq_a5:'By progress: a 10 % deposit on signing, then partial invoices for the work completed, with 5 % retained until a defect-free handover. Every partial invoice shows which items have been finished.',
+  fq_q6:'Are there grants for a renovation?',
+  fq_a6:'Vienna offers grants for thermal renovation, heating replacement and basement ceiling insulation, on top of the federal scheme. We supply what the application needs — photos, invoices, technical data sheets. The amount is decided by the grant office, not by us.',
+
+  ct_eyebrow:'Contact', ct_title:'Tell us about your project.',
+  ct_sub:'A short conversation is usually enough to say what makes sense and what it costs. We reply the same working day.',
+  ci1:'Phone', ci2:'Email', ci3:'Office & yard', ci3_v:'Beispielgasse 7, 1110 Vienna',
+  ci4:'Availability', ci4_v:'Mon–Fri 7:00–17:00 · Sat by appointment',
+  ci5:'Site viewing', ci5_v:'Fridays, by arrangement',
+  f_name:'First and last name', f_name_ph:'M. Example', f_phone:'Phone', f_mail:'Email',
+  f_topic:'What is it about?',
+  f_t1:'New build', f_t2:'Renovation', f_t3:'Extension / loft', f_t4:'Facade & insulation',
+  f_t5:'Basement & foundations', f_t6:'Outdoor works',
+  f_msg:'Message', f_msg_ph:'Address, year built, preferred start — and when we can best reach you.',
+  f_btn:'Send a no-obligation enquiry',
+  f_ok:'Thank you, {name}! We will get back to you the same working day.',
+  f_err:'Please fill in name, phone and email.',
+  f_hint:'Demo form — nothing is sent and nothing is stored.',
+  f_prefill:'I am interested in the project "{obj}" ({loc}) and would like to view a reference site.',
+
+  ft_txt:'Master builder in Vienna. New builds, renovations, extensions and facades — with a fixed price, a schedule and one contact.',
+  ft_c1:'Services', ft_c2:'Service', ft_c3:'Contact',
+  ft_l1:'New build & shell', ft_l2:'Renovation', ft_l3:'Extension & loft', ft_l4:'Facade & insulation',
+  ft_s1:'Cost calculator', ft_s2:'Reference projects', ft_s3:'Process', ft_s4:'FAQ',
+  ft_h1:'Mon–Fri 7:00–17:00',
+  ft_by:'Demo project by Menes Nasufoski',
+  ft_demo:'Demo page — fictional company, no real projects',
+  sw_now:'After', sw_link:'See the before →'
+},
+
+it:{
+  logo_sub:'Impresa edile Vienna',
+  nav_srv:'Servizi', nav_proj:'Progetti', nav_calc:'Costi', nav_flow:'Come lavoriamo',
+  nav_team:'Team', nav_faq:'FAQ', nav_contact:'Contatti', nav_cta:'Calcola i costi',
+
+  hero_badge:'su 5 · 142 recensioni · impresa edile dal 1998',
+  hero_h1a:'Costruiamo', hero_h1b:'quello che abbiamo concordato.',
+  hero_lead:'Nuove costruzioni, ristrutturazioni e ampliamenti a Vienna e dintorni — con un prezzo fisso prima dell’inizio dei lavori, un direttore dei lavori come referente e un rapporto settimanale che mostra dove si trova il cantiere.',
+  hero_cta1:'Calcola i costi', hero_cta2:'Guarda i progetti',
+  stat1:'progetti conclusi', stat2:'anni di esperienza', stat3:'consegne nei tempi',
+  mock_live:'Cantiere in corso', mock_title:'Ristrutturazione palazzo d’epoca', mock_loc:'1050 Vienna · 14 appartamenti',
+  mock_bar:'Avanzamento lavori',
+  float1_t:'Prezzo fisso prima di iniziare', float1_s:'per scritto, con elenco delle opere',
+  float2_t:'Rapporto settimanale', float2_s:'ogni venerdì via e-mail',
+  trust1:'Impresa edile abilitata', trust2:'Garanzia del prezzo fisso',
+  trust3:'5 anni di garanzia', trust4:'Consulenza in 4 lingue',
+
+  srv_eyebrow:'Servizi', srv_title:'Dalle fondazioni alla consegna — con un unico referente.',
+  srv_sub:'Progettiamo, calcoliamo e costruiamo con squadre nostre. Quello che non facciamo direttamente lo coordiniamo: un contratto, un referente, una data di consegna.',
+  s1_t:'Nuova costruzione & struttura', s1_d:'Case unifamiliari, bifamiliari e piccoli edifici residenziali — chiavi in mano oppure come struttura grezza con un confine di fornitura chiaro.',
+  s1_l1:'Scavo, fondazioni, platea', s1_l2:'Murature, solai, scale', s1_l3:'Tetto tramite impresa partner',
+  s2_t:'Ristrutturazione & edifici d’epoca', s2_d:'Palazzi d’epoca, appartamenti e interi piani: struttura, umidità e distribuzione nell’ordine giusto.',
+  s2_l1:'Aperture murarie con lo strutturista', s2_l2:'Risanamento umidità e cantine', s2_l3:'Nuova distribuzione, massetto, intonaco',
+  s3_t:'Ampliamento & mansarda', s3_d:'Più spazio senza traslocare: ampliamento, sopraelevazione o recupero della mansarda, pratica edilizia inclusa.',
+  s3_l1:'Pratica presso l’ufficio tecnico', s3_l2:'Struttura, solai, carpenteria metallica', s3_l3:'Lavori con l’immobile abitato',
+  s4_t:'Facciata & isolamento', s4_d:'Cappotto termico, intonaco di risanamento e tinteggiatura — con assistenza per gli incentivi.',
+  s4_l1:'Cappotto con zoccolature e dettagli', s4_l2:'Ponteggio, protezioni, smaltimento', s4_l3:'Documentazione per gli incentivi',
+  s5_t:'Cantina & fondazioni', s5_d:'Nuove cantine, rinforzo delle fondazioni e impermeabilizzazione — anche su edifici esistenti.',
+  s5_l1:'Vasca impermeabile, sigillature, drenaggio', s5_l2:'Sottofondazione di muri esistenti', s5_l3:'Scavo con documenti di smaltimento',
+  s6_t:'Opere esterne & pavimentazioni', s6_d:'Accesso carrabile, terrazza, muro di sostegno e fondazioni per recinzioni — perché anche l’esterno sia finito.',
+  s6_l1:'Autobloccanti, lastre, cordoli', s6_l2:'Muri di sostegno e scale', s6_l3:'Drenaggio e pozzo perdente',
+
+  pr_eyebrow:'Referenze', pr_title:'Progetti che potete vedere anche dall’interno.',
+  pr_sub:'Ogni progetto con le opere eseguite, la superficie, la durata e l’anno. Tocca un progetto per i dettagli e per visitare un cantiere di riferimento.',
+  pr_filter:'Ambito', pr_count:'progetti', pr_note:'Progetti dimostrativi: indirizzi, numeri e tempi sono inventati.',
+  cat_all:'Tutti', cat_new:'Nuova costruzione', cat_san:'Ristrutturazione', cat_add:'Ampliamento & mansarda', cat_com:'Commerciale', cat_out:'Opere esterne',
+  fg_run:'In corso', fg_done:'Concluso', fg_new:'Nuovo',
+  c_area:'Superficie', c_time:'Durata', c_year:'Anno', c_more:'Vedi il progetto',
+  u_m2:'m²', u_months:'mesi', u_month:'mese',
+  md_feat:'Opere eseguite', md_cta1:'Richiedi una visita', md_cta2:'Calcola un progetto simile',
+  no_res:'Nessun progetto in questo ambito.', no_res_hint:'Scegli un altro ambito oppure guarda tutti i progetti.',
+
+  x_abbruch:'Demolizioni e smaltimento', x_rohbau:'Struttura grezza', x_statik:'Struttura e aperture',
+  x_keller:'Cantina e impermeabilizzazione', x_wdvs:'Cappotto termico', x_estrich:'Massetto e intonaco',
+  x_dach:'Tetto e lattoneria', x_aussen:'Opere esterne', x_trocken:'Cartongesso',
+  x_fenster:'Sostituzione finestre', x_bad:'Bagni e colonne montanti', x_pflaster:'Pavimentazione esterna',
+  x_unterfang:'Sottofondazione', x_halle:'Pavimento industriale e portoni', x_geruest:'Ponteggio',
+  x_bodenplatte:'Platea di fondazione', x_stiegen:'Scale e solai', x_stuetz:'Muro di sostegno',
+
+  p1_t:'Casa unifamiliare chiavi in mano', p1_d:'Nuova costruzione su terreno in pendenza con cantina completa e doppio garage. Platea a marzo, struttura chiusa prima dell’estate, consegna due settimane prima della data concordata. Le opere esterne, accesso carrabile incluso, erano parte del prezzo fisso.',
+  p2_t:'Palazzo d’epoca, 14 appartamenti', p2_d:'Ristrutturazione completa di un edificio di fine Ottocento con inquilini presenti: nuove colonne montanti, bagni, impianto elettrico e facciata. Si è lavorato piano per piano con fasce orarie fisse per i lavori rumorosi.',
+  p3_t:'Mansarda con terrazza', p3_d:'Sottotetto non utilizzato trasformato in appartamento con 22 m² di terrazza. Struttura con travi in acciaio, nuovo solaio, pratica edilizia e direzione lavori a cura nostra. L’ascensore è rimasto sempre utilizzabile.',
+  p4_t:'Ampliamento con cantina', p4_d:'Ampliamento di una casa bifamiliare esistente: due stanze più cantina, collegate all’edificio. Il muro esistente è stato sottofondato e il tetto proseguito senza giunti — da fuori il passaggio non si vede.',
+  p5_t:'Facciata e cappotto termico', p5_d:'Complesso residenziale con 1.850 m² di facciata: ponteggio, cappotto da 18 cm, nuova impermeabilizzazione dello zoccolo e tinteggiatura. Abbiamo fornito la documentazione per l’incentivo, i lavori sono durati meno di quattro mesi.',
+  p6_t:'Riconversione di un capannone', p6_d:'Un magazzino trasformato in officina con zona uffici: nuovo pavimento industriale, due portoni sezionali, pareti divisorie e servizi. L’attività è proseguita in metà capannone, quindi si è costruito in due fasi.',
+  p7_t:'Accesso carrabile e opere esterne', p7_d:'Accesso carrabile, terrazza e muro di sostegno in una casa unifamiliare. Drenaggio e pozzo perdente nuovi, autobloccanti con cordoli in calcestruzzo, quote allineate al garage esistente. Finito in cinque settimane.',
+  p8_t:'Risanamento cantina e sottofondazione', p8_d:'Cantina umida in un edificio d’epoca: impermeabilizzazione esterna, drenaggio, barriera orizzontale e sottofondazione di una porzione di muro per la nuova scala. Da allora la cantina è asciutta e viene usata come laboratorio.',
+
+  ca_eyebrow:'Calcolatore dei costi', ca_title:'Quanto costa più o meno il vostro progetto?',
+  ca_sub:'Impostate tipo di intervento, superficie e livello di finitura — vedrete subito una fascia di costo, il prezzo al metro quadro e una durata realistica. Senza registrazione e senza telefonate.',
+  ca_f1:'Intervento', ca_f2:'Superficie', ca_f3:'Livello di finitura', ca_f4:'Piani', ca_f5:'In aggiunta',
+  k_new:'Nuova costruzione', k_san:'Ristrutturazione', k_add:'Ampliamento', k_dach:'Mansarda',
+  lv1:'Base', lv2:'Standard', lv3:'Alta qualità',
+  ex1:'Cantina', ex2:'Garage', ex3:'Pompa di calore', ex4:'Fotovoltaico', ex5:'Smart home', ex6:'Opere esterne',
+  ca_out_t:'Fascia di costo stimata', ca_note_short:'IVA inclusa · terreno escluso',
+  ca_o1:'Al metro quadro', ca_o2:'Durata dall’inizio', ca_o3:'Acconto alla firma',
+  ca_split:'Come si dividono i costi',
+  sp1:'Struttura', sp2:'Finiture', sp3:'Impianti', sp4:'Esterni e accessori',
+  ca_btn:'Richiedi un prezzo fisso',
+  ca_note:'Valore indicativo basato su superficie, livello di finitura e opere aggiuntive — escluso terreno, allacciamenti e arredo. L’offerta vincolante arriva dopo il sopralluogo e i disegni.',
+
+  fl_eyebrow:'Come lavoriamo', fl_title:'Sei passaggi che potete seguire in qualsiasi momento.',
+  fl_sub:'Sapete in anticipo cosa accade e quando — e chi è in cantiere. Da noi nessun progetto parte senza un programma lavori firmato.',
+  f1_t:'Primo sopralluogo', f1_d:'Guardiamo l’esistente, gli accessi e lo spazio per il cantiere e diciamo con chiarezza cosa è realistico.', f1_x:'gratuito · circa 1 ora',
+  f2_t:'Progetto e pratica edilizia', f2_d:'Disegni, calcoli strutturali e pratica presso l’ufficio tecnico — con tutta la documentazione per gli incentivi.', f2_x:'2–8 settimane',
+  f3_t:'Offerta a prezzo fisso', f3_d:'Un elenco di opere, voce per voce, con prezzo e data. Quello che non è elencato non viene fatturato.', f3_x:'entro 10 giorni lavorativi',
+  f4_t:'Inizio dei lavori', f4_d:'Allestimento del cantiere, notifiche e avviso ai vicini. Da qui avete un direttore dei lavori con numero di cellulare.', f4_x:'data fissa',
+  f5_t:'Cantiere con rapporti', f5_d:'Ogni venerdì un breve rapporto con foto, voci completate e il programma della settimana successiva.', f5_x:'settimanale',
+  f6_t:'Consegna e garanzia', f6_d:'Collaudo insieme con verbale, documenti e garanzie — più 5 anni di garanzia sul nostro lavoro.', f6_x:'assistenza inclusa',
+
+  tm_eyebrow:'Team', tm_title:'Le persone che saranno nel vostro cantiere.',
+  tm_sub:'Nessun call center e nessun subappaltatore che cambia: dal primo incontro alla consegna parlate sempre con le stesse persone.',
+  m1_r:'Titolare e direzione', m1_d:'Fa il primo sopralluogo e firma personalmente ogni offerta.',
+  m2_r:'Direzione lavori', m2_d:'Coordina squadre e imprese e scrive il rapporto settimanale.',
+  m3_r:'Preventivi e computi', m3_d:'Redige i computi metrici e controlla ogni voce prima del prezzo fisso.',
+  m4_r:'Capocantiere', m4_d:'Guida la squadra in cantiere e tiene ordine e scadenze.',
+
+  rv_eyebrow:'Recensioni', rv_title:'Cosa dicono i committenti dopo la consegna.',
+  r1_q:'Offerta, programma lavori e fattura finale coincidevano. Le varianti ci sono state solo dove abbiamo cambiato idea noi — e sono state concordate prima.',
+  r1_w:'Casa unifamiliare nuova, 1230 Vienna',
+  r2_q:'Durante la ristrutturazione abbiamo continuato ad abitare in casa. Protezioni dalla polvere, orari fissi per i lavori rumorosi e cantiere pulito il venerdì: è questa la differenza.',
+  r2_w:'Ristrutturazione edificio d’epoca, 1050 Vienna',
+  r3_q:'Il rapporto settimanale con le foto è stato preziosissimo, perché viaggio molto per lavoro. Sapevo sempre a che punto era il cantiere senza dover telefonare.',
+  r3_w:'Recupero mansarda, 1070 Vienna',
+
+  fq_eyebrow:'Domande frequenti', fq_title:'Quello che i committenti vogliono sapere prima di iniziare.',
+  fq_q1:'Quanto è vincolante il prezzo fisso?',
+  fq_a1:'Il prezzo fisso vale per le opere elencate nel computo e ha validità quattro mesi. Aumenta solo se ordinate qualcosa in più o se durante gli scavi emerge qualcosa che prima nessuno poteva vedere, per esempio una vecchia cisterna. In quel caso ricevete un’offerta integrativa prima che proseguiamo.',
+  fq_q2:'Quanto passa dal primo incontro all’inizio dei lavori?',
+  fq_a2:'Senza pratica edilizia, per esempio per una ristrutturazione di un appartamento, di solito tre a cinque settimane. Con progetto e procedura amministrativa calcolate da tre a sei mesi, a seconda del distretto. Al primo incontro vi diciamo in quale caso rientra il vostro progetto.',
+  fq_q3:'Possiamo rimanere in casa durante i lavori?',
+  fq_a3:'Per interventi su singole stanze e per i lavori di facciata sì. Se si rifanno massetto, colonne montanti o impianto elettrico in tutto l’immobile, abitarci non ha senso per due a sei settimane. Pianifichiamo le fasi perché questo periodo sia il più breve possibile e lo indichiamo nel programma lavori.',
+  fq_q4:'Vi occupate voi della pratica edilizia?',
+  fq_a4:'Sì. Progetto, calcoli strutturali e pratica passano dal nostro ufficio e dai professionisti con cui collaboriamo stabilmente. Voi firmate come committenti, il resto lo seguiamo noi.',
+  fq_q5:'Come avviene la fatturazione?',
+  fq_a5:'In base all’avanzamento: un acconto del 10 % alla firma, poi fatture parziali per le opere eseguite, con il 5 % trattenuto fino al collaudo senza difetti. Ogni fattura parziale indica quali voci sono state completate.',
+  fq_q6:'Esistono incentivi per una ristrutturazione?',
+  fq_a6:'A Vienna ci sono contributi per il risanamento termico, la sostituzione dell’impianto di riscaldamento e l’isolamento del soffitto della cantina, oltre agli incentivi nazionali. Noi forniamo quello che serve alla domanda: foto, fatture, schede tecniche. L’importo lo decide l’ente, non noi.',
+
+  ct_eyebrow:'Contatti', ct_title:'Raccontateci il vostro progetto.',
+  ct_sub:'Spesso basta una breve telefonata per dire cosa ha senso e quanto costa. Rispondiamo nello stesso giorno lavorativo.',
+  ci1:'Telefono', ci2:'E-mail', ci3:'Ufficio e deposito', ci3_v:'Beispielgasse 7, 1110 Vienna',
+  ci4:'Reperibilità', ci4_v:'Lun–Ven 7:00–17:00 · Sab su appuntamento',
+  ci5:'Visita al cantiere', ci5_v:'il venerdì, su appuntamento',
+  f_name:'Nome e cognome', f_name_ph:'M. Esempio', f_phone:'Telefono', f_mail:'E-mail',
+  f_topic:'Di cosa si tratta?',
+  f_t1:'Nuova costruzione', f_t2:'Ristrutturazione', f_t3:'Ampliamento / mansarda', f_t4:'Facciata e isolamento',
+  f_t5:'Cantina e fondazioni', f_t6:'Opere esterne',
+  f_msg:'Messaggio', f_msg_ph:'Indirizzo, anno di costruzione, inizio desiderato — e quando possiamo contattarvi.',
+  f_btn:'Richiesta senza impegno',
+  f_ok:'Grazie, {name}! Rispondiamo nello stesso giorno lavorativo.',
+  f_err:'Inserite nome, telefono ed e-mail.',
+  f_hint:'Modulo dimostrativo — non viene inviato né salvato nulla.',
+  f_prefill:'Mi interessa il progetto "{obj}" ({loc}) e vorrei visitare un cantiere di riferimento.',
+
+  ft_txt:'Impresa edile a Vienna. Nuove costruzioni, ristrutturazioni, ampliamenti e facciate — con prezzo fisso, programma lavori e un unico referente.',
+  ft_c1:'Servizi', ft_c2:'Servizio', ft_c3:'Contatti',
+  ft_l1:'Nuova costruzione', ft_l2:'Ristrutturazione', ft_l3:'Ampliamento e mansarda', ft_l4:'Facciata e isolamento',
+  ft_s1:'Calcolatore dei costi', ft_s2:'Progetti di riferimento', ft_s3:'Come lavoriamo', ft_s4:'FAQ',
+  ft_h1:'Lun–Ven 7:00–17:00',
+  ft_by:'Progetto dimostrativo di Menes Nasufoski',
+  ft_demo:'Pagina dimostrativa — azienda fittizia, nessun progetto reale',
+  sw_now:'Dopo', sw_link:'Guarda il prima →'
+},
+
+bs:{
+  logo_sub:'Građevinska firma Beč',
+  nav_srv:'Usluge', nav_proj:'Projekti', nav_calc:'Troškovi', nav_flow:'Kako radimo',
+  nav_team:'Tim', nav_faq:'FAQ', nav_contact:'Kontakt', nav_cta:'Izračunaj troškove',
+
+  hero_badge:'od 5 · 142 ocjene · građevinska firma od 1998.',
+  hero_h1a:'Gradi se ono', hero_h1b:'što je dogovoreno.',
+  hero_lead:'Novogradnja, sanacija i dogradnja u Beču i okolini — s fiksnom cijenom prije početka radova, jednim nadzornim inženjerom kao kontaktom i sedmičnim izvještajem koji pokazuje gdje je vaš projekat.',
+  hero_cta1:'Izračunaj troškove', hero_cta2:'Pogledaj projekte',
+  stat1:'završenih projekata', stat2:'godina iskustva', stat3:'završeno u roku',
+  mock_live:'Projekat u toku', mock_title:'Sanacija stare zgrade', mock_loc:'1050 Beč · 14 stanova',
+  mock_bar:'Napredak radova',
+  float1_t:'Fiksna cijena prije početka', float1_s:'pismeno, s popisom radova',
+  float2_t:'Sedmični izvještaj', float2_s:'svakog petka na e-mail',
+  trust1:'Licencirani građevinski majstor', trust2:'Garancija fiksne cijene',
+  trust3:'5 godina garancije', trust4:'Savjetovanje na 4 jezika',
+
+  srv_eyebrow:'Usluge', srv_title:'Od temelja do predaje — iz jedne ruke.',
+  srv_sub:'Planiramo, kalkuliramo i gradimo sa svojim ekipama. Ono što ne radimo sami, koordiniramo: imate jedan ugovor, jedan kontakt i jedan rok.',
+  s1_t:'Novogradnja i grubi radovi', s1_d:'Kuće, dvojne kuće i manje stambene zgrade — ključ u ruke ili kao grubi radovi s jasno definisanom granicom.',
+  s1_l1:'Iskop, temelji, temeljna ploča', s1_l2:'Zidovi, ploče, stepeništa', s1_l3:'Krovna konstrukcija preko partnera',
+  s2_t:'Sanacija i stare zgrade', s2_d:'Stare zgrade, stanovi i cijele etaže: statika, vlaga i raspored u pravom redoslijedu.',
+  s2_l1:'Probijanja zidova sa statičarem', s2_l2:'Sanacija vlage i podruma', s2_l3:'Izmjena rasporeda, estrih, malter',
+  s3_t:'Dogradnja i potkrovlje', s3_d:'Više prostora bez selidbe: dogradnja, nadogradnja ili uređenje potkrovlja s projektom i dozvolom.',
+  s3_l1:'Prijava kod građevinske uprave', s3_l2:'Statika, ploče, čelična konstrukcija', s3_l3:'Radovi u useljenom objektu',
+  s4_t:'Fasada i izolacija', s4_d:'Termoizolacija, sanacijski malter i fasadna boja — uz pomoć kod subvencija za sanaciju.',
+  s4_l1:'Termofasada sa soklom i detaljima', s4_l2:'Skela, zaštita, odvoz otpada', s4_l3:'Dokumentacija za subvencije',
+  s5_t:'Podrum i temelji', s5_d:'Novi podrumi, pojačanje temelja i hidroizolacija — i naknadno u postojećoj kući.',
+  s5_l1:'Vodonepropusni beton, izolacija, drenaža', s5_l2:'Podupiranje postojećih zidova', s5_l3:'Iskop s dokazom o odvozu',
+  s6_t:'Vanjski radovi i popločavanje', s6_d:'Prilaz, terasa, potporni zid i temelji za ogradu — da i vanjski dio izgleda završeno.',
+  s6_l1:'Behaton, ploče, ivičnjaci', s6_l2:'Potporni zidovi i stepenice', s6_l3:'Odvodnja i upojni bunar',
+
+  pr_eyebrow:'Reference', pr_title:'Projekti koje možete vidjeti i iznutra.',
+  pr_sub:'Svaki projekat s obimom radova, površinom, trajanjem i godinom. Dotaknite projekat za detalje i za obilazak referentnog objekta.',
+  pr_filter:'Područje', pr_count:'projekata', pr_note:'Demo projekti: adrese, brojevi i rokovi su izmišljeni.',
+  cat_all:'Svi', cat_new:'Novogradnja', cat_san:'Sanacija', cat_add:'Dogradnja i potkrovlje', cat_com:'Poslovni objekti', cat_out:'Vanjski radovi',
+  fg_run:'U toku', fg_done:'Završeno', fg_new:'Novo',
+  c_area:'Površina', c_time:'Trajanje', c_year:'Godina', c_more:'Pogledaj projekat',
+  u_m2:'m²', u_months:'mjeseci', u_month:'mjesec',
+  md_feat:'Obim radova', md_cta1:'Zatraži obilazak', md_cta2:'Izračunaj sličan projekat',
+  no_res:'Nema projekta u ovom području.', no_res_hint:'Odaberite drugo područje ili pogledajte sve projekte.',
+
+  x_abbruch:'Rušenje i odvoz', x_rohbau:'Grubi radovi', x_statik:'Statika i probijanja',
+  x_keller:'Podrum i hidroizolacija', x_wdvs:'Termofasada', x_estrich:'Estrih i malter',
+  x_dach:'Krov i limarija', x_aussen:'Vanjski radovi', x_trocken:'Suhomontažni radovi',
+  x_fenster:'Zamjena stolarije', x_bad:'Kupatila i vertikale', x_pflaster:'Popločavanje',
+  x_unterfang:'Podupiranje temelja', x_halle:'Industrijski pod i vrata', x_geruest:'Skela',
+  x_bodenplatte:'Temeljna ploča', x_stiegen:'Stepeništa i ploče', x_stuetz:'Potporni zid',
+
+  p1_t:'Kuća, ključ u ruke', p1_d:'Novogradnja na kosoj parceli s punim podrumom i duplom garažom. Temeljna ploča u martu, grubi radovi završeni prije ljeta, predaja dvije sedmice prije dogovorenog roka. Vanjski radovi s prilazom bili su dio fiksne cijene.',
+  p2_t:'Sanacija zgrade, 14 stanova', p2_d:'Kompletna sanacija zgrade iz 19. stoljeća s useljenim stanarima: nove vertikale, kupatila, elektrika i fasada. Radilo se etaža po etaža s fiksnim vremenom za bučne radove, pa su stanari mogli ostati.',
+  p3_t:'Potkrovlje s terasom', p3_d:'Neiskorišteno potkrovlje pretvoreno u stan s terasom od 22 m². Statika preko čeličnih nosača, nova ploča, prijava i nadzor kod nas. Lift je cijelo vrijeme radova bio u funkciji.',
+  p4_t:'Dogradnja s podrumom', p4_d:'Dogradnja postojeće dvojne kuće: dvije prostorije i podrum, povezani s postojećim objektom. Postojeći zid je podupiran, krov nastavljen bez spoja — s vana se prelaz ne vidi.',
+  p5_t:'Fasada i termoizolacija', p5_d:'Stambeni objekat s 1.850 m² fasade: skela, 18 cm termofasade, nova izolacija sokla i boja. Dostavili smo dokumentaciju za subvenciju, radovi su trajali manje od četiri mjeseca.',
+  p6_t:'Prenamjena hale', p6_d:'Skladišna hala prenamijenjena u radionicu s kancelarijskim dijelom: novi industrijski pod, dvoja segmentna vrata, pregradni zidovi i sanitarije. Pola hale je radilo dalje, pa se gradilo u dvije faze.',
+  p7_t:'Prilaz i vanjski radovi', p7_d:'Prilaz, terasa i potporni zid kod kuće. Nova drenaža i upojni bunar, behaton s ivičnjacima u betonu, visine usklađene s postojećom garažom. Završeno u pet sedmica.',
+  p8_t:'Sanacija podruma i podupiranje', p8_d:'Vlažan podrum stare kuće: vanjska hidroizolacija, drenaža, horizontalna barijera i podupiranje dijela zida za novo stepeniště. Podrum je od tada suh i koristi se kao radionica.',
+
+  ca_eyebrow:'Kalkulator troškova', ca_title:'Koliko približno košta vaš projekat?',
+  ca_sub:'Postavite vrstu radova, površinu i nivo opremanja — odmah vidite okvir troškova, cijenu po kvadratu i realno trajanje. Bez registracije i bez poziva.',
+  ca_f1:'Vrsta radova', ca_f2:'Površina', ca_f3:'Nivo opremanja', ca_f4:'Etaže', ca_f5:'Dodatno',
+  k_new:'Novogradnja', k_san:'Sanacija', k_add:'Dogradnja', k_dach:'Potkrovlje',
+  lv1:'Osnovni', lv2:'Standard', lv3:'Visoki',
+  ex1:'Podrum', ex2:'Garaža', ex3:'Toplotna pumpa', ex4:'Solarni paneli', ex5:'Smart home', ex6:'Vanjski radovi',
+  ca_out_t:'Procijenjeni okvir troškova', ca_note_short:'sa PDV-om · bez zemljišta',
+  ca_o1:'Po kvadratnom metru', ca_o2:'Trajanje od početka', ca_o3:'Avans pri ugovoru',
+  ca_split:'Raspored troškova',
+  sp1:'Grubi radovi', sp2:'Završni radovi', sp3:'Instalacije', sp4:'Vanjski i ostalo',
+  ca_btn:'Zatraži fiksnu cijenu',
+  ca_note:'Orijentaciona vrijednost na osnovu površine, nivoa opremanja i dodatnih radova — bez zemljišta, priključaka i opremanja. Obavezujuća ponuda nastaje nakon izlaska na lice mjesta i uvida u projekat.',
+
+  fl_eyebrow:'Kako radimo', fl_title:'Šest koraka koje možete pratiti u svakom trenutku.',
+  fl_sub:'Unaprijed znate šta se kada radi — i ko je na gradilištu. Kod nas nijedan projekat ne počinje bez potpisanog terminskog plana.',
+  f1_t:'Prvi izlazak na lice mjesta', f1_d:'Pogledamo postojeće stanje, pristup i prostor za gradilište i otvoreno kažemo šta je realno.', f1_x:'besplatno · oko 1 sat',
+  f2_t:'Projekat i prijava', f2_d:'Projekat, statika i prijava kod građevinske uprave — sa svom dokumentacijom za subvencije.', f2_x:'2–8 sedmica',
+  f3_t:'Ponuda s fiksnom cijenom', f3_d:'Popis radova, pozicija po pozicija, s cijenom i rokom. Što nije u popisu, ne naplaćujemo.', f3_x:'u 10 radnih dana',
+  f4_t:'Početak radova', f4_d:'Uređenje gradilišta, prijave i obavijest susjedima. Od tada imate nadzornog inženjera s brojem mobitela.', f4_x:'fiksan datum',
+  f5_t:'Radovi s izvještajem', f5_d:'Svakog petka kratak izvještaj s fotografijama, završenim pozicijama i planom za sljedeću sedmicu.', f5_x:'sedmično',
+  f6_t:'Predaja i garancija', f6_d:'Zajednički prijem s protokolom, dokumentacijom i garancijama — plus 5 godina garancije na naš rad.', f6_x:'uz naknadnu podršku',
+
+  tm_eyebrow:'Tim', tm_title:'Ljudi koji će biti na vašem gradilištu.',
+  tm_sub:'Bez call centra i bez podizvođača koji se mijenjaju: od prvog razgovora do predaje razgovarate s istim ljudima.',
+  m1_r:'Građevinski majstor i direkcija', m1_d:'Vodi prvi razgovor i lično potpisuje svaku ponudu.',
+  m2_r:'Nadzor gradilišta', m2_d:'Koordinira ekipe i podizvođače i piše sedmični izvještaj.',
+  m3_r:'Kalkulacija i ponude', m3_d:'Radi predmjere i provjerava svaku poziciju prije fiksne cijene.',
+  m4_r:'Poslovođa', m4_d:'Vodi ekipu na gradilištu i drži red i rokove.',
+
+  rv_eyebrow:'Ocjene', rv_title:'Šta investitori kažu nakon predaje.',
+  r1_q:'Ponuda, terminski plan i konačni račun su se poklopili. Dodatni radovi su bili samo tamo gdje smo mi nešto mijenjali — i to je dogovoreno unaprijed.',
+  r1_w:'Novogradnja kuće, 1230 Beč',
+  r2_q:'Tokom sanacije smo živjeli u kući. Zaštita od prašine, fiksno vrijeme za bučne radove i počišćeno gradilište u petak — to je bila razlika.',
+  r2_w:'Sanacija stare zgrade, 1050 Beč',
+  r3_q:'Sedmični izvještaj s fotografijama mi je mnogo značio jer poslovno često putujem. Uvijek sam znao gdje je projekat, bez da zovem telefonom.',
+  r3_w:'Uređenje potkrovlja, 1070 Beč',
+
+  fq_eyebrow:'Česta pitanja', fq_title:'Šta investitori žele znati prije početka.',
+  fq_q1:'Koliko je fiksna cijena obavezujuća?',
+  fq_a1:'Fiksna cijena vrijedi za radove iz popisa i važi četiri mjeseca. Raste samo ako vi dodatno nešto naručite ili ako se pri iskopu pojavi nešto što prije nije bilo vidljivo, naprimjer stari rezervoar za naftu. U tom slučaju dobijete dodatnu ponudu prije nego nastavimo.',
+  fq_q2:'Koliko traje od prvog razgovora do početka radova?',
+  fq_a2:'Bez građevinske prijave, naprimjer kod sanacije stana, najčešće tri do pet sedmica. S projektom i upravnim postupkom računajte tri do šest mjeseci, zavisno od opštine. Na prvom razgovoru kažemo u koju grupu spada vaš projekat.',
+  fq_q3:'Možemo li ostati u stanu tokom sanacije?',
+  fq_a3:'Kod radova u pojedinim prostorijama i kod fasade da. Ako se mijenjaju estrih, vertikale ili elektrika u cijelom objektu, stanovanje nema smisla dvije do šest sedmica. Planiramo radove tako da taj period bude što kraći i navedemo ga u terminskom planu.',
+  fq_q4:'Preuzimate li prijavu kod građevinske uprave?',
+  fq_a4:'Da. Projekat, statika i prijava idu preko naše kancelarije i inženjera s kojima stalno radimo. Vi potpisujete kao investitor, a upravni dio i dodatne zahtjeve rješavamo mi.',
+  fq_q5:'Kako se obračunava?',
+  fq_a5:'Po napretku radova: avans od 10 % pri ugovoru, zatim privremeni računi za izvedene radove, a 5 % ostaje zadržano do prijema bez nedostataka. Svaki privremeni račun pokazuje koje su pozicije završene.',
+  fq_q6:'Postoje li subvencije za sanaciju?',
+  fq_a6:'U Beču postoje subvencije za termičku sanaciju, zamjenu grijanja i izolaciju podrumske ploče, uz državne podsticaje. Mi dostavljamo ono što zahtjev traži — fotografije, račune, tehničke listove. Iznos određuje služba za subvencije, ne mi.',
+
+  ct_eyebrow:'Kontakt', ct_title:'Recite nam šta planirate.',
+  ct_sub:'Kratak razgovor je obično dovoljan da kažemo šta ima smisla i koliko košta. Odgovaramo istog radnog dana.',
+  ci1:'Telefon', ci2:'E-mail', ci3:'Kancelarija i baza', ci3_v:'Beispielgasse 7, 1110 Beč',
+  ci4:'Dostupnost', ci4_v:'Pon–Pet 7:00–17:00 · Sub po dogovoru',
+  ci5:'Obilazak gradilišta', ci5_v:'petkom, uz najavu',
+  f_name:'Ime i prezime', f_name_ph:'M. Primjer', f_phone:'Telefon', f_mail:'E-mail',
+  f_topic:'O čemu se radi?',
+  f_t1:'Novogradnja', f_t2:'Sanacija', f_t3:'Dogradnja / potkrovlje', f_t4:'Fasada i izolacija',
+  f_t5:'Podrum i temelji', f_t6:'Vanjski radovi',
+  f_msg:'Poruka', f_msg_ph:'Adresa, godina gradnje, željeni početak — i kada vas najbolje možemo dobiti.',
+  f_btn:'Pošalji upit bez obaveze',
+  f_ok:'Hvala, {name}! Javljamo se istog radnog dana.',
+  f_err:'Molimo unesite ime, telefon i e-mail.',
+  f_hint:'Demo forma — ništa se ne šalje i ništa se ne sprema.',
+  f_prefill:'Zanima me projekat "{obj}" ({loc}) i želio bih obići referentni objekat.',
+
+  ft_txt:'Građevinska firma u Beču. Novogradnja, sanacija, dogradnja i fasade — s fiksnom cijenom, terminskim planom i jednim kontaktom.',
+  ft_c1:'Usluge', ft_c2:'Servis', ft_c3:'Kontakt',
+  ft_l1:'Novogradnja', ft_l2:'Sanacija', ft_l3:'Dogradnja i potkrovlje', ft_l4:'Fasada i izolacija',
+  ft_s1:'Kalkulator troškova', ft_s2:'Referentni projekti', ft_s3:'Kako radimo', ft_s4:'FAQ',
+  ft_h1:'Pon–Pet 7:00–17:00',
+  ft_by:'Demo projekat Menesa Nasufoskog',
+  ft_demo:'Demo stranica — izmišljena firma, nema stvarnih projekata',
+  sw_now:'Poslije', sw_link:'Pogledaj prije →'
+}
+};
+
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+};
+
+let lang = store.get('steinklar_lang') || 'de';
+if(!I18N[lang]) lang = 'de';
+const LOC = { de:'de-DE', en:'en-GB', it:'it-IT', bs:'bs-BA' };
+
+const t = k => (I18N[lang] && I18N[lang][k]) || I18N.de[k] || k;
+const nInt = v => new Intl.NumberFormat(LOC[lang], { maximumFractionDigits:0 }).format(Math.round(v));
+const eur = v => '€ ' + nInt(v);
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+
+const PROJECTS = [
+  { id:1, key:'p1', cat:'new', art:'house',  pal:0, area:184,  months:11, year:2025, loc:'1230', flag:'done', feats:['x_bodenplatte','x_rohbau','x_keller','x_dach','x_aussen'] },
+  { id:2, key:'p2', cat:'san', art:'zins',   pal:1, area:1120, months:14, year:2026, loc:'1050', flag:'run',  feats:['x_statik','x_bad','x_estrich','x_wdvs','x_geruest'] },
+  { id:3, key:'p3', cat:'add', art:'dach',   pal:2, area:96,   months:7,  year:2024, loc:'1070', flag:'done', feats:['x_statik','x_stiegen','x_trocken','x_dach','x_fenster'] },
+  { id:4, key:'p4', cat:'add', art:'zubau',  pal:3, area:72,   months:6,  year:2025, loc:'1210', flag:'done', feats:['x_unterfang','x_keller','x_rohbau','x_dach'] },
+  { id:5, key:'p5', cat:'san', art:'fassade',pal:4, area:1850, months:4,  year:2025, loc:'1100', flag:'done', feats:['x_geruest','x_wdvs','x_estrich','x_abbruch'] },
+  { id:6, key:'p6', cat:'com', art:'halle',  pal:5, area:640,  months:8,  year:2024, loc:'1110', flag:'done', feats:['x_abbruch','x_halle','x_trocken','x_statik'] },
+  { id:7, key:'p7', cat:'out', art:'aussen', pal:6, area:420,  months:2,  year:2026, loc:'2340', flag:'new',  feats:['x_pflaster','x_stuetz','x_aussen'] },
+  { id:8, key:'p8', cat:'san', art:'keller', pal:7, area:210,  months:5,  year:2024, loc:'1180', flag:'done', feats:['x_keller','x_unterfang','x_abbruch','x_estrich'] }
+];
+
+const CITY = { de:'Wien', en:'Vienna', it:'Vienna', bs:'Beč' };
+const PAL = [
+  ['#18242D','#0D151A','#2B3C49','#F0A42B'],
+  ['#1B2630','#0C1419','#30404E','#E9B05A'],
+  ['#172A2A','#0A1718','#27403F','#F0A42B'],
+  ['#1E2433','#0D111C','#303A4E','#D9A8E0'],
+  ['#202A2E','#0E1517','#36454B','#F0A42B'],
+  ['#232730','#10131A','#3A404C','#8FB4D4'],
+  ['#1C2621','#0C1410','#2F3F36','#C9D96B'],
+  ['#242029','#100E14','#3C3645','#F0A42B']
+];
+
+function artSVG(p, uid){
+  const c = PAL[p.pal], gid = 'g' + uid + '_' + p.id;
+  const win = (x,y,w,h,o) => '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="2" fill="'+c[3]+'" opacity="'+o+'"/>';
+  const rnd = i => (0.2 + ((i * 41) % 5) * 0.16).toFixed(2);
+  let b = '';
+
+  if(p.art === 'house'){
+    b += '<path d="M104 112 200 56l96 56z" fill="'+c[3]+'" opacity=".6"/>';
+    b += '<rect x="118" y="110" width="164" height="94" fill="'+c[2]+'"/>';
+    b += win(138,126,40,30,'.65') + win(222,126,40,30,'.4');
+    b += '<rect x="182" y="162" width="36" height="42" rx="2" fill="'+c[1]+'"/>';
+    b += '<rect x="118" y="200" width="164" height="8" fill="'+c[3]+'" opacity=".35"/>';
+    b += '<rect x="286" y="150" width="62" height="54" fill="'+c[2]+'" opacity=".85"/>';
+    b += '<rect x="294" y="162" width="46" height="32" rx="2" fill="'+c[1]+'"/>';
+    b += '<path d="M282 150h70l-14-16h-42z" fill="'+c[3]+'" opacity=".4"/>';
+    b += '<g stroke="'+c[3]+'" stroke-width="1.6" opacity=".7" fill="none"><path d="M56 204V96h22v108M56 96h22M56 132h22M56 168h22M56 96l22 36M78 96l-22 36M56 132l22 36M78 132l-22 36"/></g>';
+  }
+  else if(p.art === 'zins'){
+    b += '<rect x="58" y="30" width="284" height="174" fill="'+c[2]+'"/>';
+    b += '<rect x="52" y="26" width="296" height="9" rx="2" fill="'+c[3]+'" opacity=".5"/>';
+    for(let r = 0; r < 3; r++){
+      for(let i = 0; i < 6; i++){
+        const x = 74 + i * 44, y = 46 + r * 50;
+        b += win(x, y, 30, 32, rnd(r * 6 + i));
+        b += '<path d="M'+x+' '+y+' a15 15 0 0 1 30 0" fill="'+c[3]+'" opacity="'+rnd(r + i)+'"/>';
+      }
+      b += '<rect x="58" y="'+(84 + r * 50)+'" width="284" height="3" fill="'+c[3]+'" opacity=".18"/>';
+    }
+    b += '<rect x="182" y="164" width="40" height="40" rx="2" fill="'+c[1]+'"/>';
+    b += '<g stroke="'+c[3]+'" stroke-width="1.5" opacity=".8" fill="none">';
+    b += '<path d="M58 30v174M124 30v174M190 30v174M256 30v174M342 30v174"/>';
+    b += '<path d="M58 74h284M58 118h284M58 162h284"/>';
+    b += '</g>';
+    b += '<rect x="58" y="30" width="284" height="174" fill="none" stroke="'+c[3]+'" stroke-width="2" opacity=".55"/>';
+  }
+  else if(p.art === 'dach'){
+    b += '<rect x="76" y="140" width="248" height="64" fill="'+c[2]+'"/>';
+    b += win(96,156,40,28,'.4') + win(156,156,40,28,'.62') + win(216,156,40,28,'.32') + win(272,156,36,28,'.5');
+    b += '<path d="M76 140 200 72l124 68z" fill="'+c[2]+'" opacity=".92"/>';
+    b += '<path d="M76 140 200 72l124 68" fill="none" stroke="'+c[3]+'" stroke-width="2.4" opacity=".7"/>';
+    b += '<rect x="166" y="96" width="68" height="44" fill="'+c[1]+'"/>';
+    b += '<rect x="176" y="106" width="48" height="26" rx="2" fill="'+c[3]+'" opacity=".6"/>';
+    b += '<path d="M160 96h80l-40-22z" fill="'+c[3]+'" opacity=".45"/>';
+    b += '<g stroke="'+c[3]+'" stroke-width="1.8" opacity=".5" fill="none"><path d="M96 134l34-20M130 140l34-20M236 120l34 20M270 114l34 20"/></g>';
+    b += '<rect x="246" y="140" width="68" height="7" rx="2" fill="'+c[3]+'" opacity=".55"/>';
+    b += '<g stroke="'+c[3]+'" stroke-width="2" opacity=".8" fill="none"><path d="M310 30v24M310 54h-26"/></g>';
+    b += '<rect x="276" y="54" width="16" height="11" rx="2" fill="'+c[3]+'" opacity=".8"/>';
+  }
+  else if(p.art === 'zubau'){
+    b += '<path d="M60 120 148 62l88 58z" fill="'+c[3]+'" opacity=".5"/>';
+    b += '<rect x="74" y="118" width="148" height="86" fill="'+c[2]+'"/>';
+    b += win(92,134,36,28,'.45') + win(166,134,36,28,'.6');
+    b += '<rect x="130" y="166" width="36" height="38" rx="2" fill="'+c[1]+'"/>';
+    b += '<rect x="226" y="146" width="112" height="58" fill="'+c[2]+'" opacity=".6"/>';
+    b += '<g stroke="'+c[3]+'" stroke-width="2.4" fill="none" opacity=".85"><path d="M226 146h112v58H226z"/><path d="M226 146v58M262 146v58M300 146v58M338 146v58M226 176h112"/></g>';
+    b += '<path d="M220 146h124l-20-20H238z" fill="'+c[3]+'" opacity=".35"/>';
+    b += '<rect x="226" y="200" width="112" height="6" fill="'+c[3]+'" opacity=".5"/>';
+    b += '<g fill="'+c[3]+'" opacity=".3"><rect x="246" y="208" width="80" height="8" rx="2"/></g>';
+  }
+  else if(p.art === 'fassade'){
+    b += '<rect x="48" y="36" width="304" height="168" fill="'+c[2]+'"/>';
+    for(let r = 0; r < 3; r++){
+      for(let i = 0; i < 7; i++) b += win(62 + i * 42, 52 + r * 52, 28, 32, rnd(r * 7 + i));
+    }
+    b += '<rect x="48" y="36" width="152" height="168" fill="'+c[1]+'" opacity=".45"/>';
+    b += '<g fill="'+c[3]+'" opacity=".14">';
+    for(let r = 0; r < 4; r++){
+      for(let i = 0; i < 4; i++) b += '<rect x="'+(52 + i * 38)+'" y="'+(40 + r * 42)+'" width="34" height="38"/>';
+    }
+    b += '</g>';
+    b += '<g stroke="'+c[3]+'" stroke-width="1.6" opacity=".85" fill="none">';
+    b += '<path d="M48 36v168M106 36v168M164 36v168M222 36v168M280 36v168M338 36v168"/>';
+    b += '<path d="M48 78h304M48 120h304M48 162h304"/>';
+    b += '<path d="M48 78l58 42M106 78l58 42M164 78l58 42M222 78l58 42M280 78l58 42"/>';
+    b += '</g>';
+    b += '<rect x="48" y="200" width="304" height="8" fill="'+c[3]+'" opacity=".45"/>';
+  }
+  else if(p.art === 'halle'){
+    b += '<path d="M40 104 200 52l160 52z" fill="'+c[3]+'" opacity=".42"/>';
+    b += '<rect x="54" y="102" width="292" height="102" fill="'+c[2]+'"/>';
+    b += '<g fill="'+c[3]+'" opacity=".14"><rect x="54" y="102" width="292" height="4"/><rect x="54" y="140" width="292" height="3"/></g>';
+    b += '<rect x="86" y="128" width="88" height="76" rx="3" fill="'+c[1]+'"/>';
+    b += '<g fill="'+c[3]+'" opacity=".3"><rect x="92" y="134" width="76" height="14"/><rect x="92" y="152" width="76" height="14"/><rect x="92" y="170" width="76" height="14"/><rect x="92" y="188" width="76" height="12"/></g>';
+    b += '<rect x="212" y="128" width="88" height="76" rx="3" fill="'+c[1]+'" opacity=".8"/>';
+    b += '<g fill="'+c[3]+'" opacity=".22"><rect x="218" y="134" width="76" height="14"/><rect x="218" y="152" width="76" height="14"/><rect x="218" y="170" width="76" height="14"/><rect x="218" y="188" width="76" height="12"/></g>';
+    b += win(60,112,18,12,'.5') + win(316,112,22,12,'.4');
+    b += '<rect x="54" y="200" width="292" height="8" fill="'+c[3]+'" opacity=".4"/>';
+    b += '<g stroke="'+c[3]+'" stroke-width="1.6" opacity=".55" fill="none"><path d="M40 104 200 52l160 52"/></g>';
+  }
+  else if(p.art === 'aussen'){
+    b += '<rect x="0" y="118" width="400" height="112" fill="'+c[1]+'" opacity=".55"/>';
+    b += '<path d="M120 230 168 118h74l48 112z" fill="'+c[2]+'"/>';
+    b += '<g stroke="'+c[3]+'" stroke-width="1.3" opacity=".45" fill="none">';
+    for(let i = 1; i < 7; i++){
+      const yy = 118 + i * 16, x1 = 168 - (i * 8), x2 = 242 + (i * 8);
+      b += '<path d="M'+x1+' '+yy+'H'+x2+'"/>';
+    }
+    b += '<path d="M190 118v112M220 118v112"/>';
+    b += '</g>';
+    b += '<rect x="286" y="96" width="114" height="34" fill="'+c[2]+'"/>';
+    b += '<g fill="'+c[3]+'" opacity=".22"><rect x="288" y="98" width="34" height="14"/><rect x="326" y="98" width="34" height="14"/><rect x="364" y="98" width="34" height="14"/><rect x="288" y="114" width="52" height="14"/><rect x="344" y="114" width="54" height="14"/></g>';
+    b += '<path d="M64 118h98v12H64z" fill="'+c[3]+'" opacity=".3"/>';
+    b += '<rect x="42" y="66" width="76" height="52" fill="'+c[2]+'" opacity=".8"/>';
+    b += '<path d="M36 66h88L80 40z" fill="'+c[3]+'" opacity=".4"/>';
+    b += win(56,82,22,18,'.5') + win(86,82,22,18,'.35');
+    b += '<g fill="'+c[3]+'" opacity=".3"><circle cx="330" cy="76" r="14"/><circle cx="360" cy="80" r="10"/></g>';
+  }
+  else {
+    b += '<rect x="0" y="92" width="400" height="12" fill="'+c[3]+'" opacity=".4"/>';
+    b += '<path d="M96 92 200 44l104 48z" fill="'+c[3]+'" opacity=".3"/>';
+    b += '<rect x="116" y="60" width="168" height="32" fill="'+c[2]+'" opacity=".7"/>';
+    b += win(140,68,36,18,'.4') + win(224,68,36,18,'.5');
+    b += '<rect x="110" y="104" width="180" height="92" fill="'+c[2]+'"/>';
+    b += '<g stroke="'+c[3]+'" stroke-width="2" opacity=".75" fill="none"><path d="M110 104h180v92H110z"/><path d="M110 150h180"/><path d="M170 104v92M230 104v92"/></g>';
+    b += win(126,118,30,22,'.35') + win(186,118,30,22,'.5') + win(246,118,30,22,'.3');
+    b += '<rect x="110" y="196" width="180" height="10" fill="'+c[3]+'" opacity=".6"/>';
+    b += '<g stroke="'+c[3]+'" stroke-width="1.4" opacity=".4" fill="none"><path d="M74 104v102M326 104v102M74 206h252"/></g>';
+    b += '<g fill="'+c[3]+'" opacity=".16">';
+    for(let i = 0; i < 10; i++) b += '<rect x="'+(78 + i * 25)+'" y="208" width="18" height="6"/>';
+    b += '</g>';
+  }
+
+  return '<svg viewBox="0 0 400 230" role="img" aria-label="'+t(p.key + '_t')+'">' +
+    '<defs><linearGradient id="'+gid+'" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0" stop-color="'+c[0]+'"/><stop offset="1" stop-color="'+c[1]+'"/>' +
+    '</linearGradient>' +
+    '<radialGradient id="'+gid+'g" cx="50%" cy="50%" r="50%">' +
+    '<stop offset="0" stop-color="'+c[3]+'" stop-opacity=".17"/>' +
+    '<stop offset="1" stop-color="'+c[3]+'" stop-opacity="0"/>' +
+    '</radialGradient></defs>' +
+    '<rect width="400" height="230" fill="url(#'+gid+')"/>' +
+    '<circle cx="322" cy="48" r="104" fill="url(#'+gid+'g)"/>' +
+    b +
+    '<rect x="0" y="214" width="400" height="16" fill="'+c[1]+'" opacity=".6"/>' +
+    '</svg>';
+}
+
+const CATS = ['all','new','san','add','com','out'];
+let fCat = 'all';
+
+function renderCats(){
+  const row = document.getElementById('catRow');
+  row.innerHTML = '';
+  CATS.forEach(c => {
+    const el = document.createElement('button');
+    el.className = 'chip' + (fCat === c ? ' active' : '');
+    el.textContent = t('cat_' + c);
+    el.addEventListener('click', () => { fCat = c; renderCats(); renderProjects(); });
+    row.appendChild(el);
+  });
+}
+
+function months(n){ return nInt(n) + ' ' + (n === 1 ? t('u_month') : t('u_months')); }
+
+function renderProjects(){
+  const grid = document.getElementById('projGrid');
+  const list = PROJECTS.filter(p => fCat === 'all' || p.cat === fCat);
+  document.getElementById('projCount').textContent = nInt(list.length);
+  grid.innerHTML = '';
+
+  if(!list.length){
+    const e = document.createElement('div');
+    e.className = 'no-res';
+    e.innerHTML = '<b>' + t('no_res') + '</b><span>' + t('no_res_hint') + '</span>';
+    grid.appendChild(e);
+    return;
+  }
+
+  list.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'pcard reveal in';
+    const flagCls = p.flag === 'done' ? 'pflag done' : 'pflag';
+    card.innerHTML =
+      '<div class="pcard-art">' + artSVG(p, 'c') +
+      '<span class="' + flagCls + '">' + t('fg_' + p.flag) + '</span></div>' +
+      '<div class="pcard-b">' +
+      '<h3>' + t(p.key + '_t') + '</h3>' +
+      '<div class="pcard-loc">' + p.loc + ' ' + CITY[lang] + ' &middot; ' + t('cat_' + p.cat) + '</div>' +
+      '<div class="pcard-facts">' +
+      '<div><b>' + nInt(p.area) + '</b>' + t('u_m2') + '</div>' +
+      '<div><b>' + nInt(p.months) + '</b>' + t('u_months') + '</div>' +
+      '<div><b>' + p.year + '</b>' + t('c_year') + '</div>' +
+      '</div>' +
+      '<span class="pcard-more">' + t('c_more') +
+      '<svg viewBox="0 0 24 24"><path d="M8 5l8 7-8 7z"/></svg></span>' +
+      '</div>';
+    card.addEventListener('click', () => openModal(p));
+    grid.appendChild(card);
+  });
+}
+
+const modal = document.getElementById('projModal');
+let openProj = null;
+
+function openModal(p){
+  openProj = p;
+  const art = document.getElementById('modalArt');
+  art.innerHTML = artSVG(p, 'm') + '<button class="modal-x" id="modalX" aria-label="Close">&times;</button>';
+  document.getElementById('modalX').addEventListener('click', e => { e.stopPropagation(); closeModal(); });
+
+  document.getElementById('modalCat').textContent = t('cat_' + p.cat);
+  document.getElementById('modalTitle').textContent = t(p.key + '_t');
+  document.getElementById('modalLoc').textContent = p.loc + ' ' + CITY[lang] + ' · ' + t('fg_' + p.flag);
+  document.getElementById('modalDesc').textContent = t(p.key + '_d');
+  document.getElementById('modalFeatH').textContent = t('md_feat');
+
+  document.getElementById('modalKv').innerHTML =
+    '<div><span>' + t('c_area') + '</span><b>' + nInt(p.area) + ' ' + t('u_m2') + '</b></div>' +
+    '<div><span>' + t('c_time') + '</span><b>' + months(p.months) + '</b></div>' +
+    '<div><span>' + t('c_year') + '</span><b>' + p.year + '</b></div>';
+
+  document.getElementById('modalFeat').innerHTML =
+    p.feats.map(f => '<span>' + t(f) + '</span>').join('');
+
+  document.getElementById('modalCta1').textContent = t('md_cta1');
+  document.getElementById('modalCta2').textContent = t('md_cta2');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(){
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  openProj = null;
+}
+modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+document.getElementById('modalCta1').addEventListener('click', () => {
+  if(!openProj) return;
+  const msg = document.getElementById('fmMsg');
+  msg.value = t('f_prefill')
+    .replace('{obj}', t(openProj.key + '_t'))
+    .replace('{loc}', openProj.loc + ' ' + CITY[lang]);
+  closeModal();
+});
+
+const KINDS = ['new','san','add','dach'];
+const LEVELS = ['lv1','lv2','lv3'];
+const EXTRAS = ['ex1','ex2','ex3','ex4','ex5','ex6'];
+const BASE = { new:[1850,2250,2780], san:[1150,1560,2060], add:[2060,2460,2960], dach:[2240,2660,3180] };
+const TBASE = { new:9, san:7, add:6, dach:5 };
+const SPLIT = {
+  new:[38,34,18,10], san:[28,42,22,8], add:[40,32,20,8], dach:[32,40,22,6]
+};
+const SPCOL = ['#F0A42B','#C98B2A','#7FA7C4','#6E7C86'];
+
+let cKind = 'new', cLevel = 1, cFloors = 2, cExtras = { ex1:false, ex2:false, ex3:false, ex4:false, ex5:false, ex6:false };
+
+const cArea = document.getElementById('cArea');
+
+function paintRange(el){
+  const min = +el.min, max = +el.max;
+  el.style.setProperty('--p', ((el.value - min) / (max - min) * 100) + '%');
+}
+
+function renderKinds(){
+  const row = document.getElementById('kindRow');
+  row.innerHTML = '';
+  KINDS.forEach(k => {
+    const el = document.createElement('button');
+    el.className = 'chip' + (cKind === k ? ' active' : '');
+    el.textContent = t('k_' + k);
+    el.addEventListener('click', () => { cKind = k; renderKinds(); calc(); });
+    row.appendChild(el);
+  });
+}
+
+function renderLevels(){
+  const row = document.getElementById('levelRow');
+  row.innerHTML = '';
+  LEVELS.forEach((l, i) => {
+    const el = document.createElement('button');
+    el.className = 'chip' + (cLevel === i ? ' active' : '');
+    el.textContent = t(l);
+    el.addEventListener('click', () => { cLevel = i; renderLevels(); calc(); });
+    row.appendChild(el);
+  });
+}
+
+function renderFloors(){
+  const row = document.getElementById('floorRow');
+  row.innerHTML = '';
+  [1,2,3].forEach(n => {
+    const el = document.createElement('button');
+    el.className = 'chip' + (cFloors === n ? ' active' : '');
+    el.textContent = nInt(n);
+    el.addEventListener('click', () => { cFloors = n; renderFloors(); calc(); });
+    row.appendChild(el);
+  });
+}
+
+function renderExtras(){
+  const grid = document.getElementById('extraGrid');
+  grid.innerHTML = '';
+  EXTRAS.forEach(x => {
+    const el = document.createElement('div');
+    el.className = 'ck' + (cExtras[x] ? ' on' : '');
+    el.innerHTML = '<i>&#10003;</i><span>' + t(x) + '</span>';
+    el.addEventListener('click', () => { cExtras[x] = !cExtras[x]; renderExtras(); calc(); });
+    grid.appendChild(el);
+  });
+}
+
+function calc(){
+  const area = +cArea.value;
+  document.getElementById('areaVal').textContent = nInt(area) + ' ' + t('u_m2');
+  paintRange(cArea);
+
+  const sqm = BASE[cKind][cLevel];
+  const areaF = clamp(1.13 - (area - 40) / 380 * 0.24, 0.89, 1.13);
+  const floorF = cFloors === 1 ? 1.07 : (cFloors === 2 ? 1 : 0.965);
+
+  let total = area * sqm * areaF * floorF;
+  let extra = 0;
+  if(cExtras.ex1) extra += area * 0.45 * 820;
+  if(cExtras.ex2) extra += 27000;
+  if(cExtras.ex3) extra += 21500;
+  if(cExtras.ex4) extra += 13500;
+  if(cExtras.ex5) extra += 10500;
+  if(cExtras.ex6) extra += 16000 + area * 38;
+  total += extra;
+
+  const lo = total * 0.93, hi = total * 1.08;
+  document.getElementById('outRange').innerHTML =
+    '€ ' + nInt(lo) + ' &ndash; ' + nInt(hi) +
+    '<small>' + t('ca_note_short') + '</small>';
+  document.getElementById('outSqm').textContent = eur(total / area);
+
+  const nEx = EXTRAS.filter(x => cExtras[x]).length;
+  const mo = Math.round(clamp(TBASE[cKind] + area / 90 + nEx * 0.5, 3, 26));
+  document.getElementById('outTime').textContent = months(mo);
+  document.getElementById('outDown').textContent = eur(lo * 0.1);
+
+  let sp = SPLIT[cKind].slice();
+  if(cExtras.ex6){ sp[3] += 6; sp[1] -= 4; sp[0] -= 2; }
+  if(cExtras.ex3 || cExtras.ex4){ sp[2] += 4; sp[1] -= 4; }
+  const sum = sp.reduce((a, v) => a + v, 0);
+  sp = sp.map(v => v / sum * 100);
+
+  document.getElementById('splitTrack').innerHTML =
+    sp.map((v, i) => '<i style="width:' + v.toFixed(1) + '%;background:' + SPCOL[i] + '"></i>').join('');
+  document.getElementById('splitLegend').innerHTML =
+    sp.map((v, i) => '<div><i style="background:' + SPCOL[i] + '"></i>' + t('sp' + (i + 1)) +
+      ' ' + Math.round(v) + '%</div>').join('');
+}
+cArea.addEventListener('input', calc);
+
+function renderFaq(){
+  const box = document.getElementById('faqBox');
+  const openIdx = [...box.children].findIndex(c => c.classList.contains('open'));
+  box.innerHTML = '';
+  for(let i = 1; i <= 6; i++){
+    const item = document.createElement('div');
+    item.className = 'faq-item';
+    item.innerHTML =
+      '<button class="faq-q"><span>' + t('fq_q' + i) + '</span><i>+</i></button>' +
+      '<div class="faq-a"><p>' + t('fq_a' + i) + '</p></div>';
+    const btn = item.querySelector('.faq-q'), ans = item.querySelector('.faq-a');
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      [...box.children].forEach(c => {
+        c.classList.remove('open');
+        c.querySelector('.faq-a').style.maxHeight = '0px';
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        ans.style.maxHeight = ans.scrollHeight + 'px';
+      }
+    });
+    box.appendChild(item);
+    if(i - 1 === openIdx){
+      item.classList.add('open');
+      ans.style.maxHeight = ans.scrollHeight + 'px';
+    }
+  }
+}
+
+function applyLang(l){
+  lang = l;
+  store.set('steinklar_lang', l);
+  document.documentElement.lang = l;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = I18N[l][el.dataset.i18n];
+    if(v) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const v = I18N[l][el.dataset.i18nPh];
+    if(v) el.placeholder = v;
+  });
+  document.querySelectorAll('.lang-switch button').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === l);
+  });
+
+  renderCats(); renderProjects(); renderKinds(); renderLevels(); renderFloors(); renderExtras();
+  renderFaq(); calc();
+  if(openProj) openModal(openProj);
+}
+document.querySelectorAll('.lang-switch button').forEach(b => {
+  b.addEventListener('click', () => {
+    applyLang(b.dataset.lang);
+    document.getElementById('burger').classList.remove('open');
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+const SUN = 'M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5v3m0 14v3M2 12h3m14 0h3M4.2 4.2l2.1 2.1m11.4 11.4 2.1 2.1M19.8 4.2l-2.1 2.1M6.3 17.7l-2.1 2.1';
+const MOON = 'M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4 5.39 5.39 0 0 1 2.26-4.4c-.44-.06-.9-.1-1.36-.1z';
+function applyTheme(mode){
+  document.documentElement.setAttribute('data-theme', mode);
+  store.set('steinklar_theme', mode);
+  document.getElementById('themeIcon').innerHTML = mode === 'dark'
+    ? '<path d="' + SUN + '" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>'
+    : '<path d="' + MOON + '"/>';
+  paintRange(cArea);
+}
+document.getElementById('themeBtn').addEventListener('click', () => {
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+document.getElementById('sendBtn').addEventListener('click', () => {
+  const name = document.getElementById('fmName').value.trim();
+  const phone = document.getElementById('fmPhone').value.trim();
+  const mail = document.getElementById('fmMail').value.trim();
+  const ok = document.getElementById('formOk');
+  if(!name || !phone || !mail){
+    ok.textContent = t('f_err');
+    ok.style.color = 'var(--accent)';
+    ok.classList.add('show');
+    return;
+  }
+  ok.style.color = '';
+  ok.textContent = t('f_ok').replace('{name}', name.split(' ')[0]);
+  ok.classList.add('show');
+});
+
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+
+const hdr = document.getElementById('hdr');
+window.addEventListener('scroll', () => {
+  hdr.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const io = 'IntersectionObserver' in window
+  ? new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold:.1, rootMargin:'0px 0px -40px 0px' })
+  : null;
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  if(!io){ el.classList.add('in'); return; }
+  el.style.transitionDelay = (i % 3) * 0.08 + 's';
+  io.observe(el);
+});
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+applyTheme(store.get('steinklar_theme') ||
+  (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+applyLang(lang);
+</script>
+</body>
+</html>
