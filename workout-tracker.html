@@ -34,7 +34,6 @@
             min-height: 100vh;
         }
 
-        /* Header */
         header {
             padding: 1.5rem 2rem;
             border-bottom: 1px solid var(--border);
@@ -91,7 +90,6 @@
             letter-spacing: 0.05em;
         }
 
-        /* Main layout */
         main {
             max-width: 1100px;
             margin: 0 auto;
@@ -101,7 +99,6 @@
             gap: 2rem;
         }
 
-        /* Add Workout Panel */
         .panel {
             background: var(--card);
             border: 1px solid var(--border);
@@ -189,7 +186,6 @@
 
         .btn-add:active { transform: translateY(0); }
 
-        /* Workout Log */
         .log-header {
             display: flex;
             align-items: center;
@@ -239,7 +235,6 @@
 
         .btn-clear:hover { background: rgba(239, 68, 68, 0.1); }
 
-        /* Exercise Cards */
         .exercise-list {
             display: flex;
             flex-direction: column;
@@ -326,7 +321,6 @@
 
         .btn-delete:hover { color: var(--red); background: rgba(239, 68, 68, 0.1); }
 
-        /* Empty State */
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
@@ -346,7 +340,6 @@
             line-height: 1.6;
         }
 
-        /* Progress Bar */
         .progress-section {
             margin-bottom: 1.5rem;
         }
@@ -375,7 +368,6 @@
             transition: width 0.4s ease;
         }
 
-        /* Category filter */
         .category-pills {
             display: flex;
             gap: 0.5rem;
@@ -432,7 +424,7 @@
 </header>
 
 <main>
-    <!-- Add Exercise Panel -->
+
     <div>
         <div class="panel">
             <div class="panel-title">Ubung hinzufugen</div>
@@ -473,7 +465,6 @@
             <button class="btn-add" onclick="addExercise()">+ Ubung hinzufugen</button>
         </div>
 
-        <!-- Progress -->
         <div class="panel" style="margin-top: 1rem;">
             <div class="panel-title">Tages-Ziel</div>
             <div class="progress-section">
@@ -488,7 +479,6 @@
         </div>
     </div>
 
-    <!-- Workout Log -->
     <div class="panel">
         <div class="log-header">
             <div class="panel-title" style="margin-bottom: 0;">Trainingslog</div>
@@ -610,7 +600,6 @@
 
         document.getElementById('date-display').textContent = formatDate(currentDate);
 
-        // Stats
         const todayKey = getDateKey(new Date());
         const todayWorkouts = getWorkouts(todayKey);
         const allKeys = Object.keys(localStorage).filter(k => k.startsWith('wt_'));
@@ -618,13 +607,11 @@
         document.getElementById('total-sets').textContent = todayWorkouts.reduce((a, w) => a + w.sets, 0);
         document.getElementById('total-reps').textContent = todayWorkouts.reduce((a, w) => a + (w.sets * w.reps), 0);
 
-        // Progress
         const goal = 6;
         const count = todayWorkouts.length;
         document.getElementById('progress-text').textContent = count + ' / ' + goal;
         document.getElementById('progress-fill').style.width = Math.min(100, (count / goal) * 100) + '%';
 
-        // List
         const filtered = activeFilter === 'all' ? workouts : workouts.filter(w => w.category === activeFilter);
         const list = document.getElementById('exercise-list');
 
@@ -656,14 +643,12 @@
         `).join('');
     }
 
-    // Enter key support
     document.getElementById('ex-name').addEventListener('keydown', e => {
         if (e.key === 'Enter') addExercise();
     });
 
     render();
 
-    // Register Service Worker (PWA)
     if ('serviceWorker' in navigator) {
         const registerScoped = () => navigator.serviceWorker.register('/sw-workout.js', { scope: '/workout-tracker.html' });
         navigator.serviceWorker.getRegistrations()

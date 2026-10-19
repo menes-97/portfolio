@@ -82,7 +82,6 @@
   h2.display{font-size:clamp(2.1rem,5.2vw,3.5rem);margin:.35em 0 .3em}
   .lead{color:var(--ink-soft);font-size:clamp(1.02rem,1.6vw,1.18rem);max-width:60ch}
 
-  /* ---------- NAV ---------- */
   header.nav{
     position:sticky;top:0;z-index:60;
     background:color-mix(in srgb,var(--bg) 82%,transparent);
@@ -135,7 +134,6 @@
   .nav-cta{display:inline-flex}
   .burger{display:none}
 
-  /* ---------- HERO ---------- */
   .hero{background:linear-gradient(160deg,var(--hero-bg),var(--hero-bg2));color:var(--hero-ink);position:relative;overflow:hidden}
   .hero::before{
     content:"";position:absolute;inset:0;pointer-events:none;
@@ -171,19 +169,16 @@
   .hero-scroll::after{content:"";width:1px;height:34px;background:linear-gradient(var(--accent),transparent);animation:scr 2s ease-in-out infinite}
   @keyframes scr{0%,100%{opacity:.3;height:20px}50%{opacity:1;height:38px}}
 
-  /* marquee */
   .ticker{background:var(--accent);color:#1a1204;overflow:hidden;border-block:1px solid rgba(0,0,0,.12)}
   .ticker .track{display:flex;gap:0;white-space:nowrap;animation:marq 34s linear infinite;will-change:transform}
   .ticker span{font-family:var(--f-display);font-stretch:condensed;text-transform:uppercase;font-weight:700;font-size:15px;letter-spacing:.08em;padding:11px 0;display:inline-flex;align-items:center}
   .ticker span::after{content:"◆";margin:0 26px;font-size:9px;opacity:.55}
   @keyframes marq{to{transform:translateX(-50%)}}
 
-  /* ---------- SECTION SHELL ---------- */
   .sec{padding:96px 0}
   .sec-head{max-width:720px}
   .grid{display:grid;gap:22px}
 
-  /* services */
   .services{grid-template-columns:repeat(3,1fr)}
   .card{
     background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
@@ -197,7 +192,6 @@
   .card p{color:var(--ink-soft);font-size:15px;margin:0;line-height:1.6}
   .card .no{position:absolute;top:22px;right:24px;font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
 
-  /* projects */
   .projects{grid-template-columns:repeat(2,1fr)}
   .proj{
     border-radius:var(--radius);overflow:hidden;position:relative;border:1px solid var(--line);
@@ -214,7 +208,6 @@
   .proj .loc{font-size:13.5px;color:#C7CCD1;display:flex;gap:16px;font-family:var(--f-mono);letter-spacing:.03em}
   .proj .loc b{color:#fff;font-weight:600}
 
-  /* stats band */
   .band{background:linear-gradient(150deg,#323e4c,#232c37);color:#fff;border-radius:20px;padding:56px 40px;margin:0 auto;position:relative;overflow:hidden}
   .band::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:38px 38px;mask-image:radial-gradient(100% 120% at 100% 0,#000,transparent 70%)}
   .band-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;position:relative}
@@ -223,7 +216,6 @@
   .stat .u{color:var(--accent)}
   .stat span{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#B9C2CB;margin-top:6px;display:block}
 
-  /* process */
   .steps{grid-template-columns:repeat(4,1fr)}
   .step{position:relative;padding-top:30px}
   .step .n{font-family:var(--f-mono);font-size:13px;color:var(--accent-strong);font-weight:700;letter-spacing:.1em}
@@ -233,7 +225,6 @@
   .step h3{font-family:var(--f-display);font-stretch:condensed;text-transform:uppercase;font-size:1.35rem;margin:0 0 8px}
   .step p{color:var(--ink-soft);font-size:14.5px;margin:0}
 
-  /* about */
   .about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
   .about-art{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:linear-gradient(160deg,var(--steel),#232b33);aspect-ratio:4/3;position:relative}
   .about-art svg{width:100%;height:100%}
@@ -243,7 +234,6 @@
   .value b{display:block;font-weight:700;font-size:15.5px}
   .value p{margin:2px 0 0;color:var(--ink-soft);font-size:14.5px}
 
-  /* contact */
   .contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:start}
   .contact-info{display:flex;flex-direction:column;gap:22px}
   .ci{display:flex;gap:16px;align-items:flex-start}
@@ -264,7 +254,6 @@
   .form-ok.show{display:block}
   .form-ok::before{content:"✓ ";color:var(--accent-strong);font-weight:800}
 
-  /* footer */
   footer{background:var(--hero-bg);color:#C6CBD1;padding:64px 0 30px;margin-top:20px}
   .foot{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px;padding-bottom:40px;border-bottom:1px solid #262d36}
   footer .brand b,footer .brand{color:#fff}
@@ -278,7 +267,6 @@
   .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
-  /* ---------- responsive ---------- */
   @media (max-width:960px){
     .hero-in{grid-template-columns:1fr;padding:48px 0 60px}
     .hero-art{min-height:300px;order:-1}
@@ -317,7 +305,6 @@
 </head>
 <body>
 
-<!-- ======================= NAV ======================= -->
 <header class="nav" id="nav">
   <div class="wrap nav-in">
     <a href="#top" class="brand" aria-label="GRADNJA BAU">
@@ -346,7 +333,6 @@
   </div>
 </header>
 
-<!-- ======================= HERO ======================= -->
 <section class="hero" id="top">
   <canvas id="dust"></canvas>
   <div class="wrap hero-in">
@@ -367,28 +353,28 @@
     <div class="hero-art">
       <svg class="blueprint" viewBox="0 0 460 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <g stroke="#4a90d9" stroke-opacity=".55" stroke-width="1.4">
-          <!-- ground -->
+
           <path class="draw" pathLength="1" d="M30 372 H440" stroke="#E0930A" stroke-opacity=".9" stroke-width="2"/>
-          <!-- building outline -->
+
           <path class="draw d2" pathLength="1" d="M90 372 V150 H300 V372"/>
           <path class="draw d2" pathLength="1" d="M90 150 L195 92 L300 150"/>
-          <!-- floors -->
+
           <path class="draw d3" pathLength="1" d="M90 205 H300 M90 260 H300 M90 315 H300"/>
-          <!-- columns -->
+
           <path class="draw d3" pathLength="1" d="M160 150 V372 M230 150 V372"/>
-          <!-- windows -->
+
           <g class="draw d4" pathLength="1" stroke="#7fb2e6">
             <rect x="108" y="170" width="34" height="24"/><rect x="178" y="170" width="34" height="24"/><rect x="248" y="170" width="34" height="24"/>
             <rect x="108" y="225" width="34" height="24"/><rect x="178" y="225" width="34" height="24"/><rect x="248" y="225" width="34" height="24"/>
             <rect x="108" y="280" width="34" height="24"/><rect x="248" y="280" width="34" height="24"/>
           </g>
-          <!-- door -->
+
           <path class="draw d4" pathLength="1" d="M178 372 V300 H212 V372"/>
-          <!-- crane -->
+
           <path class="draw d5" pathLength="1" stroke="#E0930A" stroke-opacity=".85" d="M360 372 V70 M330 96 H430 M360 70 L410 96 M360 96 L400 118 M410 96 V132 M410 132 L402 148 M410 132 L418 148"/>
           <path class="draw d5" pathLength="1" stroke="#E0930A" stroke-opacity=".85" d="M348 70 h24"/>
         </g>
-        <!-- dimension + labels -->
+
         <g class="fade" fill="#8fb6e0" font-family="ui-monospace,monospace" font-size="11" letter-spacing="1">
           <path d="M90 392 H300" stroke="#8fb6e0" stroke-opacity=".5" stroke-width="1"/>
           <path d="M90 388 V396 M300 388 V396" stroke="#8fb6e0" stroke-opacity=".5"/>
@@ -405,12 +391,10 @@
   <div class="hero-scroll" aria-hidden="true"><span data-i18n="hero.scroll">Scrollen</span></div>
 </section>
 
-<!-- ticker -->
 <div class="ticker" aria-hidden="true">
   <div class="track" id="ticker"></div>
 </div>
 
-<!-- ======================= SERVICES ======================= -->
 <section class="sec" id="services">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -429,7 +413,6 @@
   </div>
 </section>
 
-<!-- ======================= PROJECTS ======================= -->
 <section class="sec" id="projects" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -458,7 +441,6 @@
   </div>
 </section>
 
-<!-- ======================= STATS BAND ======================= -->
 <section class="sec" style="padding-top:0">
   <div class="wrap">
     <div class="band reveal">
@@ -472,7 +454,6 @@
   </div>
 </section>
 
-<!-- ======================= ABOUT ======================= -->
 <section class="sec" id="about" style="padding-top:0">
   <div class="wrap about">
     <div class="reveal">
@@ -491,7 +472,6 @@
   </div>
 </section>
 
-<!-- ======================= PROCESS ======================= -->
 <section class="sec" id="process" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -507,7 +487,6 @@
   </div>
 </section>
 
-<!-- ======================= CONTACT ======================= -->
 <section class="sec" id="contact" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -547,7 +526,6 @@
   </div>
 </section>
 
-<!-- ======================= FOOTER ======================= -->
 <footer>
   <div class="wrap">
     <div class="foot">
@@ -584,7 +562,6 @@
 (function(){
   "use strict";
 
-  /* ---------------- i18n ---------------- */
   var T = {
     de:{
       "nav.services":"Leistungen","nav.projects":"Projekte","nav.about":"Über uns","nav.process":"Ablauf","nav.contact":"Kontakt","nav.cta":"Angebot anfragen",
@@ -750,7 +727,6 @@
     apply(b.getAttribute("data-lang"));
   });
 
-  /* ---------------- theme ---------------- */
   var savedTheme = load("gradnja-theme");
   if(savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
   document.getElementById("theme").addEventListener("click", function(){
@@ -763,13 +739,11 @@
     store("gradnja-theme", next);
   });
 
-  /* ---------------- nav scroll ---------------- */
   var nav = document.getElementById("nav");
   window.addEventListener("scroll", function(){
     nav.classList.toggle("scrolled", window.scrollY>10);
   }, {passive:true});
 
-  /* ---------------- reveal on scroll ---------------- */
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(en){
       if(en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
@@ -777,7 +751,6 @@
   }, {threshold:.14, rootMargin:"0px 0px -40px 0px"});
   document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
 
-  /* ---------------- counters ---------------- */
   var reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
   var cio = new IntersectionObserver(function(entries){
     entries.forEach(function(en){
@@ -796,7 +769,6 @@
   }, {threshold:.5});
   document.querySelectorAll("[data-count]").forEach(function(el){cio.observe(el);});
 
-  /* ---------------- form ---------------- */
   document.getElementById("form").addEventListener("submit", function(e){
     e.preventDefault();
     var f=e.target;
@@ -808,7 +780,6 @@
     f.querySelectorAll("input,textarea").forEach(function(i){i.value="";});
   });
 
-  /* ---------------- dust particles ---------------- */
   (function(){
     if(reduce) return;
     var c=document.getElementById("dust"), ctx=c.getContext("2d"), parts=[], raf;
@@ -825,7 +796,6 @@
     window.addEventListener("resize", size, {passive:true});
   })();
 
-  /* ---------------- init ---------------- */
   document.getElementById("year").textContent = new Date().getFullYear();
   var pref = load("gradnja-lang");
   if(!pref){ var b=(navigator.language||"de").slice(0,2); pref = T[b]?b:"de"; }

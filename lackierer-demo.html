@@ -497,7 +497,6 @@
     }
   };
 
-  // Static images
   document.getElementById('heroHood').style.backgroundImage = 'url(' + PHOTOS.hero + ')';
   document.getElementById('effektImg').src = PHOTOS.effekt;
 
@@ -526,14 +525,12 @@
   document.querySelectorAll('.lang-switch button').forEach(b=>
     b.addEventListener('click', ()=> setLang(b.getAttribute('data-lang'))));
 
-  // Theme toggle
   const root = document.documentElement;
   document.getElementById('themeToggle').addEventListener('click', ()=>{
     const cur = root.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     root.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
   });
 
-  // Before / After slider
   const range = document.getElementById('baRange');
   const before = document.getElementById('baBefore');
   const handle = document.getElementById('baHandle');
