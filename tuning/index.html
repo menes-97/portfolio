@@ -1,0 +1,2458 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>VEKTOR Car Coding &amp; Performance — Chiptuning, Codierung &amp; Ambientebeleuchtung</title>
+<meta name="description" content="Demo-Projekt: Website für einen Auto-Tuning-Betrieb mit Leistungsrechner, Prüfstandskurve, Ambiente-Konfigurator und Coding-Rechner.">
+<meta name="theme-color" content="#0a0b0d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0b0d'/%3E%3Cpath d='M7 9h5l4 10 4-10h5l-7 15h-4z' fill='%23ff5a1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/hero-m.jpg" media="(max-width: 760px)">
+<link rel="preload" as="image" href="img/hero.jpg" media="(min-width: 761px)">
+<style>
+:root {
+  --bg: #0a0b0d;
+  --bg-2: #0f1114;
+  --card: #14171b;
+  --card-2: #1a1e23;
+  --line: #252a31;
+  --line-2: #323840;
+  --ink: #f3f5f7;
+  --muted: #8d95a1;
+  --dim: #5d6570;
+  --heat: #ff5a1f;
+  --heat-2: #ff8a3d;
+  --heat-soft: rgba(255, 90, 31, .12);
+  --ice: #38d9f5;
+  --ice-soft: rgba(56, 217, 245, .12);
+  --ok: #3ddc84;
+  --radius: 18px;
+  --radius-sm: 12px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --display: "Chakra Petch", "Manrope", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --shadow: 0 20px 50px -20px rgba(0, 0, 0, .7);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; -webkit-tap-highlight-color: transparent; background: var(--bg); color: var(--ink);
+  font: 16px/1.6 "Manrope", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--heat); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); }
+section { padding: clamp(72px, 10vw, 120px) 0; position: relative; }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; line-height: 1.08; margin: 0; letter-spacing: -.01em; }
+h2 { font-size: clamp(32px, 5vw, 54px); text-transform: uppercase; }
+h2 .hl, h1 .hl { color: var(--heat); }
+h3 { font-size: 22px; }
+p { margin: 0; }
+.mono { font-family: var(--mono); }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font: 600 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--heat);
+}
+.eyebrow::before { content: ""; width: 22px; height: 2px; background: currentColor; }
+.eyebrow.ice { color: var(--ice); }
+.sec-head { display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: end; margin-bottom: 48px; }
+.sec-head h2 { margin-top: 14px; }
+.sec-head p { color: var(--muted); font-size: 17px; max-width: 52ch; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 15px 24px; border-radius: 999px; border: 1px solid transparent;
+  font-weight: 700; font-size: 15px; transition: transform .2s, background .2s, border-color .2s, box-shadow .2s;
+  white-space: nowrap;
+}
+.btn svg { width: 18px; height: 18px; flex: none; transition: transform .2s; }
+.btn:hover svg { transform: translateX(3px); }
+.btn-primary { background: var(--heat); color: #fff; box-shadow: 0 10px 30px -10px rgba(255, 90, 31, .7); }
+.btn-primary:hover { background: #ff6c35; transform: translateY(-1px); }
+.btn-ghost { border-color: rgba(255, 255, 255, .22); color: #fff; background: rgba(255, 255, 255, .04); backdrop-filter: blur(6px); }
+.btn-ghost:hover { border-color: rgba(255, 255, 255, .5); }
+.btn-light { background: var(--ink); color: var(--bg); }
+.btn-light:hover { background: #fff; transform: translateY(-1px); }
+
+header {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  transition: background .3s, border-color .3s, backdrop-filter .3s;
+  border-bottom: 1px solid transparent;
+}
+header.scrolled { background: rgba(10, 11, 13, .82); backdrop-filter: blur(14px) saturate(1.4); border-color: var(--line); }
+.nav { display: flex; align-items: center; gap: 24px; height: 76px; }
+.logo { display: flex; align-items: center; gap: 12px; flex: none; }
+.logo-mark {
+  width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center;
+  background: linear-gradient(145deg, #1d2127, #0d0f12); border: 1px solid var(--line-2);
+}
+.logo-mark svg { width: 24px; height: 24px; }
+.logo b { display: block; font: 700 19px/1 var(--display); letter-spacing: .14em; }
+.logo small { display: block; font: 600 9.5px/1 var(--mono); letter-spacing: .2em; color: var(--muted); margin-top: 5px; }
+.menu { display: flex; align-items: center; gap: 22px; margin-left: auto; }
+.menu-links { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.menu-links a { padding: 8px 12px; border-radius: 8px; font-weight: 600; font-size: 14.5px; color: #c9ced6; transition: color .2s, background .2s; }
+.menu-links a:hover { color: #fff; background: rgba(255, 255, 255, .06); }
+.lang-switch { display: flex; padding: 3px; border-radius: 999px; background: rgba(255, 255, 255, .06); border: 1px solid var(--line); }
+.lng { border: 0; background: none; padding: 5px 9px; border-radius: 999px; font: 600 11.5px/1 var(--mono); color: var(--muted); }
+.lng.active { background: var(--ink); color: var(--bg); }
+.nav-cta { padding: 11px 18px; font-size: 14px; }
+.burger { display: none; margin-left: auto; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line-2); background: rgba(10, 11, 13, .6); position: relative; }
+.burger span, .burger span::before, .burger span::after { position: absolute; left: 12px; width: 20px; height: 2px; background: #fff; border-radius: 2px; transition: transform .25s, top .25s, opacity .2s; content: ""; }
+.burger span { top: 21px; }
+.burger span::before { top: -6px; left: 0; }
+.burger span::after { top: 6px; left: 0; }
+header.open .burger span { background: transparent; }
+header.open .burger span::before { top: 0; transform: rotate(45deg); }
+header.open .burger span::after { top: 0; transform: rotate(-45deg); }
+
+.hero { padding: 0; min-height: 100svh; display: flex; flex-direction: column; isolation: isolate; overflow: hidden; }
+.hero picture, .hero picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.hero picture img { object-position: 60% 50%; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(10, 11, 13, .94) 0%, rgba(10, 11, 13, .7) 42%, rgba(10, 11, 13, .15) 75%),
+    linear-gradient(0deg, var(--bg) 0%, rgba(10, 11, 13, 0) 35%);
+}
+.hero-inner { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-top: 110px; }
+.hero-grid > *, .sec-head > *, .calc > *, .amb > *, .code-grid > *, .faq-grid > *, .ct-grid > * { min-width: 0; }
+.hero-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 48px; align-items: center; }
+.hero h1 { font-size: clamp(44px, 7.4vw, 96px); text-transform: uppercase; margin: 20px 0 22px; line-height: .98; }
+.hero h1 .outline { color: transparent; -webkit-text-stroke: 1.5px rgba(255, 255, 255, .85); }
+.hero .lead { font-size: clamp(17px, 1.6vw, 19px); color: #c7ccd4; max-width: 50ch; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+.hero-card {
+  background: rgba(16, 18, 22, .72); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow);
+}
+.hc-head { display: flex; justify-content: space-between; align-items: center; font: 600 11.5px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.live { display: inline-flex; align-items: center; gap: 7px; color: var(--ok); }
+.live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 0 rgba(61, 220, 132, .6); animation: ping 1.8s infinite; }
+@keyframes ping { 70% { box-shadow: 0 0 0 8px rgba(61, 220, 132, 0); } 100% { box-shadow: 0 0 0 0 rgba(61, 220, 132, 0); } }
+.gauge { position: relative; margin: 10px auto 0; width: 100%; max-width: 250px; }
+.gauge svg { width: 100%; height: auto; overflow: visible; }
+.gauge-val { position: absolute; left: 0; right: 0; bottom: 6px; text-align: center; }
+.gauge-val b { display: block; font: 700 46px/1 var(--display); }
+.gauge-val small { font: 600 11px/1 var(--mono); color: var(--muted); letter-spacing: .14em; }
+.hc-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+.hc-rows div { background: rgba(255, 255, 255, .04); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.hc-rows small { display: block; font-size: 11.5px; color: var(--muted); }
+.hc-rows b { font: 600 15px/1.3 var(--mono); }
+.hc-rows b em { font-style: normal; color: var(--ok); font-size: 12px; margin-left: 4px; }
+.stats { border-top: 1px solid rgba(255, 255, 255, .08); margin-top: 56px; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat { padding: 24px 20px 30px; border-left: 1px solid rgba(255, 255, 255, .08); }
+.stat:first-child { border-left: 0; padding-left: 0; }
+.stat b { display: block; font: 700 clamp(26px, 3vw, 36px)/1.1 var(--display); }
+.stat > span { color: var(--muted); font-size: 14px; }
+
+.ticker { border-block: 1px solid var(--line); background: var(--bg-2); overflow: hidden; padding: 18px 0; }
+.ticker-track { display: flex; gap: 56px; width: max-content; animation: marquee 38s linear infinite; }
+.ticker span { font: 600 15px/1 var(--display); letter-spacing: .2em; text-transform: uppercase; color: #6f7782; display: inline-flex; align-items: center; gap: 56px; }
+.ticker span::after { content: ""; width: 6px; height: 6px; background: var(--heat); transform: rotate(45deg); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+.svc-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.svc {
+  position: relative; border-radius: var(--radius); overflow: hidden; min-height: 380px;
+  background: var(--card); border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: flex-end;
+  grid-column: span 3; isolation: isolate;
+}
+.svc.s2 { grid-column: span 2; min-height: 420px; }
+.svc img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+.svc:hover img { transform: scale(1.05); }
+.svc::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(8, 9, 11, .96) 8%, rgba(8, 9, 11, .55) 50%, rgba(8, 9, 11, .1) 100%); }
+.svc-body { padding: 26px; }
+.svc .tag { display: inline-block; font: 600 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; padding: 7px 10px; border-radius: 6px; background: rgba(255, 255, 255, .1); backdrop-filter: blur(6px); margin-bottom: 14px; }
+.svc h3 { font-size: 26px; text-transform: uppercase; }
+.svc p { color: #b9c0ca; margin-top: 10px; font-size: 15px; max-width: 46ch; }
+.svc .price { margin-top: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 14px; color: var(--muted); }
+.svc .price b { font: 600 16px/1 var(--mono); color: #fff; }
+.mini-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 16px; }
+.mini { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 22px; transition: border-color .2s, transform .2s; }
+.mini:hover { border-color: var(--line-2); transform: translateY(-2px); }
+.mini .ic { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; background: var(--heat-soft); color: var(--heat); margin-bottom: 16px; }
+.mini .ic svg { width: 21px; height: 21px; }
+.mini h4 { font-size: 17px; }
+.mini p { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+.calc-sec { background: radial-gradient(1200px 500px at 85% 0%, rgba(255, 90, 31, .08), transparent 60%), var(--bg-2); border-block: 1px solid var(--line); }
+.calc { display: grid; grid-template-columns: 380px 1fr; gap: 20px; align-items: start; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+.step { margin-bottom: 22px; }
+.step:last-child { margin-bottom: 0; }
+.step-label { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-weight: 700; font-size: 14.5px; }
+.step-label i { font: 600 11px/1 var(--mono); font-style: normal; width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; background: var(--card-2); border: 1px solid var(--line-2); color: var(--heat); }
+.brands { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.brand-btn {
+  border: 1px solid var(--line-2); background: var(--card-2); border-radius: 10px; padding: 11px 6px;
+  font-weight: 700; font-size: 13.5px; transition: border-color .2s, background .2s, color .2s; color: #c9ced6;
+}
+.brand-btn:hover { border-color: #4a525c; color: #fff; }
+.brand-btn.active { border-color: var(--heat); background: var(--heat-soft); color: #fff; }
+.select { position: relative; }
+.select select {
+  width: 100%; appearance: none; -webkit-appearance: none; background: var(--card-2); border: 1px solid var(--line-2);
+  border-radius: 10px; padding: 13px 40px 13px 14px; font-weight: 600; font-size: 15px; color: #fff;
+}
+.select::after { content: ""; position: absolute; right: 16px; top: 50%; width: 8px; height: 8px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
+.select option { background: #1a1e23; }
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); padding: 4px; gap: 4px; background: var(--card-2); border: 1px solid var(--line-2); border-radius: 12px; }
+.seg button { border: 0; background: none; border-radius: 9px; padding: 11px 4px; font-weight: 700; font-size: 14px; color: var(--muted); transition: background .2s, color .2s; }
+.seg button.active { background: var(--heat); color: #fff; }
+.seg button:disabled { opacity: .35; cursor: not-allowed; }
+.seg-note { font-size: 12.5px; color: var(--muted); margin-top: 8px; min-height: 1.4em; }
+.toggle { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px; border-radius: 12px; background: var(--card-2); border: 1px solid var(--line-2); cursor: pointer; }
+.toggle b { display: block; font-size: 14.5px; }
+.toggle small { color: var(--muted); font-size: 12.5px; }
+.switch { position: relative; width: 46px; height: 26px; flex: none; }
+.switch input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.switch span { position: absolute; inset: 0; border-radius: 99px; background: #2c323a; transition: background .2s; pointer-events: none; }
+.switch span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .2s; }
+.switch input:checked + span { background: var(--heat); }
+.switch input:checked + span::after { transform: translateX(20px); }
+.switch input:disabled + span { opacity: .35; }
+.switch input:focus-visible + span { outline: 2px solid var(--heat); outline-offset: 2px; }
+
+.result { display: grid; gap: 20px; }
+.res-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.res-top h3 { font-size: clamp(22px, 2.6vw, 30px); text-transform: uppercase; }
+.res-top .sub { font: 500 13px/1.4 var(--mono); color: var(--muted); margin-top: 6px; }
+.gain { font: 700 15px/1 var(--mono); color: var(--heat); background: var(--heat-soft); border: 1px solid rgba(255, 90, 31, .3); border-radius: 999px; padding: 9px 14px; white-space: nowrap; }
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.kpi { background: var(--card-2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.kpi small { display: block; font-size: 12.5px; color: var(--muted); }
+.kpi .v { font: 700 clamp(26px, 3vw, 34px)/1.1 var(--display); margin-top: 4px; }
+.kpi .v em { font: 500 13px/1 var(--mono); font-style: normal; color: var(--muted); margin-left: 4px; }
+.kpi .from { font: 500 12.5px/1.4 var(--mono); color: var(--muted); margin-top: 4px; }
+.kpi .from b { color: var(--ok); font-weight: 600; }
+.bar { height: 6px; border-radius: 6px; background: #252a31; margin-top: 12px; position: relative; overflow: hidden; }
+.bar i { position: absolute; inset: 0 auto 0 0; border-radius: 6px; background: #4a525c; transition: width .7s cubic-bezier(.2, .7, .2, 1); }
+.bar i.t { background: linear-gradient(90deg, var(--heat), var(--heat-2)); }
+.bar i.s { background: #5b636e; z-index: 1; }
+.dyno { background: var(--card-2); border: 1px solid var(--line); border-radius: 14px; padding: 16px 16px 10px; }
+.dyno-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.dyno-head b { color: var(--ink); font-size: 14px; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font: 500 12px/1 var(--mono); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+.dyno svg { width: 100%; height: auto; display: block; }
+.dyno .grid line { stroke: #252a31; stroke-width: 1; }
+.dyno .axis text { fill: #6b737e; font: 500 11px var(--mono); }
+.curve { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.curve.draw { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: draw 1.4s cubic-bezier(.3, .6, .2, 1) forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.res-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 18px 20px; border-radius: 14px; background: linear-gradient(120deg, rgba(255, 90, 31, .16), rgba(255, 90, 31, .04)); border: 1px solid rgba(255, 90, 31, .28); }
+.res-foot small { display: block; color: #d0c2bb; font-size: 13px; }
+.res-foot .big { font: 700 28px/1.1 var(--display); }
+.res-foot ul { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: #d9cfca; }
+.res-foot li::before { content: "✓ "; color: var(--ok); }
+.disclaimer { font-size: 12.5px; color: var(--dim); }
+
+.amb { display: grid; grid-template-columns: 1.35fr .65fr; gap: 20px; align-items: stretch; }
+.amb-stage { position: relative; border-radius: var(--radius); overflow: hidden; background: #000; border: 1px solid var(--line); min-height: 420px; }
+.amb-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.amb-light {
+  position: absolute; inset: 0; background: var(--lc, #3b6cf6); mix-blend-mode: screen; transition: background .45s, opacity .45s;
+  -webkit-mask: url(img/ambiente-licht.png) center / cover no-repeat; mask: url(img/ambiente-licht.png) center / cover no-repeat;
+}
+.amb-light.bloom { filter: blur(10px); }
+.amb-stage.noanim .amb-light { transition: none; }
+.amb-badge { position: absolute; left: 16px; top: 16px; display: flex; align-items: center; gap: 10px; padding: 9px 14px 9px 10px; border-radius: 999px; background: rgba(8, 9, 11, .7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, .12); font-weight: 700; font-size: 14px; }
+.amb-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--c, #3b82f6); box-shadow: 0 0 14px 2px var(--c, #3b82f6); transition: background .3s, box-shadow .3s; }
+.amb-hint { position: absolute; right: 16px; bottom: 16px; font: 500 12px/1 var(--mono); color: rgba(255, 255, 255, .6); background: rgba(8, 9, 11, .55); padding: 8px 10px; border-radius: 8px; }
+.swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.sw { aspect-ratio: 1; border-radius: 50%; border: 2px solid transparent; background: var(--c); box-shadow: inset 0 0 0 3px var(--card), 0 0 12px -2px var(--c); transition: transform .15s, border-color .2s; }
+.sw:hover { transform: scale(1.08); }
+.sw.active { border-color: #fff; }
+.range { width: 100%; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 8px; background: #2c323a; outline: none; }
+.range.hue { background: linear-gradient(90deg, #f33, #fa3, #ff3, #3f6, #3ff, #36f, #c3f, #f3a, #f33); }
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 4px solid var(--bg); box-shadow: 0 0 0 1px #fff; cursor: pointer; }
+.range::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 4px solid var(--bg); cursor: pointer; }
+.modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.modes button { border: 1px solid var(--line-2); background: var(--card-2); border-radius: 10px; padding: 10px 4px; font-weight: 700; font-size: 13.5px; color: var(--muted); }
+.modes button.active { color: #fff; border-color: var(--ice); background: var(--ice-soft); }
+.amb-panel { display: flex; flex-direction: column; gap: 22px; }
+.amb-panel .step { margin: 0; }
+.pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+.pkg { display: flex; gap: 16px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px; }
+.pkg img { width: 92px; height: 92px; border-radius: 10px; object-fit: cover; flex: none; }
+.pkg h4 { font-size: 16px; }
+.pkg p { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+.pkg b { display: block; font: 600 14px/1 var(--mono); color: var(--ice); margin-top: 8px; }
+
+.coding-sec { background: var(--bg-2); border-block: 1px solid var(--line); }
+.code-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 20px; align-items: start; }
+.code-visual { position: sticky; top: 96px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #000; }
+.code-visual img { width: 100%; aspect-ratio: 4 / 3.2; object-fit: cover; opacity: .82; }
+.term {
+  position: absolute; left: 14px; right: 14px; bottom: 14px; background: rgba(6, 8, 10, .88); backdrop-filter: blur(10px);
+  border: 1px solid rgba(56, 217, 245, .25); border-radius: 12px; padding: 14px 16px; font: 500 12.5px/1.75 var(--mono); color: #9fe9f7; min-height: 150px;
+}
+.term .bar-dots { display: flex; gap: 6px; margin-bottom: 8px; }
+.term .bar-dots i { width: 9px; height: 9px; border-radius: 50%; background: #2c323a; }
+.term .ok { color: var(--ok); }
+.term .cur::after { content: "▍"; animation: blink 1s steps(1) infinite; color: var(--ice); }
+@keyframes blink { 50% { opacity: 0; } }
+.tabs { display: flex; gap: 6px; padding: 4px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 14px; }
+.tabs button { flex: 1; border: 0; background: none; padding: 11px 8px; border-radius: 9px; font-weight: 700; font-size: 14px; color: var(--muted); transition: background .2s, color .2s; }
+.tabs button.active { background: var(--ice); color: #041014; }
+.code-list { display: grid; gap: 8px; }
+.ci { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); cursor: pointer; transition: border-color .2s, background .2s; }
+.ci:hover { border-color: var(--line-2); }
+.ci input { position: absolute; opacity: 0; pointer-events: none; }
+.ci .box { width: 22px; height: 22px; border-radius: 7px; border: 2px solid #3a414a; flex: none; display: grid; place-items: center; transition: background .2s, border-color .2s; }
+.ci .box svg { width: 14px; height: 14px; stroke: #041014; opacity: 0; }
+.ci.on { border-color: rgba(56, 217, 245, .5); background: linear-gradient(90deg, rgba(56, 217, 245, .08), transparent); }
+.ci.on .box { background: var(--ice); border-color: var(--ice); }
+.ci.on .box svg { opacity: 1; }
+.ci input:focus-visible + .box { outline: 2px solid var(--ice); outline-offset: 2px; }
+.ci .txt { flex: 1; min-width: 0; }
+.ci .txt b { display: block; font-size: 15px; }
+.ci .txt small { color: var(--muted); font-size: 13px; }
+.ci .pr { font: 600 14px/1 var(--mono); color: #c9ced6; white-space: nowrap; }
+.code-sum { margin-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 18px 20px; border-radius: 14px; background: linear-gradient(120deg, rgba(56, 217, 245, .14), rgba(56, 217, 245, .03)); border: 1px solid rgba(56, 217, 245, .3); }
+.code-sum small { display: block; color: #b6d3da; font-size: 13px; }
+.code-sum .big { font: 700 28px/1.1 var(--display); }
+.code-sum .big s { font: 500 15px/1 var(--mono); color: var(--muted); margin-left: 8px; }
+.code-sum .btn-ice { background: var(--ice); color: #041014; }
+.code-sum .btn-ice:hover { background: #6ae4f9; }
+
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.filters button { border: 1px solid var(--line-2); background: var(--card); color: var(--muted); padding: 9px 16px; border-radius: 999px; font-weight: 700; font-size: 14px; transition: all .2s; }
+.filters button.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.ref-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.ref { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform .3s, border-color .3s, opacity .3s; }
+.ref:hover { transform: translateY(-4px); border-color: var(--line-2); }
+.ref.hide { display: none; }
+.ref .ph { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+.ref .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+.ref:hover .ph img { transform: scale(1.06); }
+.ref .chip { position: absolute; left: 12px; top: 12px; font: 600 10.5px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 6px 9px; border-radius: 6px; background: rgba(8, 9, 11, .75); backdrop-filter: blur(6px); }
+.ref .chip.t { color: var(--heat); }
+.ref .chip.c { color: var(--ice); }
+.ref .chip.l { color: #c084fc; }
+.ref-body { padding: 18px; }
+.ref-body h4 { font-size: 17px; }
+.ref-body p { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+.spec { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); font: 500 12.5px/1.6 var(--mono); color: #c9ced6; }
+.spec b { color: var(--ok); font-weight: 600; }
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: st; }
+.st { position: relative; padding: 26px 22px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line); }
+.st::before { counter-increment: st; content: "0" counter(st); font: 700 44px/1 var(--display); color: transparent; -webkit-text-stroke: 1px #3a414a; display: block; margin-bottom: 18px; }
+.st h4 { font-size: 18px; }
+.st p { color: var(--muted); font-size: 14.5px; margin-top: 8px; }
+.st .dur { display: inline-block; margin-top: 14px; font: 600 11.5px/1 var(--mono); color: var(--heat); background: var(--heat-soft); padding: 6px 9px; border-radius: 6px; }
+
+.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.q { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; }
+.q .stars { color: #ffb020; letter-spacing: 3px; font-size: 15px; }
+.q blockquote { margin: 14px 0 22px; font-size: 16px; color: #d7dbe1; flex: 1; }
+.q footer { display: flex; align-items: center; gap: 12px; }
+.avatar { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font: 700 14px/1 var(--display); background: var(--card-2); border: 1px solid var(--line-2); }
+.q footer b { display: block; font-size: 14.5px; }
+.q footer small { color: var(--muted); font: 500 12px/1.4 var(--mono); }
+
+.faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; }
+.faq-grid .sec-head { display: block; margin: 0; }
+.faq-grid .sec-head p { margin-top: 18px; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 0; font-weight: 700; font-size: 17px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .pm { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line-2); flex: none; position: relative; transition: transform .3s, background .3s; }
+.faq summary .pm::before, .faq summary .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; background: var(--ink); transform: translate(-50%, -50%); }
+.faq summary .pm::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform .3s; }
+.faq details[open] summary .pm { background: var(--heat); border-color: var(--heat); }
+.faq details[open] summary .pm::after { transform: translate(-50%, -50%) rotate(0); }
+.faq details p { color: var(--muted); padding: 0 48px 22px 0; }
+
+.contact { background: radial-gradient(900px 500px at 10% 100%, rgba(255, 90, 31, .1), transparent 60%), var(--bg-2); border-top: 1px solid var(--line); }
+.ct-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; }
+.ct-info h2 { margin: 14px 0 18px; }
+.ct-info > p { color: var(--muted); font-size: 17px; }
+.ct-list { list-style: none; padding: 0; margin: 30px 0 0; display: grid; gap: 12px; }
+.ct-list li { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+.ct-list .ic { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--heat-soft); color: var(--heat); flex: none; }
+.ct-list .ic svg { width: 19px; height: 19px; }
+.ct-list small { display: block; color: var(--muted); font-size: 12.5px; }
+.ct-list b { font-size: 15px; }
+.ct-form { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(20px, 3vw, 32px); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; position: relative; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field.full { grid-column: 1 / -1; }
+.field label { font-size: 13px; font-weight: 700; color: #c9ced6; }
+.field input, .field select, .field textarea {
+  background: var(--card-2); border: 1px solid var(--line-2); border-radius: 10px; padding: 13px 14px; font-size: 15px; color: #fff; width: 100%;
+  transition: border-color .2s, box-shadow .2s;
+}
+.field select { appearance: none; -webkit-appearance: none; background-image: linear-gradient(45deg, transparent 50%, #8d95a1 50%), linear-gradient(135deg, #8d95a1 50%, transparent 50%); background-position: calc(100% - 20px) 55%, calc(100% - 15px) 55%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 36px; }
+.field select option { background: #1a1e23; }
+.field input::placeholder, .field textarea::placeholder { color: #5d6570; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--heat); box-shadow: 0 0 0 3px rgba(255, 90, 31, .18); }
+.field textarea { min-height: 120px; resize: vertical; }
+.field input[type="date"] { color-scheme: dark; }
+.field.err input { border-color: #ef4444; }
+.check { grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--muted); cursor: pointer; }
+.check input { margin-top: 3px; accent-color: var(--heat); width: 17px; height: 17px; flex: none; }
+.ct-form .btn { grid-column: 1 / -1; justify-self: start; }
+.sent-msg { display: none; position: absolute; inset: 0; border-radius: var(--radius); background: var(--card); flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 32px; gap: 14px; }
+.ct-form.sent .sent-msg { display: flex; }
+.sent-msg .ok-ic { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: rgba(61, 220, 132, .14); color: var(--ok); }
+.sent-msg .ok-ic svg { width: 30px; height: 30px; }
+.sent-msg h3 { font-size: 26px; text-transform: uppercase; }
+.sent-msg p { color: var(--muted); max-width: 40ch; }
+
+.site-footer { border-top: 1px solid var(--line); padding: 64px 0 100px; color: var(--muted); font-size: 14.5px; }
+.f-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 32px; }
+.f-grid .logo { margin-bottom: 18px; color: var(--ink); }
+.site-footer h4 { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); margin-bottom: 14px; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.site-footer a:hover { color: var(--ink); }
+.f-bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; }
+.credits { margin-top: 20px; font-size: 12.5px; }
+.credits summary { cursor: pointer; color: var(--muted); }
+.credits ul { margin-top: 12px; gap: 6px; }
+.credits a { text-decoration: underline; }
+
+.mbar { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 40; display: none; gap: 8px; transform: translateY(150%); transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
+.mbar.show { transform: none; }
+.mbar a { display: grid; place-items: center; border-radius: 14px; font-weight: 700; height: 54px; box-shadow: 0 12px 30px -8px rgba(0, 0, 0, .8); }
+.mbar .call { width: 54px; background: var(--card-2); border: 1px solid var(--line-2); }
+.mbar .call svg { width: 22px; height: 22px; }
+.mbar .quote { flex: 1; background: var(--heat); color: #fff; }
+
+.rv { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2, .7, .2, 1), transform .8s cubic-bezier(.2, .7, .2, 1); }
+.rv.in { opacity: 1; transform: none; }
+.d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; } .d3 { transition-delay: .24s; }
+.no-js .rv { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .rv { opacity: 1; transform: none; }
+  .ticker-track { animation: none; }
+  .curve.draw { stroke-dashoffset: 0; }
+}
+@media (max-width: 1100px) {
+  .menu-links a { padding: 8px 8px; font-size: 14px; }
+  .calc { grid-template-columns: 340px 1fr; }
+  .ref-grid { grid-template-columns: repeat(2, 1fr); }
+  .mini-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 960px) {
+  .burger { display: block; }
+  .menu {
+    position: fixed; inset: 76px 0 auto 0; flex-direction: column; align-items: stretch; gap: 16px;
+    background: rgba(10, 11, 13, .97); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line);
+    padding: 16px var(--gutter) 24px; transform: translateY(-12px); opacity: 0; visibility: hidden; transition: all .25s;
+  }
+  header.open { background: rgba(10, 11, 13, .97); }
+  header.open .menu { transform: none; opacity: 1; visibility: visible; }
+  .menu-links { flex-direction: column; }
+  .menu-links a { display: block; padding: 13px 4px; font-size: 17px; border-bottom: 1px solid var(--line); border-radius: 0; }
+  .lang-switch { align-self: flex-start; }
+  .nav-cta { width: 100%; }
+  .hero-grid, .sec-head, .calc, .amb, .code-grid, .faq-grid, .ct-grid { grid-template-columns: 1fr; }
+  .hero-card { max-width: 420px; }
+  .svc, .svc.s2 { grid-column: span 6; min-height: 340px; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .quotes { grid-template-columns: 1fr; }
+  .pkg-grid { grid-template-columns: 1fr; }
+  .code-visual { position: relative; top: 0; }
+  .f-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .hero::before { background: linear-gradient(0deg, var(--bg) 4%, rgba(10, 11, 13, .82) 45%, rgba(10, 11, 13, .45) 100%); }
+  .hero-inner { padding-top: 120px; }
+  .hero-card { display: none; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat { padding: 18px 0 18px 16px; }
+  .stat:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, .08); }
+  .stats { margin-top: 36px; }
+  .kpis { grid-template-columns: 1fr 1fr; }
+  .kpis .kpi:last-child { grid-column: 1 / -1; }
+  .mini-grid { grid-template-columns: 1fr; }
+  .amb-stage { min-height: 300px; aspect-ratio: 4 / 3; }
+  .ref-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .ct-form { grid-template-columns: 1fr; }
+  .f-grid { grid-template-columns: 1fr; }
+  .mbar { display: flex; }
+  .faq details p { padding-right: 0; }
+  .res-foot .btn, .code-sum .btn { width: 100%; }
+  .panel { padding: 18px; }
+}
+@media (max-width: 760px) {
+  section { padding: 64px 0; }
+  .nav { height: 64px; }
+  .menu { inset: 64px 0 auto 0; max-height: calc(100svh - 64px); overflow-y: auto; }
+  .logo-mark { width: 36px; height: 36px; }
+  .logo b { font-size: 17px; }
+  .sec-head { gap: 14px; margin-bottom: 28px; }
+  .sec-head p { font-size: 16px; }
+  h2 { font-size: clamp(30px, 8.6vw, 38px); }
+  .eyebrow { font-size: 11px; letter-spacing: .1em; }
+  .eb-loc { display: none; }
+  .hero { min-height: 100svh; }
+  .hero-inner { padding-top: 96px; }
+  .hero h1 { font-size: clamp(34px, 10vw, 46px); margin: 16px 0 16px; }
+  .hero .lead { font-size: 16px; }
+  .hero-cta { flex-direction: column; margin-top: 24px; }
+  .hero-cta .btn { width: 100%; }
+  .stat b { font-size: 26px; }
+  .stat > span { font-size: 13px; }
+  .ticker { padding: 14px 0; }
+  .ticker span { font-size: 13px; gap: 40px; }
+  .ticker-track { gap: 40px; }
+  .svc, .svc.s2 { min-height: 300px; }
+  .svc-body { padding: 20px; }
+  .svc h3 { font-size: 22px; }
+  .svc p { font-size: 14.5px; }
+  .mini { padding: 18px; display: grid; grid-template-columns: 42px 1fr; column-gap: 14px; }
+  .mini .ic { margin: 0; grid-row: span 2; }
+  .mini p { margin-top: 2px; }
+  .brands { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .brand-btn { padding: 12px 4px; font-size: 13px; }
+  .select select { font-size: 16px; }
+  .res-top h3 { font-size: 22px; }
+  .kpi { padding: 14px; }
+  .kpi .v { font-size: 28px; }
+  .dyno { padding: 14px 10px 8px; }
+  .dyno-head { margin-bottom: 4px; }
+  .res-foot { padding: 16px; }
+  .amb-stage { min-height: 0; aspect-ratio: 4 / 3; }
+  .amb-badge { left: 12px; top: 12px; font-size: 13px; }
+  .amb-hint { display: none; }
+  .swatches { gap: 8px; }
+  .code-visual { border-radius: var(--radius); }
+  .code-visual img { aspect-ratio: 16 / 9; opacity: .9; }
+  .term { position: relative; left: auto; right: auto; bottom: auto; border-radius: 0; border: 0; border-top: 1px solid rgba(56, 217, 245, .25); min-height: 136px; font-size: 12px; }
+  .tabs button { font-size: 13px; padding: 10px 4px; line-height: 1.25; }
+  .ci { padding: 13px 14px; gap: 12px; }
+  .ci .txt b { font-size: 14.5px; }
+  .ci .txt small { font-size: 12.5px; }
+  .scroller {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px;
+    margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter) 6px; scroll-padding: 0 var(--gutter); scrollbar-width: none;
+  }
+  .scroller::-webkit-scrollbar { display: none; }
+  .scroller > * { flex: 0 0 82%; scroll-snap-align: start; }
+  .scroller > .hide { display: none; }
+  .ref:hover, .mini:hover { transform: none; }
+  .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 calc(var(--gutter) * -1) 18px; padding: 0 var(--gutter); }
+  .filters::-webkit-scrollbar { display: none; }
+  .filters button { flex: none; }
+  .st { padding: 20px 18px; display: grid; grid-template-columns: 52px 1fr; column-gap: 12px; }
+  .st::before { font-size: 34px; margin: 0; grid-row: span 3; }
+  .st .dur { justify-self: start; }
+  .q { padding: 22px; }
+  .q blockquote { font-size: 15px; }
+  .faq summary { font-size: 16px; padding: 18px 0; }
+  .faq-grid { gap: 20px; }
+  .ct-grid { gap: 28px; }
+  .ct-info > p { font-size: 16px; }
+  .ct-list { margin-top: 22px; }
+  .field input, .field select, .field textarea { font-size: 16px; }
+  .ct-form .btn { width: 100%; justify-self: stretch; }
+  .site-footer { padding: 48px 0 110px; }
+  .f-bottom { flex-direction: column; gap: 6px; }
+}
+@media (max-width: 380px) {
+  .brands { grid-template-columns: repeat(2, 1fr); }
+  .kpi .v { font-size: 24px; }
+  .gain { font-size: 13px; padding: 8px 11px; }
+  .swatches { grid-template-columns: repeat(6, 1fr); gap: 6px; }
+  .modes button { font-size: 12.5px; }
+}
+</style>
+</head>
+<body class="no-js">
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="VEKTOR Car Coding &amp; Performance">
+      <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h4.2l4.8 10.6L16.8 5H21l-7.4 15h-3.2z" fill="#ff5a1f"/><path d="M16.8 5H21l-2 4h-4.1z" fill="#38d9f5"/></svg></span>
+      <span><b>VEKTOR</b><small>CODING · PERFORMANCE</small></span>
+    </a>
+    <nav class="menu" id="menu">
+      <ul class="menu-links">
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#rechner">Leistungsrechner</a></li>
+        <li><a href="#ambiente">Ambiente</a></li>
+        <li><a href="#coding">Coding</a></li>
+        <li><a href="#referenzen">Referenzen</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="lang-switch" id="langSwitch" role="group" aria-label="Sprache">
+        <button class="lng active" data-lang="de">DE</button>
+        <button class="lng" data-lang="it">IT</button>
+        <button class="lng" data-lang="en">EN</button>
+        <button class="lng" data-lang="bs">BS</button>
+      </div>
+      <a href="#kontakt" class="btn btn-primary nav-cta">Termin buchen</a>
+    </nav>
+    <button class="burger" aria-label="Menü" aria-expanded="false" aria-controls="menu"><span></span></button>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-label="Einleitung">
+  <picture>
+    <source media="(max-width: 760px)" srcset="img/hero-m.jpg">
+    <img src="img/hero.jpg" alt="Sportwagen mit roten Rückleuchten auf nasser Straße am Abend" fetchpriority="high">
+  </picture>
+  <div class="hero-inner">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Car Coding · Chiptuning · Ambiente<span class="eb-loc"> — Wels</span></span>
+        <h1>Mehr <span class="hl">Leistung.</span><br><span class="outline">Mehr Komfort.</span></h1>
+        <p class="lead">Software-Optimierung auf dem eigenen Prüfstand, Freischaltung versteckter Funktionen und Ambientebeleuchtung wie ab Werk — für BMW, Audi, VW, Mercedes, Porsche und mehr.</p>
+        <div class="hero-cta">
+          <a href="#rechner" class="btn btn-primary">Leistung berechnen
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#leistungen" class="btn btn-ghost">Alle Leistungen</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Beispiel Prüfstandsmessung">
+        <div class="hc-head"><span>Prüfstand · Bay 2</span><span class="live">Live</span></div>
+        <div class="gauge">
+          <svg viewBox="0 0 200 120" aria-hidden="true">
+            <defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ff5a1f"/></linearGradient></defs>
+            <path d="M20 110 A80 80 0 0 1 180 110" fill="none" stroke="#252a31" stroke-width="12" stroke-linecap="round"/>
+            <path id="gArc" d="M20 110 A80 80 0 0 1 180 110" fill="none" stroke="url(#gg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3"/>
+          </svg>
+          <div class="gauge-val"><b id="gNum">245</b><small>PS</small></div>
+        </div>
+        <div class="hc-rows">
+          <div><small>Fahrzeug</small><b>Golf 8 GTI</b></div>
+          <div><small>Software</small><b>Stage 1</b></div>
+          <div><small>Drehmoment</small><b>440 Nm<em>+70</em></b></div>
+          <div><small>Leistung</small><b>310 PS<em>+65</em></b></div>
+        </div>
+      </aside>
+    </div>
+    <div class="stats">
+      <div class="wrap stats-grid">
+        <div class="stat"><b><span class="count" data-to="3800">3800</span>+</b><span>Fahrzeuge optimiert</span></div>
+        <div class="stat"><b><span class="count" data-to="45">45</span></b><span>Automarken</span></div>
+        <div class="stat"><b>100 %</b><span>Backup der Originalsoftware</span></div>
+        <div class="stat"><b>4,9 ★</b><span>aus 410 Bewertungen</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>BMW</span><span>Audi</span><span>Volkswagen</span><span>Mercedes-Benz</span><span>Porsche</span><span>Cupra</span><span>Škoda</span><span>Mini</span><span>Seat</span>
+    <span>BMW</span><span>Audi</span><span>Volkswagen</span><span>Mercedes-Benz</span><span>Porsche</span><span>Cupra</span><span>Škoda</span><span>Mini</span><span>Seat</span>
+  </div>
+</div>
+
+<section id="leistungen">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow">Leistungen</span>
+        <h2>Alles, was dein Auto <span class="hl">kann.</span></h2>
+      </div>
+      <p class="rv d1">Viele Funktionen sind ab Werk schon verbaut — nur nicht aktiviert. Wir holen heraus, was in Motor, Steuergeräten und Innenraum steckt. Sauber dokumentiert und jederzeit rückrüstbar.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc rv">
+        <img src="img/pruefstand.jpg" alt="Auto auf einem Rollenprüfstand in einer Werkshalle" loading="lazy">
+        <div class="svc-body">
+          <span class="tag">Chiptuning</span>
+          <h3>Software-Optimierung</h3>
+          <p>Stage 1 und Stage 2 für Benziner und Diesel — individuell abgestimmt und mit Prüfstandsprotokoll vorher und nachher.</p>
+          <div class="price"><span>ab</span><b>€ 590</b></div>
+        </div>
+      </article>
+      <article class="svc rv d1">
+        <img src="img/coding.jpg" alt="Techniker mit Laptop bei der Fahrzeugdiagnose am offenen Motorraum" loading="lazy">
+        <div class="svc-body">
+          <span class="tag">Car Coding</span>
+          <h3>Funktionen freischalten</h3>
+          <p>Sport-Anzeigen, Komfortfunktionen, Lichtfunktionen und Startbildschirme — wir codieren, was dein Auto schon an Bord hat.</p>
+          <div class="price"><span>ab</span><b>€ 29</b></div>
+        </div>
+      </article>
+      <article class="svc s2 rv">
+        <img src="img/m3-nacht.jpg" alt="Schwarze Sportlimousine bei Nacht mit leuchtenden Rückleuchten" loading="lazy">
+        <div class="svc-body">
+          <span class="tag">Vmax</span>
+          <h3>Vmax-Aufhebung</h3>
+          <p>Elektronische Begrenzung anheben — mit Prüfung von Reifen-Index und Bremsen.</p>
+          <div class="price"><span>ab</span><b>€ 390</b></div>
+        </div>
+      </article>
+      <article class="svc s2 rv d1">
+        <img src="img/ambiente.jpg" alt="Autotür mit blauer Ambientebeleuchtung" loading="lazy">
+        <div class="svc-body">
+          <span class="tag">Licht</span>
+          <h3>Ambientebeleuchtung</h3>
+          <p>Bis zu 64 Farben, nahtlos integriert und über das Original-Menü steuerbar.</p>
+          <div class="price"><span>ab</span><b>€ 890</b></div>
+        </div>
+      </article>
+      <article class="svc s2 rv d2">
+        <img src="img/sternenhimmel.jpg" alt="Sternenhimmel aus Lichtpunkten im Dachhimmel eines Autos" loading="lazy">
+        <div class="svc-body">
+          <span class="tag">Licht</span>
+          <h3>Sternenhimmel</h3>
+          <p>Bis zu 1.400 handgesetzte Glasfaser-Sterne — mit Funkel-Effekt.</p>
+          <div class="price"><span>ab</span><b>€ 1.290</b></div>
+        </div>
+      </article>
+    </div>
+    <div class="mini-grid">
+      <div class="mini rv">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg></span>
+        <h4>Diagnose &amp; Fehlerspeicher</h4>
+        <p>Alle Steuergeräte auslesen, Fehler finden und dokumentieren.</p>
+      </div>
+      <div class="mini rv d1">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+        <h4>Retrofits</h4>
+        <p>CarPlay, Rückfahrkamera, Lenkradtasten und mehr nachrüsten.</p>
+      </div>
+      <div class="mini rv d2">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span>
+        <h4>Getriebe-Software</h4>
+        <p>Schnellere Schaltzeiten und angepasste Kennfelder für DSG und ZF.</p>
+      </div>
+      <div class="mini rv d3">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <h4>Gutachten &amp; Eintragung</h4>
+        <p>Wir begleiten die Typisierung der Leistungssteigerung.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="calc-sec" id="rechner">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow">Leistungsrechner</span>
+        <h2>Wie viel steckt in <span class="hl">deinem Auto?</span></h2>
+      </div>
+      <p class="rv d1">Marke und Modell wählen, Stufe festlegen — und sofort sehen, was Software-Optimierung bringt. Inklusive Prüfstandskurve und Festpreis.</p>
+    </div>
+    <div class="calc">
+      <div class="panel rv">
+        <div class="step">
+          <div class="step-label"><i>1</i>Marke</div>
+          <div class="brands" id="brands" data-dyn></div>
+        </div>
+        <div class="step">
+          <div class="step-label"><i>2</i>Modell &amp; Motor</div>
+          <div class="select" data-dyn><select id="model" aria-label="Modell"></select></div>
+        </div>
+        <div class="step">
+          <div class="step-label"><i>3</i>Stufe</div>
+          <div class="seg" id="stage" role="group" aria-label="Stufe">
+            <button data-s="0">Serie</button>
+            <button data-s="1" class="active">Stage 1</button>
+            <button data-s="2">Stage 2</button>
+          </div>
+          <div class="seg-note" id="stageNote" data-dyn></div>
+        </div>
+        <div class="step">
+          <label class="toggle">
+            <span><b>Vmax-Aufhebung</b><small data-dyn id="vmaxNote">250 → 270 km/h</small></span>
+            <span class="switch"><input type="checkbox" id="vmax" aria-label="Vmax-Aufhebung"><span></span></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="panel result rv d1">
+        <div class="res-top">
+          <div>
+            <h3 data-dyn id="resName">VW Golf 8 GTI</h3>
+            <div class="sub" data-dyn id="resSub">2.0 TSI · Benzin</div>
+          </div>
+          <span class="gain" data-dyn id="resGain">+65 PS · +27 %</span>
+        </div>
+        <div class="kpis">
+          <div class="kpi">
+            <small>Leistung</small>
+            <div class="v" data-dyn><span id="kPs">310</span><em>PS</em></div>
+            <div class="from" data-dyn id="kPsFrom">Serie 245 PS</div>
+            <div class="bar"><i class="t" id="bPsT"></i><i class="s" id="bPsS"></i></div>
+          </div>
+          <div class="kpi">
+            <small>Drehmoment</small>
+            <div class="v" data-dyn><span id="kNm">440</span><em>Nm</em></div>
+            <div class="from" data-dyn id="kNmFrom">Serie 370 Nm</div>
+            <div class="bar"><i class="t" id="bNmT"></i><i class="s" id="bNmS"></i></div>
+          </div>
+          <div class="kpi">
+            <small>Höchstgeschwindigkeit</small>
+            <div class="v" data-dyn><span id="kV">250</span><em>km/h</em></div>
+            <div class="from" data-dyn id="kVFrom">abgeregelt</div>
+            <div class="bar"><i class="t" id="bVT"></i><i class="s" id="bVS"></i></div>
+          </div>
+        </div>
+        <div class="dyno">
+          <div class="dyno-head">
+            <b>Prüfstandskurve</b>
+            <div class="legend">
+              <span><i style="background:#5b636e"></i><span>Serie PS</span></span>
+              <span><i style="background:#ff5a1f"></i><span>Tuning PS</span></span>
+              <span><i style="background:#38d9f5"></i><span>Tuning Nm</span></span>
+            </div>
+          </div>
+          <svg id="dyno" viewBox="0 0 640 280" role="img" aria-label="Prüfstandskurve: Leistung und Drehmoment über Drehzahl"></svg>
+        </div>
+        <div class="res-foot">
+          <div>
+            <small>Festpreis inkl. Prüfstandslauf</small>
+            <div class="big" data-dyn id="resPrice">€ 790</div>
+            <ul>
+              <li>Backup der Originalsoftware</li>
+              <li>2 Jahre Garantie auf Software</li>
+              <li>Rückrüstung jederzeit möglich</li>
+            </ul>
+          </div>
+          <a href="#kontakt" class="btn btn-primary" id="calcSend">Termin anfragen
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <p class="disclaimer">Richtwerte. Die tatsächlichen Werte hängen vom Zustand des Fahrzeugs ab und werden vor und nach der Optimierung auf dem Prüfstand gemessen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ambiente">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow ice">Ambiente-Konfigurator</span>
+        <h2>Dein Licht. <span class="hl">Deine Farbe.</span></h2>
+      </div>
+      <p class="rv d1">Wähle eine Farbe und einen Lichtmodus und sieh direkt, wie dein Innenraum bei Nacht wirkt. Wir rüsten Lichtleisten in Türen, Armaturenbrett und Fußraum nach — passend zum Original-Menü.</p>
+    </div>
+    <div class="amb">
+      <div class="amb-stage rv" id="ambStage">
+        <img id="ambImg" src="img/ambiente-basis.jpg" alt="Innenraum einer Autotür mit Ambientebeleuchtung" loading="lazy">
+        <div class="amb-light bloom" aria-hidden="true"></div>
+        <div class="amb-light" aria-hidden="true"></div>
+        <div class="amb-badge" data-dyn><span class="amb-dot" id="ambDot"></span><span id="ambName">Polarblau</span></div>
+        <div class="amb-hint">64 Farben · Original-Menü</div>
+      </div>
+      <div class="panel amb-panel rv d1">
+        <div class="step">
+          <div class="step-label"><i>1</i>Farbe wählen</div>
+          <div class="swatches" id="swatches" data-dyn></div>
+        </div>
+        <div class="step">
+          <div class="step-label"><i>2</i>Feinabstimmung</div>
+          <input type="range" class="range hue" id="hue" min="0" max="359" value="225" aria-label="Farbton">
+        </div>
+        <div class="step">
+          <div class="step-label"><i>3</i>Intensität</div>
+          <input type="range" class="range" id="inten" min="20" max="160" value="100" aria-label="Intensität">
+        </div>
+        <div class="step">
+          <div class="step-label"><i>4</i>Lichtmodus</div>
+          <div class="modes" id="modes">
+            <button data-m="static" class="active">Statisch</button>
+            <button data-m="breath">Atmen</button>
+            <button data-m="cycle">Farbwechsel</button>
+          </div>
+        </div>
+        <a href="#kontakt" class="btn btn-light" id="ambSend">Diese Farbe anfragen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+    <div class="pkg-grid">
+      <div class="pkg rv">
+        <img src="img/ambiente.jpg" alt="Lichtleiste in einer Autotür" loading="lazy">
+        <div><h4>Ambiente-Paket</h4><p>Türen &amp; Armaturenbrett, 64 Farben</p><b>ab € 890</b></div>
+      </div>
+      <div class="pkg rv d1">
+        <img src="img/fussraum.jpg" alt="Rot beleuchteter Fußraum eines Autos" loading="lazy">
+        <div><h4>Fußraum-Licht</h4><p>RGB, gekoppelt an das Ambiente</p><b>ab € 290</b></div>
+      </div>
+      <div class="pkg rv d2">
+        <img src="img/sternenhimmel.jpg" alt="Sternenhimmel im Dachhimmel" loading="lazy">
+        <div><h4>Sternenhimmel</h4><p>Bis 1.400 Sterne mit Funkel-Effekt</p><b>ab € 1.290</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="coding-sec" id="coding">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow ice">Car Coding</span>
+        <h2>Versteckte Funktionen. <span class="hl">Freigeschaltet.</span></h2>
+      </div>
+      <p class="rv d1">Wähle deine Wunschfunktionen und sieh sofort den Preis. Ab drei Funktionen gibt es 15 % Paketrabatt — Auslesen und Backup sind immer inklusive.</p>
+    </div>
+    <div class="code-grid">
+      <div class="code-visual rv">
+        <img src="img/coding-nah.jpg" alt="Techniker codiert ein Fahrzeug per Laptop" loading="lazy">
+        <div class="term" id="term" aria-hidden="true" data-dyn>
+          <div class="bar-dots"><i></i><i></i><i></i></div>
+          <div id="termOut"></div>
+        </div>
+      </div>
+      <div class="rv d1">
+        <div class="tabs" id="codeTabs" role="tablist" aria-label="Marke">
+          <button class="active" data-b="bmw" role="tab">BMW · Mini</button>
+          <button data-b="vag" role="tab">VW · Audi · Škoda</button>
+          <button data-b="mb" role="tab">Mercedes</button>
+        </div>
+        <div class="code-list" id="codeList" data-dyn></div>
+        <div class="code-sum">
+          <div>
+            <small data-dyn id="codeCount">0 Funktionen gewählt</small>
+            <div class="big" data-dyn id="codeTotal">€ 0</div>
+          </div>
+          <a href="#kontakt" class="btn btn-ice" id="codeSend">Codierung anfragen
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="referenzen">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow">Referenzen</span>
+        <h2>Aus unserer <span class="hl">Werkstatt.</span></h2>
+      </div>
+      <p class="rv d1">Eine Auswahl an Fahrzeugen, die in den letzten Monaten bei uns waren — mit gemessenen Werten vom Prüfstand.</p>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Referenzen filtern">
+      <button class="active" data-f="all">Alle</button>
+      <button data-f="t">Tuning</button>
+      <button data-f="c">Coding</button>
+      <button data-f="l">Licht</button>
+    </div>
+    <div class="ref-grid scroller" id="refGrid">
+      <article class="ref" data-cat="t">
+        <div class="ph"><img src="img/m3-gruen.jpg" alt="Grüne BMW M3 Limousine von hinten" loading="lazy"><span class="chip t">Tuning</span></div>
+        <div class="ref-body"><h4>BMW M3 Competition</h4><p>Stage 1 + Vmax-Aufhebung</p><div class="spec">510 → <b>603 PS</b> · 650 → <b>762 Nm</b></div></div>
+      </article>
+      <article class="ref" data-cat="t">
+        <div class="ph"><img src="img/porsche-nacht.jpg" alt="Roter Porsche 911 bei Nacht auf nasser Straße" loading="lazy"><span class="chip t">Tuning</span></div>
+        <div class="ref-body"><h4>Porsche 911 Carrera S</h4><p>Stage 1 + Abgasklappen-Steuerung</p><div class="spec">450 → <b>532 PS</b> · 530 → <b>648 Nm</b></div></div>
+      </article>
+      <article class="ref" data-cat="t">
+        <div class="ph"><img src="img/golf-gti.jpg" alt="Blauer VW Golf GTI" loading="lazy"><span class="chip t">Tuning</span></div>
+        <div class="ref-body"><h4>VW Golf 7 GTI</h4><p>Stage 2 + DSG-Software</p><div class="spec">230 → <b>318 PS</b> · 350 → <b>452 Nm</b></div></div>
+      </article>
+      <article class="ref" data-cat="c">
+        <div class="ph"><img src="img/m3-nacht.jpg" alt="Schwarzer BMW M3 bei Nacht" loading="lazy"><span class="chip c">Coding</span></div>
+        <div class="ref-body"><h4>BMW M3 (G80)</h4><p>Sport-Displays, Lichtfunktionen, Komfort</p><div class="spec"><b>9 Funktionen</b> · 45 Min.</div></div>
+      </article>
+      <article class="ref" data-cat="c">
+        <div class="ph"><img src="img/amg-cockpit.jpg" alt="Cockpit eines Mercedes-AMG GT" loading="lazy"><span class="chip c">Coding</span></div>
+        <div class="ref-body"><h4>Mercedes-AMG GT S</h4><p>AMG-Menü, Startbildschirm, Spiegel</p><div class="spec"><b>6 Funktionen</b> · 40 Min.</div></div>
+      </article>
+      <article class="ref" data-cat="l">
+        <div class="ph"><img src="img/ambiente.jpg" alt="Mercedes E-Klasse Tür mit Ambientebeleuchtung" loading="lazy"><span class="chip l">Licht</span></div>
+        <div class="ref-body"><h4>Mercedes E-Klasse</h4><p>Ambiente 64 Farben nachgerüstet</p><div class="spec"><b>12 Lichtleisten</b> · 1 Tag</div></div>
+      </article>
+      <article class="ref" data-cat="l">
+        <div class="ph"><img src="img/sternenhimmel.jpg" alt="Sternenhimmel im Auto" loading="lazy"><span class="chip l">Licht</span></div>
+        <div class="ref-body"><h4>Sternenhimmel</h4><p>Glasfaser-Sterne mit Funkel-Modul</p><div class="spec"><b>1.200 Sterne</b> · 2 Tage</div></div>
+      </article>
+      <article class="ref" data-cat="l">
+        <div class="ph"><img src="img/fussraum.jpg" alt="Rote Fußraumbeleuchtung" loading="lazy"><span class="chip l">Licht</span></div>
+        <div class="ref-body"><h4>Fußraum-Licht RGB</h4><p>Nachrüstung, gekoppelt an das Ambiente</p><div class="spec"><b>4 Zonen</b> · 3 Std.</div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="calc-sec" id="ablauf">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow">Ablauf</span>
+        <h2>In vier Schritten <span class="hl">zum Ergebnis.</span></h2>
+      </div>
+      <p class="rv d1">Transparent, dokumentiert und meistens am selben Tag erledigt. Du kannst gerne in unserer Lounge warten.</p>
+    </div>
+    <div class="steps">
+      <div class="st rv"><h4>Termin &amp; Beratung</h4><p>Online oder per Telefon. Wir klären Fahrzeug, Wünsche und das passende Paket.</p><span class="dur">5 Min.</span></div>
+      <div class="st rv d1"><h4>Diagnose &amp; Backup</h4><p>Fehlerspeicher auslesen, Zustand prüfen, Originalsoftware sichern.</p><span class="dur">20 Min.</span></div>
+      <div class="st rv d2"><h4>Software &amp; Einbau</h4><p>Optimierung, Codierung oder Nachrüstung durch unsere Techniker.</p><span class="dur">1–4 Std.</span></div>
+      <div class="st rv d3"><h4>Prüfstand &amp; Übergabe</h4><p>Messung, Protokoll und kurze Einweisung in die neuen Funktionen.</p><span class="dur">30 Min.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="stimmen">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow">Kundenstimmen</span>
+        <h2>Das sagen <span class="hl">unsere Kunden.</span></h2>
+      </div>
+      <p class="rv d1">4,9 von 5 Sternen aus über 400 Bewertungen.</p>
+    </div>
+    <div class="quotes scroller">
+      <figure class="q rv" style="margin:0">
+        <div class="stars" aria-label="5 von 5 Sternen">★★★★★</div>
+        <blockquote>Stage 1 auf meinem Golf R — der Unterschied ist brutal, und das Auto läuft trotzdem ruhig und sauber. Prüfstandsprotokoll vorher und nachher, alles transparent.</blockquote>
+        <footer><span class="avatar">LK</span><div><b>Lukas K.</b><small>VW Golf 8 R</small></div></footer>
+      </figure>
+      <figure class="q rv d1" style="margin:0">
+        <div class="stars" aria-label="5 von 5 Sternen">★★★★★</div>
+        <blockquote>Ambiente mit 64 Farben nachgerüstet — sieht aus wie ab Werk und lässt sich ganz normal über das Menü einstellen. Saubere Arbeit, keine Klappergeräusche.</blockquote>
+        <footer><span class="avatar">SM</span><div><b>Selina M.</b><small>Mercedes C-Klasse</small></div></footer>
+      </figure>
+      <figure class="q rv d2" style="margin:0">
+        <div class="stars" aria-label="5 von 5 Sternen">★★★★★</div>
+        <blockquote>Neun Funktionen in 45 Minuten codiert, während ich Kaffee getrunken habe. Fairer Preis und super erklärt.</blockquote>
+        <footer><span class="avatar">DA</span><div><b>Daniel A.</b><small>BMW 340i Touring</small></div></footer>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="calc-sec" id="faq">
+  <div class="wrap faq-grid">
+    <div class="sec-head rv">
+      <span class="eyebrow">FAQ</span>
+      <h2>Häufige <span class="hl">Fragen.</span></h2>
+      <p>Noch etwas unklar? Ruf uns an oder schreib uns — wir beraten dich gerne.</p>
+    </div>
+    <div class="faq rv d1">
+      <details open>
+        <summary>Ist Chiptuning legal?<span class="pm"></span></summary>
+        <p>Ja, wenn die Leistungssteigerung eingetragen wird. Wir stellen die nötigen Unterlagen bereit und begleiten die Typisierung. Ohne Eintragung erlischt die Betriebserlaubnis — darauf weisen wir vor jedem Auftrag hin.</p>
+      </details>
+      <details>
+        <summary>Schadet die Optimierung dem Motor?<span class="pm"></span></summary>
+        <p>Wir bleiben innerhalb der Toleranzen der Bauteile und prüfen Ladedruck, Abgastemperatur und Lambda auf dem Prüfstand. Auf unsere Software geben wir 2 Jahre Garantie.</p>
+      </details>
+      <details>
+        <summary>Kann ich auf Serie zurück?<span class="pm"></span></summary>
+        <p>Jederzeit. Vor jeder Änderung sichern wir die Originalsoftware aller betroffenen Steuergeräte. Die Rückrüstung dauert meist unter 30 Minuten.</p>
+      </details>
+      <details>
+        <summary>Was ist bei der Vmax-Aufhebung zu beachten?<span class="pm"></span></summary>
+        <p>Reifen, Bremsen und Fahrwerk müssen zur neuen Höchstgeschwindigkeit passen. Wir prüfen den Geschwindigkeitsindex der Reifen und beraten dich, bevor wir etwas ändern.</p>
+      </details>
+      <details>
+        <summary>Wie lange dauert ein Termin?<span class="pm"></span></summary>
+        <p>Codierungen 30–60 Minuten, Chiptuning mit Prüfstand 2–3 Stunden, Ambientebeleuchtung je nach Umfang 1–2 Tage. Auf Wunsch stellen wir ein Ersatzfahrzeug.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="kontakt">
+  <div class="wrap ct-grid">
+    <div class="ct-info rv">
+      <span class="eyebrow">Kontakt</span>
+      <h2>Termin <span class="hl">buchen.</span></h2>
+      <p>Schreib uns dein Fahrzeug und deinen Wunsch — wir melden uns innerhalb von 24 Stunden mit einem Festpreis.</p>
+      <ul class="ct-list">
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><div><small>Telefon &amp; WhatsApp</small><b><a href="tel:+437242987654">07242 / 98 76 54</a></b></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></span><div><small>E-Mail</small><b><a href="mailto:hallo@vektor-demo.at">hallo@vektor-demo.at</a></b></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><small>Werkstatt</small><b>Beispielstraße 8, 4600 Wels</b></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div><small>Öffnungszeiten</small><b>Mo–Fr 9–18 · Sa 9–13 Uhr</b></div></li>
+      </ul>
+    </div>
+    <form class="ct-form rv d1" id="form" novalidate>
+      <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" placeholder="Vor- und Nachname" required></div>
+      <div class="field"><label for="f-tel">Telefon</label><input id="f-tel" name="tel" type="tel" autocomplete="tel" placeholder="Für Rückfragen" required></div>
+      <div class="field full"><label for="f-mail">E-Mail</label><input id="f-mail" name="mail" type="email" autocomplete="email" placeholder="name@beispiel.at" required></div>
+      <div class="field"><label for="f-car">Fahrzeug</label><input id="f-car" name="car" placeholder="z. B. BMW 340i, Bj. 2021" required></div>
+      <div class="field"><label for="f-svc">Leistung</label>
+        <select id="f-svc" name="svc">
+          <option value="stage1">Chiptuning Stage 1</option>
+          <option value="stage2">Chiptuning Stage 2</option>
+          <option value="vmax">Vmax-Aufhebung</option>
+          <option value="coding">Car Coding</option>
+          <option value="amb">Ambientebeleuchtung</option>
+          <option value="star">Sternenhimmel</option>
+          <option value="other">Sonstiges</option>
+        </select>
+      </div>
+      <div class="field"><label for="f-date">Wunschtermin</label><input id="f-date" name="date" type="date"></div>
+      <div class="field"><label for="f-time">Uhrzeit</label>
+        <select id="f-time" name="time">
+          <option>Vormittag</option>
+          <option>Nachmittag</option>
+          <option>Egal</option>
+        </select>
+      </div>
+      <div class="field full"><label for="f-msg">Nachricht</label><textarea id="f-msg" name="msg" placeholder="Was dürfen wir für dich tun?"></textarea></div>
+      <label class="check"><input type="checkbox" id="f-ok" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden.</span></label>
+      <button type="submit" class="btn btn-primary">Anfrage senden
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <div class="sent-msg" role="status">
+        <span class="ok-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>
+        <h3>Danke!</h3>
+        <p>Deine Anfrage ist angekommen. Wir melden uns innerhalb von 24 Stunden. (Demo — es wurde nichts versendet.)</p>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <a href="#top" class="logo"><span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 5h4.2l4.8 10.6L16.8 5H21l-7.4 15h-3.2z" fill="#ff5a1f"/><path d="M16.8 5H21l-2 4h-4.1z" fill="#38d9f5"/></svg></span><span><b>VEKTOR</b><small>CODING · PERFORMANCE</small></span></a>
+        <p style="max-width:36ch">Chiptuning, Car Coding und Ambientebeleuchtung in Wels und ganz Oberösterreich.</p>
+      </div>
+      <div>
+        <h4>Leistungen</h4>
+        <ul><li><a href="#rechner">Chiptuning</a></li><li><a href="#coding">Car Coding</a></li><li><a href="#rechner">Vmax-Aufhebung</a></li><li><a href="#ambiente">Ambientebeleuchtung</a></li></ul>
+      </div>
+      <div>
+        <h4>Werkstatt</h4>
+        <ul><li><a href="#referenzen">Referenzen</a></li><li><a href="#ablauf">Ablauf</a></li><li><a href="#faq">FAQ</a></li><li><a href="#kontakt">Kontakt</a></li></ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul><li><a href="tel:+437242987654">07242 / 98 76 54</a></li><li><a href="mailto:hallo@vektor-demo.at">hallo@vektor-demo.at</a></li><li>Beispielstraße 8<br>4600 Wels</li></ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 VEKTOR Car Coding &amp; Performance — Demo-Projekt, kein echtes Unternehmen.</span>
+      <span>Impressum · Datenschutz · AGB</span>
+    </div>
+    <details class="credits">
+      <summary>Bildnachweis</summary>
+      <ul>
+        <li>Porsche 911 im Regen: Gabriel Gurrola, <a href="https://commons.wikimedia.org/wiki/File:Porsche_911_on_a_rainy_evening_(Unsplash).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC0</li>
+        <li>Fahrzeugdiagnose (2 Fotos): Shixart1985, <a href="https://commons.wikimedia.org/wiki/File:Young_mechanic_with_modern_laptop_doing_car_diagnostic_at_automobile_repair.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> / <a href="https://commons.wikimedia.org/wiki/File:Young_mechanic_with_laptop_doing_car_diagnostic_at_automobile_repair_shop_close.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY 2.0</li>
+        <li>Rollenprüfstand: Marek Ślusarczyk (Tupungato), <a href="https://commons.wikimedia.org/wiki/File:005_Chassis_dynamometer_car_testing_in_car_factory_-_Opel_Factory_in_Gliwice,_Poland_-_Rollenpr%C3%BCfstand.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY 3.0</li>
+        <li>Ambientebeleuchtung (Farbe im Konfigurator digital verändert): Kārlis Dambrāns, <a href="https://commons.wikimedia.org/wiki/File:Mercedes-Benz_W213_(E-class)_doors_with_ambient_lighting,_2016.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY 2.0</li>
+        <li>Sternenhimmel: Damian B Oh, <a href="https://commons.wikimedia.org/wiki/File:Rolls-Royce_Phantom_VIII_Series_II_Scivaro_Grey_Peony_Pink_Iceland_Moss_(13).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 4.0</li>
+        <li>BMW M3 bei Nacht: OWS Photography, <a href="https://commons.wikimedia.org/wiki/File:BMW_M3_(G80)_Miami_Metro_Area,_USA.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY 4.0</li>
+        <li>Porsche bei Nacht: Ben, <a href="https://commons.wikimedia.org/wiki/File:Porsche_Porsche_at_night_(8169422529).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 2.0</li>
+        <li>BMW M3 grün: Alexander-93, <a href="https://commons.wikimedia.org/wiki/File:BMW_M3_Competition_(G80)_1X7A1573.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 4.0</li>
+        <li>VW Golf GTI: Cutlass, <a href="https://commons.wikimedia.org/wiki/File:2016_Volkswagen_Golf_GTI_S_in_Night_Blue_Metallic,_front_left,_07-04-2026.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC0</li>
+        <li>Fußraumbeleuchtung: Michael Sheehan, <a href="https://commons.wikimedia.org/wiki/File:Foot_Well_Shows_Ambient_Lighting_(5653379527).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY 2.0</li>
+        <li>Mercedes-AMG GT Cockpit: Tokumeigakarinoaoshima, <a href="https://commons.wikimedia.org/wiki/File:The_interior_of_Mercedes-AMG_GT_S_(C190).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 4.0</li>
+        <li>Alle Fotos verkleinert bzw. zugeschnitten. Lizenzen: <a href="https://creativecommons.org/licenses/" target="_blank" rel="noopener">creativecommons.org/licenses</a></li>
+      </ul>
+    </details>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar">
+  <a href="tel:+437242987654" class="call" aria-label="Anrufen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
+  <a href="#kontakt" class="quote">Termin buchen</a>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  document.body.classList.remove("no-js");
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  var DICT = {
+"it": {
+"Leistungen": "Servizi",
+"Leistungsrechner": "Calcolatore potenza",
+"Ambiente": "Luci ambiente",
+"Referenzen": "Referenze",
+"Sprache": "Lingua",
+"Termin buchen": "Prenota appuntamento",
+"Menü": "Menu",
+"Einleitung": "Introduzione",
+"Sportwagen mit roten Rückleuchten auf nasser Straße am Abend": "Auto sportiva con fanali rossi su strada bagnata di sera",
+"Car Coding · Chiptuning · Ambiente — Wels": "Car coding · Chiptuning · Luci ambiente — Wels",
+"Mehr": "Più",
+"Leistung.": "potenza.",
+"Mehr Komfort.": "Più comfort.",
+"Software-Optimierung auf dem eigenen Prüfstand, Freischaltung versteckter Funktionen und Ambientebeleuchtung wie ab Werk — für BMW, Audi, VW, Mercedes, Porsche und mehr.": "Ottimizzazione software sul nostro banco prova, sblocco di funzioni nascoste e luci ambiente come di serie — per BMW, Audi, VW, Mercedes, Porsche e altri.",
+"Leistung berechnen": "Calcola la potenza",
+"Alle Leistungen": "Tutti i servizi",
+"Beispiel Prüfstandsmessung": "Esempio di misurazione al banco",
+"Prüfstand · Bay 2": "Banco prova · Box 2",
+"Fahrzeug": "Veicolo",
+"Drehmoment": "Coppia",
+"Leistung": "Potenza",
+"Fahrzeuge optimiert": "veicoli ottimizzati",
+"Automarken": "marche auto",
+"Backup der Originalsoftware": "backup del software originale",
+"aus 410 Bewertungen": "su 410 recensioni",
+"Alles, was dein Auto": "Tutto ciò che la tua auto",
+"kann.": "sa fare.",
+"Viele Funktionen sind ab Werk schon verbaut — nur nicht aktiviert. Wir holen heraus, was in Motor, Steuergeräten und Innenraum steckt. Sauber dokumentiert und jederzeit rückrüstbar.": "Molte funzioni sono già presenti di serie — solo non attivate. Tiriamo fuori tutto ciò che c'è in motore, centraline e abitacolo. Documentato con cura e sempre reversibile.",
+"Auto auf einem Rollenprüfstand in einer Werkshalle": "Auto su un banco prova a rulli in officina",
+"Software-Optimierung": "Ottimizzazione software",
+"Stage 1 und Stage 2 für Benziner und Diesel — individuell abgestimmt und mit Prüfstandsprotokoll vorher und nachher.": "Stage 1 e Stage 2 per benzina e diesel — calibrati su misura e con protocollo del banco prima e dopo.",
+"ab": "da",
+"Techniker mit Laptop bei der Fahrzeugdiagnose am offenen Motorraum": "Tecnico con laptop durante la diagnosi del veicolo a cofano aperto",
+"Funktionen freischalten": "Sblocca funzioni",
+"Sport-Anzeigen, Komfortfunktionen, Lichtfunktionen und Startbildschirme — wir codieren, was dein Auto schon an Bord hat.": "Indicatori sportivi, funzioni comfort, funzioni luci e schermate di avvio — codifichiamo ciò che la tua auto ha già a bordo.",
+"Schwarze Sportlimousine bei Nacht mit leuchtenden Rückleuchten": "Berlina sportiva nera di notte con fanali accesi",
+"Vmax-Aufhebung": "Sblocco Vmax",
+"Elektronische Begrenzung anheben — mit Prüfung von Reifen-Index und Bremsen.": "Innalzamento del limitatore elettronico — con verifica dell'indice dei pneumatici e dei freni.",
+"Autotür mit blauer Ambientebeleuchtung": "Portiera con luce ambiente blu",
+"Licht": "Luci",
+"Ambientebeleuchtung": "Luci ambiente",
+"Bis zu 64 Farben, nahtlos integriert und über das Original-Menü steuerbar.": "Fino a 64 colori, integrati perfettamente e regolabili dal menu originale.",
+"Sternenhimmel aus Lichtpunkten im Dachhimmel eines Autos": "Cielo stellato di punti luce nel padiglione di un'auto",
+"Sternenhimmel": "Cielo stellato",
+"Bis zu 1.400 handgesetzte Glasfaser-Sterne — mit Funkel-Effekt.": "Fino a 1.400 stelle in fibra ottica posate a mano — con effetto scintillio.",
+"Diagnose & Fehlerspeicher": "Diagnosi e memoria guasti",
+"Alle Steuergeräte auslesen, Fehler finden und dokumentieren.": "Lettura di tutte le centraline, ricerca e documentazione dei guasti.",
+"Retrofits": "Retrofit",
+"CarPlay, Rückfahrkamera, Lenkradtasten und mehr nachrüsten.": "Installazione di CarPlay, retrocamera, comandi al volante e altro.",
+"Getriebe-Software": "Software del cambio",
+"Schnellere Schaltzeiten und angepasste Kennfelder für DSG und ZF.": "Cambiate più rapide e mappe adattate per DSG e ZF.",
+"Gutachten & Eintragung": "Perizia e omologazione",
+"Wir begleiten die Typisierung der Leistungssteigerung.": "Ti seguiamo nell'omologazione dell'aumento di potenza.",
+"Wie viel steckt in": "Quanto c'è dentro",
+"deinem Auto?": "la tua auto?",
+"Marke und Modell wählen, Stufe festlegen — und sofort sehen, was Software-Optimierung bringt. Inklusive Prüfstandskurve und Festpreis.": "Scegli marca e modello, imposta lo stage — e vedi subito cosa porta l'ottimizzazione. Con curva al banco e prezzo fisso.",
+"Marke": "Marca",
+"Modell & Motor": "Modello e motore",
+"Modell": "Modello",
+"Stufe": "Stage",
+"Höchstgeschwindigkeit": "Velocità massima",
+"Prüfstandskurve": "Curva al banco",
+"Serie PS": "Serie PS",
+"Tuning PS": "Tuning PS",
+"Prüfstandskurve: Leistung und Drehmoment über Drehzahl": "Curva al banco: potenza e coppia in funzione dei giri",
+"Festpreis inkl. Prüfstandslauf": "Prezzo fisso incl. prova al banco",
+"2 Jahre Garantie auf Software": "2 anni di garanzia sul software",
+"Rückrüstung jederzeit möglich": "Ripristino possibile in qualsiasi momento",
+"Termin anfragen": "Richiedi appuntamento",
+"Richtwerte. Die tatsächlichen Werte hängen vom Zustand des Fahrzeugs ab und werden vor und nach der Optimierung auf dem Prüfstand gemessen.": "Valori indicativi. I valori reali dipendono dallo stato del veicolo e vengono misurati al banco prima e dopo l'ottimizzazione.",
+"Ambiente-Konfigurator": "Configuratore luci ambiente",
+"Dein Licht.": "La tua luce.",
+"Deine Farbe.": "Il tuo colore.",
+"Wähle eine Farbe und einen Lichtmodus und sieh direkt, wie dein Innenraum bei Nacht wirkt. Wir rüsten Lichtleisten in Türen, Armaturenbrett und Fußraum nach — passend zum Original-Menü.": "Scegli un colore e una modalità e guarda subito come appare il tuo abitacolo di notte. Installiamo strisce luminose in portiere, cruscotto e vano piedi — compatibili con il menu originale.",
+"Innenraum einer Autotür mit Ambientebeleuchtung": "Interno di una portiera con luce ambiente",
+"64 Farben · Original-Menü": "64 colori · menu originale",
+"Farbe wählen": "Scegli il colore",
+"Feinabstimmung": "Regolazione fine",
+"Farbton": "Tonalità",
+"Intensität": "Intensità",
+"Lichtmodus": "Modalità luce",
+"Statisch": "Statico",
+"Atmen": "Respiro",
+"Farbwechsel": "Cambio colore",
+"Diese Farbe anfragen": "Richiedi questo colore",
+"Lichtleiste in einer Autotür": "Striscia luminosa in una portiera",
+"Ambiente-Paket": "Pacchetto ambiente",
+"Türen & Armaturenbrett, 64 Farben": "Portiere e cruscotto, 64 colori",
+"ab € 890": "da € 890",
+"Rot beleuchteter Fußraum eines Autos": "Vano piedi illuminato di rosso",
+"Fußraum-Licht": "Luce vano piedi",
+"RGB, gekoppelt an das Ambiente": "RGB, collegata alle luci ambiente",
+"ab € 290": "da € 290",
+"Sternenhimmel im Dachhimmel": "Cielo stellato nel padiglione",
+"Bis 1.400 Sterne mit Funkel-Effekt": "Fino a 1.400 stelle con effetto scintillio",
+"ab € 1.290": "da € 1.290",
+"Versteckte Funktionen.": "Funzioni nascoste.",
+"Freigeschaltet.": "Sbloccate.",
+"Wähle deine Wunschfunktionen und sieh sofort den Preis. Ab drei Funktionen gibt es 15 % Paketrabatt — Auslesen und Backup sind immer inklusive.": "Scegli le funzioni che desideri e vedi subito il prezzo. Da tre funzioni in su 15 % di sconto pacchetto — lettura e backup sempre inclusi.",
+"Techniker codiert ein Fahrzeug per Laptop": "Tecnico che codifica un veicolo con il laptop",
+"Codierung anfragen": "Richiedi codifica",
+"Aus unserer": "Dalla nostra",
+"Werkstatt.": "officina.",
+"Eine Auswahl an Fahrzeugen, die in den letzten Monaten bei uns waren — mit gemessenen Werten vom Prüfstand.": "Una selezione di veicoli passati da noi negli ultimi mesi — con i valori misurati al banco.",
+"Referenzen filtern": "Filtra referenze",
+"Alle": "Tutti",
+"Grüne BMW M3 Limousine von hinten": "BMW M3 berlina verde vista da dietro",
+"Stage 1 + Vmax-Aufhebung": "Stage 1 + sblocco Vmax",
+"Roter Porsche 911 bei Nacht auf nasser Straße": "Porsche 911 rossa di notte su strada bagnata",
+"Stage 1 + Abgasklappen-Steuerung": "Stage 1 + controllo valvole di scarico",
+"Blauer VW Golf GTI": "VW Golf GTI blu",
+"Stage 2 + DSG-Software": "Stage 2 + software DSG",
+"Schwarzer BMW M3 bei Nacht": "BMW M3 nera di notte",
+"Sport-Displays, Lichtfunktionen, Komfort": "Display sportivi, funzioni luci, comfort",
+"9 Funktionen": "9 funzioni",
+"· 45 Min.": "· 45 min",
+"Cockpit eines Mercedes-AMG GT": "Abitacolo di una Mercedes-AMG GT",
+"AMG-Menü, Startbildschirm, Spiegel": "Menu AMG, schermata di avvio, specchietti",
+"6 Funktionen": "6 funzioni",
+"· 40 Min.": "· 40 min",
+"Mercedes E-Klasse Tür mit Ambientebeleuchtung": "Portiera Mercedes Classe E con luce ambiente",
+"Mercedes E-Klasse": "Mercedes Classe E",
+"Ambiente 64 Farben nachgerüstet": "Luci ambiente 64 colori installate",
+"12 Lichtleisten": "12 strisce luminose",
+"· 1 Tag": "· 1 giorno",
+"Sternenhimmel im Auto": "Cielo stellato in auto",
+"Glasfaser-Sterne mit Funkel-Modul": "Stelle in fibra ottica con modulo scintillio",
+"1.200 Sterne": "1.200 stelle",
+"· 2 Tage": "· 2 giorni",
+"Rote Fußraumbeleuchtung": "Luce vano piedi rossa",
+"Fußraum-Licht RGB": "Luce vano piedi RGB",
+"Nachrüstung, gekoppelt an das Ambiente": "Installazione, collegata alle luci ambiente",
+"4 Zonen": "4 zone",
+"· 3 Std.": "· 3 ore",
+"Ablauf": "Processo",
+"In vier Schritten": "In quattro passi",
+"zum Ergebnis.": "al risultato.",
+"Transparent, dokumentiert und meistens am selben Tag erledigt. Du kannst gerne in unserer Lounge warten.": "Trasparente, documentato e di solito completato in giornata. Puoi aspettare nella nostra lounge.",
+"Termin & Beratung": "Appuntamento e consulenza",
+"Online oder per Telefon. Wir klären Fahrzeug, Wünsche und das passende Paket.": "Online o per telefono. Chiariamo veicolo, desideri e pacchetto adatto.",
+"5 Min.": "5 min",
+"Diagnose & Backup": "Diagnosi e backup",
+"Fehlerspeicher auslesen, Zustand prüfen, Originalsoftware sichern.": "Lettura memoria guasti, controllo dello stato, backup del software originale.",
+"20 Min.": "20 min",
+"Software & Einbau": "Software e installazione",
+"Optimierung, Codierung oder Nachrüstung durch unsere Techniker.": "Ottimizzazione, codifica o installazione da parte dei nostri tecnici.",
+"1–4 Std.": "1–4 ore",
+"Prüfstand & Übergabe": "Banco prova e consegna",
+"Messung, Protokoll und kurze Einweisung in die neuen Funktionen.": "Misurazione, protocollo e breve spiegazione delle nuove funzioni.",
+"30 Min.": "30 min",
+"Kundenstimmen": "Recensioni",
+"Das sagen": "Cosa dicono",
+"unsere Kunden.": "i nostri clienti.",
+"4,9 von 5 Sternen aus über 400 Bewertungen.": "4,9 su 5 stelle da oltre 400 recensioni.",
+"5 von 5 Sternen": "5 su 5 stelle",
+"Stage 1 auf meinem Golf R — der Unterschied ist brutal, und das Auto läuft trotzdem ruhig und sauber. Prüfstandsprotokoll vorher und nachher, alles transparent.": "Stage 1 sulla mia Golf R — la differenza è enorme, eppure l'auto gira fluida e pulita. Protocollo del banco prima e dopo, tutto trasparente.",
+"Ambiente mit 64 Farben nachgerüstet — sieht aus wie ab Werk und lässt sich ganz normal über das Menü einstellen. Saubere Arbeit, keine Klappergeräusche.": "Luci ambiente a 64 colori installate — sembrano di serie e si regolano normalmente dal menu. Lavoro pulito, nessun rumore.",
+"Mercedes C-Klasse": "Mercedes Classe C",
+"Neun Funktionen in 45 Minuten codiert, während ich Kaffee getrunken habe. Fairer Preis und super erklärt.": "Nove funzioni codificate in 45 minuti mentre bevevo un caffè. Prezzo onesto e spiegato benissimo.",
+"Häufige": "Domande",
+"Fragen.": "frequenti.",
+"Noch etwas unklar? Ruf uns an oder schreib uns — wir beraten dich gerne.": "Qualcosa non è chiaro? Chiamaci o scrivici — ti consigliamo volentieri.",
+"Ist Chiptuning legal?": "Il chiptuning è legale?",
+"Ja, wenn die Leistungssteigerung eingetragen wird. Wir stellen die nötigen Unterlagen bereit und begleiten die Typisierung. Ohne Eintragung erlischt die Betriebserlaubnis — darauf weisen wir vor jedem Auftrag hin.": "Sì, se l'aumento di potenza viene omologato. Forniamo i documenti necessari e ti seguiamo nell'omologazione. Senza omologazione decade l'abilitazione alla circolazione — lo segnaliamo prima di ogni lavoro.",
+"Schadet die Optimierung dem Motor?": "L'ottimizzazione danneggia il motore?",
+"Wir bleiben innerhalb der Toleranzen der Bauteile und prüfen Ladedruck, Abgastemperatur und Lambda auf dem Prüfstand. Auf unsere Software geben wir 2 Jahre Garantie.": "Restiamo entro le tolleranze dei componenti e controlliamo pressione turbo, temperatura dei gas di scarico e lambda al banco. Sul nostro software diamo 2 anni di garanzia.",
+"Kann ich auf Serie zurück?": "Posso tornare alla serie?",
+"Jederzeit. Vor jeder Änderung sichern wir die Originalsoftware aller betroffenen Steuergeräte. Die Rückrüstung dauert meist unter 30 Minuten.": "In qualsiasi momento. Prima di ogni modifica salviamo il software originale di tutte le centraline interessate. Il ripristino richiede di solito meno di 30 minuti.",
+"Was ist bei der Vmax-Aufhebung zu beachten?": "A cosa fare attenzione con lo sblocco Vmax?",
+"Reifen, Bremsen und Fahrwerk müssen zur neuen Höchstgeschwindigkeit passen. Wir prüfen den Geschwindigkeitsindex der Reifen und beraten dich, bevor wir etwas ändern.": "Pneumatici, freni e assetto devono essere adatti alla nuova velocità massima. Controlliamo l'indice di velocità dei pneumatici e ti consigliamo prima di modificare qualcosa.",
+"Wie lange dauert ein Termin?": "Quanto dura un appuntamento?",
+"Codierungen 30–60 Minuten, Chiptuning mit Prüfstand 2–3 Stunden, Ambientebeleuchtung je nach Umfang 1–2 Tage. Auf Wunsch stellen wir ein Ersatzfahrzeug.": "Codifiche 30–60 minuti, chiptuning con banco 2–3 ore, luci ambiente 1–2 giorni a seconda del lavoro. Su richiesta forniamo un'auto sostitutiva.",
+"Kontakt": "Contatti",
+"Termin": "Prenota",
+"buchen.": "ora.",
+"Schreib uns dein Fahrzeug und deinen Wunsch — wir melden uns innerhalb von 24 Stunden mit einem Festpreis.": "Scrivici il tuo veicolo e cosa desideri — ti rispondiamo entro 24 ore con un prezzo fisso.",
+"Telefon & WhatsApp": "Telefono e WhatsApp",
+"Werkstatt": "Officina",
+"Öffnungszeiten": "Orari",
+"Mo–Fr 9–18 · Sa 9–13 Uhr": "Lun–Ven 9–18 · Sab 9–13",
+"Name": "Nome",
+"Vor- und Nachname": "Nome e cognome",
+"Telefon": "Telefono",
+"Für Rückfragen": "Per eventuali domande",
+"name@beispiel.at": "nome@esempio.it",
+"z. B. BMW 340i, Bj. 2021": "es. BMW 340i, anno 2021",
+"Sonstiges": "Altro",
+"Wunschtermin": "Data preferita",
+"Uhrzeit": "Orario",
+"Vormittag": "Mattina",
+"Nachmittag": "Pomeriggio",
+"Egal": "Indifferente",
+"Nachricht": "Messaggio",
+"Was dürfen wir für dich tun?": "Cosa possiamo fare per te?",
+"Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden.": "Acconsento all'uso dei miei dati per l'elaborazione della richiesta.",
+"Anfrage senden": "Invia richiesta",
+"Danke!": "Grazie!",
+"Deine Anfrage ist angekommen. Wir melden uns innerhalb von 24 Stunden. (Demo — es wurde nichts versendet.)": "La tua richiesta è arrivata. Ti rispondiamo entro 24 ore. (Demo — non è stato inviato nulla.)",
+"Chiptuning, Car Coding und Ambientebeleuchtung in Wels und ganz Oberösterreich.": "Chiptuning, car coding e luci ambiente a Wels e in tutta l'Alta Austria.",
+"© 2026 VEKTOR Car Coding & Performance — Demo-Projekt, kein echtes Unternehmen.": "© 2026 VEKTOR Car Coding & Performance — Progetto demo, non è un'azienda reale.",
+"Impressum · Datenschutz · AGB": "Note legali · Privacy · Condizioni",
+"Bildnachweis": "Crediti fotografici",
+"Porsche 911 im Regen: Gabriel Gurrola,": "Porsche 911 sotto la pioggia: Gabriel Gurrola,",
+"Fahrzeugdiagnose (2 Fotos): Shixart1985,": "Diagnosi veicolo (2 foto): Shixart1985,",
+"Rollenprüfstand: Marek Ślusarczyk (Tupungato),": "Banco prova a rulli: Marek Ślusarczyk (Tupungato),",
+"Ambientebeleuchtung (Farbe im Konfigurator digital verändert): Kārlis Dambrāns,": "Luci ambiente (colore modificato digitalmente nel configuratore): Kārlis Dambrāns,",
+"Sternenhimmel: Damian B Oh,": "Cielo stellato: Damian B Oh,",
+"BMW M3 bei Nacht: OWS Photography,": "BMW M3 di notte: OWS Photography,",
+"Porsche bei Nacht: Ben,": "Porsche di notte: Ben,",
+"BMW M3 grün: Alexander-93,": "BMW M3 verde: Alexander-93,",
+"Fußraumbeleuchtung: Michael Sheehan,": "Luce vano piedi: Michael Sheehan,",
+"Mercedes-AMG GT Cockpit: Tokumeigakarinoaoshima,": "Abitacolo Mercedes-AMG GT: Tokumeigakarinoaoshima,",
+"Alle Fotos verkleinert bzw. zugeschnitten. Lizenzen:": "Tutte le foto ridimensionate o ritagliate. Licenze:",
+"Anrufen": "Chiama",
+"Bei diesem Modell nicht abgeregelt": "Non limitata su questo modello",
+"Benötigt Hardware: Downpipe und Ladeluftkühler": "Richiede hardware: downpipe e intercooler",
+"Stage 2 für dieses Modell nicht verfügbar": "Stage 2 non disponibile per questo modello",
+"Nur Vmax-Aufhebung oder Messung": "Solo sblocco Vmax o misurazione",
+"Reine Software — keine Hardware nötig": "Solo software — nessun hardware necessario",
+"Serienstand": "Stato di serie",
+"offen": "sbloccata",
+"abgeregelt": "limitata",
+"Messung € 89": "Misurazione € 89",
+"1 Funktion gewählt": "1 funzione scelta",
+"Funktionen gewählt": "funzioni scelte",
+"Eisblau": "Blu ghiaccio",
+"Polarblau": "Blu polare",
+"Türkis": "Turchese",
+"Mint": "Menta",
+"Racing-Grün": "Verde racing",
+"Gelb": "Giallo",
+"Amber": "Ambra",
+"Orange": "Arancione",
+"Rot": "Rosso",
+"Pink": "Rosa",
+"Violett": "Viola",
+"Individuell": "Personalizzato",
+"Benzin": "Benzina",
+"Start/Stopp merkt sich den letzten Zustand": "Start/Stop memorizza l'ultimo stato",
+"Kein Knopfdruck mehr nach jedem Start": "Niente più pulsante a ogni avvio",
+"Sport-Anzeigen im Display": "Indicatori sportivi sul display",
+"Leistung, Drehmoment und Ladedruck live": "Potenza, coppia e pressione turbo in tempo reale",
+"Begrüßungslicht & Coming-Home": "Luce di benvenuto e coming home",
+"Animation beim Auf- und Zusperren": "Animazione all'apertura e chiusura",
+"Spiegel klappen beim Zusperren an": "Specchietti si ripiegano alla chiusura",
+"Automatisch per Schlüssel": "Automaticamente con la chiave",
+"Digitale Geschwindigkeit im Tacho": "Velocità digitale nel quadro",
+"Zusätzliche km/h-Anzeige": "Indicazione km/h aggiuntiva",
+"Fahrmodus-Speicher": "Memoria modalità di guida",
+"Sport bleibt nach dem Neustart aktiv": "Sport resta attivo dopo il riavvio",
+"Apple CarPlay im Vollbild": "Apple CarPlay a schermo intero",
+"Bei vorhandener Hardware": "Con hardware presente",
+"Startbildschirm ändern": "Cambia schermata di avvio",
+"z. B. S-, RS- oder GTI-Logo": "es. logo S, RS o GTI",
+"Laptimer & Leistungsmonitor": "Cronometro e monitor prestazioni",
+"Rundenzeiten, Öltemperatur, Ladedruck": "Tempi sul giro, temperatura olio, pressione turbo",
+"Nadeltest beim Start": "Test lancette all'avvio",
+"Zeiger laufen einmal durch": "Le lancette fanno un giro completo",
+"Spiegelabsenkung beim Rückwärtsfahren": "Abbassamento specchietto in retromarcia",
+"Bordstein immer im Blick": "Marciapiede sempre in vista",
+"Komfortblinker 5× statt 3×": "Lampeggio comfort 5× invece di 3×",
+"Für Spurwechsel auf der Autobahn": "Per i cambi di corsia in autostrada",
+"Ambiente-Farben freischalten": "Sblocca colori ambiente",
+"Bis zu 30 Farben im Menü": "Fino a 30 colori nel menu",
+"AMG-Startbildschirm": "Schermata di avvio AMG",
+"Beim Einschalten der Zündung": "All'accensione del quadro",
+"Ambiente 64 Farben freischalten": "Sblocca luci ambiente 64 colori",
+"Wenn Ambiente verbaut ist": "Se le luci ambiente sono presenti",
+"AMG-Menü im Kombiinstrument": "Menu AMG nel quadro strumenti",
+"G-Kräfte, Temperaturen, Leistung": "Forze G, temperature, potenza",
+"Abbiegelicht & Coming-Home": "Luce di svolta e coming home",
+"Lichtfunktionen erweitern": "Estendi le funzioni luci"
+},
+"en": {
+"Leistungen": "Services",
+"Leistungsrechner": "Power calculator",
+"Ambiente": "Ambient",
+"Referenzen": "References",
+"Sprache": "Language",
+"Termin buchen": "Book appointment",
+"Menü": "Menu",
+"Einleitung": "Introduction",
+"Sportwagen mit roten Rückleuchten auf nasser Straße am Abend": "Sports car with red tail lights on a wet street in the evening",
+"Car Coding · Chiptuning · Ambiente — Wels": "Car coding · Chip tuning · Ambient — Wels",
+"Mehr": "More",
+"Leistung.": "power.",
+"Mehr Komfort.": "More comfort.",
+"Software-Optimierung auf dem eigenen Prüfstand, Freischaltung versteckter Funktionen und Ambientebeleuchtung wie ab Werk — für BMW, Audi, VW, Mercedes, Porsche und mehr.": "Software tuning on our own dyno, unlocking hidden features and factory-style ambient lighting — for BMW, Audi, VW, Mercedes, Porsche and more.",
+"Leistung berechnen": "Calculate power",
+"Alle Leistungen": "All services",
+"Beispiel Prüfstandsmessung": "Example dyno measurement",
+"Prüfstand · Bay 2": "Dyno · Bay 2",
+"Fahrzeug": "Vehicle",
+"Drehmoment": "Torque",
+"Leistung": "Power",
+"Fahrzeuge optimiert": "cars optimised",
+"Automarken": "car brands",
+"Backup der Originalsoftware": "backup of the original software",
+"aus 410 Bewertungen": "from 410 reviews",
+"Alles, was dein Auto": "Everything your car",
+"kann.": "can do.",
+"Viele Funktionen sind ab Werk schon verbaut — nur nicht aktiviert. Wir holen heraus, was in Motor, Steuergeräten und Innenraum steckt. Sauber dokumentiert und jederzeit rückrüstbar.": "Many features are already built in at the factory — just not activated. We unlock what's in the engine, control units and interior. Fully documented and reversible at any time.",
+"Auto auf einem Rollenprüfstand in einer Werkshalle": "Car on a chassis dynamometer in a workshop",
+"Software-Optimierung": "Software tuning",
+"Stage 1 und Stage 2 für Benziner und Diesel — individuell abgestimmt und mit Prüfstandsprotokoll vorher und nachher.": "Stage 1 and Stage 2 for petrol and diesel — individually calibrated, with dyno reports before and after.",
+"ab": "from",
+"Techniker mit Laptop bei der Fahrzeugdiagnose am offenen Motorraum": "Technician with a laptop running diagnostics on an open engine bay",
+"Funktionen freischalten": "Unlock features",
+"Sport-Anzeigen, Komfortfunktionen, Lichtfunktionen und Startbildschirme — wir codieren, was dein Auto schon an Bord hat.": "Sport displays, comfort features, lighting functions and start screens — we code what your car already has on board.",
+"Schwarze Sportlimousine bei Nacht mit leuchtenden Rückleuchten": "Black sports saloon at night with glowing tail lights",
+"Vmax-Aufhebung": "Vmax removal",
+"Elektronische Begrenzung anheben — mit Prüfung von Reifen-Index und Bremsen.": "Raise the electronic limiter — with a check of tyre speed rating and brakes.",
+"Autotür mit blauer Ambientebeleuchtung": "Car door with blue ambient lighting",
+"Licht": "Lighting",
+"Ambientebeleuchtung": "Ambient lighting",
+"Bis zu 64 Farben, nahtlos integriert und über das Original-Menü steuerbar.": "Up to 64 colours, seamlessly integrated and controlled from the original menu.",
+"Sternenhimmel aus Lichtpunkten im Dachhimmel eines Autos": "Starlight headliner made of light points in a car roof",
+"Sternenhimmel": "Starlight headliner",
+"Bis zu 1.400 handgesetzte Glasfaser-Sterne — mit Funkel-Effekt.": "Up to 1,400 hand-placed fibre-optic stars — with twinkle effect.",
+"Diagnose & Fehlerspeicher": "Diagnostics & fault memory",
+"Alle Steuergeräte auslesen, Fehler finden und dokumentieren.": "Read all control units, find and document faults.",
+"CarPlay, Rückfahrkamera, Lenkradtasten und mehr nachrüsten.": "Retrofit CarPlay, reversing camera, steering wheel buttons and more.",
+"Getriebe-Software": "Gearbox software",
+"Schnellere Schaltzeiten und angepasste Kennfelder für DSG und ZF.": "Faster shift times and adapted maps for DSG and ZF.",
+"Gutachten & Eintragung": "Certification & registration",
+"Wir begleiten die Typisierung der Leistungssteigerung.": "We support the type approval of the power increase.",
+"Wie viel steckt in": "How much is in",
+"deinem Auto?": "your car?",
+"Marke und Modell wählen, Stufe festlegen — und sofort sehen, was Software-Optimierung bringt. Inklusive Prüfstandskurve und Festpreis.": "Pick make and model, choose a stage — and instantly see what software tuning delivers. Including dyno curve and fixed price.",
+"Marke": "Make",
+"Modell & Motor": "Model & engine",
+"Modell": "Model",
+"Stufe": "Stage",
+"Serie": "Stock",
+"Höchstgeschwindigkeit": "Top speed",
+"Prüfstandskurve": "Dyno curve",
+"Serie PS": "Stock PS",
+"Tuning PS": "Tuned PS",
+"Tuning Nm": "Tuned Nm",
+"Prüfstandskurve: Leistung und Drehmoment über Drehzahl": "Dyno curve: power and torque over rpm",
+"Festpreis inkl. Prüfstandslauf": "Fixed price incl. dyno run",
+"2 Jahre Garantie auf Software": "2-year software warranty",
+"Rückrüstung jederzeit möglich": "Can be reversed at any time",
+"Termin anfragen": "Request appointment",
+"Richtwerte. Die tatsächlichen Werte hängen vom Zustand des Fahrzeugs ab und werden vor und nach der Optimierung auf dem Prüfstand gemessen.": "Guide values. Actual figures depend on the condition of the car and are measured on the dyno before and after tuning.",
+"Ambiente-Konfigurator": "Ambient configurator",
+"Dein Licht.": "Your light.",
+"Deine Farbe.": "Your colour.",
+"Wähle eine Farbe und einen Lichtmodus und sieh direkt, wie dein Innenraum bei Nacht wirkt. Wir rüsten Lichtleisten in Türen, Armaturenbrett und Fußraum nach — passend zum Original-Menü.": "Pick a colour and a light mode and see right away how your interior looks at night. We retrofit light strips in doors, dashboard and footwells — matched to the original menu.",
+"Innenraum einer Autotür mit Ambientebeleuchtung": "Inside of a car door with ambient lighting",
+"64 Farben · Original-Menü": "64 colours · original menu",
+"Farbe wählen": "Choose colour",
+"Feinabstimmung": "Fine-tune",
+"Farbton": "Hue",
+"Intensität": "Intensity",
+"Lichtmodus": "Light mode",
+"Statisch": "Static",
+"Atmen": "Breathe",
+"Farbwechsel": "Colour cycle",
+"Diese Farbe anfragen": "Request this colour",
+"Lichtleiste in einer Autotür": "Light strip in a car door",
+"Ambiente-Paket": "Ambient package",
+"Türen & Armaturenbrett, 64 Farben": "Doors & dashboard, 64 colours",
+"ab € 890": "from € 890",
+"Rot beleuchteter Fußraum eines Autos": "Car footwell lit in red",
+"Fußraum-Licht": "Footwell lighting",
+"RGB, gekoppelt an das Ambiente": "RGB, linked to the ambient lighting",
+"ab € 290": "from € 290",
+"Sternenhimmel im Dachhimmel": "Starlight headliner in the roof lining",
+"Bis 1.400 Sterne mit Funkel-Effekt": "Up to 1,400 stars with twinkle effect",
+"ab € 1.290": "from € 1,290",
+"Versteckte Funktionen.": "Hidden features.",
+"Freigeschaltet.": "Unlocked.",
+"Wähle deine Wunschfunktionen und sieh sofort den Preis. Ab drei Funktionen gibt es 15 % Paketrabatt — Auslesen und Backup sind immer inklusive.": "Choose the features you want and see the price instantly. From three features you get a 15 % bundle discount — readout and backup always included.",
+"Techniker codiert ein Fahrzeug per Laptop": "Technician coding a car with a laptop",
+"Codierung anfragen": "Request coding",
+"Aus unserer": "From our",
+"Werkstatt.": "workshop.",
+"Eine Auswahl an Fahrzeugen, die in den letzten Monaten bei uns waren — mit gemessenen Werten vom Prüfstand.": "A selection of cars we've worked on in recent months — with measured dyno figures.",
+"Referenzen filtern": "Filter references",
+"Alle": "All",
+"Grüne BMW M3 Limousine von hinten": "Green BMW M3 saloon from behind",
+"Stage 1 + Vmax-Aufhebung": "Stage 1 + Vmax removal",
+"Roter Porsche 911 bei Nacht auf nasser Straße": "Red Porsche 911 at night on a wet street",
+"Stage 1 + Abgasklappen-Steuerung": "Stage 1 + exhaust valve control",
+"Blauer VW Golf GTI": "Blue VW Golf GTI",
+"Stage 2 + DSG-Software": "Stage 2 + DSG software",
+"Schwarzer BMW M3 bei Nacht": "Black BMW M3 at night",
+"Sport-Displays, Lichtfunktionen, Komfort": "Sport displays, lighting functions, comfort",
+"9 Funktionen": "9 features",
+"· 45 Min.": "· 45 min",
+"Cockpit eines Mercedes-AMG GT": "Cockpit of a Mercedes-AMG GT",
+"AMG-Menü, Startbildschirm, Spiegel": "AMG menu, start screen, mirrors",
+"6 Funktionen": "6 features",
+"· 40 Min.": "· 40 min",
+"Mercedes E-Klasse Tür mit Ambientebeleuchtung": "Mercedes E-Class door with ambient lighting",
+"Mercedes E-Klasse": "Mercedes E-Class",
+"Ambiente 64 Farben nachgerüstet": "64-colour ambient retrofitted",
+"12 Lichtleisten": "12 light strips",
+"· 1 Tag": "· 1 day",
+"Sternenhimmel im Auto": "Starlight headliner in a car",
+"Glasfaser-Sterne mit Funkel-Modul": "Fibre-optic stars with twinkle module",
+"1.200 Sterne": "1,200 stars",
+"· 2 Tage": "· 2 days",
+"Rote Fußraumbeleuchtung": "Red footwell lighting",
+"Fußraum-Licht RGB": "RGB footwell lighting",
+"Nachrüstung, gekoppelt an das Ambiente": "Retrofit, linked to the ambient lighting",
+"4 Zonen": "4 zones",
+"· 3 Std.": "· 3 hrs",
+"Ablauf": "Process",
+"In vier Schritten": "In four steps",
+"zum Ergebnis.": "to the result.",
+"Transparent, dokumentiert und meistens am selben Tag erledigt. Du kannst gerne in unserer Lounge warten.": "Transparent, documented and usually done the same day. Feel free to wait in our lounge.",
+"Termin & Beratung": "Appointment & advice",
+"Online oder per Telefon. Wir klären Fahrzeug, Wünsche und das passende Paket.": "Online or by phone. We go through your car, wishes and the right package.",
+"5 Min.": "5 min",
+"Diagnose & Backup": "Diagnostics & backup",
+"Fehlerspeicher auslesen, Zustand prüfen, Originalsoftware sichern.": "Read fault memory, check condition, back up original software.",
+"20 Min.": "20 min",
+"Software & Einbau": "Software & installation",
+"Optimierung, Codierung oder Nachrüstung durch unsere Techniker.": "Tuning, coding or retrofitting by our technicians.",
+"1–4 Std.": "1–4 hrs",
+"Prüfstand & Übergabe": "Dyno & handover",
+"Messung, Protokoll und kurze Einweisung in die neuen Funktionen.": "Measurement, report and a short walkthrough of the new features.",
+"30 Min.": "30 min",
+"Kundenstimmen": "Testimonials",
+"Das sagen": "What our",
+"unsere Kunden.": "customers say.",
+"4,9 von 5 Sternen aus über 400 Bewertungen.": "4.9 out of 5 stars from over 400 reviews.",
+"5 von 5 Sternen": "5 out of 5 stars",
+"Stage 1 auf meinem Golf R — der Unterschied ist brutal, und das Auto läuft trotzdem ruhig und sauber. Prüfstandsprotokoll vorher und nachher, alles transparent.": "Stage 1 on my Golf R — the difference is brutal, yet the car still runs smooth and clean. Dyno report before and after, all transparent.",
+"Ambiente mit 64 Farben nachgerüstet — sieht aus wie ab Werk und lässt sich ganz normal über das Menü einstellen. Saubere Arbeit, keine Klappergeräusche.": "64-colour ambient lighting retrofitted — looks factory-fitted and is set up normally through the menu. Clean work, no rattles.",
+"Mercedes C-Klasse": "Mercedes C-Class",
+"Neun Funktionen in 45 Minuten codiert, während ich Kaffee getrunken habe. Fairer Preis und super erklärt.": "Nine features coded in 45 minutes while I had a coffee. Fair price and explained really well.",
+"Häufige": "Frequently asked",
+"Fragen.": "questions.",
+"Noch etwas unklar? Ruf uns an oder schreib uns — wir beraten dich gerne.": "Still unsure? Call or message us — we're happy to advise.",
+"Ist Chiptuning legal?": "Is chip tuning legal?",
+"Ja, wenn die Leistungssteigerung eingetragen wird. Wir stellen die nötigen Unterlagen bereit und begleiten die Typisierung. Ohne Eintragung erlischt die Betriebserlaubnis — darauf weisen wir vor jedem Auftrag hin.": "Yes, if the power increase is registered. We provide the necessary documents and support the type approval. Without registration the vehicle's road approval becomes void — we point this out before every job.",
+"Schadet die Optimierung dem Motor?": "Does tuning harm the engine?",
+"Wir bleiben innerhalb der Toleranzen der Bauteile und prüfen Ladedruck, Abgastemperatur und Lambda auf dem Prüfstand. Auf unsere Software geben wir 2 Jahre Garantie.": "We stay within component tolerances and check boost pressure, exhaust gas temperature and lambda on the dyno. Our software comes with a 2-year warranty.",
+"Kann ich auf Serie zurück?": "Can I go back to stock?",
+"Jederzeit. Vor jeder Änderung sichern wir die Originalsoftware aller betroffenen Steuergeräte. Die Rückrüstung dauert meist unter 30 Minuten.": "Any time. Before every change we back up the original software of all affected control units. Reverting usually takes under 30 minutes.",
+"Was ist bei der Vmax-Aufhebung zu beachten?": "What should I know about Vmax removal?",
+"Reifen, Bremsen und Fahrwerk müssen zur neuen Höchstgeschwindigkeit passen. Wir prüfen den Geschwindigkeitsindex der Reifen und beraten dich, bevor wir etwas ändern.": "Tyres, brakes and suspension must suit the new top speed. We check the tyres' speed rating and advise you before changing anything.",
+"Wie lange dauert ein Termin?": "How long does an appointment take?",
+"Codierungen 30–60 Minuten, Chiptuning mit Prüfstand 2–3 Stunden, Ambientebeleuchtung je nach Umfang 1–2 Tage. Auf Wunsch stellen wir ein Ersatzfahrzeug.": "Coding 30–60 minutes, chip tuning with dyno 2–3 hours, ambient lighting 1–2 days depending on scope. A courtesy car is available on request.",
+"Kontakt": "Contact",
+"Termin": "Book an",
+"buchen.": "appointment.",
+"Schreib uns dein Fahrzeug und deinen Wunsch — wir melden uns innerhalb von 24 Stunden mit einem Festpreis.": "Tell us your car and what you'd like — we'll get back to you within 24 hours with a fixed price.",
+"Telefon & WhatsApp": "Phone & WhatsApp",
+"Werkstatt": "Workshop",
+"Öffnungszeiten": "Opening hours",
+"Mo–Fr 9–18 · Sa 9–13 Uhr": "Mon–Fri 9–6 · Sat 9–1",
+"Vor- und Nachname": "First and last name",
+"Telefon": "Phone",
+"Für Rückfragen": "For any questions",
+"name@beispiel.at": "name@example.com",
+"z. B. BMW 340i, Bj. 2021": "e.g. BMW 340i, 2021",
+"Chiptuning Stage 1": "Chip tuning Stage 1",
+"Chiptuning Stage 2": "Chip tuning Stage 2",
+"Chiptuning": "Chip tuning",
+"Sonstiges": "Other",
+"Wunschtermin": "Preferred date",
+"Uhrzeit": "Time",
+"Vormittag": "Morning",
+"Nachmittag": "Afternoon",
+"Egal": "Any time",
+"Nachricht": "Message",
+"Was dürfen wir für dich tun?": "What can we do for you?",
+"Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden.": "I agree that my details may be used to process this request.",
+"Anfrage senden": "Send request",
+"Danke!": "Thank you!",
+"Deine Anfrage ist angekommen. Wir melden uns innerhalb von 24 Stunden. (Demo — es wurde nichts versendet.)": "Your request has arrived. We'll get back to you within 24 hours. (Demo — nothing was sent.)",
+"Chiptuning, Car Coding und Ambientebeleuchtung in Wels und ganz Oberösterreich.": "Chip tuning, car coding and ambient lighting in Wels and all of Upper Austria.",
+"© 2026 VEKTOR Car Coding & Performance — Demo-Projekt, kein echtes Unternehmen.": "© 2026 VEKTOR Car Coding & Performance — Demo project, not a real company.",
+"Impressum · Datenschutz · AGB": "Imprint · Privacy · Terms",
+"Bildnachweis": "Image credits",
+"Porsche 911 im Regen: Gabriel Gurrola,": "Porsche 911 in the rain: Gabriel Gurrola,",
+"Fahrzeugdiagnose (2 Fotos): Shixart1985,": "Vehicle diagnostics (2 photos): Shixart1985,",
+"Rollenprüfstand: Marek Ślusarczyk (Tupungato),": "Chassis dyno: Marek Ślusarczyk (Tupungato),",
+"Ambientebeleuchtung (Farbe im Konfigurator digital verändert): Kārlis Dambrāns,": "Ambient lighting (colour digitally altered in the configurator): Kārlis Dambrāns,",
+"Sternenhimmel: Damian B Oh,": "Starlight headliner: Damian B Oh,",
+"BMW M3 bei Nacht: OWS Photography,": "BMW M3 at night: OWS Photography,",
+"Porsche bei Nacht: Ben,": "Porsche at night: Ben,",
+"BMW M3 grün: Alexander-93,": "Green BMW M3: Alexander-93,",
+"Fußraumbeleuchtung: Michael Sheehan,": "Footwell lighting: Michael Sheehan,",
+"Mercedes-AMG GT Cockpit: Tokumeigakarinoaoshima,": "Mercedes-AMG GT cockpit: Tokumeigakarinoaoshima,",
+"Alle Fotos verkleinert bzw. zugeschnitten. Lizenzen:": "All photos resized or cropped. Licences:",
+"Anrufen": "Call",
+"Bei diesem Modell nicht abgeregelt": "Not limited on this model",
+"Benötigt Hardware: Downpipe und Ladeluftkühler": "Requires hardware: downpipe and intercooler",
+"Stage 2 für dieses Modell nicht verfügbar": "Stage 2 not available for this model",
+"Nur Vmax-Aufhebung oder Messung": "Vmax removal or measurement only",
+"Reine Software — keine Hardware nötig": "Software only — no hardware needed",
+"Serienstand": "Stock",
+"offen": "unlocked",
+"abgeregelt": "limited",
+"Messung € 89": "Measurement € 89",
+"1 Funktion gewählt": "1 feature selected",
+"Funktionen gewählt": "features selected",
+"Eisblau": "Ice blue",
+"Polarblau": "Polar blue",
+"Türkis": "Turquoise",
+"Racing-Grün": "Racing green",
+"Gelb": "Yellow",
+"Rot": "Red",
+"Violett": "Violet",
+"Individuell": "Custom",
+"Benzin": "Petrol",
+"Start/Stopp merkt sich den letzten Zustand": "Start/stop remembers the last setting",
+"Kein Knopfdruck mehr nach jedem Start": "No more button press after every start",
+"Sport-Anzeigen im Display": "Sport displays on screen",
+"Leistung, Drehmoment und Ladedruck live": "Live power, torque and boost",
+"Begrüßungslicht & Coming-Home": "Welcome light & coming home",
+"Animation beim Auf- und Zusperren": "Animation when locking and unlocking",
+"Spiegel klappen beim Zusperren an": "Mirrors fold in when locking",
+"Automatisch per Schlüssel": "Automatically via the key",
+"Digitale Geschwindigkeit im Tacho": "Digital speed in the cluster",
+"Zusätzliche km/h-Anzeige": "Additional km/h readout",
+"Fahrmodus-Speicher": "Drive mode memory",
+"Sport bleibt nach dem Neustart aktiv": "Sport stays active after restart",
+"Apple CarPlay im Vollbild": "Full-screen Apple CarPlay",
+"Bei vorhandener Hardware": "If the hardware is fitted",
+"Startbildschirm ändern": "Change start screen",
+"z. B. S-, RS- oder GTI-Logo": "e.g. S, RS or GTI logo",
+"Laptimer & Leistungsmonitor": "Lap timer & performance monitor",
+"Rundenzeiten, Öltemperatur, Ladedruck": "Lap times, oil temperature, boost",
+"Nadeltest beim Start": "Needle sweep on start",
+"Zeiger laufen einmal durch": "Needles sweep once",
+"Spiegelabsenkung beim Rückwärtsfahren": "Mirror dip when reversing",
+"Bordstein immer im Blick": "Always see the kerb",
+"Komfortblinker 5× statt 3×": "Comfort indicator 5× instead of 3×",
+"Für Spurwechsel auf der Autobahn": "For lane changes on the motorway",
+"Ambiente-Farben freischalten": "Unlock ambient colours",
+"Bis zu 30 Farben im Menü": "Up to 30 colours in the menu",
+"AMG-Startbildschirm": "AMG start screen",
+"Beim Einschalten der Zündung": "When switching on the ignition",
+"Ambiente 64 Farben freischalten": "Unlock 64 ambient colours",
+"Wenn Ambiente verbaut ist": "If ambient lighting is fitted",
+"AMG-Menü im Kombiinstrument": "AMG menu in the instrument cluster",
+"G-Kräfte, Temperaturen, Leistung": "G-forces, temperatures, power",
+"Abbiegelicht & Coming-Home": "Cornering light & coming home",
+"Lichtfunktionen erweitern": "Extend lighting functions"
+},
+"bs": {
+"Leistungen": "Usluge",
+"Leistungsrechner": "Kalkulator snage",
+"Ambiente": "Ambijent",
+"Referenzen": "Reference",
+"Sprache": "Jezik",
+"Termin buchen": "Rezerviši termin",
+"Menü": "Meni",
+"Einleitung": "Uvod",
+"Sportwagen mit roten Rückleuchten auf nasser Straße am Abend": "Sportski auto s crvenim stražnjim svjetlima na mokroj ulici navečer",
+"Car Coding · Chiptuning · Ambiente — Wels": "Car coding · Čiptuning · Ambijent — Wels",
+"Mehr": "Više",
+"Leistung.": "snage.",
+"Mehr Komfort.": "Više komfora.",
+"Software-Optimierung auf dem eigenen Prüfstand, Freischaltung versteckter Funktionen und Ambientebeleuchtung wie ab Werk — für BMW, Audi, VW, Mercedes, Porsche und mehr.": "Optimizacija softvera na vlastitom dinamometru, otključavanje skrivenih funkcija i ambijentalno svjetlo kao iz fabrike — za BMW, Audi, VW, Mercedes, Porsche i druge.",
+"Leistung berechnen": "Izračunaj snagu",
+"Alle Leistungen": "Sve usluge",
+"Beispiel Prüfstandsmessung": "Primjer mjerenja na dinamometru",
+"Prüfstand · Bay 2": "Dinamometar · Boks 2",
+"Fahrzeug": "Vozilo",
+"Software": "Softver",
+"Drehmoment": "Obrtni moment",
+"Leistung": "Snaga",
+"Fahrzeuge optimiert": "optimizovanih vozila",
+"Automarken": "marki automobila",
+"Backup der Originalsoftware": "backup originalnog softvera",
+"aus 410 Bewertungen": "iz 410 recenzija",
+"Alles, was dein Auto": "Sve što tvoj auto",
+"kann.": "može.",
+"Viele Funktionen sind ab Werk schon verbaut — nur nicht aktiviert. Wir holen heraus, was in Motor, Steuergeräten und Innenraum steckt. Sauber dokumentiert und jederzeit rückrüstbar.": "Mnoge funkcije su već ugrađene iz fabrike — samo nisu aktivirane. Izvlačimo ono što se krije u motoru, upravljačkim jedinicama i enterijeru. Uredno dokumentovano i uvijek reverzibilno.",
+"Auto auf einem Rollenprüfstand in einer Werkshalle": "Auto na valjkastom dinamometru u radionici",
+"Software-Optimierung": "Optimizacija softvera",
+"Stage 1 und Stage 2 für Benziner und Diesel — individuell abgestimmt und mit Prüfstandsprotokoll vorher und nachher.": "Stage 1 i Stage 2 za benzince i dizelaše — individualno podešeno, s protokolom s dinamometra prije i poslije.",
+"ab": "od",
+"Techniker mit Laptop bei der Fahrzeugdiagnose am offenen Motorraum": "Tehničar s laptopom tokom dijagnostike kod otvorenog motora",
+"Funktionen freischalten": "Otključaj funkcije",
+"Sport-Anzeigen, Komfortfunktionen, Lichtfunktionen und Startbildschirme — wir codieren, was dein Auto schon an Bord hat.": "Sportski prikazi, komforne funkcije, funkcije svjetla i početni ekrani — kodiramo ono što tvoj auto već ima.",
+"Schwarze Sportlimousine bei Nacht mit leuchtenden Rückleuchten": "Crna sportska limuzina noću s upaljenim stražnjim svjetlima",
+"Vmax-Aufhebung": "Ukidanje Vmax",
+"Elektronische Begrenzung anheben — mit Prüfung von Reifen-Index und Bremsen.": "Podizanje elektronskog ograničenja — uz provjeru indeksa guma i kočnica.",
+"Autotür mit blauer Ambientebeleuchtung": "Vrata auta s plavim ambijentalnim svjetlom",
+"Licht": "Svjetlo",
+"Ambientebeleuchtung": "Ambijentalno svjetlo",
+"Bis zu 64 Farben, nahtlos integriert und über das Original-Menü steuerbar.": "Do 64 boje, besprijekorno integrisano i upravljivo preko originalnog menija.",
+"Sternenhimmel aus Lichtpunkten im Dachhimmel eines Autos": "Zvjezdano nebo od svjetlosnih tačaka na plafonu auta",
+"Sternenhimmel": "Zvjezdano nebo",
+"Bis zu 1.400 handgesetzte Glasfaser-Sterne — mit Funkel-Effekt.": "Do 1.400 ručno postavljenih zvijezda od optičkih vlakana — s efektom treperenja.",
+"Diagnose & Fehlerspeicher": "Dijagnostika i memorija grešaka",
+"Alle Steuergeräte auslesen, Fehler finden und dokumentieren.": "Očitavanje svih upravljačkih jedinica, pronalazak i dokumentovanje grešaka.",
+"Retrofits": "Naknadna ugradnja",
+"CarPlay, Rückfahrkamera, Lenkradtasten und mehr nachrüsten.": "Naknadna ugradnja CarPlaya, kamere za vožnju unazad, tipki na volanu i više.",
+"Getriebe-Software": "Softver mjenjača",
+"Schnellere Schaltzeiten und angepasste Kennfelder für DSG und ZF.": "Brže promjene brzina i prilagođene mape za DSG i ZF.",
+"Gutachten & Eintragung": "Vještačenje i upis",
+"Wir begleiten die Typisierung der Leistungssteigerung.": "Pratimo te kroz homologaciju povećanja snage.",
+"Wie viel steckt in": "Koliko se krije u",
+"deinem Auto?": "tvom autu?",
+"Marke und Modell wählen, Stufe festlegen — und sofort sehen, was Software-Optimierung bringt. Inklusive Prüfstandskurve und Festpreis.": "Odaberi marku i model, postavi stage — i odmah vidi šta donosi optimizacija softvera. Uključujući krivulju s dinamometra i fiksnu cijenu.",
+"Marke": "Marka",
+"Modell & Motor": "Model i motor",
+"Modell": "Model",
+"Stufe": "Stage",
+"Serie": "Serija",
+"Höchstgeschwindigkeit": "Maksimalna brzina",
+"Prüfstandskurve": "Krivulja s dinamometra",
+"Serie PS": "Serija PS",
+"Tuning PS": "Tuning PS",
+"Prüfstandskurve: Leistung und Drehmoment über Drehzahl": "Krivulja s dinamometra: snaga i obrtni moment prema broju obrtaja",
+"Festpreis inkl. Prüfstandslauf": "Fiksna cijena uklj. mjerenje na dinamometru",
+"2 Jahre Garantie auf Software": "2 godine garancije na softver",
+"Rückrüstung jederzeit möglich": "Vraćanje na seriju uvijek moguće",
+"Termin anfragen": "Zatraži termin",
+"Richtwerte. Die tatsächlichen Werte hängen vom Zustand des Fahrzeugs ab und werden vor und nach der Optimierung auf dem Prüfstand gemessen.": "Okvirne vrijednosti. Stvarne vrijednosti zavise od stanja vozila i mjere se na dinamometru prije i poslije optimizacije.",
+"Ambiente-Konfigurator": "Konfigurator ambijenta",
+"Dein Licht.": "Tvoje svjetlo.",
+"Deine Farbe.": "Tvoja boja.",
+"Wähle eine Farbe und einen Lichtmodus und sieh direkt, wie dein Innenraum bei Nacht wirkt. Wir rüsten Lichtleisten in Türen, Armaturenbrett und Fußraum nach — passend zum Original-Menü.": "Odaberi boju i način svjetla i odmah vidi kako tvoj enterijer izgleda noću. Ugrađujemo svjetlosne trake u vrata, instrument tablu i prostor za noge — usklađeno s originalnim menijem.",
+"Innenraum einer Autotür mit Ambientebeleuchtung": "Unutrašnjost vrata auta s ambijentalnim svjetlom",
+"64 Farben · Original-Menü": "64 boje · originalni meni",
+"Farbe wählen": "Odaberi boju",
+"Feinabstimmung": "Fino podešavanje",
+"Farbton": "Nijansa",
+"Intensität": "Intenzitet",
+"Lichtmodus": "Način svjetla",
+"Statisch": "Statično",
+"Atmen": "Disanje",
+"Farbwechsel": "Promjena boja",
+"Diese Farbe anfragen": "Zatraži ovu boju",
+"Lichtleiste in einer Autotür": "Svjetlosna traka u vratima auta",
+"Ambiente-Paket": "Ambijent paket",
+"Türen & Armaturenbrett, 64 Farben": "Vrata i instrument tabla, 64 boje",
+"ab € 890": "od € 890",
+"Rot beleuchteter Fußraum eines Autos": "Crveno osvijetljen prostor za noge",
+"Fußraum-Licht": "Svjetlo za prostor nogu",
+"RGB, gekoppelt an das Ambiente": "RGB, povezano s ambijentom",
+"ab € 290": "od € 290",
+"Sternenhimmel im Dachhimmel": "Zvjezdano nebo na plafonu",
+"Bis 1.400 Sterne mit Funkel-Effekt": "Do 1.400 zvijezda s efektom treperenja",
+"ab € 1.290": "od € 1.290",
+"Versteckte Funktionen.": "Skrivene funkcije.",
+"Freigeschaltet.": "Otključane.",
+"Wähle deine Wunschfunktionen und sieh sofort den Preis. Ab drei Funktionen gibt es 15 % Paketrabatt — Auslesen und Backup sind immer inklusive.": "Odaberi željene funkcije i odmah vidi cijenu. Od tri funkcije 15 % popusta na paket — očitavanje i backup su uvijek uključeni.",
+"Techniker codiert ein Fahrzeug per Laptop": "Tehničar kodira vozilo preko laptopa",
+"Codierung anfragen": "Zatraži kodiranje",
+"Aus unserer": "Iz naše",
+"Werkstatt.": "radionice.",
+"Eine Auswahl an Fahrzeugen, die in den letzten Monaten bei uns waren — mit gemessenen Werten vom Prüfstand.": "Izbor vozila koja su posljednjih mjeseci bila kod nas — s izmjerenim vrijednostima s dinamometra.",
+"Referenzen filtern": "Filtriraj reference",
+"Alle": "Sve",
+"Grüne BMW M3 Limousine von hinten": "Zeleni BMW M3 limuzina s leđa",
+"Stage 1 + Vmax-Aufhebung": "Stage 1 + ukidanje Vmax",
+"Roter Porsche 911 bei Nacht auf nasser Straße": "Crveni Porsche 911 noću na mokroj ulici",
+"Stage 1 + Abgasklappen-Steuerung": "Stage 1 + upravljanje ispušnim klapnama",
+"Blauer VW Golf GTI": "Plavi VW Golf GTI",
+"Stage 2 + DSG-Software": "Stage 2 + DSG softver",
+"Schwarzer BMW M3 bei Nacht": "Crni BMW M3 noću",
+"Sport-Displays, Lichtfunktionen, Komfort": "Sportski prikazi, funkcije svjetla, komfor",
+"9 Funktionen": "9 funkcija",
+"· 45 Min.": "· 45 min",
+"Cockpit eines Mercedes-AMG GT": "Kokpit Mercedes-AMG GT",
+"AMG-Menü, Startbildschirm, Spiegel": "AMG meni, početni ekran, retrovizori",
+"6 Funktionen": "6 funkcija",
+"· 40 Min.": "· 40 min",
+"Mercedes E-Klasse Tür mit Ambientebeleuchtung": "Vrata Mercedes E-klase s ambijentalnim svjetlom",
+"Mercedes E-Klasse": "Mercedes E-klasa",
+"Ambiente 64 Farben nachgerüstet": "Ugrađen ambijent sa 64 boje",
+"12 Lichtleisten": "12 svjetlosnih traka",
+"· 1 Tag": "· 1 dan",
+"Sternenhimmel im Auto": "Zvjezdano nebo u autu",
+"Glasfaser-Sterne mit Funkel-Modul": "Zvijezde od optičkih vlakana s modulom treperenja",
+"1.200 Sterne": "1.200 zvijezda",
+"· 2 Tage": "· 2 dana",
+"Rote Fußraumbeleuchtung": "Crveno svjetlo za prostor nogu",
+"Fußraum-Licht RGB": "RGB svjetlo za prostor nogu",
+"Nachrüstung, gekoppelt an das Ambiente": "Naknadna ugradnja, povezano s ambijentom",
+"4 Zonen": "4 zone",
+"· 3 Std.": "· 3 sata",
+"Ablauf": "Tok",
+"In vier Schritten": "U četiri koraka",
+"zum Ergebnis.": "do rezultata.",
+"Transparent, dokumentiert und meistens am selben Tag erledigt. Du kannst gerne in unserer Lounge warten.": "Transparentno, dokumentovano i uglavnom gotovo isti dan. Slobodno sačekaj u našem salonu.",
+"Termin & Beratung": "Termin i savjetovanje",
+"Online oder per Telefon. Wir klären Fahrzeug, Wünsche und das passende Paket.": "Online ili telefonom. Dogovaramo vozilo, želje i odgovarajući paket.",
+"5 Min.": "5 min",
+"Diagnose & Backup": "Dijagnostika i backup",
+"Fehlerspeicher auslesen, Zustand prüfen, Originalsoftware sichern.": "Očitavanje grešaka, provjera stanja, backup originalnog softvera.",
+"20 Min.": "20 min",
+"Software & Einbau": "Softver i ugradnja",
+"Optimierung, Codierung oder Nachrüstung durch unsere Techniker.": "Optimizacija, kodiranje ili ugradnja od strane naših tehničara.",
+"1–4 Std.": "1–4 sata",
+"Prüfstand & Übergabe": "Dinamometar i predaja",
+"Messung, Protokoll und kurze Einweisung in die neuen Funktionen.": "Mjerenje, protokol i kratko objašnjenje novih funkcija.",
+"30 Min.": "30 min",
+"Kundenstimmen": "Utisci kupaca",
+"Das sagen": "Šta kažu",
+"unsere Kunden.": "naši kupci.",
+"4,9 von 5 Sternen aus über 400 Bewertungen.": "4,9 od 5 zvjezdica iz preko 400 recenzija.",
+"5 von 5 Sternen": "5 od 5 zvjezdica",
+"Stage 1 auf meinem Golf R — der Unterschied ist brutal, und das Auto läuft trotzdem ruhig und sauber. Prüfstandsprotokoll vorher und nachher, alles transparent.": "Stage 1 na mom Golfu R — razlika je brutalna, a auto i dalje radi mirno i čisto. Protokol s dinamometra prije i poslije, sve transparentno.",
+"Ambiente mit 64 Farben nachgerüstet — sieht aus wie ab Werk und lässt sich ganz normal über das Menü einstellen. Saubere Arbeit, keine Klappergeräusche.": "Ugrađen ambijent sa 64 boje — izgleda kao iz fabrike i podešava se normalno preko menija. Uredan posao, bez zvrckanja.",
+"Mercedes C-Klasse": "Mercedes C-klasa",
+"Neun Funktionen in 45 Minuten codiert, während ich Kaffee getrunken habe. Fairer Preis und super erklärt.": "Devet funkcija kodirano za 45 minuta dok sam pio kafu. Fer cijena i odlično objašnjeno.",
+"Häufige": "Česta",
+"Fragen.": "pitanja.",
+"Noch etwas unklar? Ruf uns an oder schreib uns — wir beraten dich gerne.": "Nešto nije jasno? Pozovi nas ili nam piši — rado ćemo te savjetovati.",
+"Ist Chiptuning legal?": "Da li je čiptuning legalan?",
+"Ja, wenn die Leistungssteigerung eingetragen wird. Wir stellen die nötigen Unterlagen bereit und begleiten die Typisierung. Ohne Eintragung erlischt die Betriebserlaubnis — darauf weisen wir vor jedem Auftrag hin.": "Da, ako se povećanje snage upiše. Pripremamo potrebnu dokumentaciju i pratimo homologaciju. Bez upisa vozilo gubi saobraćajnu dozvolu — na to ukazujemo prije svakog naloga.",
+"Schadet die Optimierung dem Motor?": "Da li optimizacija šteti motoru?",
+"Wir bleiben innerhalb der Toleranzen der Bauteile und prüfen Ladedruck, Abgastemperatur und Lambda auf dem Prüfstand. Auf unsere Software geben wir 2 Jahre Garantie.": "Ostajemo u granicama tolerancije dijelova i na dinamometru provjeravamo pritisak turba, temperaturu izduvnih gasova i lambdu. Na naš softver dajemo 2 godine garancije.",
+"Kann ich auf Serie zurück?": "Mogu li se vratiti na seriju?",
+"Jederzeit. Vor jeder Änderung sichern wir die Originalsoftware aller betroffenen Steuergeräte. Die Rückrüstung dauert meist unter 30 Minuten.": "Uvijek. Prije svake izmjene čuvamo originalni softver svih upravljačkih jedinica. Vraćanje obično traje manje od 30 minuta.",
+"Was ist bei der Vmax-Aufhebung zu beachten?": "Na šta paziti kod ukidanja Vmax?",
+"Reifen, Bremsen und Fahrwerk müssen zur neuen Höchstgeschwindigkeit passen. Wir prüfen den Geschwindigkeitsindex der Reifen und beraten dich, bevor wir etwas ändern.": "Gume, kočnice i ovjes moraju odgovarati novoj maksimalnoj brzini. Provjeravamo brzinski indeks guma i savjetujemo te prije bilo kakve izmjene.",
+"Wie lange dauert ein Termin?": "Koliko traje termin?",
+"Codierungen 30–60 Minuten, Chiptuning mit Prüfstand 2–3 Stunden, Ambientebeleuchtung je nach Umfang 1–2 Tage. Auf Wunsch stellen wir ein Ersatzfahrzeug.": "Kodiranja 30–60 minuta, čiptuning s dinamometrom 2–3 sata, ambijentalno svjetlo 1–2 dana zavisno od obima. Na zahtjev obezbjeđujemo zamjensko vozilo.",
+"Termin": "Rezerviši",
+"buchen.": "termin.",
+"Schreib uns dein Fahrzeug und deinen Wunsch — wir melden uns innerhalb von 24 Stunden mit einem Festpreis.": "Napiši nam vozilo i želju — javljamo se u roku od 24 sata s fiksnom cijenom.",
+"Telefon & WhatsApp": "Telefon i WhatsApp",
+"Werkstatt": "Radionica",
+"Öffnungszeiten": "Radno vrijeme",
+"Mo–Fr 9–18 · Sa 9–13 Uhr": "Pon–Pet 9–18 · Sub 9–13 h",
+"Name": "Ime",
+"Vor- und Nachname": "Ime i prezime",
+"Für Rückfragen": "Za povratna pitanja",
+"name@beispiel.at": "ime@primjer.ba",
+"z. B. BMW 340i, Bj. 2021": "npr. BMW 340i, god. 2021",
+"Chiptuning Stage 1": "Čiptuning Stage 1",
+"Chiptuning Stage 2": "Čiptuning Stage 2",
+"Chiptuning": "Čiptuning",
+"Sonstiges": "Ostalo",
+"Wunschtermin": "Željeni termin",
+"Uhrzeit": "Vrijeme",
+"Vormittag": "Prijepodne",
+"Nachmittag": "Poslijepodne",
+"Egal": "Svejedno",
+"Nachricht": "Poruka",
+"Was dürfen wir für dich tun?": "Šta možemo uraditi za tebe?",
+"Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden.": "Saglasan/na sam da se moji podaci koriste za obradu upita.",
+"Anfrage senden": "Pošalji upit",
+"Danke!": "Hvala!",
+"Deine Anfrage ist angekommen. Wir melden uns innerhalb von 24 Stunden. (Demo — es wurde nichts versendet.)": "Tvoj upit je stigao. Javljamo se u roku od 24 sata. (Demo — ništa nije poslano.)",
+"Chiptuning, Car Coding und Ambientebeleuchtung in Wels und ganz Oberösterreich.": "Čiptuning, car coding i ambijentalno svjetlo u Welsu i cijeloj Gornjoj Austriji.",
+"© 2026 VEKTOR Car Coding & Performance — Demo-Projekt, kein echtes Unternehmen.": "© 2026 VEKTOR Car Coding & Performance — Demo projekat, nije stvarna firma.",
+"Impressum · Datenschutz · AGB": "Impresum · Privatnost · Uslovi",
+"Bildnachweis": "Izvori slika",
+"Porsche 911 im Regen: Gabriel Gurrola,": "Porsche 911 na kiši: Gabriel Gurrola,",
+"Fahrzeugdiagnose (2 Fotos): Shixart1985,": "Dijagnostika vozila (2 fotografije): Shixart1985,",
+"Rollenprüfstand: Marek Ślusarczyk (Tupungato),": "Valjkasti dinamometar: Marek Ślusarczyk (Tupungato),",
+"Ambientebeleuchtung (Farbe im Konfigurator digital verändert): Kārlis Dambrāns,": "Ambijentalno svjetlo (boja digitalno mijenjana u konfiguratoru): Kārlis Dambrāns,",
+"Sternenhimmel: Damian B Oh,": "Zvjezdano nebo: Damian B Oh,",
+"BMW M3 bei Nacht: OWS Photography,": "BMW M3 noću: OWS Photography,",
+"Porsche bei Nacht: Ben,": "Porsche noću: Ben,",
+"BMW M3 grün: Alexander-93,": "Zeleni BMW M3: Alexander-93,",
+"Fußraumbeleuchtung: Michael Sheehan,": "Svjetlo za prostor nogu: Michael Sheehan,",
+"Mercedes-AMG GT Cockpit: Tokumeigakarinoaoshima,": "Kokpit Mercedes-AMG GT: Tokumeigakarinoaoshima,",
+"Alle Fotos verkleinert bzw. zugeschnitten. Lizenzen:": "Sve fotografije smanjene ili izrezane. Licence:",
+"Anrufen": "Pozovi",
+"Bei diesem Modell nicht abgeregelt": "Na ovom modelu nije ograničeno",
+"Benötigt Hardware: Downpipe und Ladeluftkühler": "Potreban hardver: downpipe i interkuler",
+"Stage 2 für dieses Modell nicht verfügbar": "Stage 2 nije dostupan za ovaj model",
+"Nur Vmax-Aufhebung oder Messung": "Samo ukidanje Vmax ili mjerenje",
+"Reine Software — keine Hardware nötig": "Samo softver — bez dodatnog hardvera",
+"Serienstand": "Serijsko stanje",
+"offen": "otključano",
+"abgeregelt": "ograničeno",
+"Messung € 89": "Mjerenje € 89",
+"1 Funktion gewählt": "1 funkcija odabrana",
+"Funktionen gewählt": "funkcija odabrano",
+"Eisblau": "Ledeno plava",
+"Polarblau": "Polarno plava",
+"Türkis": "Tirkizna",
+"Racing-Grün": "Trkaća zelena",
+"Gelb": "Žuta",
+"Amber": "Jantar",
+"Orange": "Narandžasta",
+"Rot": "Crvena",
+"Pink": "Roza",
+"Violett": "Ljubičasta",
+"Individuell": "Prilagođeno",
+"Diesel": "Dizel",
+"Start/Stopp merkt sich den letzten Zustand": "Start/Stop pamti posljednje stanje",
+"Kein Knopfdruck mehr nach jedem Start": "Nema više pritiska na dugme nakon svakog paljenja",
+"Sport-Anzeigen im Display": "Sportski prikazi na ekranu",
+"Leistung, Drehmoment und Ladedruck live": "Snaga, obrtni moment i pritisak turba uživo",
+"Begrüßungslicht & Coming-Home": "Svjetlo dobrodošlice i coming home",
+"Animation beim Auf- und Zusperren": "Animacija pri otključavanju i zaključavanju",
+"Spiegel klappen beim Zusperren an": "Retrovizori se sklapaju pri zaključavanju",
+"Automatisch per Schlüssel": "Automatski preko ključa",
+"Digitale Geschwindigkeit im Tacho": "Digitalna brzina na instrumentima",
+"Zusätzliche km/h-Anzeige": "Dodatni prikaz km/h",
+"Fahrmodus-Speicher": "Memorija načina vožnje",
+"Sport bleibt nach dem Neustart aktiv": "Sport ostaje aktivan nakon ponovnog paljenja",
+"Apple CarPlay im Vollbild": "Apple CarPlay preko cijelog ekrana",
+"Bei vorhandener Hardware": "Ako je hardver ugrađen",
+"Startbildschirm ändern": "Promjena početnog ekrana",
+"z. B. S-, RS- oder GTI-Logo": "npr. S, RS ili GTI logo",
+"Laptimer & Leistungsmonitor": "Laptimer i monitor performansi",
+"Rundenzeiten, Öltemperatur, Ladedruck": "Vremena krugova, temperatura ulja, pritisak turba",
+"Nadeltest beim Start": "Test kazaljki pri paljenju",
+"Zeiger laufen einmal durch": "Kazaljke jednom prođu skalu",
+"Spiegelabsenkung beim Rückwärtsfahren": "Spuštanje retrovizora pri vožnji unazad",
+"Bordstein immer im Blick": "Ivičnjak uvijek na vidiku",
+"Komfortblinker 5× statt 3×": "Komfortni žmigavac 5× umjesto 3×",
+"Für Spurwechsel auf der Autobahn": "Za promjenu trake na autoputu",
+"Ambiente-Farben freischalten": "Otključaj boje ambijenta",
+"Bis zu 30 Farben im Menü": "Do 30 boja u meniju",
+"AMG-Startbildschirm": "AMG početni ekran",
+"Beim Einschalten der Zündung": "Pri uključivanju kontakta",
+"Ambiente 64 Farben freischalten": "Otključaj ambijent sa 64 boje",
+"Wenn Ambiente verbaut ist": "Ako je ambijent ugrađen",
+"AMG-Menü im Kombiinstrument": "AMG meni na instrument tabli",
+"G-Kräfte, Temperaturen, Leistung": "G-sile, temperature, snaga",
+"Abbiegelicht & Coming-Home": "Svjetlo za skretanje i coming home",
+"Lichtfunktionen erweitern": "Proširenje funkcija svjetla"
+}
+};
+  var TITLES = {
+    de: "VEKTOR Car Coding & Performance — Chiptuning, Codierung & Ambientebeleuchtung",
+    it: "VEKTOR Car Coding & Performance — Chiptuning, codifiche e luci ambiente",
+    en: "VEKTOR Car Coding & Performance — Chip tuning, coding & ambient lighting",
+    bs: "VEKTOR Car Coding & Performance — čiptuning, kodiranje i ambijentalno svjetlo"
+  };
+  var LOCALES = { de: "de-AT", it: "it-IT", en: "en-GB", bs: "bs-BA" };
+  var lang = "de";
+  function t(s) { return lang === "de" ? s : (DICT[lang] && DICT[lang][s]) || s; }
+  function norm(s) { return s.replace(/\s+/g, " ").trim(); }
+  function fmt(n) { return Math.round(n).toLocaleString(LOCALES[lang]); }
+  function eur(n) { return "€ " + fmt(n); }
+
+  var nodes = [];
+  (function walk(el) {
+    for (var n = el.firstChild; n; n = n.nextSibling) {
+      if (n.nodeType === 3) {
+        var raw = n.nodeValue, tr = raw.trim();
+        if (tr && /[A-Za-zÀ-ž]/.test(tr)) {
+          var i = raw.indexOf(tr);
+          nodes.push({ node: n, de: norm(tr), pre: raw.slice(0, i), post: raw.slice(i + tr.length) });
+        }
+      } else if (n.nodeType === 1 && !/^(SCRIPT|STYLE|svg)$/i.test(n.tagName) && n.id !== "langSwitch" && !n.hasAttribute("data-dyn")) {
+        walk(n);
+      }
+    }
+  })(document.body);
+  var attrs = [];
+  $$("[placeholder],[aria-label],img[alt]").forEach(function (el) {
+    ["placeholder", "aria-label", "alt"].forEach(function (a) {
+      if (el.hasAttribute(a) && el.getAttribute(a)) attrs.push({ el: el, a: a, de: norm(el.getAttribute(a)) });
+    });
+  });
+
+  var header = $("header"), burger = $(".burger"), mbar = $("#mbar");
+  burger.addEventListener("click", function () {
+    var open = header.classList.toggle("open");
+    burger.setAttribute("aria-expanded", open);
+    document.body.style.overflow = open ? "hidden" : "";
+  });
+  $$(".menu a").forEach(function (a) { a.addEventListener("click", function () { header.classList.remove("open"); burger.setAttribute("aria-expanded", false); document.body.style.overflow = ""; }); });
+  function onScroll() {
+    var y = window.scrollY;
+    header.classList.toggle("scrolled", y > 40);
+    var c = $("#kontakt").getBoundingClientRect();
+    mbar.classList.toggle("show", y > window.innerHeight * 0.7 && c.top > window.innerHeight * 0.6);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function tween(from, to, ms, fn, done) {
+    if (reduce) { fn(to); if (done) done(); return; }
+    var start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / ms, 1), e = 1 - Math.pow(1 - p, 3);
+      fn(from + (to - from) * e);
+      if (p < 1) requestAnimationFrame(step); else if (done) done();
+    }
+    requestAnimationFrame(step);
+  }
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    $$(".rv").forEach(function (el) { io.observe(el); });
+    $$(".count").forEach(function (el) {
+      var to = +el.dataset.to;
+      el.textContent = "0";
+      setTimeout(function () { tween(0, to, 1600, function (v) { el.textContent = fmt(v); }); }, 500);
+    });
+  } else {
+    $$(".rv").forEach(function (el) { el.classList.add("in"); });
+    $$(".count").forEach(function (el) { el.textContent = fmt(+el.dataset.to); });
+  }
+  var gArc = $("#gArc"), gNum = $("#gNum");
+  function gauge(v) { gArc.setAttribute("stroke-dashoffset", 251.3 * (1 - v / 360)); gNum.textContent = Math.round(v); }
+  gauge(0);
+  setTimeout(function () {
+    tween(0, 245, 900, gauge, function () { setTimeout(function () { tween(245, 310, 1400, gauge); }, 500); });
+  }, 400);
+
+  var CARS = {
+    vw: { name: "Volkswagen", m: [
+      ["Golf 8 GTI", "2.0 TSI", "p", 245, 370, 310, 440, 340, 480, 250, 270, 790, 1490],
+      ["Golf 8 R", "2.0 TSI", "p", 320, 420, 385, 500, 420, 550, 250, 290, 890, 1690],
+      ["Golf 8", "2.0 TDI", "d", 150, 360, 190, 430, 0, 0, 223, 0, 690, 0],
+      ["Tiguan", "2.0 TDI", "d", 200, 400, 240, 480, 0, 0, 221, 0, 690, 0]
+    ] },
+    audi: { name: "Audi", m: [
+      ["S3 (8Y)", "2.0 TFSI", "p", 310, 400, 370, 480, 410, 540, 250, 280, 890, 1590],
+      ["RS3 (8Y)", "2.5 TFSI", "p", 400, 500, 470, 600, 520, 680, 250, 300, 1190, 2490],
+      ["A4 (B9)", "40 TDI", "d", 204, 400, 245, 470, 0, 0, 241, 0, 690, 0],
+      ["RS6 Avant (C8)", "4.0 TFSI V8", "p", 600, 800, 720, 950, 800, 1050, 250, 305, 1690, 3490]
+    ] },
+    bmw: { name: "BMW", m: [
+      ["320d (G20)", "B47 2.0d", "d", 190, 400, 235, 470, 0, 0, 240, 0, 690, 0],
+      ["M340i (G20)", "B58 3.0", "p", 374, 500, 450, 620, 510, 700, 250, 285, 990, 1890],
+      ["M3 Competition (G80)", "S58 3.0", "p", 510, 650, 600, 760, 650, 820, 250, 305, 1290, 2790],
+      ["X5 xDrive30d (G05)", "B57 3.0d", "d", 286, 650, 340, 730, 0, 0, 230, 0, 890, 0]
+    ] },
+    mb: { name: "Mercedes", m: [
+      ["A 35 AMG", "M260 2.0", "p", 306, 400, 365, 480, 400, 520, 250, 280, 890, 1690],
+      ["C 220 d (W206)", "OM654 2.0d", "d", 200, 440, 245, 520, 0, 0, 245, 0, 690, 0],
+      ["AMG C 63 S (W205)", "M177 4.0 V8", "p", 510, 700, 610, 850, 680, 920, 250, 310, 1490, 2990],
+      ["E 400 d (W213)", "OM656 3.0d", "d", 340, 700, 390, 800, 0, 0, 250, 270, 990, 0]
+    ] },
+    cupra: { name: "Cupra · Škoda", m: [
+      ["Formentor VZ", "2.0 TSI", "p", 310, 400, 370, 480, 410, 540, 250, 275, 890, 1590],
+      ["Octavia RS", "2.0 TSI", "p", 245, 370, 310, 440, 340, 480, 250, 265, 790, 1490],
+      ["Octavia RS", "2.0 TDI", "d", 200, 400, 240, 480, 0, 0, 243, 0, 690, 0]
+    ] },
+    porsche: { name: "Porsche", m: [
+      ["911 Carrera S (992)", "3.0 Biturbo", "p", 450, 530, 530, 650, 580, 720, 308, 0, 1890, 3490],
+      ["Macan S", "2.9 V6 Biturbo", "p", 380, 520, 450, 620, 0, 0, 259, 0, 1290, 0]
+    ] }
+  };
+  var VMAX_PRICE = 290, VMAX_SOLO = 390;
+  var cs = { brand: "vw", model: 0, stage: 1, vmax: false };
+  var shown = { ps: 0, nm: 0, v: 0 };
+  var brandsEl = $("#brands"), modelEl = $("#model");
+
+  Object.keys(CARS).forEach(function (k) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "brand-btn" + (k === cs.brand ? " active" : ""); b.dataset.b = k; b.textContent = CARS[k].name;
+    b.addEventListener("click", function () {
+      cs.brand = k; cs.model = 0;
+      $$(".brand-btn").forEach(function (x) { x.classList.toggle("active", x === b); });
+      renderModels(); calcTune(true);
+    });
+    brandsEl.appendChild(b);
+  });
+  function fuelName(f) { return t(f === "d" ? "Diesel" : "Benzin"); }
+  function renderModels() {
+    modelEl.innerHTML = "";
+    CARS[cs.brand].m.forEach(function (r, i) {
+      var o = document.createElement("option");
+      o.value = i; o.textContent = r[0] + " · " + r[1] + " · " + r[3] + " " + "PS";
+      modelEl.appendChild(o);
+    });
+    modelEl.value = cs.model;
+  }
+  modelEl.addEventListener("change", function () { cs.model = +modelEl.value; calcTune(true); });
+  $$("#stage button").forEach(function (b) {
+    b.addEventListener("click", function () { if (b.disabled) return; cs.stage = +b.dataset.s; calcTune(true); });
+  });
+  $("#vmax").addEventListener("change", function (e) { cs.vmax = e.target.checked; calcTune(false); });
+
+  function torqueShape(n, fuel, tuned) {
+    var lo = fuel === "d" ? 1000 : 1200, peakA = fuel === "d" ? 1750 : 1900;
+    var peakB = fuel === "d" ? (tuned ? 2600 : 2800) : (tuned ? 4600 : 5000);
+    var red = fuel === "d" ? 4800 : 7000, endV = fuel === "d" ? 0.55 : 0.74;
+    if (n <= peakA) return 0.5 + 0.5 * Math.pow((n - lo) / (peakA - lo), 0.8);
+    if (n <= peakB) return 1;
+    return 1 - (1 - endV) * Math.pow((n - peakB) / (red - peakB), 1.25);
+  }
+  function curves(fuel, ps, nm, tuned) {
+    var lo = fuel === "d" ? 1000 : 1200, red = fuel === "d" ? 4800 : 7000, pts = [], maxP = 0, i, n;
+    for (i = 0; i <= 60; i++) {
+      n = lo + (red - lo) * i / 60;
+      var ts = torqueShape(n, fuel, tuned);
+      var p = ts * n;
+      if (p > maxP) maxP = p;
+      pts.push({ n: n, t: ts, p: p });
+    }
+    return pts.map(function (o) { return { n: o.n, nm: o.t * nm, ps: o.p / maxP * ps }; });
+  }
+  function drawDyno(r, ps, nm, animate) {
+    var fuel = r[2], svg = $("#dyno");
+    var small = svg.getBoundingClientRect().width < 520;
+    var W = small ? 360 : 640, H = small ? 250 : 280, L = small ? 36 : 44, R = small ? 8 : 12, T = 12, B = 28;
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    var lo = fuel === "d" ? 1000 : 1200, red = fuel === "d" ? 4800 : 7000;
+    var maxY = Math.ceil(Math.max(nm, ps, r[4], r[3]) * 1.12 / 100) * 100;
+    function x(n) { return L + (n - lo) / (red - lo) * (W - L - R); }
+    function y(v) { return T + (1 - v / maxY) * (H - T - B); }
+    function path(pts, key) { return pts.map(function (p, i) { return (i ? "L" : "M") + x(p.n).toFixed(1) + " " + y(p[key]).toFixed(1); }).join(" "); }
+    var s = curves(fuel, r[3], r[4], false), tu = curves(fuel, ps, nm, cs.stage > 0);
+    var g = '<g class="grid">', ax = '<g class="axis">', v, n;
+    for (v = 0; v <= maxY; v += maxY / 5) { g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(v) + '" y2="' + y(v) + '"/>'; ax += '<text x="' + (L - 8) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + Math.round(v) + "</text>"; }
+    var stepN = fuel === "d" ? (small ? 1000 : 500) : (small ? 2000 : 1000);
+    for (n = Math.ceil(lo / stepN) * stepN; n <= red; n += stepN) { ax += '<text x="' + x(n) + '" y="' + (H - 8) + '" text-anchor="middle">' + (n / 1000).toFixed(n % 1000 ? 1 : 0) + "k</text>"; }
+    g += "</g>"; ax += "</g>";
+    var cls = animate && !reduce ? "curve draw" : "curve";
+    svg.innerHTML = g + ax +
+      '<path class="curve" d="' + path(s, "nm") + '" stroke="#3a414a" stroke-dasharray="4 5"/>' +
+      '<path class="curve" d="' + path(s, "ps") + '" stroke="#5b636e"/>' +
+      '<path class="' + cls + '" d="' + path(tu, "nm") + '" stroke="#38d9f5"/>' +
+      '<path class="' + cls + '" d="' + path(tu, "ps") + '" stroke="#ff5a1f"/>';
+  }
+  var lastW = 0;
+  window.addEventListener("resize", function () {
+    var w = window.innerWidth;
+    if ((w < 760) !== (lastW < 760)) { var r = CARS[cs.brand].m[cs.model]; drawDyno(r, shown.ps, shown.nm, false); }
+    lastW = w;
+  });
+  lastW = window.innerWidth;
+  function setBar(id, val, max) { $(id).style.width = Math.min(100, val / max * 100) + "%"; }
+
+  function calcTune(animate) {
+    var r = CARS[cs.brand].m[cs.model];
+    var has2 = r[7] > 0;
+    if (!has2 && cs.stage === 2) cs.stage = 1;
+    $$("#stage button").forEach(function (b) {
+      var s = +b.dataset.s;
+      b.disabled = s === 2 && !has2;
+      b.classList.toggle("active", s === cs.stage);
+    });
+    var vEl = $("#vmax"), canV = r[10] > 0;
+    vEl.disabled = !canV;
+    if (!canV) { vEl.checked = false; cs.vmax = false; }
+    $("#vmaxNote").textContent = canV ? r[9] + " → " + r[10] + " km/h" : t("Bei diesem Modell nicht abgeregelt");
+    $("#stageNote").textContent = cs.stage === 2 ? t("Benötigt Hardware: Downpipe und Ladeluftkühler") : (!has2 ? t("Stage 2 für dieses Modell nicht verfügbar") : (cs.stage === 0 ? t("Nur Vmax-Aufhebung oder Messung") : t("Reine Software — keine Hardware nötig")));
+
+    var ps = cs.stage === 0 ? r[3] : cs.stage === 1 ? r[5] : r[7];
+    var nm = cs.stage === 0 ? r[4] : cs.stage === 1 ? r[6] : r[8];
+    var v = cs.vmax ? r[10] : r[9];
+    var price = cs.stage === 0 ? 0 : cs.stage === 1 ? r[11] : r[12];
+    if (cs.vmax) price += cs.stage === 0 ? VMAX_SOLO : VMAX_PRICE;
+
+    var brandName = cs.brand === "vw" ? "VW" : cs.brand === "mb" ? "Mercedes" : cs.brand === "cupra" ? (r[0].indexOf("Formentor") === 0 ? "Cupra" : "Škoda") : CARS[cs.brand].name;
+    $("#resName").textContent = brandName + " " + r[0];
+    $("#resSub").textContent = r[1] + " · " + fuelName(r[2]) + " · " + (cs.stage === 0 ? t("Serie") : "Stage " + cs.stage);
+    var dps = ps - r[3], dnm = nm - r[4];
+    $("#resGain").textContent = dps > 0 ? "+" + dps + " PS · +" + Math.round(dps / r[3] * 100) + " %" : t("Serienstand");
+    $("#kPsFrom").innerHTML = t("Serie") + " " + r[3] + " PS" + (dps > 0 ? " · <b>+" + dps + "</b>" : "");
+    $("#kNmFrom").innerHTML = t("Serie") + " " + r[4] + " Nm" + (dnm > 0 ? " · <b>+" + dnm + "</b>" : "");
+    $("#kVFrom").innerHTML = cs.vmax ? t("offen") + " · <b>+" + (r[10] - r[9]) + "</b>" : (canV ? t("abgeregelt") : t("Serie"));
+    var maxPs = Math.max(r[7], r[5]) * 1.08, maxNm = Math.max(r[8], r[6]) * 1.08, maxV = 320;
+    setBar("#bPsS", r[3], maxPs); setBar("#bPsT", ps, maxPs);
+    setBar("#bNmS", r[4], maxNm); setBar("#bNmT", nm, maxNm);
+    setBar("#bVS", r[9], maxV); setBar("#bVT", v, maxV);
+    $("#resPrice").textContent = price ? eur(price) : t("Messung € 89");
+    var from = { ps: shown.ps, nm: shown.nm, v: shown.v };
+    shown = { ps: ps, nm: nm, v: v };
+    tween(0, 1, 700, function (k) {
+      $("#kPs").textContent = Math.round(from.ps + (ps - from.ps) * k);
+      $("#kNm").textContent = Math.round(from.nm + (nm - from.nm) * k);
+      $("#kV").textContent = Math.round(from.v + (v - from.v) * k);
+    });
+    drawDyno(r, ps, nm, animate);
+  }
+  $("#calcSend").addEventListener("click", function () {
+    var r = CARS[cs.brand].m[cs.model];
+    $("#f-svc").value = cs.stage === 2 ? "stage2" : cs.stage === 1 ? "stage1" : "vmax";
+    $("#f-car").value = $("#resName").textContent + " " + r[1];
+    $("#f-msg").value = (cs.stage ? "Stage " + cs.stage : t("Serie")) + (cs.vmax ? " + Vmax" : "") + " — " + $("#resPrice").textContent;
+  });
+
+  var AMB = [["Eisblau", 195], ["Polarblau", 225], ["Türkis", 175], ["Mint", 150], ["Racing-Grün", 120], ["Gelb", 55], ["Amber", 38], ["Orange", 22], ["Rot", 0], ["Pink", 330], ["Magenta", 300], ["Violett", 270]];
+  var amb = { hue: 225, inten: 100, mode: "static", name: "Polarblau" };
+  var ambDot = $("#ambDot"), ambName = $("#ambName"), hueEl = $("#hue"), intEl = $("#inten"), swEl = $("#swatches");
+  var rafId = 0;
+  function hueCss(h, l) { return "hsl(" + Math.round(h) + ", 95%, " + (l || 58) + "%)"; }
+  var ambLights = $$(".amb-light");
+  function paintAmb(h, s) {
+    var col = "hsl(" + Math.round(h) + ", 100%, 56%)";
+    ambLights.forEach(function (el) { el.style.setProperty("--lc", col); });
+    ambLights[1].style.opacity = Math.min(1, s).toFixed(2);
+    ambLights[0].style.opacity = Math.max(0, Math.min(1, (s - 0.35) * 0.9)).toFixed(2);
+    ambDot.style.setProperty("--c", hueCss(h));
+  }
+  function nameFor(h) {
+    var best = null, bd = 999;
+    AMB.forEach(function (c) { var d = Math.abs(((h - c[1]) % 360 + 540) % 360 - 180); if (d < bd) { bd = d; best = c; } });
+    return bd <= 6 ? best[0] : "Individuell";
+  }
+  function renderSwatches() {
+    swEl.innerHTML = "";
+    AMB.forEach(function (c) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "sw"; b.style.setProperty("--c", hueCss(c[1]));
+      b.setAttribute("aria-label", t(c[0])); b.title = t(c[0]);
+      b.classList.toggle("active", nameFor(amb.hue) === c[0]);
+      b.addEventListener("click", function () { setMode("static"); amb.hue = c[1]; hueEl.value = c[1]; updateAmb(); });
+      swEl.appendChild(b);
+    });
+  }
+  function updateAmb() {
+    amb.name = nameFor(amb.hue);
+    ambName.textContent = t(amb.name);
+    $$(".sw", swEl).forEach(function (b, i) { b.classList.toggle("active", AMB[i][0] === amb.name); });
+    if (amb.mode === "static") paintAmb(amb.hue, amb.inten / 100);
+  }
+  hueEl.addEventListener("input", function () { if (amb.mode === "cycle") setMode("static"); amb.hue = +hueEl.value; updateAmb(); });
+  intEl.addEventListener("input", function () { amb.inten = +intEl.value; updateAmb(); });
+  function setMode(m) {
+    amb.mode = m;
+    $$("#modes button").forEach(function (b) { b.classList.toggle("active", b.dataset.m === m); });
+    cancelAnimationFrame(rafId);
+    $("#ambStage").classList.toggle("noanim", m !== "static");
+    if (m === "static") { paintAmb(amb.hue, amb.inten / 100); return; }
+    if (reduce) { paintAmb(amb.hue, amb.inten / 100); return; }
+    var t0 = performance.now();
+    (function loop(now) {
+      var k = (now - t0) / 1000;
+      if (m === "breath") {
+        paintAmb(amb.hue, (amb.inten / 100) * (0.25 + 0.75 * (0.5 + 0.5 * Math.sin(k * 2.2))));
+      } else {
+        var h = (amb.hue + k * 40) % 360;
+        paintAmb(h, amb.inten / 100);
+        if (Math.floor(k * 10) % 3 === 0) { hueEl.value = Math.round(h); }
+      }
+      rafId = requestAnimationFrame(loop);
+    })(t0);
+  }
+  $$("#modes button").forEach(function (b) { b.addEventListener("click", function () { setMode(b.dataset.m); }); });
+  $("#ambSend").addEventListener("click", function () {
+    $("#f-svc").value = "amb";
+    $("#f-msg").value = t("Ambientebeleuchtung") + " — " + t(amb.name) + " (" + Math.round(+hueEl.value) + "°)";
+  });
+
+  var CODE = {
+    bmw: [
+      ["Start/Stopp merkt sich den letzten Zustand", "Kein Knopfdruck mehr nach jedem Start", 49],
+      ["Sport-Anzeigen im Display", "Leistung, Drehmoment und Ladedruck live", 59],
+      ["Begrüßungslicht & Coming-Home", "Animation beim Auf- und Zusperren", 39],
+      ["Spiegel klappen beim Zusperren an", "Automatisch per Schlüssel", 39],
+      ["Digitale Geschwindigkeit im Tacho", "Zusätzliche km/h-Anzeige", 29],
+      ["Fahrmodus-Speicher", "Sport bleibt nach dem Neustart aktiv", 49],
+      ["Apple CarPlay im Vollbild", "Bei vorhandener Hardware", 149]
+    ],
+    vag: [
+      ["Startbildschirm ändern", "z. B. S-, RS- oder GTI-Logo", 49],
+      ["Laptimer & Leistungsmonitor", "Rundenzeiten, Öltemperatur, Ladedruck", 59],
+      ["Start/Stopp merkt sich den letzten Zustand", "Kein Knopfdruck mehr nach jedem Start", 49],
+      ["Nadeltest beim Start", "Zeiger laufen einmal durch", 39],
+      ["Spiegelabsenkung beim Rückwärtsfahren", "Bordstein immer im Blick", 39],
+      ["Komfortblinker 5× statt 3×", "Für Spurwechsel auf der Autobahn", 29],
+      ["Ambiente-Farben freischalten", "Bis zu 30 Farben im Menü", 79]
+    ],
+    mb: [
+      ["AMG-Startbildschirm", "Beim Einschalten der Zündung", 59],
+      ["Ambiente 64 Farben freischalten", "Wenn Ambiente verbaut ist", 99],
+      ["Spiegel klappen beim Zusperren an", "Automatisch per Schlüssel", 39],
+      ["Start/Stopp merkt sich den letzten Zustand", "Kein Knopfdruck mehr nach jedem Start", 49],
+      ["AMG-Menü im Kombiinstrument", "G-Kräfte, Temperaturen, Leistung", 79],
+      ["Abbiegelicht & Coming-Home", "Lichtfunktionen erweitern", 39],
+      ["Komfortblinker 5× statt 3×", "Für Spurwechsel auf der Autobahn", 29]
+    ]
+  };
+  var code = { brand: "bmw", sel: { bmw: {}, vag: {}, mb: {} } };
+  var listEl = $("#codeList");
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>';
+  function renderCoding() {
+    listEl.innerHTML = "";
+    CODE[code.brand].forEach(function (it, i) {
+      var on = !!code.sel[code.brand][i];
+      var l = document.createElement("label");
+      l.className = "ci" + (on ? " on" : "");
+      l.innerHTML = '<input type="checkbox"' + (on ? " checked" : "") + '><span class="box">' + CHECK + '</span><span class="txt"><b></b><small></small></span><span class="pr"></span>';
+      $("b", l).textContent = t(it[0]); $("small", l).textContent = t(it[1]); $(".pr", l).textContent = eur(it[2]);
+      $("input", l).addEventListener("change", function (e) {
+        if (e.target.checked) code.sel[code.brand][i] = 1; else delete code.sel[code.brand][i];
+        l.classList.toggle("on", e.target.checked); calcCoding();
+      });
+      listEl.appendChild(l);
+    });
+    calcCoding();
+  }
+  var codeShown = 0;
+  function calcCoding() {
+    var sel = code.sel[code.brand], n = 0, sum = 0;
+    Object.keys(sel).forEach(function (i) { n++; sum += CODE[code.brand][i][2]; });
+    var total = n >= 3 ? Math.round(sum * 0.85) : sum;
+    $("#codeCount").textContent = n === 1 ? t("1 Funktion gewählt") : n + " " + t("Funktionen gewählt") + (n >= 3 ? " · −15 %" : "");
+    var el = $("#codeTotal"), from = codeShown;
+    codeShown = total;
+    tween(0, 1, 450, function (k) {
+      el.innerHTML = eur(from + (total - from) * k) + (n >= 3 ? "<s>" + eur(sum) + "</s>" : "");
+    });
+  }
+  $$("#codeTabs button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      code.brand = b.dataset.b;
+      $$("#codeTabs button").forEach(function (x) { x.classList.toggle("active", x === b); x.setAttribute("aria-selected", x === b); });
+      renderCoding(); runTerm();
+    });
+  });
+  $("#codeSend").addEventListener("click", function () {
+    var names = Object.keys(code.sel[code.brand]).map(function (i) { return t(CODE[code.brand][i][0]); });
+    $("#f-svc").value = "coding";
+    $("#f-msg").value = names.length ? names.join(", ") + " — " + $("#codeTotal").firstChild.textContent : "";
+  });
+
+  var termOut = $("#termOut"), termTimer = 0;
+  var TERM = {
+    bmw: ["> connect ENET … ZGW found", "> VIN WBA8E1C5*******", "> backup FEM_BODY, HU_MGU, KOMBI", "> coding … 7 / 7"],
+    vag: ["> connect OBD … gateway 19", "> VIN WVWZZZCDZ*******", "> backup 5F, 17, 09, 44", "> adaptation … 7 / 7"],
+    mb: ["> connect DoIP … CGW", "> VIN W1K2060*******", "> backup HU7, IC, SAM_F", "> variant coding … 7 / 7"]
+  };
+  function runTerm() {
+    clearTimeout(termTimer);
+    var lines = TERM[code.brand], i = 0;
+    termOut.innerHTML = "";
+    (function next() {
+      if (i > 0 && termOut.lastChild) termOut.lastChild.classList.remove("cur");
+      if (i < lines.length) {
+        var d = document.createElement("div");
+        d.className = "cur"; d.textContent = lines[i];
+        termOut.appendChild(d); i++;
+        termTimer = setTimeout(next, reduce ? 0 : 650);
+      } else {
+        var ok = document.createElement("div");
+        ok.className = "ok cur"; ok.textContent = "✓ done · DTC 0 · backup saved";
+        termOut.appendChild(ok);
+      }
+    })();
+  }
+  if ("IntersectionObserver" in window) {
+    var tio = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { runTerm(); tio.disconnect(); } }, { threshold: 0.4 });
+    tio.observe($("#term"));
+  } else runTerm();
+
+  $$("#filters button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var f = b.dataset.f;
+      $$("#filters button").forEach(function (x) { x.classList.toggle("active", x === b); });
+      $$("#refGrid .ref").forEach(function (r) { r.classList.toggle("hide", f !== "all" && r.dataset.cat !== f); });
+      $("#refGrid").scrollLeft = 0;
+    });
+  });
+
+  var form = $("#form");
+  var dateEl = $("#f-date");
+  try { dateEl.min = new Date().toISOString().slice(0, 10); } catch (e) {}
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var ok = true;
+    ["#f-name", "#f-tel", "#f-car"].forEach(function (s) {
+      var el = $(s), bad = !el.value.trim();
+      el.parentNode.classList.toggle("err", bad); if (bad) ok = false;
+    });
+    var m = $("#f-mail"), badM = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.value.trim());
+    m.parentNode.classList.toggle("err", badM); if (badM) ok = false;
+    var chk = $("#f-ok");
+    if (!chk.checked) { chk.parentNode.style.color = "#ef4444"; ok = false; } else chk.parentNode.style.color = "";
+    if (!ok) return;
+    form.classList.add("sent");
+  });
+  $$("#form input").forEach(function (el) { el.addEventListener("input", function () { el.parentNode.classList.remove("err"); }); });
+
+  function applyLang(l) {
+    lang = DICT[l] || l === "de" ? l : "de";
+    nodes.forEach(function (o) { o.node.nodeValue = o.pre + t(o.de) + o.post; });
+    attrs.forEach(function (o) { o.el.setAttribute(o.a, t(o.de)); });
+    document.title = TITLES[lang];
+    document.documentElement.lang = lang;
+    $$("#langSwitch .lng").forEach(function (b) { b.classList.toggle("active", b.dataset.lang === lang); });
+    try { localStorage.setItem("vektorLang", lang); } catch (e) {}
+    renderSwatches(); updateAmb(); renderCoding(); calcTune(false);
+  }
+  $$("#langSwitch .lng").forEach(function (b) { b.addEventListener("click", function () { applyLang(b.dataset.lang); }); });
+
+  renderModels(); calcTune(true);
+  renderSwatches(); updateAmb();
+  renderCoding();
+  var saved = "de";
+  try { saved = localStorage.getItem("vektorLang") || "de"; } catch (e) {}
+  if (saved !== "de") applyLang(saved);
+})();
+</script>
+</body>
+</html>
