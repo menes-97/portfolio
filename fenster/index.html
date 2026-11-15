@@ -1,0 +1,2253 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>LUXFELD Fenster &amp; Türen — Fenstertausch, Montage &amp; Sonnenschutz</title>
+<meta name="description" content="Demo-Projekt: Website für einen Fensterbetrieb mit Fenster-Konfigurator, Energiespar-Rechner und Profil-Querschnitt.">
+<meta name="theme-color" content="#0d1719">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e6b78'/%3E%3Crect x='8' y='7' width='16' height='18' rx='1.5' fill='none' stroke='%23fff' stroke-width='2.4'/%3E%3Cpath d='M16 7v18M8 16h16' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/hero-m.jpg" media="(max-width: 760px)">
+<link rel="preload" as="image" href="img/hero.jpg" media="(min-width: 761px)">
+<style>
+:root {
+  --bg: #f5f4f0;
+  --bg-2: #ecebe5;
+  --card: #ffffff;
+  --ink: #11181b;
+  --muted: #5d696e;
+  --dim: #8a9498;
+  --line: #dedbd2;
+  --line-2: #cfcbc0;
+  --accent: #0e6b78;
+  --accent-2: #0a5560;
+  --accent-soft: #dcecee;
+  --sun: #f0a43a;
+  --sun-soft: #fcefd9;
+  --ok: #1f9d63;
+  --dark: #0d1719;
+  --dark-2: #142326;
+  --dark-line: #24363a;
+  --on-dark: #eef3f3;
+  --on-dark-muted: #98aeb2;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --display: "Sora", "Manrope", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --shadow: 0 1px 2px rgba(17, 24, 27, .05), 0 18px 40px -18px rgba(17, 24, 27, .22);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 "Manrope", system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); }
+section { padding: clamp(72px, 10vw, 120px) 0; position: relative; }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; line-height: 1.1; margin: 0; letter-spacing: -.025em; }
+h2 { font-size: clamp(32px, 4.6vw, 52px); }
+h2 em, h1 em { font-style: normal; color: var(--accent); }
+h3 { font-size: 22px; }
+p { margin: 0; }
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font: 600 12px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: currentColor; }
+.sec-head { display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: end; margin-bottom: 48px; }
+.sec-head > * { min-width: 0; }
+.sec-head h2 { margin-top: 16px; }
+.sec-head p { color: var(--muted); font-size: 17px; max-width: 52ch; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 24px; border-radius: 999px; border: 1px solid transparent; font-weight: 700; font-size: 15px; transition: transform .2s, background .2s, border-color .2s, box-shadow .2s, color .2s; white-space: nowrap; }
+.btn svg { width: 18px; height: 18px; flex: none; transition: transform .2s; }
+.btn:hover svg { transform: translateX(3px); }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 12px 28px -12px rgba(14, 107, 120, .7); }
+.btn-primary:hover { background: var(--accent-2); transform: translateY(-1px); }
+.btn-ghost { border-color: rgba(255, 255, 255, .35); color: #fff; background: rgba(255, 255, 255, .08); backdrop-filter: blur(8px); }
+.btn-ghost:hover { background: rgba(255, 255, 255, .16); }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: #000; transform: translateY(-1px); }
+.btn-sun { background: var(--sun); color: #1b1305; }
+.btn-sun:hover { background: #f5b25a; transform: translateY(-1px); }
+
+header { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; color: #fff; }
+header.scrolled, header.open { background: rgba(245, 244, 240, .9); backdrop-filter: blur(14px) saturate(1.4); border-color: var(--line); color: var(--ink); }
+.nav { display: flex; align-items: center; gap: 24px; height: 76px; }
+.logo { display: flex; align-items: center; gap: 12px; flex: none; }
+.logo-mark { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; background: var(--accent); }
+.logo-mark svg { width: 22px; height: 22px; }
+.logo b { display: block; font: 700 19px/1 var(--display); letter-spacing: .12em; }
+.logo small { display: block; font: 600 9.5px/1 var(--mono); letter-spacing: .2em; opacity: .7; margin-top: 5px; }
+.menu { display: flex; align-items: center; gap: 22px; margin-left: auto; }
+.menu-links { display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; }
+.menu-links a { padding: 8px 12px; border-radius: 8px; font-weight: 600; font-size: 14.5px; opacity: .85; transition: opacity .2s, background .2s; }
+.menu-links a:hover { opacity: 1; background: rgba(127, 127, 127, .12); }
+.lang-switch { display: flex; padding: 3px; border-radius: 999px; background: rgba(127, 127, 127, .14); }
+.lng { border: 0; background: none; padding: 5px 9px; border-radius: 999px; font: 600 11.5px/1 var(--mono); color: inherit; opacity: .7; }
+.lng.active { background: #fff; color: var(--ink); opacity: 1; }
+header.scrolled .lng.active, header.open .lng.active { background: var(--ink); color: #fff; }
+.nav-cta { padding: 11px 18px; font-size: 14px; }
+.burger { display: none; margin-left: auto; width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(127, 127, 127, .35); background: rgba(255, 255, 255, .1); position: relative; color: inherit; }
+.burger span, .burger span::before, .burger span::after { position: absolute; left: 12px; width: 20px; height: 2px; background: currentColor; border-radius: 2px; transition: transform .25s, top .25s; content: ""; }
+.burger span { top: 21px; }
+.burger span::before { top: -6px; left: 0; }
+.burger span::after { top: 6px; left: 0; }
+header.open .burger span { background: transparent; }
+header.open .burger span::before { top: 0; transform: rotate(45deg); background: var(--ink); }
+header.open .burger span::after { top: 0; transform: rotate(-45deg); background: var(--ink); }
+
+.hero { padding: 0; min-height: 100svh; display: flex; flex-direction: column; isolation: isolate; overflow: hidden; color: #fff; }
+.hero picture, .hero picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(9, 18, 20, .82) 0%, rgba(9, 18, 20, .5) 45%, rgba(9, 18, 20, .05) 75%), linear-gradient(0deg, rgba(9, 18, 20, .75) 0%, rgba(9, 18, 20, 0) 40%); }
+.hero-inner { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 120px; }
+.hero-grid { display: grid; grid-template-columns: 1.3fr .7fr; gap: 48px; align-items: end; }
+.hero-grid > * { min-width: 0; }
+.hero .eyebrow { color: #9fe0e6; }
+.hero h1 { font-size: clamp(42px, 6.6vw, 88px); margin: 20px 0 22px; line-height: 1.02; letter-spacing: -.035em; }
+.hero h1 em { color: #9fe0e6; }
+.hero .lead { font-size: clamp(17px, 1.6vw, 19px); color: rgba(255, 255, 255, .85); max-width: 52ch; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+.hero-card { background: rgba(255, 255, 255, .12); backdrop-filter: blur(18px) saturate(1.3); border: 1px solid rgba(255, 255, 255, .22); border-radius: var(--radius); padding: 22px; }
+.hc-top { display: flex; gap: 14px; align-items: center; }
+.hc-icon { width: 46px; height: 46px; border-radius: 13px; background: var(--sun); display: grid; place-items: center; flex: none; color: #1b1305; }
+.hc-icon svg { width: 22px; height: 22px; }
+.hc-top strong { display: block; font: 600 17px/1.25 var(--display); }
+.hc-top small { color: rgba(255, 255, 255, .75); font-size: 13.5px; }
+.hero-card ul { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 9px; font-size: 14.5px; }
+.hero-card li { display: flex; gap: 10px; align-items: center; }
+.hero-card li::before { content: ""; width: 18px; height: 18px; flex: none; border-radius: 50%; background: rgba(159, 224, 230, .25) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239fe0e6' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center / 12px no-repeat; }
+.stats { margin-top: 56px; border-top: 1px solid rgba(255, 255, 255, .18); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat { padding: 22px 20px 30px; border-left: 1px solid rgba(255, 255, 255, .18); }
+.stat:first-child { border-left: 0; padding-left: 0; }
+.stat b { display: block; font: 600 clamp(26px, 3vw, 36px)/1.1 var(--display); letter-spacing: -.02em; }
+.stat > span { color: rgba(255, 255, 255, .72); font-size: 14px; }
+
+.ticker { background: var(--dark); color: var(--on-dark-muted); overflow: hidden; padding: 18px 0; }
+.ticker-track { display: flex; gap: 48px; width: max-content; animation: marquee 40s linear infinite; }
+.ticker span { font: 500 15px/1 var(--display); display: inline-flex; align-items: center; gap: 48px; white-space: nowrap; }
+.ticker span::after { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--sun); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+.tile { position: relative; border-radius: var(--radius); overflow: hidden; min-height: 300px; background: var(--card); isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; color: #fff; }
+.tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+.tile:hover img { transform: scale(1.05); }
+.tile::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(9, 18, 20, .88) 5%, rgba(9, 18, 20, .3) 55%, rgba(9, 18, 20, 0) 100%); }
+.tile .body { padding: 24px; }
+.tile .tag { display: inline-block; font: 600 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; padding: 7px 10px; border-radius: 6px; background: rgba(255, 255, 255, .16); backdrop-filter: blur(6px); margin-bottom: 12px; }
+.tile h3 { font-size: 24px; }
+.tile p { color: rgba(255, 255, 255, .82); margin-top: 8px; font-size: 15px; max-width: 46ch; }
+.t-a { grid-column: span 7; min-height: 440px; }
+.t-b { grid-column: span 5; }
+.t-c, .t-d, .t-e { grid-column: span 4; }
+.minis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 16px; }
+.mini { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 22px; transition: transform .2s, box-shadow .2s; }
+.mini:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.mini .ic { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); margin-bottom: 14px; }
+.mini .ic svg { width: 21px; height: 21px; }
+.mini h4 { font-size: 17px; }
+.mini p { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+.cfg-sec { background: var(--bg-2); }
+.cfg { display: grid; grid-template-columns: 1.05fr .95fr; grid-template-areas: "prev panel" "res panel"; gap: 20px; align-items: start; }
+.cfg > * { min-width: 0; }
+.cfg-prev { grid-area: prev; position: sticky; top: 92px; }
+.cfg-res { grid-area: res; }
+.cfg-panel { grid-area: panel; }
+.stage { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.stage svg { display: block; width: 100%; height: auto; }
+.specs { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+.specs div { padding: 14px 16px; border-left: 1px solid var(--line); }
+.specs div:first-child { border-left: 0; }
+.specs small { display: block; font-size: 12px; color: var(--muted); }
+.specs b { font: 600 15px/1.3 var(--mono); }
+.panel { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; }
+.step { padding: 20px 0; border-top: 1px solid var(--line); }
+.step:first-child { padding-top: 0; border-top: 0; }
+.step:last-child { padding-bottom: 0; }
+.step-label { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.step-label h4 { display: flex; align-items: center; gap: 10px; font: 700 15px/1.2 "Manrope", sans-serif; letter-spacing: 0; }
+.step-label h4 i { font: 600 11px/1 var(--mono); font-style: normal; width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.step-label span { font: 600 13px/1 var(--mono); color: var(--muted); text-align: right; }
+.types { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.type { border: 1.5px solid var(--line); background: #fff; border-radius: 12px; padding: 10px 4px 9px; display: flex; flex-direction: column; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; line-height: 1.2; text-align: center; transition: border-color .2s, background .2s; }
+.type svg { width: 34px; height: 40px; }
+.type:hover { border-color: var(--line-2); }
+.type.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-2); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 9px 15px; font-weight: 700; font-size: 14px; transition: all .2s; }
+.chip:hover { border-color: var(--line-2); }
+.chip.active { border-color: var(--accent); background: var(--accent); color: #fff; }
+.swatches { display: flex; flex-wrap: wrap; gap: 10px; }
+.sw { width: 40px; height: 40px; border-radius: 50%; border: 2px solid transparent; background: var(--c); box-shadow: inset 0 0 0 3px #fff, 0 0 0 1px var(--line-2); transition: transform .15s, border-color .2s; }
+.sw:hover { transform: scale(1.06); }
+.sw.active { border-color: var(--accent); }
+.sw.wood { background: repeating-linear-gradient(100deg, var(--c) 0 5px, var(--c2) 5px 7px, var(--c) 7px 12px); }
+.glass-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.gl { border: 1.5px solid var(--line); background: #fff; border-radius: 12px; padding: 12px 14px; text-align: left; transition: border-color .2s, background .2s; }
+.gl b { display: block; font-size: 14px; }
+.gl small { font: 500 12px/1.4 var(--mono); color: var(--muted); }
+.gl.active { border-color: var(--accent); background: var(--accent-soft); }
+.range-row { display: grid; grid-template-columns: 70px 1fr; align-items: center; gap: 14px; }
+.range-row + .range-row { margin-top: 14px; }
+.range-row label { font-size: 13px; font-weight: 700; color: var(--muted); }
+.range { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 6px; background: linear-gradient(90deg, var(--accent) var(--p, 50%), #e2dfd7 var(--p, 50%)); outline: none; }
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #fff; border: 2px solid var(--accent); box-shadow: 0 2px 8px rgba(0, 0, 0, .18); cursor: pointer; }
+.range::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid var(--accent); cursor: pointer; }
+.shade-slider { margin-top: 14px; }
+.shade-slider[hidden] { display: none; }
+.qty { display: inline-flex; align-items: center; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; }
+.qty button { width: 44px; height: 42px; border: 0; background: #fff; font-size: 20px; font-weight: 700; }
+.qty button:hover { background: var(--bg); }
+.qty output { min-width: 44px; text-align: center; font: 600 16px/1 var(--mono); }
+.res-card { background: var(--dark); color: var(--on-dark); border-radius: var(--radius); padding: 22px 24px; display: grid; gap: 16px; }
+.res-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.res-card small { display: block; font-size: 13px; color: var(--on-dark-muted); }
+.res-card .big { font: 600 clamp(26px, 3vw, 34px)/1.15 var(--display); letter-spacing: -.02em; }
+.res-card .per { font: 500 13px/1.4 var(--mono); color: var(--on-dark-muted); }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge { font: 600 12px/1 var(--mono); padding: 8px 10px; border-radius: 8px; background: rgba(255, 255, 255, .08); color: #cfe3e5; }
+.badge.ok { background: rgba(31, 157, 99, .2); color: #7ee2b0; }
+.res-card .btn { width: 100%; }
+.note { font-size: 12.5px; color: var(--dim); margin-top: 10px; }
+
+.energy { background: var(--dark); color: var(--on-dark); overflow: hidden; }
+.energy .eyebrow { color: var(--sun); }
+.energy h2 em { color: var(--sun); }
+.energy .sec-head p { color: var(--on-dark-muted); }
+.en-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 20px; }
+.en-grid > * { min-width: 0; }
+.dpanel { background: var(--dark-2); border: 1px solid var(--dark-line); border-radius: var(--radius); padding: 24px; }
+.dpanel .step { border-color: var(--dark-line); }
+.dpanel .step-label h4 i { background: rgba(240, 164, 58, .16); color: var(--sun); }
+.dpanel .step-label span { color: var(--on-dark-muted); }
+.opt-list { display: grid; gap: 8px; }
+.opt { display: flex; justify-content: space-between; align-items: center; gap: 12px; border: 1.5px solid var(--dark-line); background: transparent; color: var(--on-dark); border-radius: 12px; padding: 12px 14px; text-align: left; transition: border-color .2s, background .2s; }
+.opt b { font-size: 14.5px; }
+.opt small { font: 500 12px/1.3 var(--mono); color: var(--on-dark-muted); white-space: nowrap; }
+.opt.active { border-color: var(--sun); background: rgba(240, 164, 58, .1); }
+.dpanel .chip { background: transparent; border-color: var(--dark-line); color: var(--on-dark); }
+.dpanel .chip.active { background: var(--sun); border-color: var(--sun); color: #1b1305; }
+.dpanel .range { background: linear-gradient(90deg, var(--sun) var(--p, 50%), #2a3d41 var(--p, 50%)); }
+.dpanel .range::-webkit-slider-thumb { border-color: var(--sun); }
+.en-out { display: grid; gap: 16px; align-content: start; }
+.save-big { background: linear-gradient(135deg, rgba(240, 164, 58, .18), rgba(240, 164, 58, .04)); border: 1px solid rgba(240, 164, 58, .3); border-radius: var(--radius); padding: 26px; }
+.save-big small { color: #e6cfa9; font-size: 14px; }
+.save-big .num { font: 600 clamp(44px, 6vw, 72px)/1 var(--display); letter-spacing: -.035em; margin: 8px 0 4px; }
+.save-big .num em { font-style: normal; font-size: .45em; color: #e6cfa9; margin-left: 6px; letter-spacing: 0; }
+.cmp { display: grid; gap: 14px; margin-top: 18px; }
+.cmp-row { display: grid; grid-template-columns: 96px 1fr 92px; align-items: center; gap: 12px; font-size: 13.5px; }
+.cmp-row span:last-child { font: 600 13px/1 var(--mono); text-align: right; }
+.cmp-bar { height: 12px; border-radius: 12px; background: #23353a; overflow: hidden; }
+.cmp-bar i { display: block; height: 100%; border-radius: 12px; transition: width .8s cubic-bezier(.2, .7, .2, 1); }
+.cmp-bar .old { background: linear-gradient(90deg, #e2603a, #f0a43a); }
+.cmp-bar .new { background: linear-gradient(90deg, #2bb3c0, #7ee2b0); }
+.en-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.en-kpi { background: var(--dark-2); border: 1px solid var(--dark-line); border-radius: 14px; padding: 16px; }
+.en-kpi small { display: block; color: var(--on-dark-muted); font-size: 12.5px; }
+.en-kpi b { font: 600 22px/1.3 var(--display); }
+
+.tech { display: grid; grid-template-columns: .95fr 1.05fr; gap: 48px; align-items: center; }
+.tech > * { min-width: 0; }
+.hot-img { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.hot-img img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.hs { position: absolute; left: var(--x); top: var(--y); width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; border: 0; background: #fff; color: var(--accent); font: 700 13px/1 var(--mono); display: grid; place-items: center; box-shadow: 0 6px 16px rgba(0, 0, 0, .3); transition: transform .2s, background .2s, color .2s; }
+.hs::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .8); animation: ring 2.2s infinite; }
+.hs.active { background: var(--accent); color: #fff; transform: scale(1.12); }
+@keyframes ring { 0% { transform: scale(.8); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+.hot-list { display: grid; gap: 10px; margin-top: 28px; }
+.hl { display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; padding: 16px; border-radius: 14px; background: var(--card); border: 1.5px solid var(--line); text-align: left; transition: border-color .2s, box-shadow .2s; }
+.hl i { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font: 700 13px/1 var(--mono); font-style: normal; background: var(--accent-soft); color: var(--accent); }
+.hl b { display: block; font-size: 16px; }
+.hl p { color: var(--muted); font-size: 14px; margin-top: 3px; display: none; }
+.hl.active { border-color: var(--accent); box-shadow: var(--shadow); }
+.hl.active i { background: var(--accent); color: #fff; }
+.hl.active p { display: block; }
+
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.filters button { border: 1.5px solid var(--line); background: #fff; color: var(--muted); padding: 9px 16px; border-radius: 999px; font-weight: 700; font-size: 14px; transition: all .2s; }
+.filters button.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.ref-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.ref { background: var(--card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); transition: transform .3s, box-shadow .3s; }
+.ref:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.ref.hide { display: none; }
+.ref .ph { position: relative; aspect-ratio: 4 / 4.2; overflow: hidden; }
+.ref .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+.ref:hover .ph img { transform: scale(1.05); }
+.ref .lbl { position: absolute; left: 12px; top: 12px; font: 600 10.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 7px 9px; border-radius: 6px; background: rgba(255, 255, 255, .92); color: var(--accent-2); }
+.ref-body { padding: 16px 18px 18px; }
+.ref-body h4 { font-size: 17px; }
+.ref-body p { color: var(--muted); font-size: 13.5px; margin-top: 3px; }
+.ref-body .meta { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); font: 500 12.5px/1.5 var(--mono); color: var(--ink); }
+
+.process { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; align-items: start; }
+.process > * { min-width: 0; }
+.proc-img { position: sticky; top: 100px; border-radius: var(--radius); overflow: hidden; }
+.proc-img img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.proc-img .float { position: absolute; left: 16px; right: 16px; bottom: 16px; background: rgba(255, 255, 255, .94); backdrop-filter: blur(10px); border-radius: 14px; padding: 16px 18px; display: flex; gap: 14px; align-items: center; }
+.proc-img .float b { font: 600 28px/1 var(--display); color: var(--accent); }
+.proc-img .float span { font-size: 14px; color: var(--muted); line-height: 1.4; }
+.timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+.timeline::before { content: ""; position: absolute; left: 21px; top: 10px; bottom: 10px; width: 2px; background: var(--line); }
+.timeline li { position: relative; padding: 0 0 30px 66px; }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline .n { position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--card); border: 2px solid var(--accent); display: grid; place-items: center; font: 600 14px/1 var(--mono); color: var(--accent); }
+.timeline h4 { font-size: 19px; padding-top: 8px; }
+.timeline p { color: var(--muted); margin-top: 6px; }
+.timeline .dur { display: inline-block; margin-top: 10px; font: 600 11.5px/1 var(--mono); padding: 6px 9px; border-radius: 6px; background: var(--sun-soft); color: #8a5a10; }
+.ral { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 36px; }
+.ral div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.ral i { display: block; width: 100%; height: 6px; border-radius: 6px; margin-bottom: 12px; }
+.ral b { display: block; font-size: 14.5px; }
+.ral small { color: var(--muted); font-size: 13px; }
+
+.quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.q { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: flex; flex-direction: column; margin: 0; }
+.q .stars { color: var(--sun); letter-spacing: 3px; }
+.q blockquote { margin: 14px 0 22px; font-size: 16px; flex: 1; }
+.q figcaption { display: flex; gap: 12px; align-items: center; }
+.avatar { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font: 600 14px/1 var(--display); background: var(--accent-soft); color: var(--accent); }
+.q figcaption b { display: block; font-size: 14.5px; }
+.q figcaption small { color: var(--muted); font-size: 13px; }
+
+.faq-sec { background: var(--bg-2); }
+.faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; }
+.faq-grid > * { min-width: 0; }
+.faq-grid .sec-head { display: block; margin: 0; }
+.faq-grid .sec-head p { margin-top: 18px; }
+.faq details { background: var(--card); border-radius: 14px; margin-bottom: 10px; border: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 22px; font-weight: 700; font-size: 16.5px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq .pm { width: 30px; height: 30px; border-radius: 50%; background: var(--bg); flex: none; position: relative; transition: background .3s; }
+.faq .pm::before, .faq .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; background: var(--ink); transform: translate(-50%, -50%); }
+.faq .pm::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform .3s; }
+.faq details[open] .pm { background: var(--accent); }
+.faq details[open] .pm::before, .faq details[open] .pm::after { background: #fff; }
+.faq details[open] .pm::after { transform: translate(-50%, -50%) rotate(0); }
+.faq details p { color: var(--muted); padding: 0 22px 20px; }
+
+.ct-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 48px; }
+.ct-grid > * { min-width: 0; }
+.ct-info h2 { margin: 16px 0 18px; }
+.ct-info > p { color: var(--muted); font-size: 17px; }
+.ct-list { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 10px; }
+.ct-list li { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+.ct-list .ic { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); flex: none; }
+.ct-list .ic svg { width: 19px; height: 19px; }
+.ct-list small { display: block; color: var(--muted); font-size: 12.5px; }
+.ct-list b { font-size: 15px; }
+.ct-form { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(20px, 3vw, 32px); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; position: relative; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field.full { grid-column: 1 / -1; }
+.field label { font-size: 13px; font-weight: 700; }
+.field input, .field select, .field textarea { background: var(--bg); border: 1.5px solid transparent; border-radius: 10px; padding: 13px 14px; font-size: 15px; width: 100%; transition: border-color .2s, background .2s; }
+.field select { appearance: none; -webkit-appearance: none; background-image: linear-gradient(45deg, transparent 50%, #5d696e 50%), linear-gradient(135deg, #5d696e 50%, transparent 50%); background-position: calc(100% - 20px) 55%, calc(100% - 15px) 55%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 36px; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); background: #fff; }
+.field textarea { min-height: 120px; resize: vertical; }
+.field.err input { border-color: #d94a3a; }
+.check { grid-column: 1 / -1; display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--muted); cursor: pointer; }
+.check input { margin-top: 3px; accent-color: var(--accent); width: 17px; height: 17px; flex: none; }
+.ct-form .btn { grid-column: 1 / -1; justify-self: start; }
+.sent-msg { display: none; position: absolute; inset: 0; border-radius: var(--radius); background: var(--card); flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 32px; gap: 14px; }
+.ct-form.sent .sent-msg { display: flex; }
+.sent-msg .ok-ic { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: #dff3e9; color: var(--ok); }
+.sent-msg .ok-ic svg { width: 30px; height: 30px; }
+.sent-msg h3 { font-size: 26px; }
+.sent-msg p { color: var(--muted); max-width: 40ch; }
+
+.site-footer { background: var(--dark); color: var(--on-dark-muted); padding: 64px 0 100px; font-size: 14.5px; }
+.f-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 32px; }
+.f-grid .logo { margin-bottom: 18px; color: var(--on-dark); }
+.site-footer h4 { font: 700 12.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--on-dark); margin-bottom: 14px; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.site-footer a:hover { color: var(--on-dark); }
+.f-bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--dark-line); font-size: 13px; }
+.credits { margin-top: 20px; font-size: 12.5px; }
+.credits summary { cursor: pointer; }
+.credits ul { margin-top: 12px; gap: 6px; }
+.credits a { text-decoration: underline; }
+
+.mbar { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 40; display: none; gap: 8px; transform: translateY(150%); transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
+.mbar.show { transform: none; }
+.mbar a { display: grid; place-items: center; border-radius: 14px; font-weight: 700; height: 54px; box-shadow: 0 12px 30px -8px rgba(0, 0, 0, .45); }
+.mbar .call { width: 54px; background: #fff; color: var(--accent); }
+.mbar .call svg { width: 22px; height: 22px; }
+.mbar .quote { flex: 1; background: var(--accent); color: #fff; }
+
+.rv { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2, .7, .2, 1), transform .8s cubic-bezier(.2, .7, .2, 1); }
+.rv.in { opacity: 1; transform: none; }
+.d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; } .d3 { transition-delay: .24s; }
+.no-js .rv { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .rv { opacity: 1; transform: none; }
+  .ticker-track { animation: none; }
+}
+@media (max-width: 1100px) {
+  .menu-links a { padding: 8px 8px; font-size: 14px; }
+  .ref-grid { grid-template-columns: repeat(2, 1fr); }
+  .minis { grid-template-columns: repeat(2, 1fr); }
+  .types { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 960px) {
+  .burger { display: block; }
+  .menu { position: fixed; inset: 76px 0 auto 0; flex-direction: column; align-items: stretch; gap: 16px; background: rgba(245, 244, 240, .98); color: var(--ink); border-bottom: 1px solid var(--line); padding: 16px var(--gutter) 24px; transform: translateY(-12px); opacity: 0; visibility: hidden; transition: all .25s; max-height: calc(100svh - 76px); overflow-y: auto; }
+  header.open .menu { transform: none; opacity: 1; visibility: visible; }
+  .menu-links { flex-direction: column; }
+  .menu-links a { display: block; padding: 13px 4px; font-size: 17px; border-bottom: 1px solid var(--line); border-radius: 0; opacity: 1; }
+  .lang-switch { align-self: flex-start; }
+  .lng.active { background: var(--ink); color: #fff; }
+  .nav-cta { width: 100%; }
+  .hero-grid, .sec-head, .en-grid, .tech, .process, .faq-grid, .ct-grid { grid-template-columns: 1fr; }
+  .hero-card { max-width: 440px; }
+  .cfg { grid-template-columns: 1fr; grid-template-areas: "prev" "panel" "res"; }
+  .cfg-prev { position: relative; top: 0; }
+  .t-a, .t-b { grid-column: span 12; }
+  .t-c, .t-d, .t-e { grid-column: span 6; }
+  .t-e { grid-column: span 12; }
+  .proc-img { position: relative; top: 0; max-width: 520px; }
+  .quotes { grid-template-columns: 1fr; }
+  .f-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  section { padding: 64px 0; }
+  .nav { height: 64px; }
+  .menu { inset: 64px 0 auto 0; max-height: calc(100svh - 64px); }
+  .logo-mark { width: 36px; height: 36px; }
+  .logo b { font-size: 17px; }
+  h2 { font-size: clamp(30px, 8.4vw, 38px); }
+  .sec-head { gap: 14px; margin-bottom: 28px; }
+  .sec-head p { font-size: 16px; }
+  .eyebrow { font-size: 11px; letter-spacing: .1em; }
+  .hero::before { background: linear-gradient(0deg, rgba(9, 18, 20, .92) 8%, rgba(9, 18, 20, .55) 55%, rgba(9, 18, 20, .25) 100%); }
+  .hero-inner { padding-top: 100px; }
+  .hero h1 { font-size: clamp(36px, 10.4vw, 46px); margin: 16px 0; }
+  .hero .lead { font-size: 16px; }
+  .hero-cta { flex-direction: column; margin-top: 24px; }
+  .hero-cta .btn { width: 100%; }
+  .hero-card { display: none; }
+  .stats { margin-top: 32px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat { padding: 16px 0 16px 16px; }
+  .stat:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, .18); }
+  .stat b { font-size: 26px; }
+  .stat > span { font-size: 13px; }
+  .ticker { padding: 14px 0; }
+  .ticker span { font-size: 13.5px; gap: 36px; }
+  .ticker-track { gap: 36px; }
+  .tile, .t-a { min-height: 300px; }
+  .t-c, .t-d, .t-e { grid-column: span 12; }
+  .tile .body { padding: 20px; }
+  .tile h3 { font-size: 21px; }
+  .tile p { font-size: 14.5px; }
+  .minis { grid-template-columns: 1fr; gap: 10px; }
+  .mini { padding: 16px; display: grid; grid-template-columns: 42px 1fr; column-gap: 14px; }
+  .mini .ic { margin: 0; grid-row: span 2; }
+  .mini p { margin-top: 2px; }
+  .panel, .dpanel { padding: 18px; }
+  .types { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .type { font-size: 11.5px; }
+  .glass-list { grid-template-columns: 1fr; }
+  .specs { grid-template-columns: 1fr 1fr; }
+  .specs div:nth-child(3) { border-left: 0; }
+  .specs div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .res-card { padding: 20px; }
+  .cmp-row { grid-template-columns: 76px 1fr 80px; gap: 10px; font-size: 12.5px; }
+  .en-kpis { grid-template-columns: 1fr 1fr; }
+  .en-kpis .en-kpi:last-child { grid-column: 1 / -1; }
+  .save-big { padding: 22px; }
+  .tech { gap: 24px; }
+  .hot-list { margin-top: 20px; }
+  .scroller { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter) 8px; scroll-padding: 0 var(--gutter); scrollbar-width: none; }
+  .scroller::-webkit-scrollbar { display: none; }
+  .scroller > * { flex: 0 0 80%; scroll-snap-align: start; }
+  .scroller > .hide { display: none; }
+  .ref:hover, .mini:hover { transform: none; }
+  .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 calc(var(--gutter) * -1) 18px; padding: 0 var(--gutter); }
+  .filters::-webkit-scrollbar { display: none; }
+  .filters button { flex: none; }
+  .process { gap: 28px; }
+  .proc-img img { aspect-ratio: 16 / 11; }
+  .timeline li { padding: 0 0 24px 58px; }
+  .timeline .n { width: 40px; height: 40px; }
+  .timeline::before { left: 19px; }
+  .timeline h4 { font-size: 17px; }
+  .ral { grid-template-columns: 1fr; margin-top: 24px; }
+  .q { padding: 22px; }
+  .q blockquote { font-size: 15px; }
+  .faq summary { font-size: 15.5px; padding: 17px 18px; }
+  .faq details p { padding: 0 18px 18px; }
+  .faq-grid, .ct-grid { gap: 24px; }
+  .ct-info > p { font-size: 16px; }
+  .ct-form { grid-template-columns: 1fr; }
+  .field input, .field select, .field textarea { font-size: 16px; }
+  .ct-form .btn { width: 100%; justify-self: stretch; }
+  .site-footer { padding: 48px 0 110px; }
+  .f-grid { grid-template-columns: 1fr; }
+  .f-bottom { flex-direction: column; gap: 6px; }
+  .mbar { display: flex; }
+}
+@media (max-width: 380px) {
+  .types { grid-template-columns: repeat(2, 1fr); }
+  .sw { width: 36px; height: 36px; }
+  .en-kpi b { font-size: 19px; }
+}
+</style>
+</head>
+<body class="no-js">
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="LUXFELD Fenster &amp; Türen">
+      <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M12 3v18M4 12h16"/></svg></span>
+      <span><b>LUXFELD</b><small>FENSTER · TÜREN</small></span>
+    </a>
+    <nav class="menu" id="menu">
+      <ul class="menu-links">
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#konfigurator">Konfigurator</a></li>
+        <li><a href="#energie">Energie</a></li>
+        <li><a href="#referenzen">Referenzen</a></li>
+        <li><a href="#ablauf">Ablauf</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="lang-switch" id="langSwitch" role="group" aria-label="Sprache">
+        <button class="lng active" data-lang="de">DE</button>
+        <button class="lng" data-lang="it">IT</button>
+        <button class="lng" data-lang="en">EN</button>
+        <button class="lng" data-lang="bs">BS</button>
+      </div>
+      <a href="#kontakt" class="btn btn-primary nav-cta">Gratis Aufmaß</a>
+    </nav>
+    <button class="burger" aria-label="Menü" aria-expanded="false" aria-controls="menu"><span></span></button>
+  </div>
+</header>
+
+<main>
+<section class="hero" aria-label="Einleitung">
+  <picture>
+    <source media="(max-width: 760px)" srcset="img/hero-m.jpg">
+    <img src="img/hero.jpg" alt="Modernes Haus mit großen Hebe-Schiebetüren zur Terrasse" fetchpriority="high">
+  </picture>
+  <div class="hero-inner">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Fenster · Türen · Sonnenschutz — Salzburg</span>
+        <h1>Mehr Licht.<br><em>Weniger Heizkosten.</em></h1>
+        <p class="lead">Neue Fenster, Hebe-Schiebetüren und Sonnenschutz — maßgefertigt, in einem Tag montiert und mit bis zu 70 % weniger Wärmeverlust als alte Fenster.</p>
+        <div class="hero-cta">
+          <a href="#konfigurator" class="btn btn-primary">Fenster konfigurieren
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#energie" class="btn btn-ghost">Ersparnis berechnen</a>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <div class="hc-top">
+          <span class="hc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3l-6.6 6.6a1 1 0 0 1-1.4 0L2.1 10.7a1 1 0 0 1 0-1.4l6.6-6.6a1 1 0 0 1 1.4 0l11.2 11.2a1 1 0 0 1 0 1.4z"/><path d="M7.5 10.5l2 2M10.5 7.5l2 2M13.5 13.5l2 2M16.5 10.5l2 2"/></svg></span>
+          <div><strong>Kostenloses Aufmaß</strong><small>Vor Ort im ganzen Land Salzburg</small></div>
+        </div>
+        <ul>
+          <li>Beratung mit Mustern bei dir zu Hause</li>
+          <li>Festpreis-Angebot in 3 Werktagen</li>
+          <li>Montage nach RAL-Richtlinie</li>
+        </ul>
+      </aside>
+    </div>
+    <div class="stats">
+      <div class="wrap stats-grid">
+        <div class="stat"><b><span class="count" data-to="18400">18400</span>+</b><span>Fenster montiert</span></div>
+        <div class="stat"><b><span class="count" data-to="26">26</span></b><span>Jahre Erfahrung</span></div>
+        <div class="stat"><b>1 Tag</b><span>Montage pro Wohnung</span></div>
+        <div class="stat"><b>4,9 ★</b><span>aus 520 Bewertungen</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Kunststofffenster</span><span>Holzfenster</span><span>Holz-Alu-Fenster</span><span>Aluminiumfenster</span><span>Hebe-Schiebetüren</span><span>Haustüren</span><span>Rollläden</span><span>Raffstores</span><span>Insektenschutz</span><span>Dachfenster</span>
+    <span>Kunststofffenster</span><span>Holzfenster</span><span>Holz-Alu-Fenster</span><span>Aluminiumfenster</span><span>Hebe-Schiebetüren</span><span>Haustüren</span><span>Rollläden</span><span>Raffstores</span><span>Insektenschutz</span><span>Dachfenster</span>
+  </div>
+</div>
+
+<section id="leistungen">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow">Leistungen</span>
+        <h2>Alles rund ums Fenster. <em>Aus einer Hand.</em></h2>
+      </div>
+      <p class="rv d1">Vom einzelnen Badfenster bis zur kompletten Sanierung: Wir beraten, messen, fertigen und montieren — mit eigenem Team und einem festen Ansprechpartner.</p>
+    </div>
+    <div class="bento">
+      <article class="tile t-a rv">
+        <img src="img/montage.jpg" alt="Monteur setzt ein neues Fenster in eine Wandöffnung ein" loading="lazy">
+        <div class="body"><span class="tag">Fenstertausch</span><h3>Fenstertausch &amp; Montage</h3><p>Ausbau, Entsorgung und Einbau an einem Tag — sauber, staubarm und nach RAL-Richtlinie abgedichtet.</p></div>
+      </article>
+      <article class="tile t-b rv d1">
+        <img src="img/holzhaus.jpg" alt="Modernes Holzhaus mit großen Fensterflächen" loading="lazy">
+        <div class="body"><span class="tag">Neubau</span><h3>Holz &amp; Holz-Alu</h3><p>Warme Optik innen, wetterfeste Aluschale außen.</p></div>
+      </article>
+      <article class="tile t-c rv">
+        <img src="img/raffstore.jpg" alt="Außenjalousien an einer Betonfassade" loading="lazy">
+        <div class="body"><span class="tag">Sonnenschutz</span><h3>Raffstore &amp; Rollladen</h3><p>Motorisiert, per App oder Wetterstation gesteuert.</p></div>
+      </article>
+      <article class="tile t-d rv d1">
+        <img src="img/eckfenster.jpg" alt="Neues Eckfenster aus Kunststoff in einem Zimmer" loading="lazy">
+        <div class="body"><span class="tag">Sonderformen</span><h3>Erker &amp; Eckfenster</h3><p>Maßanfertigung für jede Öffnung.</p></div>
+      </article>
+      <article class="tile t-e rv d2">
+        <img src="img/dachfenster.jpg" alt="Schlafzimmer im Dachgeschoss mit Dachfenster" loading="lazy">
+        <div class="body"><span class="tag">Dach</span><h3>Dachfenster</h3><p>Tausch oder Neueinbau inklusive Eindeckrahmen.</p></div>
+      </article>
+    </div>
+    <div class="minis">
+      <div class="mini rv"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="1.5"/><circle cx="15.5" cy="12" r="1"/></svg></span><h4>Haustüren</h4><p>Sicher, gedämmt und mit Fingerprint auf Wunsch.</p></div>
+      <div class="mini rv d1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1.5"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></span><h4>Insektenschutz</h4><p>Spannrahmen, Plissee und Schiebeanlagen nach Maß.</p></div>
+      <div class="mini rv d2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h4>Einbruchschutz</h4><p>RC2-Beschläge, Sicherheitsglas und abschließbare Griffe.</p></div>
+      <div class="mini rv d3"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></svg></span><h4>Service &amp; Wartung</h4><p>Beschläge einstellen, Dichtungen tauschen, Reparaturen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cfg-sec" id="konfigurator">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow">Fenster-Konfigurator</span>
+        <h2>Dein Fenster. <em>In einer Minute.</em></h2>
+      </div>
+      <p class="rv d1">Typ, Material, Farbe, Glas und Maße wählen — die Zeichnung passt sich live an. Dazu Richtpreis, Dämmwert und Lieferzeit.</p>
+    </div>
+    <div class="cfg">
+      <div class="cfg-prev rv">
+        <div class="stage">
+          <svg id="win" viewBox="0 0 440 420" role="img" aria-label="Vorschau des konfigurierten Fensters"></svg>
+          <div class="specs" data-dyn>
+            <div><small id="sU">Dämmwert Uw</small><b id="vU">0,80</b></div>
+            <div><small id="sDb">Schallschutz</small><b id="vDb">36 dB</b></div>
+            <div><small id="sRc">Sicherheit</small><b id="vRc">RC1N</b></div>
+            <div><small id="sLz">Lieferzeit</small><b id="vLz">5–6 Wo.</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="cfg-panel panel rv d1">
+        <div class="step">
+          <div class="step-label"><h4><i>1</i>Fenstertyp</h4><span data-dyn id="lType"></span></div>
+          <div class="types" id="types" data-dyn></div>
+        </div>
+        <div class="step">
+          <div class="step-label"><h4><i>2</i>Material</h4><span data-dyn id="lMat"></span></div>
+          <div class="chips" id="mats" data-dyn></div>
+        </div>
+        <div class="step">
+          <div class="step-label"><h4><i>3</i>Farbe</h4><span data-dyn id="lCol"></span></div>
+          <div class="swatches" id="cols" data-dyn></div>
+        </div>
+        <div class="step">
+          <div class="step-label"><h4><i>4</i>Verglasung</h4></div>
+          <div class="glass-list" id="glass" data-dyn></div>
+        </div>
+        <div class="step">
+          <div class="step-label"><h4><i>5</i>Maße</h4><span data-dyn id="lDim"></span></div>
+          <div class="range-row"><label for="wIn">Breite</label><input type="range" class="range" id="wIn" min="500" max="1800" step="10" value="1230"></div>
+          <div class="range-row"><label for="hIn">Höhe</label><input type="range" class="range" id="hIn" min="500" max="1800" step="10" value="1480"></div>
+        </div>
+        <div class="step">
+          <div class="step-label"><h4><i>6</i>Sonnenschutz</h4></div>
+          <div class="chips" id="shades" data-dyn></div>
+          <div class="shade-slider range-row" id="shadeRow" hidden><label for="shIn">Behang</label><input type="range" class="range" id="shIn" min="0" max="100" value="40"></div>
+        </div>
+        <div class="step">
+          <div class="step-label"><h4><i>7</i>Anzahl</h4></div>
+          <div class="qty"><button type="button" id="qMinus" aria-label="Weniger">−</button><output id="qOut">1</output><button type="button" id="qPlus" aria-label="Mehr">+</button></div>
+        </div>
+      </div>
+      <div class="cfg-res rv">
+        <div class="res-card">
+          <div class="res-row">
+            <div>
+              <small>Richtpreis inkl. Montage &amp; Entsorgung</small>
+              <div class="big" data-dyn id="rPrice">€ 1.090 – 1.240</div>
+              <div class="per" data-dyn id="rPer"></div>
+            </div>
+          </div>
+          <div class="badges" data-dyn id="rBadges"></div>
+          <a href="#kontakt" class="btn btn-sun" id="cfgSend">Angebot für diese Auswahl
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <p class="note">Richtwerte für Standardausführung. Den Festpreis erhältst du nach dem kostenlosen Aufmaß vor Ort.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="energy" id="energie">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow">Energiespar-Rechner</span>
+        <h2>Was bringen <em>neue Fenster?</em></h2>
+      </div>
+      <p class="rv d1">Alte Fenster sind oft das größte Leck im Haus. Wähle Alter, Fensterfläche und Heizung — und sieh, wie viel du jedes Jahr sparst.</p>
+    </div>
+    <div class="en-grid">
+      <div class="dpanel rv">
+        <div class="step">
+          <div class="step-label"><h4><i>1</i>Deine jetzigen Fenster</h4></div>
+          <div class="opt-list" id="oldWin" data-dyn></div>
+        </div>
+        <div class="step">
+          <div class="step-label"><h4><i>2</i>Fensterfläche</h4><span data-dyn><b id="aVal">24</b> m²</span></div>
+          <input type="range" class="range" id="aIn" min="6" max="80" value="24" aria-label="Fensterfläche in Quadratmetern">
+        </div>
+        <div class="step">
+          <div class="step-label"><h4><i>3</i>Heizung</h4></div>
+          <div class="chips" id="heat" data-dyn></div>
+        </div>
+      </div>
+      <div class="en-out rv d1">
+        <div class="save-big">
+          <small>Deine Ersparnis pro Jahr (ca.)</small>
+          <div class="num" data-dyn><span id="eSave">€ 640</span><em id="eKwh">5.120 kWh</em></div>
+          <div class="cmp" data-dyn>
+            <div class="cmp-row"><span id="cOldL">Alte Fenster</span><div class="cmp-bar"><i class="old" id="cOld"></i></div><span id="cOldV"></span></div>
+            <div class="cmp-row"><span id="cNewL">LUXFELD</span><div class="cmp-bar"><i class="new" id="cNew"></i></div><span id="cNewV"></span></div>
+          </div>
+        </div>
+        <div class="en-kpis" data-dyn>
+          <div class="en-kpi"><small id="kCo2L">CO₂ weniger / Jahr</small><b id="kCo2">1,0 t</b></div>
+          <div class="en-kpi"><small id="k20L">Ersparnis in 20 Jahren</small><b id="k20">€ 15.400</b></div>
+          <div class="en-kpi"><small id="kAmoL">Weniger Wärmeverlust</small><b id="kAmo">−71 %</b></div>
+        </div>
+        <p class="note" style="color:#6f8589">Vereinfachte Schätzung mit 82.000 Heizgradstunden, ohne Preissteigerung. Förderungen für den Fenstertausch sind zusätzlich möglich — wir helfen beim Antrag.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="technik">
+  <div class="wrap tech">
+    <div class="hot-img rv">
+      <img src="img/profil.jpg" alt="Querschnitt eines modernen Fensterprofils mit Isolierglas und Stahlverstärkung" loading="lazy">
+      <div id="hots"></div>
+    </div>
+    <div class="rv d1">
+      <span class="eyebrow">Technik im Detail</span>
+      <h2 style="margin-top:16px">Was ein gutes Fenster <em>ausmacht.</em></h2>
+      <p style="color:var(--muted);font-size:17px;margin-top:18px;max-width:52ch">Tippe auf die Punkte im Querschnitt. Jedes Detail entscheidet über Dämmung, Dichtheit und Lebensdauer.</p>
+      <div class="hot-list" id="hotList">
+        <button class="hl active" data-i="0"><i>1</i><span><b>Isolierglas mit Edelgas</b><p>Zwei oder drei Scheiben mit Argon-Füllung und Wärmeschutzbeschichtung — bis Ug 0,5 W/m²K.</p></span></button>
+        <button class="hl" data-i="1"><i>2</i><span><b>Warme Kante</b><p>Abstandhalter aus Kunststoff statt Aluminium: kein Kondenswasser am Glasrand.</p></span></button>
+        <button class="hl" data-i="2"><i>3</i><span><b>Stahlverstärkung</b><p>Verzinkter Stahlkern im Rahmen für Stabilität — auch bei großen Flügeln.</p></span></button>
+        <button class="hl" data-i="3"><i>4</i><span><b>Sicherheitsbeschlag</b><p>Pilzkopfzapfen und Sicherheitsschließteile — bis Widerstandsklasse RC2.</p></span></button>
+        <button class="hl" data-i="4"><i>5</i><span><b>Mehrkammer-Profil</b><p>Sechs Kammern und 82 mm Bautiefe dämmen wie eine Hauswand.</p></span></button>
+        <button class="hl" data-i="5"><i>6</i><span><b>Pflegeleichte Oberfläche</b><p>Kratzfeste Folie in Holzoptik oder Farbe — nie wieder streichen.</p></span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="referenzen" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow">Referenzen</span>
+        <h2>Projekte, die wir <em>gerne zeigen.</em></h2>
+      </div>
+      <p class="rv d1">Neubau, Sanierung oder Sonnenschutz — eine Auswahl aus dem letzten Jahr.</p>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Referenzen filtern">
+      <button class="active" data-f="all">Alle</button>
+      <button data-f="n">Neubau</button>
+      <button data-f="s">Sanierung</button>
+      <button data-f="u">Sonnenschutz</button>
+    </div>
+    <div class="ref-grid scroller" id="refGrid">
+      <article class="ref" data-cat="n"><div class="ph"><img src="img/holzhaus.jpg" alt="Holzhaus mit großen Holz-Alu-Fenstern" loading="lazy"><span class="lbl">Neubau</span></div><div class="ref-body"><h4>Holzhaus am Waldrand</h4><p>Holz-Alu, Lärche / Anthrazit</p><div class="meta">14 Fenster · Uw 0,72</div></div></article>
+      <article class="ref" data-cat="n"><div class="ph"><img src="img/modernhaus.jpg" alt="Modernes schwarzes Holzhaus im Grünen" loading="lazy"><span class="lbl">Neubau</span></div><div class="ref-body"><h4>Architektenhaus</h4><p>Aluminium schwarz, Fixverglasung</p><div class="meta">9 Elemente · bis 3,2 m</div></div></article>
+      <article class="ref" data-cat="s"><div class="ph"><img src="img/kueche.jpg" alt="Helle Küche mit neuem weißen Fenster" loading="lazy"><span class="lbl">Sanierung</span></div><div class="ref-body"><h4>Wohnung, Altstadt</h4><p>Kunststoff weiß, Schallschutzglas</p><div class="meta">6 Fenster · 1 Tag</div></div></article>
+      <article class="ref" data-cat="s"><div class="ph"><img src="img/eckfenster.jpg" alt="Neues Eckfenster mit Fensterbank" loading="lazy"><span class="lbl">Sanierung</span></div><div class="ref-body"><h4>Eckfenster im Erker</h4><p>Kunststoff, 3-fach Verglasung</p><div class="meta">3 Elemente · Uw 0,79</div></div></article>
+      <article class="ref" data-cat="u"><div class="ph"><img src="img/raffstore.jpg" alt="Raffstores an einem Bürogebäude" loading="lazy"><span class="lbl">Sonnenschutz</span></div><div class="ref-body"><h4>Bürogebäude</h4><p>Raffstore mit Wetterstation</p><div class="meta">32 Anlagen · motorisiert</div></div></article>
+      <article class="ref" data-cat="u"><div class="ph"><img src="img/rollladen.jpg" alt="Geschlossener Rollladen in einer Sichtbetonwand" loading="lazy"><span class="lbl">Sonnenschutz</span></div><div class="ref-body"><h4>Vorbau-Rollladen</h4><p>Nachrüstung mit Funkmotor</p><div class="meta">8 Anlagen · 1 Tag</div></div></article>
+      <article class="ref" data-cat="s"><div class="ph"><img src="img/dachfenster.jpg" alt="Dachfenster im Schlafzimmer" loading="lazy"><span class="lbl">Sanierung</span></div><div class="ref-body"><h4>Dachgeschoss</h4><p>Dachfenster-Tausch mit Innenfutter</p><div class="meta">4 Fenster · 1 Tag</div></div></article>
+      <article class="ref" data-cat="s"><div class="ph"><img src="img/montage-detail.jpg" alt="Monteur justiert einen neuen Fensterrahmen" loading="lazy"><span class="lbl">Sanierung</span></div><div class="ref-body"><h4>Mehrfamilienhaus</h4><p>Komplettsanierung, bewohnt</p><div class="meta">86 Fenster · 3 Wochen</div></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="cfg-sec" id="ablauf">
+  <div class="wrap process">
+    <div class="proc-img rv">
+      <img src="img/montage-team.jpg" alt="Zwei Monteure richten ein Fenster mit Wasserwaage aus" loading="lazy">
+      <div class="float"><b>1 Tag</b><span>Ausbau, Einbau und Abdichtung — meist in einer Wohnung pro Tag</span></div>
+    </div>
+    <div>
+      <div class="rv">
+        <span class="eyebrow">Ablauf</span>
+        <h2 style="margin:16px 0 36px">So einfach geht <em>Fenstertausch.</em></h2>
+      </div>
+      <ol class="timeline">
+        <li class="rv"><span class="n">01</span><h4>Beratung</h4><p>Telefonisch oder in unserem Schauraum — mit Mustern zum Anfassen.</p><span class="dur">kostenlos</span></li>
+        <li class="rv"><span class="n">02</span><h4>Aufmaß vor Ort</h4><p>Wir messen jede Öffnung exakt und prüfen Laibung, Fensterbank und Anschlüsse.</p><span class="dur">ca. 1 Std.</span></li>
+        <li class="rv"><span class="n">03</span><h4>Angebot &amp; Fertigung</h4><p>Festpreis in 3 Werktagen. Nach deiner Freigabe fertigen wir auf den Millimeter.</p><span class="dur">5–10 Wochen</span></li>
+        <li class="rv"><span class="n">04</span><h4>Montage</h4><p>Alte Fenster raus, neue rein, dreistufig abgedichtet. Wir decken ab und räumen auf.</p><span class="dur">meist 1 Tag</span></li>
+        <li class="rv"><span class="n">05</span><h4>Abnahme &amp; Service</h4><p>Gemeinsame Kontrolle, Einweisung und 5 Jahre Gewährleistung auf die Montage.</p><span class="dur">5 Jahre</span></li>
+      </ol>
+      <div class="ral rv">
+        <div><i style="background:#0e6b78"></i><b>Innen luftdicht</b><small>Dampfbremse gegen Feuchte im Mauerwerk</small></div>
+        <div><i style="background:#f0a43a"></i><b>Mitte gedämmt</b><small>Fugen voll mit Dämmstoff gefüllt</small></div>
+        <div><i style="background:#8a9498"></i><b>Außen schlagregendicht</b><small>Dichtband, das atmen kann</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stimmen">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="rv">
+        <span class="eyebrow">Kundenstimmen</span>
+        <h2>Zufriedene Kunden. <em>Ruhige Räume.</em></h2>
+      </div>
+      <p class="rv d1">4,9 von 5 Sternen aus über 500 Bewertungen.</p>
+    </div>
+    <div class="quotes scroller">
+      <figure class="q rv">
+        <div class="stars" aria-label="5 von 5 Sternen">★★★★★</div>
+        <blockquote>Elf Fenster an einem Tag getauscht, und am Abend war alles sauber. Seit dem Winter merken wir den Unterschied bei der Heizung deutlich.</blockquote>
+        <figcaption><span class="avatar">MB</span><div><b>Familie B.</b><small>Einfamilienhaus, Anif</small></div></figcaption>
+      </figure>
+      <figure class="q rv d1">
+        <div class="stars" aria-label="5 von 5 Sternen">★★★★★</div>
+        <blockquote>Unsere Wohnung liegt an einer Hauptstraße. Mit dem Schallschutzglas ist es jetzt so ruhig, dass wir bei offenem Vorhang schlafen.</blockquote>
+        <figcaption><span class="avatar">JK</span><div><b>Julia K.</b><small>Wohnung, Salzburg-Lehen</small></div></figcaption>
+      </figure>
+      <figure class="q rv d2">
+        <div class="stars" aria-label="5 von 5 Sternen">★★★★★</div>
+        <blockquote>Hebe-Schiebetür mit 4 Metern und Raffstores — perfekt geplant, pünktlich geliefert und super eingebaut. Klare Empfehlung.</blockquote>
+        <figcaption><span class="avatar">TS</span><div><b>Thomas S.</b><small>Neubau, Hallein</small></div></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="faq-sec" id="faq">
+  <div class="wrap faq-grid">
+    <div class="sec-head rv">
+      <span class="eyebrow">FAQ</span>
+      <h2>Häufige <em>Fragen.</em></h2>
+      <p>Noch etwas offen? Ruf uns an — wir beraten dich ehrlich und unverbindlich.</p>
+    </div>
+    <div class="faq rv d1">
+      <details open><summary>Wann lohnt sich ein Fenstertausch?<span class="pm"></span></summary><p>Bei Fenstern, die älter als 25 bis 30 Jahre sind, fast immer. Typische Zeichen: Zugluft, beschlagene Scheiben, kalte Raumecken oder schwergängige Beschläge.</p></details>
+      <details><summary>Wird beim Einbau viel Dreck gemacht?<span class="pm"></span></summary><p>Nein. Wir decken Böden und Möbel ab, arbeiten staubarm und nehmen alte Fenster und Verpackung mit. Putzarbeiten an der Laibung sind meist nicht nötig.</p></details>
+      <details><summary>Kunststoff, Holz oder Aluminium?<span class="pm"></span></summary><p>Kunststoff ist günstig und pflegeleicht, Holz wohnlich und nachhaltig, Holz-Alu verbindet beides, und Aluminium ermöglicht schlanke Profile und große Glasflächen. Wir zeigen dir alle Varianten im Schauraum.</p></details>
+      <details><summary>Gibt es eine Förderung?<span class="pm"></span></summary><p>Ja, für den Fenstertausch gibt es je nach Bundesland und Programm Förderungen. Wir sagen dir, welche infrage kommen, und bereiten die Unterlagen vor.</p></details>
+      <details><summary>Wie lange dauert es bis zur Montage?<span class="pm"></span></summary><p>Kunststofffenster ca. 5–6 Wochen, Holz und Holz-Alu 8–10 Wochen nach Freigabe. Die Montage selbst dauert pro Wohnung meist nur einen Tag.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap ct-grid">
+    <div class="ct-info rv">
+      <span class="eyebrow">Kontakt</span>
+      <h2>Kostenloses <em>Aufmaß.</em></h2>
+      <p>Erzähl uns kurz von deinem Projekt — wir melden uns innerhalb von 24 Stunden für einen Termin.</p>
+      <ul class="ct-list">
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><div><small>Telefon</small><b><a href="#kontakt">0662 / 12 34 56</a></b></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></span><div><small>E-Mail</small><b><a href="mailto:hallo@luxfeld-demo.at">hallo@luxfeld-demo.at</a></b></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><small>Schauraum</small><b>Beispielweg 5, 5020 Salzburg</b></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div><small>Öffnungszeiten</small><b>Mo–Fr 8–17 · Sa 9–12 Uhr</b></div></li>
+      </ul>
+    </div>
+    <form class="ct-form rv d1" id="form" novalidate>
+      <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" placeholder="Vor- und Nachname" required></div>
+      <div class="field"><label for="f-tel">Telefon</label><input id="f-tel" name="tel" type="tel" autocomplete="tel" placeholder="Für die Terminabsprache" required></div>
+      <div class="field full"><label for="f-mail">E-Mail</label><input id="f-mail" name="mail" type="email" autocomplete="email" placeholder="name@beispiel.at" required></div>
+      <div class="field"><label for="f-zip">PLZ &amp; Ort</label><input id="f-zip" name="zip" autocomplete="postal-code" placeholder="z. B. 5020 Salzburg" required></div>
+      <div class="field"><label for="f-svc">Anliegen</label>
+        <select id="f-svc" name="svc">
+          <option value="tausch">Fenstertausch</option>
+          <option value="neubau">Neubau</option>
+          <option value="hs">Hebe-Schiebetür</option>
+          <option value="tuer">Haustür</option>
+          <option value="sonne">Sonnenschutz</option>
+          <option value="service">Reparatur &amp; Service</option>
+        </select>
+      </div>
+      <div class="field full"><label for="f-msg">Nachricht</label><textarea id="f-msg" name="msg" placeholder="Anzahl der Fenster, Baujahr, Wunschtermin …"></textarea></div>
+      <label class="check"><input type="checkbox" id="f-ok" required><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden.</span></label>
+      <button type="submit" class="btn btn-primary">Aufmaß anfragen
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <div class="sent-msg" role="status">
+        <span class="ok-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span>
+        <h3>Danke!</h3>
+        <p>Deine Anfrage ist angekommen. Wir melden uns innerhalb von 24 Stunden. (Demo — es wurde nichts versendet.)</p>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <a href="#top" class="logo"><span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M12 3v18M4 12h16"/></svg></span><span><b>LUXFELD</b><small>FENSTER · TÜREN</small></span></a>
+        <p style="max-width:36ch">Fenster, Türen und Sonnenschutz für Salzburg und Umgebung — gefertigt nach Maß, montiert vom eigenen Team.</p>
+      </div>
+      <div>
+        <h4>Leistungen</h4>
+        <ul><li><a href="#leistungen">Fenstertausch</a></li><li><a href="#leistungen">Hebe-Schiebetüren</a></li><li><a href="#leistungen">Sonnenschutz</a></li><li><a href="#leistungen">Dachfenster</a></li></ul>
+      </div>
+      <div>
+        <h4>Unternehmen</h4>
+        <ul><li><a href="#referenzen">Referenzen</a></li><li><a href="#ablauf">Ablauf</a></li><li><a href="#faq">FAQ</a></li><li><a href="#kontakt">Kontakt</a></li></ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul><li><a href="#kontakt">0662 / 12 34 56</a></li><li><a href="mailto:hallo@luxfeld-demo.at">hallo@luxfeld-demo.at</a></li><li>Beispielweg 5<br>5020 Salzburg</li></ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 LUXFELD Fenster &amp; Türen — Demo-Projekt, kein echtes Unternehmen.</span>
+      <span>Impressum · Datenschutz · AGB</span>
+    </div>
+    <details class="credits">
+      <summary>Bildnachweis</summary>
+      <ul>
+        <li>Haus mit Schiebetüren, Holzhaus, Küche, Fenstermontage (3 Fotos), Fensterprofil: Shixart1985, <a href="https://commons.wikimedia.org/wiki/User:Shixart1985" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY 2.0 — <a href="https://commons.wikimedia.org/wiki/File:Modern_house_view_showing_living_room_and_outdoor_patio_area_with_sliding_glass_doors.jpg" target="_blank" rel="noopener">1</a>, <a href="https://commons.wikimedia.org/wiki/File:A_beautiful,_modern_wooden_house_features_large_windows_and_fresh_landscaping.jpg" target="_blank" rel="noopener">2</a>, <a href="https://commons.wikimedia.org/wiki/File:Bright_kitchen_on_a_winter_day_with_a_mixer_and_fruits_on_the_counter_near_a_large_window.jpg" target="_blank" rel="noopener">3</a>, <a href="https://commons.wikimedia.org/wiki/File:Worker_installs_window_in_a_building_during_the_day_in_a_construction_area.jpg" target="_blank" rel="noopener">4</a>, <a href="https://commons.wikimedia.org/wiki/File:Workers_install_a_window_at_a_construction_site_during_the_day_using_tools_and_equipment_for_proper_fitting_and_alignment.jpg" target="_blank" rel="noopener">5</a>, <a href="https://commons.wikimedia.org/wiki/File:Worker_installs_window_frame_in_building_under_renovation.jpg" target="_blank" rel="noopener">6</a>, <a href="https://commons.wikimedia.org/wiki/File:Detailed_view_of_a_cross-section_of_a_modern_window_frame_shows_multiple_materials_and_insulation_layers.jpg" target="_blank" rel="noopener">7</a></li>
+        <li>Eckfenster: WorkerDi, <a href="https://commons.wikimedia.org/wiki/File:Corner-PVC-window-overview-with-corner-sill-Saint-Petersburg.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 4.0</li>
+        <li>Außenjalousien und Rollladen: XDAS123, <a href="https://commons.wikimedia.org/wiki/File:Au%C3%9Fenjalousien.jpg" target="_blank" rel="noopener">Wikimedia Commons</a> / <a href="https://commons.wikimedia.org/wiki/File:Rollladen.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 4.0</li>
+        <li>Schlafzimmer mit Dachfenster: Bildsymbol123, <a href="https://commons.wikimedia.org/wiki/File:Schlafzimmer_mit_Dachfenster.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 4.0</li>
+        <li>Modernes Holzhaus: TudorTulok, <a href="https://commons.wikimedia.org/wiki/File:Youlbury_House_-_Modern_Architectural_Solitude.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, CC0</li>
+        <li>Alle Fotos verkleinert bzw. zugeschnitten. Lizenzen: <a href="https://creativecommons.org/licenses/" target="_blank" rel="noopener">creativecommons.org/licenses</a></li>
+      </ul>
+    </details>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar">
+  <a href="#kontakt" class="call" aria-label="Kontakt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
+  <a href="#kontakt" class="quote">Gratis Aufmaß</a>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  document.body.classList.remove("no-js");
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  var DICT = {
+"it": {
+"Leistungen": "Servizi",
+"Konfigurator": "Configuratore",
+"Energie": "Energia",
+"Referenzen": "Referenze",
+"Ablauf": "Processo",
+"Sprache": "Lingua",
+"Gratis Aufmaß": "Sopralluogo gratuito",
+"Menü": "Menu",
+"Einleitung": "Introduzione",
+"FENSTER · TÜREN": "FINESTRE · PORTE",
+"Modernes Haus mit großen Hebe-Schiebetüren zur Terrasse": "Casa moderna con grandi alzanti scorrevoli verso la terrazza",
+"Fenster · Türen · Sonnenschutz — Salzburg": "Finestre · Porte · Protezione solare — Salisburgo",
+"Mehr Licht.": "Più luce.",
+"Weniger Heizkosten.": "Meno riscaldamento.",
+"Neue Fenster, Hebe-Schiebetüren und Sonnenschutz — maßgefertigt, in einem Tag montiert und mit bis zu 70 % weniger Wärmeverlust als alte Fenster.": "Nuove finestre, alzanti scorrevoli e protezione solare — su misura, posati in un giorno e con fino al 70 % di dispersione termica in meno rispetto alle vecchie finestre.",
+"Fenster konfigurieren": "Configura la finestra",
+"Ersparnis berechnen": "Calcola il risparmio",
+"Kostenloses Aufmaß": "Sopralluogo gratuito",
+"Vor Ort im ganzen Land Salzburg": "In tutto il Land di Salisburgo",
+"Beratung mit Mustern bei dir zu Hause": "Consulenza con campioni a casa tua",
+"Festpreis-Angebot in 3 Werktagen": "Preventivo a prezzo fisso in 3 giorni lavorativi",
+"Montage nach RAL-Richtlinie": "Posa secondo le linee guida RAL",
+"Fenster montiert": "finestre posate",
+"Jahre Erfahrung": "anni di esperienza",
+"1 Tag": "1 giorno",
+"Montage pro Wohnung": "di posa per appartamento",
+"aus 520 Bewertungen": "su 520 recensioni",
+"Kunststofffenster": "Finestre in PVC",
+"Holzfenster": "Finestre in legno",
+"Holz-Alu-Fenster": "Finestre legno-alluminio",
+"Aluminiumfenster": "Finestre in alluminio",
+"Hebe-Schiebetüren": "Alzanti scorrevoli",
+"Haustüren": "Porte d'ingresso",
+"Rollläden": "Tapparelle",
+"Raffstores": "Frangisole",
+"Insektenschutz": "Zanzariere",
+"Dachfenster": "Finestre per tetti",
+"Alles rund ums Fenster.": "Tutto per le finestre.",
+"Aus einer Hand.": "Da un unico partner.",
+"Vom einzelnen Badfenster bis zur kompletten Sanierung: Wir beraten, messen, fertigen und montieren — mit eigenem Team und einem festen Ansprechpartner.": "Dalla singola finestra del bagno alla ristrutturazione completa: consigliamo, misuriamo, produciamo e posiamo — con squadra propria e un unico referente.",
+"Monteur setzt ein neues Fenster in eine Wandöffnung ein": "Posatore inserisce una nuova finestra nel vano",
+"Fenstertausch": "Sostituzione finestre",
+"Fenstertausch & Montage": "Sostituzione e posa",
+"Ausbau, Entsorgung und Einbau an einem Tag — sauber, staubarm und nach RAL-Richtlinie abgedichtet.": "Smontaggio, smaltimento e posa in un giorno — pulito, con poca polvere e sigillato secondo RAL.",
+"Modernes Holzhaus mit großen Fensterflächen": "Casa moderna in legno con grandi vetrate",
+"Neubau": "Nuova costruzione",
+"Holz & Holz-Alu": "Legno e legno-alluminio",
+"Warme Optik innen, wetterfeste Aluschale außen.": "Calore del legno dentro, guscio in alluminio fuori.",
+"Außenjalousien an einer Betonfassade": "Frangisole su una facciata in cemento",
+"Sonnenschutz": "Protezione solare",
+"Raffstore & Rollladen": "Frangisole e tapparelle",
+"Motorisiert, per App oder Wetterstation gesteuert.": "Motorizzati, comandati da app o stazione meteo.",
+"Neues Eckfenster aus Kunststoff in einem Zimmer": "Nuova finestra ad angolo in PVC in una stanza",
+"Sonderformen": "Forme speciali",
+"Erker & Eckfenster": "Bovindi e finestre ad angolo",
+"Maßanfertigung für jede Öffnung.": "Su misura per ogni apertura.",
+"Schlafzimmer im Dachgeschoss mit Dachfenster": "Camera mansardata con finestra per tetti",
+"Dach": "Tetto",
+"Tausch oder Neueinbau inklusive Eindeckrahmen.": "Sostituzione o nuova posa con raccordo.",
+"Sicher, gedämmt und mit Fingerprint auf Wunsch.": "Sicure, isolate e con impronta digitale su richiesta.",
+"Spannrahmen, Plissee und Schiebeanlagen nach Maß.": "Telai fissi, plissé e scorrevoli su misura.",
+"Einbruchschutz": "Antieffrazione",
+"RC2-Beschläge, Sicherheitsglas und abschließbare Griffe.": "Ferramenta RC2, vetro di sicurezza e maniglie con chiave.",
+"Service & Wartung": "Assistenza e manutenzione",
+"Beschläge einstellen, Dichtungen tauschen, Reparaturen.": "Regolazione ferramenta, cambio guarnizioni, riparazioni.",
+"Fenster-Konfigurator": "Configuratore finestre",
+"Dein Fenster.": "La tua finestra.",
+"In einer Minute.": "In un minuto.",
+"Typ, Material, Farbe, Glas und Maße wählen — die Zeichnung passt sich live an. Dazu Richtpreis, Dämmwert und Lieferzeit.": "Scegli tipo, materiale, colore, vetro e misure — il disegno si aggiorna dal vivo. Con prezzo indicativo, isolamento e tempi di consegna.",
+"Vorschau des konfigurierten Fensters": "Anteprima della finestra configurata",
+"Fenstertyp": "Tipo di finestra",
+"Material": "Materiale",
+"Farbe": "Colore",
+"Verglasung": "Vetro",
+"Maße": "Misure",
+"Breite": "Larghezza",
+"Höhe": "Altezza",
+"Behang": "Chiusura",
+"Anzahl": "Quantità",
+"Weniger": "Meno",
+"Mehr": "Più",
+"Richtpreis inkl. Montage & Entsorgung": "Prezzo indicativo incl. posa e smaltimento",
+"Angebot für diese Auswahl": "Preventivo per questa scelta",
+"Richtwerte für Standardausführung. Den Festpreis erhältst du nach dem kostenlosen Aufmaß vor Ort.": "Valori indicativi per l'esecuzione standard. Il prezzo fisso lo ricevi dopo il sopralluogo gratuito.",
+"Energiespar-Rechner": "Calcolatore di risparmio",
+"Was bringen": "Cosa portano",
+"neue Fenster?": "le finestre nuove?",
+"Alte Fenster sind oft das größte Leck im Haus. Wähle Alter, Fensterfläche und Heizung — und sieh, wie viel du jedes Jahr sparst.": "Le vecchie finestre sono spesso la falla più grande della casa. Scegli età, superficie e riscaldamento — e vedi quanto risparmi ogni anno.",
+"Deine jetzigen Fenster": "Le tue finestre attuali",
+"Fensterfläche": "Superficie finestrata",
+"Fensterfläche in Quadratmetern": "Superficie finestrata in metri quadrati",
+"Heizung": "Riscaldamento",
+"Deine Ersparnis pro Jahr (ca.)": "Il tuo risparmio annuo (ca.)",
+"Vereinfachte Schätzung mit 82.000 Heizgradstunden, ohne Preissteigerung. Förderungen für den Fenstertausch sind zusätzlich möglich — wir helfen beim Antrag.": "Stima semplificata con 82.000 gradi-ora di riscaldamento, senza aumenti di prezzo. Sono possibili anche incentivi per la sostituzione — ti aiutiamo con la domanda.",
+"Querschnitt eines modernen Fensterprofils mit Isolierglas und Stahlverstärkung": "Sezione di un profilo moderno con vetrocamera e rinforzo in acciaio",
+"Technik im Detail": "Tecnica nel dettaglio",
+"Was ein gutes Fenster": "Cosa rende",
+"ausmacht.": "buona una finestra.",
+"Tippe auf die Punkte im Querschnitt. Jedes Detail entscheidet über Dämmung, Dichtheit und Lebensdauer.": "Tocca i punti nella sezione. Ogni dettaglio decide isolamento, tenuta e durata.",
+"Isolierglas mit Edelgas": "Vetrocamera con gas nobile",
+"Zwei oder drei Scheiben mit Argon-Füllung und Wärmeschutzbeschichtung — bis Ug 0,5 W/m²K.": "Due o tre lastre con argon e rivestimento basso emissivo — fino a Ug 0,5 W/m²K.",
+"Warme Kante": "Canalina calda",
+"Abstandhalter aus Kunststoff statt Aluminium: kein Kondenswasser am Glasrand.": "Distanziatore in plastica invece che in alluminio: niente condensa al bordo del vetro.",
+"Stahlverstärkung": "Rinforzo in acciaio",
+"Verzinkter Stahlkern im Rahmen für Stabilität — auch bei großen Flügeln.": "Anima in acciaio zincato nel telaio per la stabilità — anche con ante grandi.",
+"Sicherheitsbeschlag": "Ferramenta di sicurezza",
+"Pilzkopfzapfen und Sicherheitsschließteile — bis Widerstandsklasse RC2.": "Nottolini a fungo e riscontri di sicurezza — fino alla classe RC2.",
+"Mehrkammer-Profil": "Profilo multicamera",
+"Sechs Kammern und 82 mm Bautiefe dämmen wie eine Hauswand.": "Sei camere e 82 mm di profondità isolano come un muro.",
+"Pflegeleichte Oberfläche": "Superficie facile da pulire",
+"Kratzfeste Folie in Holzoptik oder Farbe — nie wieder streichen.": "Pellicola antigraffio effetto legno o colorata — mai più verniciare.",
+"Projekte, die wir": "Progetti che",
+"gerne zeigen.": "mostriamo volentieri.",
+"Neubau, Sanierung oder Sonnenschutz — eine Auswahl aus dem letzten Jahr.": "Nuove costruzioni, ristrutturazioni o protezione solare — una selezione dell'ultimo anno.",
+"Referenzen filtern": "Filtra referenze",
+"Alle": "Tutti",
+"Sanierung": "Ristrutturazione",
+"Holzhaus mit großen Holz-Alu-Fenstern": "Casa in legno con grandi finestre legno-alluminio",
+"Holzhaus am Waldrand": "Casa in legno ai margini del bosco",
+"Holz-Alu, Lärche / Anthrazit": "Legno-alluminio, larice / antracite",
+"14 Fenster · Uw 0,72": "14 finestre · Uw 0,72",
+"Modernes schwarzes Holzhaus im Grünen": "Moderna casa in legno nera nel verde",
+"Architektenhaus": "Casa d'architetto",
+"Aluminium schwarz, Fixverglasung": "Alluminio nero, vetrate fisse",
+"9 Elemente · bis 3,2 m": "9 elementi · fino a 3,2 m",
+"Helle Küche mit neuem weißen Fenster": "Cucina luminosa con nuova finestra bianca",
+"Wohnung, Altstadt": "Appartamento, centro storico",
+"Kunststoff weiß, Schallschutzglas": "PVC bianco, vetro fonoisolante",
+"6 Fenster · 1 Tag": "6 finestre · 1 giorno",
+"Neues Eckfenster mit Fensterbank": "Nuova finestra ad angolo con davanzale",
+"Eckfenster im Erker": "Finestra ad angolo nel bovindo",
+"Kunststoff, 3-fach Verglasung": "PVC, triplo vetro",
+"3 Elemente · Uw 0,79": "3 elementi · Uw 0,79",
+"Raffstores an einem Bürogebäude": "Frangisole su un edificio per uffici",
+"Bürogebäude": "Edificio per uffici",
+"Raffstore mit Wetterstation": "Frangisole con stazione meteo",
+"32 Anlagen · motorisiert": "32 impianti · motorizzati",
+"Geschlossener Rollladen in einer Sichtbetonwand": "Tapparella chiusa in un muro di cemento a vista",
+"Vorbau-Rollladen": "Tapparella esterna",
+"Nachrüstung mit Funkmotor": "Installazione con motore radio",
+"8 Anlagen · 1 Tag": "8 impianti · 1 giorno",
+"Dachfenster im Schlafzimmer": "Finestra per tetti in camera",
+"Dachgeschoss": "Mansarda",
+"Dachfenster-Tausch mit Innenfutter": "Sostituzione con rivestimento interno",
+"4 Fenster · 1 Tag": "4 finestre · 1 giorno",
+"Monteur justiert einen neuen Fensterrahmen": "Posatore regola un nuovo telaio",
+"Mehrfamilienhaus": "Condominio",
+"Komplettsanierung, bewohnt": "Ristrutturazione completa, abitato",
+"86 Fenster · 3 Wochen": "86 finestre · 3 settimane",
+"Zwei Monteure richten ein Fenster mit Wasserwaage aus": "Due posatori allineano una finestra con la livella",
+"Ausbau, Einbau und Abdichtung — meist in einer Wohnung pro Tag": "Smontaggio, posa e sigillatura — di solito un appartamento al giorno",
+"So einfach geht": "Così semplice è",
+"Fenstertausch.": "la sostituzione.",
+"Beratung": "Consulenza",
+"Telefonisch oder in unserem Schauraum — mit Mustern zum Anfassen.": "Al telefono o nel nostro showroom — con campioni da toccare.",
+"kostenlos": "gratuito",
+"Aufmaß vor Ort": "Sopralluogo",
+"Wir messen jede Öffnung exakt und prüfen Laibung, Fensterbank und Anschlüsse.": "Misuriamo ogni apertura con precisione e controlliamo spallette, davanzale e raccordi.",
+"ca. 1 Std.": "ca. 1 ora",
+"Angebot & Fertigung": "Preventivo e produzione",
+"Festpreis in 3 Werktagen. Nach deiner Freigabe fertigen wir auf den Millimeter.": "Prezzo fisso in 3 giorni lavorativi. Dopo la tua conferma produciamo al millimetro.",
+"5–10 Wochen": "5–10 settimane",
+"Montage": "Posa",
+"Alte Fenster raus, neue rein, dreistufig abgedichtet. Wir decken ab und räumen auf.": "Fuori le vecchie, dentro le nuove, sigillate su tre livelli. Copriamo tutto e puliamo.",
+"meist 1 Tag": "di solito 1 giorno",
+"Abnahme & Service": "Collaudo e assistenza",
+"Gemeinsame Kontrolle, Einweisung und 5 Jahre Gewährleistung auf die Montage.": "Controllo insieme, istruzioni e 5 anni di garanzia sulla posa.",
+"5 Jahre": "5 anni",
+"Innen luftdicht": "Interno ermetico",
+"Dampfbremse gegen Feuchte im Mauerwerk": "Freno al vapore contro l'umidità nella muratura",
+"Mitte gedämmt": "Centro isolato",
+"Fugen voll mit Dämmstoff gefüllt": "Fughe completamente riempite di isolante",
+"Außen schlagregendicht": "Esterno a tenuta di pioggia",
+"Dichtband, das atmen kann": "Nastro sigillante traspirante",
+"Kundenstimmen": "Recensioni",
+"Zufriedene Kunden.": "Clienti soddisfatti.",
+"Ruhige Räume.": "Stanze silenziose.",
+"4,9 von 5 Sternen aus über 500 Bewertungen.": "4,9 su 5 stelle da oltre 500 recensioni.",
+"5 von 5 Sternen": "5 su 5 stelle",
+"Elf Fenster an einem Tag getauscht, und am Abend war alles sauber. Seit dem Winter merken wir den Unterschied bei der Heizung deutlich.": "Undici finestre sostituite in un giorno, e la sera era tutto pulito. Da quest'inverno notiamo chiaramente la differenza sul riscaldamento.",
+"Familie B.": "Famiglia B.",
+"Einfamilienhaus, Anif": "Casa unifamiliare, Anif",
+"Unsere Wohnung liegt an einer Hauptstraße. Mit dem Schallschutzglas ist es jetzt so ruhig, dass wir bei offenem Vorhang schlafen.": "Il nostro appartamento è su una strada principale. Con il vetro fonoisolante ora è così silenzioso che dormiamo con le tende aperte.",
+"Wohnung, Salzburg-Lehen": "Appartamento, Salisburgo-Lehen",
+"Hebe-Schiebetür mit 4 Metern und Raffstores — perfekt geplant, pünktlich geliefert und super eingebaut. Klare Empfehlung.": "Alzante scorrevole da 4 metri e frangisole — progettati perfettamente, consegnati puntuali e posati benissimo. Assolutamente consigliati.",
+"Neubau, Hallein": "Nuova costruzione, Hallein",
+"Häufige": "Domande",
+"Fragen.": "frequenti.",
+"Noch etwas offen? Ruf uns an — wir beraten dich ehrlich und unverbindlich.": "Hai ancora dubbi? Chiamaci — ti consigliamo con onestà e senza impegno.",
+"Wann lohnt sich ein Fenstertausch?": "Quando conviene sostituire le finestre?",
+"Bei Fenstern, die älter als 25 bis 30 Jahre sind, fast immer. Typische Zeichen: Zugluft, beschlagene Scheiben, kalte Raumecken oder schwergängige Beschläge.": "Con finestre di oltre 25–30 anni quasi sempre. Segnali tipici: spifferi, vetri appannati, angoli freddi o ferramenta dura.",
+"Wird beim Einbau viel Dreck gemacht?": "La posa fa molto sporco?",
+"Nein. Wir decken Böden und Möbel ab, arbeiten staubarm und nehmen alte Fenster und Verpackung mit. Putzarbeiten an der Laibung sind meist nicht nötig.": "No. Copriamo pavimenti e mobili, lavoriamo con poca polvere e portiamo via vecchie finestre e imballaggi. Di solito non servono lavori d'intonaco.",
+"Kunststoff, Holz oder Aluminium?": "PVC, legno o alluminio?",
+"Kunststoff ist günstig und pflegeleicht, Holz wohnlich und nachhaltig, Holz-Alu verbindet beides, und Aluminium ermöglicht schlanke Profile und große Glasflächen. Wir zeigen dir alle Varianten im Schauraum.": "Il PVC è economico e facile da curare, il legno accogliente e sostenibile, il legno-alluminio unisce entrambi e l'alluminio permette profili sottili e grandi vetrate. Ti mostriamo tutte le varianti nello showroom.",
+"Gibt es eine Förderung?": "Ci sono incentivi?",
+"Ja, für den Fenstertausch gibt es je nach Bundesland und Programm Förderungen. Wir sagen dir, welche infrage kommen, und bereiten die Unterlagen vor.": "Sì, per la sostituzione delle finestre esistono incentivi a seconda della regione e del programma. Ti diciamo quali sono possibili e prepariamo i documenti.",
+"Wie lange dauert es bis zur Montage?": "Quanto tempo serve fino alla posa?",
+"Kunststofffenster ca. 5–6 Wochen, Holz und Holz-Alu 8–10 Wochen nach Freigabe. Die Montage selbst dauert pro Wohnung meist nur einen Tag.": "Finestre in PVC ca. 5–6 settimane, legno e legno-alluminio 8–10 settimane dalla conferma. La posa stessa richiede di solito un solo giorno per appartamento.",
+"Kontakt": "Contatti",
+"Kostenloses": "Sopralluogo",
+"Aufmaß.": "gratuito.",
+"Erzähl uns kurz von deinem Projekt — wir melden uns innerhalb von 24 Stunden für einen Termin.": "Raccontaci brevemente il tuo progetto — ti contattiamo entro 24 ore per un appuntamento.",
+"Telefon": "Telefono",
+"Schauraum": "Showroom",
+"Öffnungszeiten": "Orari",
+"Mo–Fr 8–17 · Sa 9–12 Uhr": "Lun–Ven 8–17 · Sab 9–12",
+"Name": "Nome",
+"Vor- und Nachname": "Nome e cognome",
+"Für die Terminabsprache": "Per fissare l'appuntamento",
+"name@beispiel.at": "nome@esempio.it",
+"PLZ & Ort": "CAP e città",
+"z. B. 5020 Salzburg": "es. 5020 Salisburgo",
+"Anliegen": "Richiesta",
+"Hebe-Schiebetür": "Alzante scorrevole",
+"Haustür": "Porta d'ingresso",
+"Reparatur & Service": "Riparazione e assistenza",
+"Nachricht": "Messaggio",
+"Anzahl der Fenster, Baujahr, Wunschtermin …": "Numero di finestre, anno di costruzione, data preferita …",
+"Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden.": "Acconsento all'uso dei miei dati per l'elaborazione della richiesta.",
+"Aufmaß anfragen": "Richiedi sopralluogo",
+"Danke!": "Grazie!",
+"Deine Anfrage ist angekommen. Wir melden uns innerhalb von 24 Stunden. (Demo — es wurde nichts versendet.)": "La tua richiesta è arrivata. Ti contattiamo entro 24 ore. (Demo — non è stato inviato nulla.)",
+"Fenster, Türen und Sonnenschutz für Salzburg und Umgebung — gefertigt nach Maß, montiert vom eigenen Team.": "Finestre, porte e protezione solare per Salisburgo e dintorni — su misura, posate dalla nostra squadra.",
+"Unternehmen": "Azienda",
+"© 2026 LUXFELD Fenster & Türen — Demo-Projekt, kein echtes Unternehmen.": "© 2026 LUXFELD Finestre & Porte — Progetto demo, non è un'azienda reale.",
+"Impressum · Datenschutz · AGB": "Note legali · Privacy · Condizioni",
+"Bildnachweis": "Crediti fotografici",
+"Haus mit Schiebetüren, Holzhaus, Küche, Fenstermontage (3 Fotos), Fensterprofil: Shixart1985,": "Casa con scorrevoli, casa in legno, cucina, posa finestre (3 foto), profilo: Shixart1985,",
+"Eckfenster: WorkerDi,": "Finestra ad angolo: WorkerDi,",
+"Außenjalousien und Rollladen: XDAS123,": "Frangisole e tapparella: XDAS123,",
+"Schlafzimmer mit Dachfenster: Bildsymbol123,": "Camera con finestra per tetti: Bildsymbol123,",
+"Modernes Holzhaus: TudorTulok,": "Casa moderna in legno: TudorTulok,",
+"Alle Fotos verkleinert bzw. zugeschnitten. Lizenzen:": "Tutte le foto ridimensionate o ritagliate. Licenze:",
+"Anrufen": "Chiama",
+"Wo.": "sett.",
+"Dämmwert Uw": "Isolamento Uw",
+"Schallschutz": "Isolamento acustico",
+"Sicherheit": "Sicurezza",
+"Lieferzeit": "Consegna",
+"Stück": "pezzi",
+"je Element": "per elemento",
+"Passivhaus-tauglich": "Adatto a casa passiva",
+"Schallschutzklasse 4": "Classe acustica 4",
+"Wochen": "settimane",
+"Alte Fenster": "Finestre vecchie",
+"Jahre": "anni",
+"CO₂ weniger / Jahr": "CO₂ in meno / anno",
+"Ersparnis in 20 Jahren": "Risparmio in 20 anni",
+"Weiß": "Bianco",
+"Cremeweiß": "Bianco crema",
+"Anthrazit": "Antracite",
+"Golden Oak": "Rovere dorato",
+"Nussbaum": "Noce",
+"Fichte natur": "Abete naturale",
+"Lärche": "Larice",
+"Eiche": "Rovere",
+"Weiß deckend": "Bianco coprente",
+"Schwarz": "Nero",
+"Weißaluminium": "Alluminio bianco",
+"Bronze": "Bronzo",
+"Eisenglimmer": "Micaceo ferro",
+"Silber": "Argento",
+"1-flügelig": "1 anta",
+"2-flügelig": "2 ante",
+"Fixverglasung": "Vetrata fissa",
+"Balkontür": "Portafinestra",
+"Kunststoff": "PVC",
+"Holz": "Legno",
+"Holz-Alu": "Legno-alluminio",
+"Aluminium": "Alluminio",
+"2-fach Wärmeschutz": "Doppio vetro termico",
+"3-fach Wärmeschutz": "Triplo vetro termico",
+"3-fach Schallschutz": "Triplo fonoisolante",
+"3-fach Sicherheit": "Triplo di sicurezza",
+"Kein": "Nessuna",
+"Rollladen": "Tapparella",
+"Raffstore": "Frangisole",
+"Vor 1980 · Einfach- oder Kastenfenster": "Prima del 1980 · vetro singolo o doppia finestra",
+"1980–1995 · Isolierglas": "1980–1995 · vetrocamera",
+"1995–2010 · 2-fach Wärmeschutz": "1995–2010 · doppio vetro termico",
+"Öl": "Gasolio",
+"Fernwärme": "Teleriscaldamento",
+"Wärmepumpe": "Pompa di calore",
+"Pellets": "Pellet",
+"Weniger Wärmeverlust": "Dispersione in meno"
+},
+"en": {
+"Leistungen": "Services",
+"Konfigurator": "Configurator",
+"Energie": "Energy",
+"Referenzen": "References",
+"Ablauf": "Process",
+"Sprache": "Language",
+"Gratis Aufmaß": "Free survey",
+"Menü": "Menu",
+"Einleitung": "Introduction",
+"FENSTER · TÜREN": "WINDOWS · DOORS",
+"Modernes Haus mit großen Hebe-Schiebetüren zur Terrasse": "Modern house with large lift-and-slide doors to the terrace",
+"Fenster · Türen · Sonnenschutz — Salzburg": "Windows · Doors · Sun protection — Salzburg",
+"Mehr Licht.": "More light.",
+"Weniger Heizkosten.": "Lower heating bills.",
+"Neue Fenster, Hebe-Schiebetüren und Sonnenschutz — maßgefertigt, in einem Tag montiert und mit bis zu 70 % weniger Wärmeverlust als alte Fenster.": "New windows, lift-and-slide doors and sun protection — made to measure, fitted in one day and with up to 70 % less heat loss than old windows.",
+"Fenster konfigurieren": "Configure a window",
+"Ersparnis berechnen": "Calculate savings",
+"Kostenloses Aufmaß": "Free on-site survey",
+"Vor Ort im ganzen Land Salzburg": "On site across the Salzburg region",
+"Beratung mit Mustern bei dir zu Hause": "Advice with samples at your home",
+"Festpreis-Angebot in 3 Werktagen": "Fixed-price quote within 3 working days",
+"Montage nach RAL-Richtlinie": "Installation to RAL guidelines",
+"Fenster montiert": "windows installed",
+"Jahre Erfahrung": "years of experience",
+"1 Tag": "1 day",
+"Montage pro Wohnung": "fitting per apartment",
+"aus 520 Bewertungen": "from 520 reviews",
+"Kunststofffenster": "uPVC windows",
+"Holzfenster": "Timber windows",
+"Holz-Alu-Fenster": "Timber-aluminium windows",
+"Aluminiumfenster": "Aluminium windows",
+"Hebe-Schiebetüren": "Lift-and-slide doors",
+"Haustüren": "Front doors",
+"Rollläden": "Roller shutters",
+"Raffstores": "External blinds",
+"Insektenschutz": "Insect screens",
+"Dachfenster": "Roof windows",
+"Alles rund ums Fenster.": "Everything for your windows.",
+"Aus einer Hand.": "From one source.",
+"Vom einzelnen Badfenster bis zur kompletten Sanierung: Wir beraten, messen, fertigen und montieren — mit eigenem Team und einem festen Ansprechpartner.": "From a single bathroom window to a full renovation: we advise, measure, manufacture and install — with our own team and one fixed contact.",
+"Monteur setzt ein neues Fenster in eine Wandöffnung ein": "Fitter placing a new window into the wall opening",
+"Fenstertausch": "Window replacement",
+"Fenstertausch & Montage": "Replacement & installation",
+"Ausbau, Entsorgung und Einbau an einem Tag — sauber, staubarm und nach RAL-Richtlinie abgedichtet.": "Removal, disposal and installation in one day — clean, low-dust and sealed to RAL guidelines.",
+"Modernes Holzhaus mit großen Fensterflächen": "Modern timber house with large glazed areas",
+"Neubau": "New build",
+"Holz & Holz-Alu": "Timber & timber-aluminium",
+"Warme Optik innen, wetterfeste Aluschale außen.": "Warm timber inside, weatherproof aluminium outside.",
+"Außenjalousien an einer Betonfassade": "External blinds on a concrete façade",
+"Sonnenschutz": "Sun protection",
+"Raffstore & Rollladen": "Blinds & roller shutters",
+"Motorisiert, per App oder Wetterstation gesteuert.": "Motorised, controlled by app or weather station.",
+"Neues Eckfenster aus Kunststoff in einem Zimmer": "New uPVC corner window in a room",
+"Sonderformen": "Special shapes",
+"Erker & Eckfenster": "Bay & corner windows",
+"Maßanfertigung für jede Öffnung.": "Made to measure for every opening.",
+"Schlafzimmer im Dachgeschoss mit Dachfenster": "Attic bedroom with a roof window",
+"Dach": "Roof",
+"Tausch oder Neueinbau inklusive Eindeckrahmen.": "Replacement or new installation incl. flashing.",
+"Sicher, gedämmt und mit Fingerprint auf Wunsch.": "Secure, insulated and with fingerprint on request.",
+"Spannrahmen, Plissee und Schiebeanlagen nach Maß.": "Fixed frames, pleated and sliding screens made to measure.",
+"Einbruchschutz": "Burglary protection",
+"RC2-Beschläge, Sicherheitsglas und abschließbare Griffe.": "RC2 hardware, safety glass and lockable handles.",
+"Service & Wartung": "Service & maintenance",
+"Beschläge einstellen, Dichtungen tauschen, Reparaturen.": "Adjusting hardware, replacing seals, repairs.",
+"Fenster-Konfigurator": "Window configurator",
+"Dein Fenster.": "Your window.",
+"In einer Minute.": "In one minute.",
+"Typ, Material, Farbe, Glas und Maße wählen — die Zeichnung passt sich live an. Dazu Richtpreis, Dämmwert und Lieferzeit.": "Choose type, material, colour, glass and size — the drawing updates live. Plus guide price, insulation value and delivery time.",
+"Vorschau des konfigurierten Fensters": "Preview of the configured window",
+"Fenstertyp": "Window type",
+"Farbe": "Colour",
+"Verglasung": "Glazing",
+"Maße": "Size",
+"Breite": "Width",
+"Höhe": "Height",
+"Behang": "Lowered",
+"Anzahl": "Quantity",
+"Weniger": "Fewer",
+"Mehr": "More",
+"Richtpreis inkl. Montage & Entsorgung": "Guide price incl. fitting & disposal",
+"Angebot für diese Auswahl": "Quote for this selection",
+"Richtwerte für Standardausführung. Den Festpreis erhältst du nach dem kostenlosen Aufmaß vor Ort.": "Guide values for the standard version. You get the fixed price after the free on-site survey.",
+"Energiespar-Rechner": "Energy savings calculator",
+"Was bringen": "What do",
+"neue Fenster?": "new windows save?",
+"Alte Fenster sind oft das größte Leck im Haus. Wähle Alter, Fensterfläche und Heizung — und sieh, wie viel du jedes Jahr sparst.": "Old windows are often the biggest leak in a house. Choose age, window area and heating — and see how much you save each year.",
+"Deine jetzigen Fenster": "Your current windows",
+"Fensterfläche": "Window area",
+"Fensterfläche in Quadratmetern": "Window area in square metres",
+"Heizung": "Heating",
+"Deine Ersparnis pro Jahr (ca.)": "Your savings per year (approx.)",
+"Vereinfachte Schätzung mit 82.000 Heizgradstunden, ohne Preissteigerung. Förderungen für den Fenstertausch sind zusätzlich möglich — wir helfen beim Antrag.": "Simplified estimate with 82,000 heating degree hours, without price increases. Subsidies for window replacement may also be available — we help with the application.",
+"Querschnitt eines modernen Fensterprofils mit Isolierglas und Stahlverstärkung": "Cross-section of a modern window profile with insulated glass and steel reinforcement",
+"Technik im Detail": "Technology in detail",
+"Was ein gutes Fenster": "What makes a",
+"ausmacht.": "good window.",
+"Tippe auf die Punkte im Querschnitt. Jedes Detail entscheidet über Dämmung, Dichtheit und Lebensdauer.": "Tap the dots in the cross-section. Every detail affects insulation, airtightness and service life.",
+"Isolierglas mit Edelgas": "Insulated glass with inert gas",
+"Zwei oder drei Scheiben mit Argon-Füllung und Wärmeschutzbeschichtung — bis Ug 0,5 W/m²K.": "Two or three panes with argon filling and low-e coating — down to Ug 0.5 W/m²K.",
+"Warme Kante": "Warm edge",
+"Abstandhalter aus Kunststoff statt Aluminium: kein Kondenswasser am Glasrand.": "Plastic instead of aluminium spacer: no condensation at the glass edge.",
+"Stahlverstärkung": "Steel reinforcement",
+"Verzinkter Stahlkern im Rahmen für Stabilität — auch bei großen Flügeln.": "Galvanised steel core in the frame for stability — even with large sashes.",
+"Sicherheitsbeschlag": "Security hardware",
+"Pilzkopfzapfen und Sicherheitsschließteile — bis Widerstandsklasse RC2.": "Mushroom-head cams and security keeps — up to resistance class RC2.",
+"Mehrkammer-Profil": "Multi-chamber profile",
+"Sechs Kammern und 82 mm Bautiefe dämmen wie eine Hauswand.": "Six chambers and 82 mm depth insulate like a house wall.",
+"Pflegeleichte Oberfläche": "Easy-care surface",
+"Kratzfeste Folie in Holzoptik oder Farbe — nie wieder streichen.": "Scratch-resistant foil in wood look or colour — never paint again.",
+"Projekte, die wir": "Projects we're",
+"gerne zeigen.": "proud to show.",
+"Neubau, Sanierung oder Sonnenschutz — eine Auswahl aus dem letzten Jahr.": "New builds, renovations or sun protection — a selection from the past year.",
+"Referenzen filtern": "Filter references",
+"Alle": "All",
+"Sanierung": "Renovation",
+"Holzhaus mit großen Holz-Alu-Fenstern": "Timber house with large timber-aluminium windows",
+"Holzhaus am Waldrand": "Timber house by the forest",
+"Holz-Alu, Lärche / Anthrazit": "Timber-alu, larch / anthracite",
+"14 Fenster · Uw 0,72": "14 windows · Uw 0.72",
+"Modernes schwarzes Holzhaus im Grünen": "Modern black timber house in the countryside",
+"Architektenhaus": "Architect-designed house",
+"Aluminium schwarz, Fixverglasung": "Black aluminium, fixed glazing",
+"9 Elemente · bis 3,2 m": "9 units · up to 3.2 m",
+"Helle Küche mit neuem weißen Fenster": "Bright kitchen with a new white window",
+"Wohnung, Altstadt": "Apartment, old town",
+"Kunststoff weiß, Schallschutzglas": "White uPVC, acoustic glass",
+"6 Fenster · 1 Tag": "6 windows · 1 day",
+"Neues Eckfenster mit Fensterbank": "New corner window with sill",
+"Eckfenster im Erker": "Corner window in a bay",
+"Kunststoff, 3-fach Verglasung": "uPVC, triple glazing",
+"3 Elemente · Uw 0,79": "3 units · Uw 0.79",
+"Raffstores an einem Bürogebäude": "External blinds on an office building",
+"Bürogebäude": "Office building",
+"Raffstore mit Wetterstation": "Blinds with weather station",
+"32 Anlagen · motorisiert": "32 units · motorised",
+"Geschlossener Rollladen in einer Sichtbetonwand": "Closed roller shutter in an exposed concrete wall",
+"Vorbau-Rollladen": "Surface-mounted shutter",
+"Nachrüstung mit Funkmotor": "Retrofit with radio motor",
+"8 Anlagen · 1 Tag": "8 units · 1 day",
+"Dachfenster im Schlafzimmer": "Roof window in the bedroom",
+"Dachgeschoss": "Attic floor",
+"Dachfenster-Tausch mit Innenfutter": "Roof window replacement with lining",
+"4 Fenster · 1 Tag": "4 windows · 1 day",
+"Monteur justiert einen neuen Fensterrahmen": "Fitter adjusting a new window frame",
+"Mehrfamilienhaus": "Apartment building",
+"Komplettsanierung, bewohnt": "Full renovation, occupied",
+"86 Fenster · 3 Wochen": "86 windows · 3 weeks",
+"Zwei Monteure richten ein Fenster mit Wasserwaage aus": "Two fitters aligning a window with a spirit level",
+"Ausbau, Einbau und Abdichtung — meist in einer Wohnung pro Tag": "Removal, installation and sealing — usually one apartment per day",
+"So einfach geht": "This is how easy",
+"Fenstertausch.": "replacement is.",
+"Beratung": "Consultation",
+"Telefonisch oder in unserem Schauraum — mit Mustern zum Anfassen.": "By phone or in our showroom — with samples to touch.",
+"kostenlos": "free",
+"Aufmaß vor Ort": "On-site survey",
+"Wir messen jede Öffnung exakt und prüfen Laibung, Fensterbank und Anschlüsse.": "We measure every opening precisely and check reveals, sill and connections.",
+"ca. 1 Std.": "approx. 1 hr",
+"Angebot & Fertigung": "Quote & production",
+"Festpreis in 3 Werktagen. Nach deiner Freigabe fertigen wir auf den Millimeter.": "Fixed price within 3 working days. After your approval we manufacture to the millimetre.",
+"5–10 Wochen": "5–10 weeks",
+"Montage": "Installation",
+"Alte Fenster raus, neue rein, dreistufig abgedichtet. Wir decken ab und räumen auf.": "Old windows out, new ones in, sealed in three layers. We cover up and tidy up.",
+"meist 1 Tag": "usually 1 day",
+"Abnahme & Service": "Handover & service",
+"Gemeinsame Kontrolle, Einweisung und 5 Jahre Gewährleistung auf die Montage.": "Joint inspection, walkthrough and 5-year warranty on installation.",
+"5 Jahre": "5 years",
+"Innen luftdicht": "Airtight inside",
+"Dampfbremse gegen Feuchte im Mauerwerk": "Vapour barrier against damp in the masonry",
+"Mitte gedämmt": "Insulated middle",
+"Fugen voll mit Dämmstoff gefüllt": "Joints fully filled with insulation",
+"Außen schlagregendicht": "Driving-rain tight outside",
+"Dichtband, das atmen kann": "Sealing tape that can breathe",
+"Kundenstimmen": "Testimonials",
+"Zufriedene Kunden.": "Happy customers.",
+"Ruhige Räume.": "Quiet rooms.",
+"4,9 von 5 Sternen aus über 500 Bewertungen.": "4.9 out of 5 stars from over 500 reviews.",
+"5 von 5 Sternen": "5 out of 5 stars",
+"Elf Fenster an einem Tag getauscht, und am Abend war alles sauber. Seit dem Winter merken wir den Unterschied bei der Heizung deutlich.": "Eleven windows replaced in one day, and by the evening everything was clean. Since winter we've clearly noticed the difference in heating.",
+"Familie B.": "The B. family",
+"Einfamilienhaus, Anif": "Detached house, Anif",
+"Unsere Wohnung liegt an einer Hauptstraße. Mit dem Schallschutzglas ist es jetzt so ruhig, dass wir bei offenem Vorhang schlafen.": "Our flat is on a main road. With the acoustic glass it's now so quiet that we sleep with the curtains open.",
+"Wohnung, Salzburg-Lehen": "Apartment, Salzburg-Lehen",
+"Hebe-Schiebetür mit 4 Metern und Raffstores — perfekt geplant, pünktlich geliefert und super eingebaut. Klare Empfehlung.": "A 4-metre lift-and-slide door and external blinds — perfectly planned, delivered on time and beautifully installed. Highly recommended.",
+"Neubau, Hallein": "New build, Hallein",
+"Häufige": "Frequently asked",
+"Fragen.": "questions.",
+"Noch etwas offen? Ruf uns an — wir beraten dich ehrlich und unverbindlich.": "Still have questions? Call us — honest advice with no obligation.",
+"Wann lohnt sich ein Fenstertausch?": "When is replacing windows worth it?",
+"Bei Fenstern, die älter als 25 bis 30 Jahre sind, fast immer. Typische Zeichen: Zugluft, beschlagene Scheiben, kalte Raumecken oder schwergängige Beschläge.": "For windows older than 25 to 30 years, almost always. Typical signs: draughts, misted panes, cold corners or stiff hardware.",
+"Wird beim Einbau viel Dreck gemacht?": "Does installation make a lot of mess?",
+"Nein. Wir decken Böden und Möbel ab, arbeiten staubarm und nehmen alte Fenster und Verpackung mit. Putzarbeiten an der Laibung sind meist nicht nötig.": "No. We cover floors and furniture, work low-dust and take the old windows and packaging away. Plastering the reveals is usually not needed.",
+"Kunststoff, Holz oder Aluminium?": "uPVC, timber or aluminium?",
+"Kunststoff ist günstig und pflegeleicht, Holz wohnlich und nachhaltig, Holz-Alu verbindet beides, und Aluminium ermöglicht schlanke Profile und große Glasflächen. Wir zeigen dir alle Varianten im Schauraum.": "uPVC is affordable and low-maintenance, timber is homely and sustainable, timber-alu combines both, and aluminium allows slim profiles and large glass areas. We show you every option in our showroom.",
+"Gibt es eine Förderung?": "Are there subsidies?",
+"Ja, für den Fenstertausch gibt es je nach Bundesland und Programm Förderungen. Wir sagen dir, welche infrage kommen, und bereiten die Unterlagen vor.": "Yes, depending on the region and programme there are subsidies for window replacement. We tell you which apply and prepare the documents.",
+"Wie lange dauert es bis zur Montage?": "How long until installation?",
+"Kunststofffenster ca. 5–6 Wochen, Holz und Holz-Alu 8–10 Wochen nach Freigabe. Die Montage selbst dauert pro Wohnung meist nur einen Tag.": "uPVC windows approx. 5–6 weeks, timber and timber-alu 8–10 weeks after approval. The installation itself usually takes just one day per apartment.",
+"Kontakt": "Contact",
+"Kostenloses": "Free",
+"Aufmaß.": "survey.",
+"Erzähl uns kurz von deinem Projekt — wir melden uns innerhalb von 24 Stunden für einen Termin.": "Tell us briefly about your project — we'll get back to you within 24 hours to arrange a visit.",
+"Telefon": "Phone",
+"Schauraum": "Showroom",
+"Öffnungszeiten": "Opening hours",
+"Mo–Fr 8–17 · Sa 9–12 Uhr": "Mon–Fri 8–5 · Sat 9–12",
+"Vor- und Nachname": "First and last name",
+"Für die Terminabsprache": "To arrange the appointment",
+"name@beispiel.at": "name@example.com",
+"PLZ & Ort": "Postcode & town",
+"z. B. 5020 Salzburg": "e.g. 5020 Salzburg",
+"Anliegen": "Request",
+"Hebe-Schiebetür": "Lift-and-slide door",
+"Haustür": "Front door",
+"Reparatur & Service": "Repair & service",
+"Nachricht": "Message",
+"Anzahl der Fenster, Baujahr, Wunschtermin …": "Number of windows, year built, preferred date …",
+"Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden.": "I agree that my details may be used to process this request.",
+"Aufmaß anfragen": "Request a survey",
+"Danke!": "Thank you!",
+"Deine Anfrage ist angekommen. Wir melden uns innerhalb von 24 Stunden. (Demo — es wurde nichts versendet.)": "Your request has arrived. We'll get back to you within 24 hours. (Demo — nothing was sent.)",
+"Fenster, Türen und Sonnenschutz für Salzburg und Umgebung — gefertigt nach Maß, montiert vom eigenen Team.": "Windows, doors and sun protection for Salzburg and surroundings — made to measure, fitted by our own team.",
+"Unternehmen": "Company",
+"© 2026 LUXFELD Fenster & Türen — Demo-Projekt, kein echtes Unternehmen.": "© 2026 LUXFELD Windows & Doors — Demo project, not a real company.",
+"Impressum · Datenschutz · AGB": "Imprint · Privacy · Terms",
+"Bildnachweis": "Image credits",
+"Haus mit Schiebetüren, Holzhaus, Küche, Fenstermontage (3 Fotos), Fensterprofil: Shixart1985,": "House with sliding doors, timber house, kitchen, window fitting (3 photos), window profile: Shixart1985,",
+"Eckfenster: WorkerDi,": "Corner window: WorkerDi,",
+"Außenjalousien und Rollladen: XDAS123,": "External blinds and roller shutter: XDAS123,",
+"Schlafzimmer mit Dachfenster: Bildsymbol123,": "Bedroom with roof window: Bildsymbol123,",
+"Modernes Holzhaus: TudorTulok,": "Modern timber house: TudorTulok,",
+"Alle Fotos verkleinert bzw. zugeschnitten. Lizenzen:": "All photos resized or cropped. Licences:",
+"Anrufen": "Call",
+"Wo.": "wks",
+"Dämmwert Uw": "Insulation Uw",
+"Schallschutz": "Sound insulation",
+"Sicherheit": "Security",
+"Lieferzeit": "Delivery",
+"Stück": "units",
+"je Element": "per unit",
+"Passivhaus-tauglich": "Passive-house ready",
+"Schallschutzklasse 4": "Sound class 4",
+"Wochen": "weeks",
+"Alte Fenster": "Old windows",
+"Jahre": "years",
+"CO₂ weniger / Jahr": "Less CO₂ / year",
+"Ersparnis in 20 Jahren": "Savings over 20 years",
+"Weiß": "White",
+"Cremeweiß": "Cream white",
+"Anthrazit": "Anthracite",
+"Golden Oak": "Golden oak",
+"Nussbaum": "Walnut",
+"Fichte natur": "Natural spruce",
+"Lärche": "Larch",
+"Eiche": "Oak",
+"Weiß deckend": "Opaque white",
+"Schwarz": "Black",
+"Weißaluminium": "White aluminium",
+"Eisenglimmer": "Micaceous iron",
+"Silber": "Silver",
+"1-flügelig": "Single sash",
+"2-flügelig": "Double sash",
+"Fixverglasung": "Fixed glazing",
+"Balkontür": "Balcony door",
+"Kunststoff": "uPVC",
+"Holz": "Timber",
+"Holz-Alu": "Timber-alu",
+"2-fach Wärmeschutz": "Double low-e",
+"3-fach Wärmeschutz": "Triple low-e",
+"3-fach Schallschutz": "Triple acoustic",
+"3-fach Sicherheit": "Triple security",
+"Kein": "None",
+"Rollladen": "Roller shutter",
+"Raffstore": "External blind",
+"Vor 1980 · Einfach- oder Kastenfenster": "Before 1980 · single or box-type windows",
+"1980–1995 · Isolierglas": "1980–1995 · insulated glass",
+"1995–2010 · 2-fach Wärmeschutz": "1995–2010 · double low-e",
+"Öl": "Oil",
+"Fernwärme": "District heating",
+"Wärmepumpe": "Heat pump",
+"Weniger Wärmeverlust": "Less heat loss"
+},
+"bs": {
+"Leistungen": "Usluge",
+"Energie": "Energija",
+"Referenzen": "Reference",
+"Ablauf": "Tok",
+"Sprache": "Jezik",
+"Gratis Aufmaß": "Besplatno mjerenje",
+"Menü": "Meni",
+"Einleitung": "Uvod",
+"FENSTER · TÜREN": "PROZORI · VRATA",
+"Modernes Haus mit großen Hebe-Schiebetüren zur Terrasse": "Moderna kuća s velikim podizno-kliznim vratima prema terasi",
+"Fenster · Türen · Sonnenschutz — Salzburg": "Prozori · Vrata · Zaštita od sunca — Salzburg",
+"Mehr Licht.": "Više svjetla.",
+"Weniger Heizkosten.": "Manji troškovi grijanja.",
+"Neue Fenster, Hebe-Schiebetüren und Sonnenschutz — maßgefertigt, in einem Tag montiert und mit bis zu 70 % weniger Wärmeverlust als alte Fenster.": "Novi prozori, podizno-klizna vrata i zaštita od sunca — po mjeri, ugrađeni za jedan dan i do 70 % manje gubitka toplote nego stari prozori.",
+"Fenster konfigurieren": "Konfiguriši prozor",
+"Ersparnis berechnen": "Izračunaj uštedu",
+"Kostenloses Aufmaß": "Besplatno mjerenje",
+"Vor Ort im ganzen Land Salzburg": "Na licu mjesta u cijeloj pokrajini Salzburg",
+"Beratung mit Mustern bei dir zu Hause": "Savjetovanje s uzorcima kod tebe kući",
+"Festpreis-Angebot in 3 Werktagen": "Ponuda s fiksnom cijenom za 3 radna dana",
+"Montage nach RAL-Richtlinie": "Montaža prema RAL smjernicama",
+"Fenster montiert": "ugrađenih prozora",
+"Jahre Erfahrung": "godina iskustva",
+"1 Tag": "1 dan",
+"Montage pro Wohnung": "montaže po stanu",
+"aus 520 Bewertungen": "iz 520 recenzija",
+"Kunststofffenster": "PVC prozori",
+"Holzfenster": "Drveni prozori",
+"Holz-Alu-Fenster": "Drvo-alu prozori",
+"Aluminiumfenster": "Aluminijski prozori",
+"Hebe-Schiebetüren": "Podizno-klizna vrata",
+"Haustüren": "Ulazna vrata",
+"Rollläden": "Roletne",
+"Raffstores": "Vanjske žaluzine",
+"Insektenschutz": "Komarnici",
+"Dachfenster": "Krovni prozori",
+"Alles rund ums Fenster.": "Sve oko prozora.",
+"Aus einer Hand.": "Iz jedne ruke.",
+"Vom einzelnen Badfenster bis zur kompletten Sanierung: Wir beraten, messen, fertigen und montieren — mit eigenem Team und einem festen Ansprechpartner.": "Od jednog prozora u kupatilu do kompletne sanacije: savjetujemo, mjerimo, proizvodimo i montiramo — s vlastitim timom i jednom kontakt osobom.",
+"Monteur setzt ein neues Fenster in eine Wandöffnung ein": "Monter ugrađuje novi prozor u otvor zida",
+"Fenstertausch": "Zamjena prozora",
+"Fenstertausch & Montage": "Zamjena i montaža",
+"Ausbau, Entsorgung und Einbau an einem Tag — sauber, staubarm und nach RAL-Richtlinie abgedichtet.": "Demontaža, odvoz i ugradnja za jedan dan — čisto, bez puno prašine i zaptiveno prema RAL-u.",
+"Modernes Holzhaus mit großen Fensterflächen": "Moderna drvena kuća s velikim staklenim površinama",
+"Neubau": "Novogradnja",
+"Holz & Holz-Alu": "Drvo i drvo-alu",
+"Warme Optik innen, wetterfeste Aluschale außen.": "Topao izgled iznutra, otporna alu obloga spolja.",
+"Außenjalousien an einer Betonfassade": "Vanjske žaluzine na betonskoj fasadi",
+"Sonnenschutz": "Zaštita od sunca",
+"Raffstore & Rollladen": "Žaluzine i roletne",
+"Motorisiert, per App oder Wetterstation gesteuert.": "Motorizovano, upravljanje aplikacijom ili meteo stanicom.",
+"Neues Eckfenster aus Kunststoff in einem Zimmer": "Novi PVC ugaoni prozor u sobi",
+"Sonderformen": "Posebni oblici",
+"Erker & Eckfenster": "Erkeri i ugaoni prozori",
+"Maßanfertigung für jede Öffnung.": "Po mjeri za svaki otvor.",
+"Schlafzimmer im Dachgeschoss mit Dachfenster": "Spavaća soba u potkrovlju s krovnim prozorom",
+"Dach": "Krov",
+"Tausch oder Neueinbau inklusive Eindeckrahmen.": "Zamjena ili nova ugradnja uključujući opšav.",
+"Sicher, gedämmt und mit Fingerprint auf Wunsch.": "Sigurna, izolovana i s otiskom prsta po želji.",
+"Spannrahmen, Plissee und Schiebeanlagen nach Maß.": "Fiksni okviri, plise i klizni sistemi po mjeri.",
+"Einbruchschutz": "Zaštita od provale",
+"RC2-Beschläge, Sicherheitsglas und abschließbare Griffe.": "RC2 okovi, sigurnosno staklo i ručke s ključem.",
+"Service & Wartung": "Servis i održavanje",
+"Beschläge einstellen, Dichtungen tauschen, Reparaturen.": "Podešavanje okova, zamjena dihtunga, popravke.",
+"Fenster-Konfigurator": "Konfigurator prozora",
+"Dein Fenster.": "Tvoj prozor.",
+"In einer Minute.": "Za jednu minutu.",
+"Typ, Material, Farbe, Glas und Maße wählen — die Zeichnung passt sich live an. Dazu Richtpreis, Dämmwert und Lieferzeit.": "Odaberi tip, materijal, boju, staklo i mjere — crtež se mijenja uživo. Uz okvirnu cijenu, izolaciju i rok isporuke.",
+"Vorschau des konfigurierten Fensters": "Pregled konfigurisanog prozora",
+"Fenstertyp": "Tip prozora",
+"Material": "Materijal",
+"Farbe": "Boja",
+"Verglasung": "Staklo",
+"Maße": "Mjere",
+"Breite": "Širina",
+"Höhe": "Visina",
+"Behang": "Spušteno",
+"Anzahl": "Količina",
+"Weniger": "Manje",
+"Mehr": "Više",
+"Richtpreis inkl. Montage & Entsorgung": "Okvirna cijena uklj. montažu i odvoz",
+"Angebot für diese Auswahl": "Ponuda za ovaj izbor",
+"Richtwerte für Standardausführung. Den Festpreis erhältst du nach dem kostenlosen Aufmaß vor Ort.": "Okvirne vrijednosti za standardnu izvedbu. Fiksnu cijenu dobijaš nakon besplatnog mjerenja.",
+"Energiespar-Rechner": "Kalkulator uštede energije",
+"Was bringen": "Šta donose",
+"neue Fenster?": "novi prozori?",
+"Alte Fenster sind oft das größte Leck im Haus. Wähle Alter, Fensterfläche und Heizung — und sieh, wie viel du jedes Jahr sparst.": "Stari prozori su često najveće curenje u kući. Odaberi starost, površinu i grijanje — i vidi koliko štediš svake godine.",
+"Deine jetzigen Fenster": "Tvoji sadašnji prozori",
+"Fensterfläche": "Površina prozora",
+"Fensterfläche in Quadratmetern": "Površina prozora u kvadratnim metrima",
+"Heizung": "Grijanje",
+"Deine Ersparnis pro Jahr (ca.)": "Tvoja ušteda godišnje (cca)",
+"Vereinfachte Schätzung mit 82.000 Heizgradstunden, ohne Preissteigerung. Förderungen für den Fenstertausch sind zusätzlich möglich — wir helfen beim Antrag.": "Pojednostavljena procjena s 82.000 stepen-sati grijanja, bez poskupljenja. Moguće su i subvencije za zamjenu prozora — pomažemo oko zahtjeva.",
+"Querschnitt eines modernen Fensterprofils mit Isolierglas und Stahlverstärkung": "Presjek modernog profila prozora s izolacionim staklom i čeličnim ojačanjem",
+"Technik im Detail": "Tehnika u detalje",
+"Was ein gutes Fenster": "Šta čini",
+"ausmacht.": "dobar prozor.",
+"Tippe auf die Punkte im Querschnitt. Jedes Detail entscheidet über Dämmung, Dichtheit und Lebensdauer.": "Dodirni tačke na presjeku. Svaki detalj odlučuje o izolaciji, zaptivenosti i trajnosti.",
+"Isolierglas mit Edelgas": "Izolaciono staklo s plemenitim plinom",
+"Zwei oder drei Scheiben mit Argon-Füllung und Wärmeschutzbeschichtung — bis Ug 0,5 W/m²K.": "Dva ili tri stakla s argonom i niskoemisionim premazom — do Ug 0,5 W/m²K.",
+"Warme Kante": "Topla ivica",
+"Abstandhalter aus Kunststoff statt Aluminium: kein Kondenswasser am Glasrand.": "Distancer od plastike umjesto aluminija: bez kondenza na rubu stakla.",
+"Stahlverstärkung": "Čelično ojačanje",
+"Verzinkter Stahlkern im Rahmen für Stabilität — auch bei großen Flügeln.": "Pocinčano čelično jezgro u okviru za stabilnost — i kod velikih krila.",
+"Sicherheitsbeschlag": "Sigurnosni okov",
+"Pilzkopfzapfen und Sicherheitsschließteile — bis Widerstandsklasse RC2.": "Gljivasti zatvarači i sigurnosni prihvatnici — do klase otpornosti RC2.",
+"Mehrkammer-Profil": "Višekomorni profil",
+"Sechs Kammern und 82 mm Bautiefe dämmen wie eine Hauswand.": "Šest komora i 82 mm dubine izoluju kao zid kuće.",
+"Pflegeleichte Oberfläche": "Površina laka za održavanje",
+"Kratzfeste Folie in Holzoptik oder Farbe — nie wieder streichen.": "Folija otporna na ogrebotine u izgledu drveta ili boji — nikad više farbanja.",
+"Projekte, die wir": "Projekti koje",
+"gerne zeigen.": "rado pokazujemo.",
+"Neubau, Sanierung oder Sonnenschutz — eine Auswahl aus dem letzten Jahr.": "Novogradnja, sanacija ili zaštita od sunca — izbor iz prošle godine.",
+"Referenzen filtern": "Filtriraj reference",
+"Alle": "Sve",
+"Sanierung": "Sanacija",
+"Holzhaus mit großen Holz-Alu-Fenstern": "Drvena kuća s velikim drvo-alu prozorima",
+"Holzhaus am Waldrand": "Drvena kuća uz šumu",
+"Holz-Alu, Lärche / Anthrazit": "Drvo-alu, ariš / antracit",
+"14 Fenster · Uw 0,72": "14 prozora · Uw 0,72",
+"Modernes schwarzes Holzhaus im Grünen": "Moderna crna drvena kuća u zelenilu",
+"Architektenhaus": "Arhitektonska kuća",
+"Aluminium schwarz, Fixverglasung": "Crni aluminij, fiksno staklo",
+"9 Elemente · bis 3,2 m": "9 elemenata · do 3,2 m",
+"Helle Küche mit neuem weißen Fenster": "Svijetla kuhinja s novim bijelim prozorom",
+"Wohnung, Altstadt": "Stan, stari grad",
+"Kunststoff weiß, Schallschutzglas": "Bijeli PVC, zvučno izolaciono staklo",
+"6 Fenster · 1 Tag": "6 prozora · 1 dan",
+"Neues Eckfenster mit Fensterbank": "Novi ugaoni prozor s klupicom",
+"Eckfenster im Erker": "Ugaoni prozor u erkeru",
+"Kunststoff, 3-fach Verglasung": "PVC, trostruko staklo",
+"3 Elemente · Uw 0,79": "3 elementa · Uw 0,79",
+"Raffstores an einem Bürogebäude": "Vanjske žaluzine na poslovnoj zgradi",
+"Bürogebäude": "Poslovna zgrada",
+"Raffstore mit Wetterstation": "Žaluzine s meteo stanicom",
+"32 Anlagen · motorisiert": "32 sistema · motorizovano",
+"Geschlossener Rollladen in einer Sichtbetonwand": "Zatvorena roletna u zidu od vidljivog betona",
+"Vorbau-Rollladen": "Nadgradna roletna",
+"Nachrüstung mit Funkmotor": "Naknadna ugradnja s radio motorom",
+"8 Anlagen · 1 Tag": "8 sistema · 1 dan",
+"Dachfenster im Schlafzimmer": "Krovni prozor u spavaćoj sobi",
+"Dachgeschoss": "Potkrovlje",
+"Dachfenster-Tausch mit Innenfutter": "Zamjena krovnog prozora s unutrašnjom oblogom",
+"4 Fenster · 1 Tag": "4 prozora · 1 dan",
+"Monteur justiert einen neuen Fensterrahmen": "Monter podešava novi okvir prozora",
+"Mehrfamilienhaus": "Stambena zgrada",
+"Komplettsanierung, bewohnt": "Kompletna sanacija, naseljeno",
+"86 Fenster · 3 Wochen": "86 prozora · 3 sedmice",
+"Zwei Monteure richten ein Fenster mit Wasserwaage aus": "Dva montera poravnavaju prozor libelom",
+"Ausbau, Einbau und Abdichtung — meist in einer Wohnung pro Tag": "Demontaža, ugradnja i zaptivanje — obično jedan stan dnevno",
+"So einfach geht": "Ovako je jednostavna",
+"Fenstertausch.": "zamjena prozora.",
+"Beratung": "Savjetovanje",
+"Telefonisch oder in unserem Schauraum — mit Mustern zum Anfassen.": "Telefonom ili u našem salonu — s uzorcima za opipati.",
+"kostenlos": "besplatno",
+"Aufmaß vor Ort": "Mjerenje na licu mjesta",
+"Wir messen jede Öffnung exakt und prüfen Laibung, Fensterbank und Anschlüsse.": "Precizno mjerimo svaki otvor i provjeravamo špalete, klupicu i spojeve.",
+"ca. 1 Std.": "cca 1 sat",
+"Angebot & Fertigung": "Ponuda i proizvodnja",
+"Festpreis in 3 Werktagen. Nach deiner Freigabe fertigen wir auf den Millimeter.": "Fiksna cijena za 3 radna dana. Nakon tvoje potvrde proizvodimo na milimetar.",
+"5–10 Wochen": "5–10 sedmica",
+"Montage": "Montaža",
+"Alte Fenster raus, neue rein, dreistufig abgedichtet. Wir decken ab und räumen auf.": "Stari prozori van, novi unutra, zaptiveno u tri nivoa. Pokrivamo i čistimo.",
+"meist 1 Tag": "obično 1 dan",
+"Abnahme & Service": "Primopredaja i servis",
+"Gemeinsame Kontrolle, Einweisung und 5 Jahre Gewährleistung auf die Montage.": "Zajednička kontrola, uputstva i 5 godina garancije na montažu.",
+"5 Jahre": "5 godina",
+"Innen luftdicht": "Iznutra nepropusno",
+"Dampfbremse gegen Feuchte im Mauerwerk": "Parna brana protiv vlage u zidu",
+"Mitte gedämmt": "Sredina izolovana",
+"Fugen voll mit Dämmstoff gefüllt": "Fuge potpuno ispunjene izolacijom",
+"Außen schlagregendicht": "Spolja otporno na kišu",
+"Dichtband, das atmen kann": "Zaptivna traka koja diše",
+"Kundenstimmen": "Utisci kupaca",
+"Zufriedene Kunden.": "Zadovoljni kupci.",
+"Ruhige Räume.": "Mirne prostorije.",
+"4,9 von 5 Sternen aus über 500 Bewertungen.": "4,9 od 5 zvjezdica iz preko 500 recenzija.",
+"5 von 5 Sternen": "5 od 5 zvjezdica",
+"Elf Fenster an einem Tag getauscht, und am Abend war alles sauber. Seit dem Winter merken wir den Unterschied bei der Heizung deutlich.": "Jedanaest prozora zamijenjeno za jedan dan, a navečer je sve bilo čisto. Od zime jasno primjećujemo razliku u grijanju.",
+"Familie B.": "Porodica B.",
+"Einfamilienhaus, Anif": "Porodična kuća, Anif",
+"Unsere Wohnung liegt an einer Hauptstraße. Mit dem Schallschutzglas ist es jetzt so ruhig, dass wir bei offenem Vorhang schlafen.": "Naš stan je na glavnoj ulici. Sa zvučno izolacionim staklom sada je toliko tiho da spavamo s otvorenom zavjesom.",
+"Wohnung, Salzburg-Lehen": "Stan, Salzburg-Lehen",
+"Hebe-Schiebetür mit 4 Metern und Raffstores — perfekt geplant, pünktlich geliefert und super eingebaut. Klare Empfehlung.": "Podizno-klizna vrata od 4 metra i žaluzine — savršeno isplanirano, isporučeno na vrijeme i odlično ugrađeno. Topla preporuka.",
+"Neubau, Hallein": "Novogradnja, Hallein",
+"Häufige": "Česta",
+"Fragen.": "pitanja.",
+"Noch etwas offen? Ruf uns an — wir beraten dich ehrlich und unverbindlich.": "Još nešto nejasno? Pozovi nas — savjetujemo iskreno i bez obaveze.",
+"Wann lohnt sich ein Fenstertausch?": "Kada se isplati zamjena prozora?",
+"Bei Fenstern, die älter als 25 bis 30 Jahre sind, fast immer. Typische Zeichen: Zugluft, beschlagene Scheiben, kalte Raumecken oder schwergängige Beschläge.": "Kod prozora starijih od 25 do 30 godina gotovo uvijek. Tipični znakovi: promaja, zamagljena stakla, hladni uglovi ili teški okovi.",
+"Wird beim Einbau viel Dreck gemacht?": "Da li ugradnja pravi puno nereda?",
+"Nein. Wir decken Böden und Möbel ab, arbeiten staubarm und nehmen alte Fenster und Verpackung mit. Putzarbeiten an der Laibung sind meist nicht nötig.": "Ne. Pokrivamo podove i namještaj, radimo bez puno prašine i odnosimo stare prozore i ambalažu. Malterisanje špaleta obično nije potrebno.",
+"Kunststoff, Holz oder Aluminium?": "PVC, drvo ili aluminij?",
+"Kunststoff ist günstig und pflegeleicht, Holz wohnlich und nachhaltig, Holz-Alu verbindet beides, und Aluminium ermöglicht schlanke Profile und große Glasflächen. Wir zeigen dir alle Varianten im Schauraum.": "PVC je povoljan i lak za održavanje, drvo toplo i održivo, drvo-alu spaja oboje, a aluminij omogućava tanke profile i velike staklene površine. Sve varijante pokazujemo u salonu.",
+"Gibt es eine Förderung?": "Postoje li subvencije?",
+"Ja, für den Fenstertausch gibt es je nach Bundesland und Programm Förderungen. Wir sagen dir, welche infrage kommen, und bereiten die Unterlagen vor.": "Da, zavisno od pokrajine i programa postoje subvencije za zamjenu prozora. Kažemo ti koje dolaze u obzir i pripremamo dokumente.",
+"Wie lange dauert es bis zur Montage?": "Koliko traje do montaže?",
+"Kunststofffenster ca. 5–6 Wochen, Holz und Holz-Alu 8–10 Wochen nach Freigabe. Die Montage selbst dauert pro Wohnung meist nur einen Tag.": "PVC prozori cca 5–6 sedmica, drvo i drvo-alu 8–10 sedmica nakon potvrde. Sama montaža obično traje samo jedan dan po stanu.",
+"Kostenloses": "Besplatno",
+"Aufmaß.": "mjerenje.",
+"Erzähl uns kurz von deinem Projekt — wir melden uns innerhalb von 24 Stunden für einen Termin.": "Ukratko nam opiši projekat — javljamo se u roku od 24 sata za termin.",
+"Schauraum": "Salon",
+"Öffnungszeiten": "Radno vrijeme",
+"Mo–Fr 8–17 · Sa 9–12 Uhr": "Pon–Pet 8–17 · Sub 9–12 h",
+"Name": "Ime",
+"Vor- und Nachname": "Ime i prezime",
+"Für die Terminabsprache": "Za dogovor termina",
+"name@beispiel.at": "ime@primjer.ba",
+"PLZ & Ort": "Poštanski broj i mjesto",
+"z. B. 5020 Salzburg": "npr. 5020 Salzburg",
+"Anliegen": "Zahtjev",
+"Hebe-Schiebetür": "Podizno-klizna vrata",
+"Haustür": "Ulazna vrata",
+"Reparatur & Service": "Popravka i servis",
+"Nachricht": "Poruka",
+"Anzahl der Fenster, Baujahr, Wunschtermin …": "Broj prozora, godina izgradnje, željeni termin …",
+"Ich bin einverstanden, dass meine Angaben zur Bearbeitung der Anfrage verwendet werden.": "Saglasan/na sam da se moji podaci koriste za obradu upita.",
+"Aufmaß anfragen": "Zatraži mjerenje",
+"Danke!": "Hvala!",
+"Deine Anfrage ist angekommen. Wir melden uns innerhalb von 24 Stunden. (Demo — es wurde nichts versendet.)": "Tvoj upit je stigao. Javljamo se u roku od 24 sata. (Demo — ništa nije poslano.)",
+"Fenster, Türen und Sonnenschutz für Salzburg und Umgebung — gefertigt nach Maß, montiert vom eigenen Team.": "Prozori, vrata i zaštita od sunca za Salzburg i okolinu — po mjeri, montira vlastiti tim.",
+"Unternehmen": "Firma",
+"© 2026 LUXFELD Fenster & Türen — Demo-Projekt, kein echtes Unternehmen.": "© 2026 LUXFELD Prozori i vrata — Demo projekat, nije stvarna firma.",
+"Impressum · Datenschutz · AGB": "Impresum · Privatnost · Uslovi",
+"Bildnachweis": "Izvori slika",
+"Haus mit Schiebetüren, Holzhaus, Küche, Fenstermontage (3 Fotos), Fensterprofil: Shixart1985,": "Kuća s kliznim vratima, drvena kuća, kuhinja, montaža prozora (3 fotografije), profil: Shixart1985,",
+"Eckfenster: WorkerDi,": "Ugaoni prozor: WorkerDi,",
+"Außenjalousien und Rollladen: XDAS123,": "Žaluzine i roletna: XDAS123,",
+"Schlafzimmer mit Dachfenster: Bildsymbol123,": "Spavaća soba s krovnim prozorom: Bildsymbol123,",
+"Modernes Holzhaus: TudorTulok,": "Moderna drvena kuća: TudorTulok,",
+"Alle Fotos verkleinert bzw. zugeschnitten. Lizenzen:": "Sve fotografije smanjene ili izrezane. Licence:",
+"Anrufen": "Pozovi",
+"Wo.": "sedm.",
+"Dämmwert Uw": "Izolacija Uw",
+"Schallschutz": "Zvučna izolacija",
+"Sicherheit": "Sigurnost",
+"Lieferzeit": "Rok isporuke",
+"Stück": "kom.",
+"je Element": "po elementu",
+"Passivhaus-tauglich": "Pogodno za pasivnu kuću",
+"Schallschutzklasse 4": "Zvučna klasa 4",
+"Wochen": "sedmica",
+"Alte Fenster": "Stari prozori",
+"Jahre": "godina",
+"CO₂ weniger / Jahr": "Manje CO₂ / godišnje",
+"Ersparnis in 20 Jahren": "Ušteda za 20 godina",
+"Weiß": "Bijela",
+"Cremeweiß": "Krem bijela",
+"Anthrazit": "Antracit",
+"Golden Oak": "Zlatni hrast",
+"Nussbaum": "Orah",
+"Fichte natur": "Prirodna smrča",
+"Lärche": "Ariš",
+"Eiche": "Hrast",
+"Weiß deckend": "Pokrivna bijela",
+"Schwarz": "Crna",
+"Weißaluminium": "Bijeli aluminij",
+"Bronze": "Bronza",
+"Eisenglimmer": "Željezni tinjac",
+"Silber": "Srebrna",
+"1-flügelig": "Jednokrilni",
+"2-flügelig": "Dvokrilni",
+"Fixverglasung": "Fiksno staklo",
+"Balkontür": "Balkonska vrata",
+"Kunststoff": "PVC",
+"Holz": "Drvo",
+"Holz-Alu": "Drvo-alu",
+"Aluminium": "Aluminij",
+"2-fach Wärmeschutz": "Dvostruko termo",
+"3-fach Wärmeschutz": "Trostruko termo",
+"3-fach Schallschutz": "Trostruko zvučno",
+"3-fach Sicherheit": "Trostruko sigurnosno",
+"Kein": "Bez",
+"Rollladen": "Roletna",
+"Raffstore": "Žaluzina",
+"Vor 1980 · Einfach- oder Kastenfenster": "Prije 1980 · jednostruki ili kutijasti prozori",
+"1980–1995 · Isolierglas": "1980–1995 · izolaciono staklo",
+"1995–2010 · 2-fach Wärmeschutz": "1995–2010 · dvostruko termo",
+"Gas": "Plin",
+"Öl": "Lož-ulje",
+"Fernwärme": "Daljinsko grijanje",
+"Wärmepumpe": "Toplotna pumpa",
+"Pellets": "Peleti",
+"Weniger Wärmeverlust": "Manje gubitka toplote"
+}
+};
+  var TITLES = {
+    de: "LUXFELD Fenster & Türen — Fenstertausch, Montage & Sonnenschutz",
+    it: "LUXFELD Finestre & Porte — Sostituzione finestre, posa e protezione solare",
+    en: "LUXFELD Windows & Doors — Window replacement, fitting & sun protection",
+    bs: "LUXFELD Prozori i vrata — zamjena prozora, montaža i zaštita od sunca"
+  };
+  var LOCALES = { de: "de-AT", it: "it-IT", en: "en-GB", bs: "bs-BA" };
+  var lang = "de";
+  function t(s) { return lang === "de" ? s : (DICT[lang] && DICT[lang][s]) || s; }
+  function norm(s) { return s.replace(/\s+/g, " ").trim(); }
+  function fmt(n, d) { return Number(n).toLocaleString(LOCALES[lang], { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }); }
+  function eur(n) { return "€ " + fmt(Math.round(n)); }
+
+  var nodes = [];
+  (function walk(el) {
+    for (var n = el.firstChild; n; n = n.nextSibling) {
+      if (n.nodeType === 3) {
+        var raw = n.nodeValue, tr = raw.trim();
+        if (tr && /[A-Za-zÀ-ž]/.test(tr)) {
+          var i = raw.indexOf(tr);
+          nodes.push({ node: n, de: norm(tr), pre: raw.slice(0, i), post: raw.slice(i + tr.length) });
+        }
+      } else if (n.nodeType === 1 && !/^(SCRIPT|STYLE|svg)$/i.test(n.tagName) && n.id !== "langSwitch" && !n.hasAttribute("data-dyn")) {
+        walk(n);
+      }
+    }
+  })(document.body);
+  var attrs = [];
+  $$("[placeholder],[aria-label],img[alt]").forEach(function (el) {
+    ["placeholder", "aria-label", "alt"].forEach(function (a) {
+      if (el.hasAttribute(a) && el.getAttribute(a)) attrs.push({ el: el, a: a, de: norm(el.getAttribute(a)) });
+    });
+  });
+
+  var header = $("header"), burger = $(".burger"), mbar = $("#mbar");
+  function closeMenu() { header.classList.remove("open"); burger.setAttribute("aria-expanded", false); document.body.style.overflow = ""; }
+  burger.addEventListener("click", function () {
+    var open = header.classList.toggle("open");
+    burger.setAttribute("aria-expanded", open);
+    document.body.style.overflow = open ? "hidden" : "";
+  });
+  $$(".menu a").forEach(function (a) { a.addEventListener("click", closeMenu); });
+  function onScroll() {
+    var y = window.scrollY;
+    header.classList.toggle("scrolled", y > 40);
+    var c = $("#kontakt").getBoundingClientRect();
+    mbar.classList.toggle("show", y > window.innerHeight * 0.7 && c.top > window.innerHeight * 0.6);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function tween(from, to, ms, fn) {
+    if (reduce) { fn(to); return; }
+    var start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / ms, 1), e = 1 - Math.pow(1 - p, 3);
+      fn(from + (to - from) * e);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    $$(".rv").forEach(function (el) { io.observe(el); });
+    $$(".count").forEach(function (el) {
+      var to = +el.dataset.to;
+      el.textContent = "0";
+      setTimeout(function () { tween(0, to, 1600, function (v) { el.textContent = fmt(v); }); }, 400);
+    });
+  } else {
+    $$(".rv").forEach(function (el) { el.classList.add("in"); });
+    $$(".count").forEach(function (el) { el.textContent = fmt(+el.dataset.to); });
+  }
+
+  function paintRange(el) { el.style.setProperty("--p", ((el.value - el.min) / (el.max - el.min) * 100) + "%"); }
+
+  var TYPES = [
+    { k: "dk1", n: "1-flügelig", w: [500, 1400, 1230], h: [500, 1800, 1480], f: 1 },
+    { k: "dk2", n: "2-flügelig", w: [900, 2200, 1500], h: [600, 1800, 1480], f: 1.15 },
+    { k: "fix", n: "Fixverglasung", w: [400, 3000, 1500], h: [400, 2600, 1200], f: 0.72 },
+    { k: "door", n: "Balkontür", w: [700, 1200, 900], h: [1900, 2500, 2200], f: 1.25 },
+    { k: "hs", n: "Hebe-Schiebetür", w: [2000, 5000, 3000], h: [2000, 2700, 2300], f: 1.9 }
+  ];
+  var MATS = [
+    { k: "pvc", n: "Kunststoff", m2: 380, uf: 1.0, lz: "5–6", cols: [["Weiß", "#f4f4f1"], ["Cremeweiß", "#ece5d6"], ["Anthrazit", "#3a4044"], ["Golden Oak", "#a8692f", "#7d4a1d"], ["Nussbaum", "#5c3d28", "#3d2718"]] },
+    { k: "wood", n: "Holz", m2: 620, uf: 1.1, lz: "8–10", cols: [["Fichte natur", "#d8b384", "#b98f5c"], ["Lärche", "#b9834b", "#8f5f30"], ["Eiche", "#a07646", "#76532d"], ["Weiß deckend", "#f2f0ea"], ["Nussbaum", "#5c3d28", "#3d2718"]] },
+    { k: "woodalu", n: "Holz-Alu", m2: 760, uf: 1.0, lz: "8–10", cols: [["Anthrazit", "#3a4044"], ["Schwarz", "#1e2022"], ["Weißaluminium", "#e6e6e2"], ["Bronze", "#6e5a43"], ["Eisenglimmer", "#5d605f"]] },
+    { k: "alu", n: "Aluminium", m2: 820, uf: 1.4, lz: "6–8", cols: [["Anthrazit", "#3a4044"], ["Schwarz", "#1e2022"], ["Silber", "#b7bbbd"], ["Weiß", "#f4f4f1"], ["Bronze", "#6e5a43"]] }
+  ];
+  var GLASS = [
+    { k: "g2", n: "2-fach Wärmeschutz", d: "Ug 1,1 · 32 dB", ug: 1.1, db: 32, add: 0, tint: "#d6e7ee" },
+    { k: "g3", n: "3-fach Wärmeschutz", d: "Ug 0,6 · 36 dB", ug: 0.6, db: 36, add: 45, tint: "#cfe3e6" },
+    { k: "g3s", n: "3-fach Schallschutz", d: "Ug 0,7 · 44 dB", ug: 0.7, db: 44, add: 110, tint: "#cde0e4" },
+    { k: "g3p", n: "3-fach Sicherheit", d: "Ug 0,6 · P4A · RC2", ug: 0.6, db: 38, add: 160, tint: "#cfe2e5" }
+  ];
+  var SHADES = [
+    { k: "none", n: "Kein" },
+    { k: "roll", n: "Rollladen" },
+    { k: "raff", n: "Raffstore" },
+    { k: "ins", n: "Insektenschutz" }
+  ];
+  var cf = { type: 0, mat: 0, col: 0, glass: 1, w: 1230, h: 1480, shade: 0, sh: 40, qty: 1 };
+  var wIn = $("#wIn"), hIn = $("#hIn"), shIn = $("#shIn");
+
+  function typeIcon(k) {
+    var s = '<svg viewBox="0 0 34 40" fill="none" stroke="currentColor" stroke-width="1.6">';
+    if (k === "hs") s = '<svg viewBox="0 0 34 40" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1" y="8" width="32" height="24" rx="1"/><path d="M17 8v24"/><path d="M28 20h-7m2-3l-3 3 3 3" stroke-linecap="round" stroke-linejoin="round"/>';
+    else if (k === "dk2") s += '<rect x="2" y="2" width="30" height="36" rx="1"/><path d="M17 2v36"/><path d="M4 4l11 16L4 36M30 4L19 20l11 16" stroke-dasharray="2 2"/>';
+    else if (k === "fix") s += '<rect x="4" y="2" width="26" height="36" rx="1"/><rect x="7" y="5" width="20" height="30" rx=".5"/>';
+    else if (k === "door") s += '<rect x="7" y="1" width="20" height="38" rx="1"/><path d="M9 3l16 17L9 37M9 37h16" stroke-dasharray="2 2"/>';
+    else s += '<rect x="4" y="2" width="26" height="36" rx="1"/><path d="M6 4l22 16L6 36M6 36L17 4l11 32" stroke-dasharray="2 2"/>';
+    return s + "</svg>";
+  }
+
+  function renderTypes() {
+    var el = $("#types"); el.innerHTML = "";
+    TYPES.forEach(function (ty, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "type" + (i === cf.type ? " active" : "");
+      b.innerHTML = typeIcon(ty.k) + "<span></span>";
+      $("span", b).textContent = t(ty.n);
+      b.addEventListener("click", function () { setType(i); });
+      el.appendChild(b);
+    });
+  }
+  function setType(i) {
+    cf.type = i;
+    var ty = TYPES[i];
+    wIn.min = ty.w[0]; wIn.max = ty.w[1]; hIn.min = ty.h[0]; hIn.max = ty.h[1];
+    cf.w = ty.w[2]; cf.h = ty.h[2]; wIn.value = cf.w; hIn.value = cf.h;
+    $$("#types .type").forEach(function (b, j) { b.classList.toggle("active", j === i); });
+    update();
+  }
+  function renderMats() {
+    var el = $("#mats"); el.innerHTML = "";
+    MATS.forEach(function (m, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "chip" + (i === cf.mat ? " active" : ""); b.textContent = t(m.n);
+      b.addEventListener("click", function () { cf.mat = i; cf.col = 0; renderMats(); renderCols(); update(); });
+      el.appendChild(b);
+    });
+  }
+  function renderCols() {
+    var el = $("#cols"); el.innerHTML = "";
+    MATS[cf.mat].cols.forEach(function (c, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "sw" + (c[2] ? " wood" : "") + (i === cf.col ? " active" : "");
+      b.style.setProperty("--c", c[1]); if (c[2]) b.style.setProperty("--c2", c[2]);
+      b.setAttribute("aria-label", t(c[0])); b.title = t(c[0]);
+      b.addEventListener("click", function () { cf.col = i; $$("#cols .sw").forEach(function (x, j) { x.classList.toggle("active", j === i); }); update(); });
+      el.appendChild(b);
+    });
+  }
+  function renderGlass() {
+    var el = $("#glass"); el.innerHTML = "";
+    GLASS.forEach(function (g, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "gl" + (i === cf.glass ? " active" : "");
+      b.innerHTML = "<b></b><small></small>";
+      $("b", b).textContent = t(g.n); $("small", b).textContent = g.d;
+      b.addEventListener("click", function () { cf.glass = i; $$("#glass .gl").forEach(function (x, j) { x.classList.toggle("active", j === i); }); update(); });
+      el.appendChild(b);
+    });
+  }
+  function renderShades() {
+    var el = $("#shades"); el.innerHTML = "";
+    SHADES.forEach(function (s, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "chip" + (i === cf.shade ? " active" : ""); b.textContent = t(s.n);
+      b.addEventListener("click", function () { cf.shade = i; renderShades(); update(); });
+      el.appendChild(b);
+    });
+    $("#shadeRow").hidden = !(cf.shade === 1 || cf.shade === 2);
+  }
+  wIn.addEventListener("input", function () { cf.w = +wIn.value; update(); });
+  hIn.addEventListener("input", function () { cf.h = +hIn.value; update(); });
+  shIn.addEventListener("input", function () { cf.sh = +shIn.value; update(); });
+  $("#qMinus").addEventListener("click", function () { cf.qty = Math.max(1, cf.qty - 1); update(); });
+  $("#qPlus").addEventListener("click", function () { cf.qty = Math.min(60, cf.qty + 1); update(); });
+
+  function shade(hex, f) {
+    var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
+    function c(v) { return Math.max(0, Math.min(255, Math.round(f < 0 ? v * (1 + f) : v + (255 - v) * f))); }
+    return "rgb(" + c(r) + "," + c(g) + "," + c(b) + ")";
+  }
+
+  function drawWin() {
+    var ty = TYPES[cf.type], mat = MATS[cf.mat], col = mat.cols[cf.col], gl = GLASS[cf.glass], sh = SHADES[cf.shade].k;
+    var VW = 440, VH = 420, top = sh === "roll" || sh === "raff" ? 34 : 14;
+    var sc = Math.min((VW - 120) / cf.w, (VH - 110 - top) / cf.h);
+    var ww = cf.w * sc, hh = cf.h * sc;
+    var x0 = (VW - ww) / 2 - 10, y0 = top + 20 + (VH - 110 - top - hh) / 2;
+    var F = Math.max(7, 62 * sc), S = Math.max(6, 58 * sc);
+    var fc = col[1], wood = !!col[2], edge = shade(fc, -0.28);
+    var frameFill = wood ? "url(#wood)" : fc;
+    var o = [];
+    o.push('<defs>' +
+      '<pattern id="plaster" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#efede7"/><circle cx="1" cy="2" r=".5" fill="#e3e0d8"/><circle cx="4" cy="5" r=".4" fill="#e6e3dc"/></pattern>' +
+      '<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + shade(gl.tint, -0.12) + '"/><stop offset="1" stop-color="' + shade(gl.tint, 0.55) + '"/></linearGradient>' +
+      (wood ? '<pattern id="wood" width="80" height="7" patternUnits="userSpaceOnUse"><rect width="80" height="7" fill="' + fc + '"/><path d="M0 2.5 Q20 1.5 40 2.8 T80 2.4" stroke="' + col[2] + '" stroke-width="1" fill="none" opacity=".7"/><path d="M0 5.6 Q25 6.3 50 5.2 T80 5.8" stroke="' + col[2] + '" stroke-width=".6" fill="none" opacity=".5"/></pattern>' : "") +
+      '<pattern id="slats" width="10" height="9" patternUnits="userSpaceOnUse"><rect width="10" height="9" fill="#a9afb2"/><rect y="7.4" width="10" height="1.6" fill="#7f8689"/><rect y="0" width="10" height="1" fill="#c3c8ca"/></pattern>' +
+      '<pattern id="mesh" width="3" height="3" patternUnits="userSpaceOnUse"><path d="M0 0H3M0 0V3" stroke="#2b3236" stroke-width=".5"/></pattern>' +
+      '<filter id="ds" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity=".18"/></filter>' +
+      '</defs>');
+    o.push('<rect width="' + VW + '" height="' + VH + '" fill="url(#plaster)"/>');
+    o.push('<rect x="' + (x0 - 10) + '" y="' + (y0 - 10 - (top > 14 ? 22 : 0)) + '" width="' + (ww + 20) + '" height="' + (hh + 20 + (top > 14 ? 22 : 0)) + '" fill="#dcd8cf"/>');
+    o.push('<rect x="' + (x0 - 18) + '" y="' + (y0 + hh) + '" width="' + (ww + 36) + '" height="9" rx="1.5" fill="#c9cdcf"/><rect x="' + (x0 - 18) + '" y="' + (y0 + hh + 9) + '" width="' + (ww + 36) + '" height="3" fill="#a9aeb1"/>');
+    o.push('<g filter="url(#ds)"><rect x="' + x0 + '" y="' + y0 + '" width="' + ww + '" height="' + hh + '" fill="' + frameFill + '" stroke="' + edge + '" stroke-width="1"/></g>');
+
+    function glass(x, y, w, h) {
+      var g = '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="url(#sky)"/>';
+      g += '<polygon points="' + (x + w * 0.12) + ',' + (y + h) + ' ' + (x + w * 0.42) + ',' + (y + h) + ' ' + (x + w * 0.95) + ',' + y + ' ' + (x + w * 0.65) + ',' + y + '" fill="#fff" opacity=".28"/>';
+      g += '<polygon points="' + (x + w * 0.5) + ',' + (y + h) + ' ' + (x + w * 0.56) + ',' + (y + h) + ' ' + (x + w * 1) + ',' + (y + h * 0.15) + ' ' + (x + w * 1) + ',' + (y + h * 0.02) + '" fill="#fff" opacity=".22"/>';
+      if (sh === "ins") g += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="url(#mesh)" opacity=".55"/>';
+      return g + '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="none" stroke="#2b3236" stroke-opacity=".35" stroke-width="1"/>';
+    }
+    function sash(x, y, w, h) {
+      return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="' + frameFill + '" stroke="' + edge + '" stroke-width="1"/>' + glass(x + S, y + S, w - 2 * S, h - 2 * S);
+    }
+    function handle(x, y, vertical) {
+      var hc = shade(fc, fc === "#f4f4f1" || fc === "#f2f0ea" || fc === "#e6e6e2" || fc === "#ece5d6" ? -0.08 : 0.5);
+      return '<rect x="' + (x - 4) + '" y="' + (y - 7) + '" width="8" height="14" rx="2" fill="' + hc + '" stroke="' + edge + '" stroke-width=".8"/>' + (vertical ? '<rect x="' + (x - 2.2) + '" y="' + (y + 3) + '" width="4.4" height="' + Math.max(18, S * 3.4) + '" rx="2.2" fill="' + hc + '" stroke="' + edge + '" stroke-width=".8"/>' : "");
+    }
+    function sym(pts) { return '<path d="' + pts + '" fill="none" stroke="#33404a" stroke-width="1" stroke-dasharray="5 4" opacity=".7"/>'; }
+
+    var ix = x0 + F, iy = y0 + F, iw = ww - 2 * F, ih = hh - 2 * F;
+    if (ty.k === "fix") {
+      o.push(glass(ix, iy, iw, ih));
+      o.push('<text x="' + (ix + iw / 2) + '" y="' + (iy + ih / 2 + 4) + '" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#33404a" opacity=".6">FIX</text>');
+    } else if (ty.k === "dk2") {
+      var hw = iw / 2;
+      o.push(sash(ix, iy, hw, ih)); o.push(sash(ix + hw, iy, hw, ih));
+      var gx = ix + S, gy = iy + S, gw = hw - 2 * S, gh = ih - 2 * S;
+      o.push(sym("M" + gx + " " + gy + "L" + (gx + gw) + " " + (gy + gh / 2) + "L" + gx + " " + (gy + gh)));
+      var gx2 = ix + hw + S;
+      o.push(sym("M" + (gx2 + gw) + " " + gy + "L" + gx2 + " " + (gy + gh / 2) + "L" + (gx2 + gw) + " " + (gy + gh) + "M" + gx2 + " " + (gy + gh) + "L" + (gx2 + gw / 2) + " " + gy + "L" + (gx2 + gw) + " " + (gy + gh)));
+      o.push(handle(ix + hw + S / 2, iy + ih / 2, true));
+    } else if (ty.k === "hs") {
+      var pw = iw / 2 + S * 0.6;
+      o.push(sash(ix, iy, iw / 2, ih));
+      o.push(sash(ix + iw - pw, iy, pw, ih));
+      var ax = ix + iw - pw / 2, ay = iy + ih * 0.55;
+      o.push('<path d="M' + (ax + pw * 0.22) + ' ' + ay + 'H' + (ax - pw * 0.22) + 'm9 -7l-9 7 9 7" fill="none" stroke="#33404a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity=".75"/>');
+      o.push(handle(ix + iw - pw + S / 2, iy + ih / 2, true));
+    } else {
+      o.push(sash(ix, iy, iw, ih));
+      var sx = ix + S, sy = iy + S, sw = iw - 2 * S, shh = ih - 2 * S;
+      o.push(sym("M" + sx + " " + sy + "L" + (sx + sw) + " " + (sy + shh / 2) + "L" + sx + " " + (sy + shh) + "M" + sx + " " + (sy + shh) + "L" + (sx + sw / 2) + " " + sy + "L" + (sx + sw) + " " + (sy + shh)));
+      o.push(handle(ix + iw - S / 2, iy + ih / 2, true));
+      if (ty.k === "door") o.push('<rect x="' + ix + '" y="' + (iy + ih - S * 0.6) + '" width="' + iw + '" height="' + (S * 0.6) + '" fill="' + edge + '" opacity=".25"/>');
+    }
+
+    if (sh === "roll" || sh === "raff") {
+      var cover = hh * cf.sh / 100;
+      var boxH = sh === "roll" ? 26 : 16;
+      o.push('<rect x="' + (x0 - 6) + '" y="' + y0 + '" width="6" height="' + hh + '" fill="#8f969a"/><rect x="' + (x0 + ww) + '" y="' + y0 + '" width="6" height="' + hh + '" fill="#8f969a"/>');
+      if (sh === "roll") {
+        if (cover > 0) o.push('<rect x="' + x0 + '" y="' + y0 + '" width="' + ww + '" height="' + cover + '" fill="url(#slats)"/><rect x="' + x0 + '" y="' + (y0 + cover - 4) + '" width="' + ww + '" height="4" fill="#6e7579"/>');
+      } else {
+        var n = Math.floor(cover / 8), lam = "";
+        for (var i = 0; i < n; i++) lam += '<rect x="' + x0 + '" y="' + (y0 + 3 + i * 8) + '" width="' + ww + '" height="4.2" rx="1" fill="#9aa1a5"/><rect x="' + x0 + '" y="' + (y0 + 7.2 + i * 8) + '" width="' + ww + '" height="1.2" fill="#6f777b" opacity=".6"/>';
+        if (n > 0) lam += '<rect x="' + x0 + '" y="' + (y0 + n * 8 + 1) + '" width="' + ww + '" height="5" rx="1" fill="#70787c"/>';
+        o.push(lam);
+      }
+      o.push('<rect x="' + (x0 - 8) + '" y="' + (y0 - boxH) + '" width="' + (ww + 16) + '" height="' + boxH + '" rx="2" fill="' + (sh === "roll" ? frameFill : "#8f969a") + '" stroke="' + edge + '" stroke-width="1"/>');
+    }
+
+    var dy = y0 + hh + 34, dx = x0 + ww + 32, lc = "#5d696e";
+    o.push('<g stroke="' + lc + '" stroke-width="1"><path d="M' + x0 + ' ' + dy + 'H' + (x0 + ww) + 'M' + x0 + ' ' + (dy - 5) + 'v10M' + (x0 + ww) + ' ' + (dy - 5) + 'v10"/><path d="M' + dx + ' ' + y0 + 'V' + (y0 + hh) + 'M' + (dx - 5) + ' ' + y0 + 'h10M' + (dx - 5) + ' ' + (y0 + hh) + 'h10"/></g>');
+    o.push('<rect x="' + (x0 + ww / 2 - 30) + '" y="' + (dy - 9) + '" width="60" height="18" rx="4" fill="#f5f4f0"/><text x="' + (x0 + ww / 2) + '" y="' + (dy + 4) + '" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600" fill="#11181b">' + cf.w + '</text>');
+    o.push('<g transform="translate(' + dx + ' ' + (y0 + hh / 2) + ') rotate(-90)"><rect x="-30" y="-9" width="60" height="18" rx="4" fill="#f5f4f0"/><text y="4" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="600" fill="#11181b">' + cf.h + '</text></g>');
+    $("#win").innerHTML = o.join("");
+  }
+
+  var shownPrice = [0, 0];
+  function update() {
+    var ty = TYPES[cf.type], mat = MATS[cf.mat], gl = GLASS[cf.glass], sh = SHADES[cf.shade].k;
+    paintRange(wIn); paintRange(hIn); paintRange(shIn);
+    $("#shadeRow").hidden = !(sh === "roll" || sh === "raff");
+    var area = Math.max(0.6, cf.w * cf.h / 1e6);
+    var colorAdd = cf.col > 0 && mat.k === "pvc" ? 1.12 : 1;
+    var one = area * (mat.m2 * ty.f * colorAdd + gl.add);
+    if (sh === "roll") one += Math.max(390, area * 180);
+    if (sh === "raff") one += Math.max(690, area * 290);
+    if (sh === "ins") one += Math.max(95, area * 60);
+    one += ty.k === "hs" ? 480 : 180;
+    var lo = one * cf.qty * 0.92, hi = one * cf.qty * 1.08;
+    lo = Math.round(lo / 10) * 10; hi = Math.round(hi / 10) * 10;
+    var uw = 0.7 * gl.ug + 0.3 * mat.uf + 0.08;
+    if (ty.k === "hs") uw += 0.06;
+    $("#vU").textContent = fmt(uw, 2);
+    $("#vDb").textContent = gl.db + " dB";
+    $("#vRc").textContent = gl.k === "g3p" ? "RC2" : "RC1N";
+    $("#vLz").textContent = mat.lz + " " + t("Wo.");
+    $("#sU").textContent = t("Dämmwert Uw"); $("#sDb").textContent = t("Schallschutz"); $("#sRc").textContent = t("Sicherheit"); $("#sLz").textContent = t("Lieferzeit");
+    $("#lType").textContent = t(ty.n);
+    $("#lMat").textContent = "Uf " + fmt(mat.uf, 1);
+    $("#lCol").textContent = t(mat.cols[cf.col][0]);
+    $("#lDim").textContent = cf.w + " × " + cf.h + " mm";
+    $("#qOut").textContent = cf.qty;
+    var from = shownPrice.slice();
+    shownPrice = [lo, hi];
+    tween(0, 1, 450, function (k) {
+      $("#rPrice").textContent = eur(Math.round((from[0] + (lo - from[0]) * k) / 10) * 10) + " – " + fmt(Math.round((from[1] + (hi - from[1]) * k) / 10) * 10);
+    });
+    $("#rPer").textContent = cf.qty > 1 ? cf.qty + " × " + t("Stück") + " · " + fmt(area, 2) + " m² " + t("je Element") : fmt(area, 2) + " m² · " + t(ty.n) + " · " + t(mat.n);
+    var b = [];
+    b.push('<span class="badge' + (uw <= 0.8 ? " ok" : "") + '">Uw ' + fmt(uw, 2) + " W/m²K</span>");
+    if (uw <= 0.8) b.push('<span class="badge ok">' + t("Passivhaus-tauglich") + "</span>");
+    if (gl.db >= 40) b.push('<span class="badge ok">' + t("Schallschutzklasse 4") + "</span>");
+    if (gl.k === "g3p") b.push('<span class="badge ok">RC2</span>');
+    b.push('<span class="badge">' + t("Lieferzeit") + " " + mat.lz + " " + t("Wochen") + "</span>");
+    $("#rBadges").innerHTML = b.join("");
+    drawWin();
+  }
+  $("#cfgSend").addEventListener("click", function () {
+    var ty = TYPES[cf.type], mat = MATS[cf.mat];
+    $("#f-svc").value = ty.k === "hs" ? "hs" : "tausch";
+    $("#f-msg").value = cf.qty + " × " + t(ty.n) + ", " + t(mat.n) + " " + t(mat.cols[cf.col][0]) + ", " + t(GLASS[cf.glass].n) + ", " + cf.w + " × " + cf.h + " mm" + (cf.shade ? ", " + t(SHADES[cf.shade].n) : "") + " — " + $("#rPrice").textContent;
+  });
+
+  var OLD = [
+    { n: "Vor 1980 · Einfach- oder Kastenfenster", d: "Uw ≈ 3,5", u: 3.5 },
+    { n: "1980–1995 · Isolierglas", d: "Uw ≈ 2,7", u: 2.7 },
+    { n: "1995–2010 · 2-fach Wärmeschutz", d: "Uw ≈ 1,6", u: 1.6 }
+  ];
+  var HEAT = [
+    { n: "Gas", p: 0.12 },
+    { n: "Öl", p: 0.13 },
+    { n: "Fernwärme", p: 0.14 },
+    { n: "Wärmepumpe", p: 0.09 },
+    { n: "Pellets", p: 0.08 }
+  ];
+  var en = { old: 1, a: 24, heat: 0 };
+  var NEW_U = 0.78, HGH = 82;
+  var aIn = $("#aIn");
+  function renderOld() {
+    var el = $("#oldWin"); el.innerHTML = "";
+    OLD.forEach(function (o, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "opt" + (i === en.old ? " active" : "");
+      b.innerHTML = "<b></b><small></small>";
+      $("b", b).textContent = t(o.n); $("small", b).textContent = o.d;
+      b.addEventListener("click", function () { en.old = i; renderOld(); calcEnergy(); });
+      el.appendChild(b);
+    });
+  }
+  function renderHeat() {
+    var el = $("#heat"); el.innerHTML = "";
+    HEAT.forEach(function (h, i) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "chip" + (i === en.heat ? " active" : ""); b.textContent = t(h.n);
+      b.addEventListener("click", function () { en.heat = i; renderHeat(); calcEnergy(); });
+      el.appendChild(b);
+    });
+  }
+  aIn.addEventListener("input", function () { en.a = +aIn.value; calcEnergy(); });
+  var shownSave = 0;
+  function calcEnergy() {
+    paintRange(aIn);
+    $("#aVal").textContent = en.a;
+    var o = OLD[en.old], p = HEAT[en.heat].p;
+    var qOld = o.u * en.a * HGH, qNew = NEW_U * en.a * HGH, kwh = qOld - qNew, save = kwh * p;
+    var from = shownSave; shownSave = save;
+    tween(0, 1, 600, function (k) { $("#eSave").textContent = eur(from + (save - from) * k); });
+    $("#eKwh").textContent = fmt(Math.round(kwh / 10) * 10) + " kWh";
+    $("#cOld").style.width = "100%";
+    $("#cNew").style.width = (qNew / qOld * 100) + "%";
+    $("#cOldV").textContent = fmt(Math.round(qOld / 100) * 100) + " kWh";
+    $("#cNewV").textContent = fmt(Math.round(qNew / 100) * 100) + " kWh";
+    $("#cOldL").textContent = t("Alte Fenster");
+    $("#kCo2").textContent = fmt(kwh * 0.21 / 1000, 1) + " t";
+    $("#k20").textContent = eur(save * 20);
+    $("#kAmo").textContent = "−" + Math.round((1 - qNew / qOld) * 100) + " %";
+    $("#kCo2L").textContent = t("CO₂ weniger / Jahr"); $("#k20L").textContent = t("Ersparnis in 20 Jahren"); $("#kAmoL").textContent = t("Weniger Wärmeverlust");
+  }
+
+  var HOTS = [[52, 33], [43, 60], [53, 70], [48, 79.5], [31, 88], [76, 62]];
+  var hotsEl = $("#hots");
+  HOTS.forEach(function (h, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "hs" + (i === 0 ? " active" : ""); b.textContent = i + 1;
+    b.style.setProperty("--x", h[0] + "%"); b.style.setProperty("--y", h[1] + "%");
+    b.setAttribute("aria-label", "Detail " + (i + 1));
+    b.addEventListener("click", function () { setHot(i); });
+    hotsEl.appendChild(b);
+  });
+  function setHot(i) {
+    $$(".hs").forEach(function (x, j) { x.classList.toggle("active", j === i); });
+    $$("#hotList .hl").forEach(function (x, j) { x.classList.toggle("active", j === i); });
+  }
+  $$("#hotList .hl").forEach(function (b, i) { b.addEventListener("click", function () { setHot(i); }); });
+
+  $$("#filters button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var f = b.dataset.f;
+      $$("#filters button").forEach(function (x) { x.classList.toggle("active", x === b); });
+      $$("#refGrid .ref").forEach(function (r) { r.classList.toggle("hide", f !== "all" && r.dataset.cat !== f); });
+      $("#refGrid").scrollLeft = 0;
+    });
+  });
+
+  var form = $("#form");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var ok = true;
+    ["#f-name", "#f-tel", "#f-zip"].forEach(function (s) {
+      var el = $(s), bad = !el.value.trim();
+      el.parentNode.classList.toggle("err", bad); if (bad) ok = false;
+    });
+    var m = $("#f-mail"), badM = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.value.trim());
+    m.parentNode.classList.toggle("err", badM); if (badM) ok = false;
+    var chk = $("#f-ok");
+    if (!chk.checked) { chk.parentNode.style.color = "#d94a3a"; ok = false; } else chk.parentNode.style.color = "";
+    if (ok) form.classList.add("sent");
+  });
+  $$("#form input").forEach(function (el) { el.addEventListener("input", function () { el.parentNode.classList.remove("err"); }); });
+
+  function renderAll() { renderTypes(); renderMats(); renderCols(); renderGlass(); renderShades(); renderOld(); renderHeat(); update(); calcEnergy(); }
+  function applyLang(l) {
+    lang = DICT[l] || l === "de" ? l : "de";
+    nodes.forEach(function (o) { o.node.nodeValue = o.pre + t(o.de) + o.post; });
+    attrs.forEach(function (o) { o.el.setAttribute(o.a, t(o.de)); });
+    document.title = TITLES[lang];
+    document.documentElement.lang = lang;
+    $$("#langSwitch .lng").forEach(function (b) { b.classList.toggle("active", b.dataset.lang === lang); });
+    try { localStorage.setItem("luxfeldLang", lang); } catch (e) {}
+    renderAll();
+  }
+  $$("#langSwitch .lng").forEach(function (b) { b.addEventListener("click", function () { applyLang(b.dataset.lang); }); });
+
+  renderAll();
+  var saved = "de";
+  try { saved = localStorage.getItem("luxfeldLang") || "de"; } catch (e) {}
+  if (saved !== "de") applyLang(saved);
+})();
+</script>
+</body>
+</html>
