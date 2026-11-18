@@ -508,6 +508,7 @@
         .cta-buttons {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
             justify-content: center;
             animation: fadeInUp 0.8s ease 0.4s both;
         }
@@ -852,6 +853,29 @@
             transform: translateY(0);
         }
 
+        .cta-buttons .btn {
+            white-space: nowrap;
+        }
+
+        .btn-biz {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid transparent;
+            background-image: linear-gradient(var(--bg), var(--bg)), var(--gradient);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .btn-biz:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px var(--glow);
+        }
+
+        .contact-card-biz {
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 0 1px var(--glow), 0 20px 40px -20px var(--glow);
+        }
+
         .floating-cta {
             position: fixed;
             bottom: 1.5rem;
@@ -1022,6 +1046,7 @@
                 <div class="cta-buttons">
                     <a href="#projects" class="btn btn-primary" data-translate="hero_btn_projects">Meine Projekte</a>
                     <a href="#contact" class="btn btn-secondary" data-translate="hero_btn_contact">Kontakt</a>
+                    <a href="https://www.menesweb.com/" target="_blank" rel="noopener" class="btn btn-biz"><span data-translate="hero_btn_biz">Webseite für dein Geschäft</span> &rarr;</a>
                 </div>
             </div>
             <div class="code-window" aria-hidden="true">
@@ -1666,6 +1691,13 @@
             <p class="section-subtitle" data-translate="contact_subtitle">Interessiert an einer Zusammenarbeit? Kontaktiere mich!</p>
 
             <div class="contact-cards">
+                <a href="https://www.menesweb.com/#anfrage" target="_blank" rel="noopener" class="contact-card contact-card-biz fade-in">
+                    <div class="contact-card-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.93 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.99 7.99 0 0 1 5.08 16zm2.95-8H5.08a7.99 7.99 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
+                    </div>
+                    <h3 data-translate="contact_biz">Webseite anfragen</h3>
+                    <p>menesweb.com</p>
+                </a>
                 <a href="#" id="email-card" class="contact-card fade-in" onclick="openEmail(); return false;">
                     <div class="contact-card-icon">
                         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -1701,7 +1733,7 @@
         </div>
     </section>
 
-    <a href="#contact" class="floating-cta">
+    <a href="https://www.menesweb.com/#anfrage" target="_blank" rel="noopener" class="floating-cta">
         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         <span data-translate="floating_cta">Hole dir ein Angebot</span>
     </a>
@@ -1759,6 +1791,8 @@
                 contact_phone: 'Telefon',
                 footer: '© 2026 Mein Portfolio. Alle Rechte vorbehalten.',
                 floating_cta: 'Hole dir ein Angebot',
+                hero_btn_biz: 'Webseite für dein Geschäft',
+                contact_biz: 'Webseite anfragen',
                 hero_badge: 'Verfügbar für Projekte',
                 skills_eyebrow: 'Tech-Stack',
                 projects_eyebrow: 'Portfolio',
@@ -1812,6 +1846,8 @@
                 contact_phone: 'Phone',
                 footer: '© 2026 My Portfolio. All rights reserved.',
                 floating_cta: 'Get a quote',
+                hero_btn_biz: 'Website for your business',
+                contact_biz: 'Request a website',
                 hero_badge: 'Available for projects',
                 skills_eyebrow: 'Tech Stack',
                 projects_eyebrow: 'Portfolio',
@@ -1865,6 +1901,8 @@
                 contact_phone: 'Telefono',
                 footer: '© 2026 Il mio Portfolio. Tutti i diritti riservati.',
                 floating_cta: 'Richiedi un preventivo',
+                hero_btn_biz: 'Sito web per la tua attività',
+                contact_biz: 'Richiedi un sito web',
                 hero_badge: 'Disponibile per progetti',
                 skills_eyebrow: 'Tech Stack',
                 projects_eyebrow: 'Portfolio',
@@ -1918,6 +1956,8 @@
                 contact_phone: 'Telefon',
                 footer: '© 2026 Moj Portfolio. Sva prava zadržana.',
                 floating_cta: 'Zatraži ponudu',
+                hero_btn_biz: 'Web stranica za tvoj posao',
+                contact_biz: 'Zatraži web stranicu',
                 hero_badge: 'Dostupan za projekte',
                 skills_eyebrow: 'Tehnologije',
                 projects_eyebrow: 'Portfolio',
